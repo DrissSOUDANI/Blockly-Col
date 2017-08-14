@@ -1,0 +1,251 @@
+@CHARSET "UTF-8"; 
+
+
+html,body {
+	height: 100%;
+}
+
+body {
+	background-color: #fff;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	margin: 0;
+}
+
+
+#divBody {
+    position: absolute;
+    top: 90px;
+    bottom: 5px;
+    width: 100%;
+}
+
+
+.div_close_modal {
+	padding-right: 10px;	
+	float: right;
+	bottom: 10px;
+	position: absolute;
+	text-align: center;
+}
+
+
+#languageMenu {
+	/*position: absolute;
+	top: 35px;
+	right: 15px;*/
+}
+
+html[dir="RTL"] #languageMenu {
+	left: 10px;
+	right: auto;
+}
+
+#content_area,#content_blocks,#content_term,#content_xml {
+	height: 100%;
+	width: 100%;
+	padding-right: 0px;
+}
+
+
+
+
+#toggle {
+	width: 25%;
+	position: absolute;
+	z-index: 1;
+	right: 25px;
+	top: 50px;
+	bottom: 100px;
+}
+
+html[dir="RTL"] #toggle {
+    left: 25px;
+}
+
+#toggle pre {
+	height: 100%;
+}
+
+#btn_delete {
+	position: absolute;
+	right: 100px;
+	bottom: 40px;
+	z-index: 10;
+}
+
+html[dir="RTL"] #btn_delete {
+    left: 100px;
+}
+
+
+
+#pre_arduino {
+    /*height: 65%;   Driss -    */
+    min-height: 100%;  /* Driss +   */
+    width: 90%;
+    margin: 0px auto;
+    background-color: #fcf8e3;
+}
+
+
+#modal-body-config {
+	-webkit-column-count: 3;
+	-moz-column-count: 3;
+	column-count: 3;
+}
+
+#select_all {
+	margin-left: 15px;
+}
+
+html[dir="RTL"] #select_all {
+    margin-right: 15px;
+}
+
+#span_select_all {
+	font-weight: bold;
+}
+
+
+.blocklySvg {
+	border-top: none !important;
+}
+
+
+
+.blocklyToolboxDiv {
+	background-color: #ffffe6 !important;
+	top:0px;
+	padding-top:30px;
+	border-right: 1px solid #c6c6c6;
+
+}
+
+.blocklyFlyoutBackground {
+	fill: #ffffe6 !important;
+	top:1px;
+	left:-2px;
+}
+
+.blocklyTreeRoot {
+	padding: 0 !important;
+}
+
+.blocklyToolboxDiv .blocklyTreeRoot [role="treeitem"] {
+	position: relative;
+}
+
+.blocklyToolboxDiv .blocklyTreeRoot [role="treeitem"]	.blocklyTreeRow {
+	line-height: normal !important;
+	/*padding: 6px 50px 6px 12px !important;   Driss -     */
+	padding: 6px 20px 6px 5px !important;   /* Driss +   */
+}
+
+html[dir="RTL"] .blocklyToolboxDiv .blocklyTreeRoot [role="treeitem"]   .blocklyTreeRow {
+    padding: 6px 12px 6px 50px !important;
+}
+
+.blocklyTreeRow {
+	height: 30px !important;
+	line-height: 30px !important;
+}
+
+
+
+.blocklyTreeSeparator {
+	/*background: none repeat scroll 0 0 #e9f9f9 !important; //Driss -     */
+	background: none repeat scroll 0 0 transparent !important;   /* //Driss +     */
+	border-bottom: none !important;
+	height: 10px !important;
+}
+
+
+
+
+.loading {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: url(../media/ajax-loading.gif) center no-repeat #fff;
+}
+
+
+
+/* Driss +*/
+@font-face {
+	font-family: "prison_break";
+	src: url('../fonts/prison_break.ttf');
+}
+
+#divTitre{background:#ffffe6; }
+#appName {position:relative; height:90px;}
+#appName img {vertical-align: top; margin-top: 15px;  }
+
+
+
+#divTitre b {font-family: "prison_break";}
+/* large desktops and up ----------- */
+@media screen and (min-width: 1200px) {
+    #divTitre b.appNameLet { font-size:88px; font-weight:normal; line-height:90px; }
+	#divTitre b.appNameCor { font-size:32px; font-weight:normal;  }
+	#driss{ font-size: 9px; position: absolute; top:76px; left:310px; }
+	#ver{ font-size: 8px; position: absolute; top:76px; left:105px; }
+	span#title{position: absolute; top:22px; left:165px; line-height:12px; font-size:12px;}
+}
+/* tablets/desktops and up ----------- */
+@media (min-width: 992px) and (max-width: 1199px)  {
+    #divTitre b.appNameLet {font-size:70px; font-weight:normal; line-height:90px; }
+	#divTitre b.appNameCor { font-size:20px; font-weight:normal;  }
+	#driss{ font-size: 8px; position: absolute; top:76px; left:230px; }
+	#ver{ font-size: 8px; position: absolute; top:76px; left:105px; }
+	span#title{position: absolute; top:22px; left:150px; line-height:12px;  font-size:10px; text-align:center;}
+}
+
+/* Extra small devices (phones, up to 480px) */
+@media screen and (max-width: 767px) {
+}
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991px) {
+}
+
+
+
+
+
+.glyphicon{padding-right:5px;}
+
+/*Centrer le select de la carte dans le menu déroulant*/
+select#pinout{width:90%; margin:1px auto;}
+/*pour que la nav bar s'affiche au dessus de tous*/
+.navbar {z-index:20; margin-top:5px; height:75px;}
+/*pour placer les boutons copy code et editer le code dans la fenetre de code */
+#boutons_code{position:absolute; right:6% ;top:10px;}
+/*pour centrer les boutons dans la navbar */
+.margin-top-5 {margin-top: 20px; margin-right: 10px;}
+/*bouton copy code de l'apercu*/
+.btn_copy_code{ position: absolute; top: 5px; right: 5px;}
+/*pour ecrans xs*/
+#tab_arduino, #tab_blocks, #btn_Programme, #btn_Code_Arduino {width:100%; }
+
+#btn_about {margin-top:10px;}
+
+.navbar-header{width:25%;}
+.navbar-right{padding-top:10px;}
+
+#btns_blocks{position:absolute; top:5px; right:1%;  z-index:15;}
+
+#btn_size, 
+#btn_blocs_picture, 
+#btn_undo, #btn_redo, 
+#btn_block_capture, 
+#btn_blocs_picture_mini, 
+#btn_blocs_picture_maxi, 
+#btn_preview, 
+#btn_preview, 
+#btn_inline {float:right;}
+
+#ul_nav {list-style-type:none;}
+/* Fin Driss +  */

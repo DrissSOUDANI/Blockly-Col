@@ -1,0 +1,6 @@
+V1.1  Ouggoug  :  Arduino
+V1.2  Imini : Ajout TZ51
+V1.3  Tim9it : Ajout A4
+V1.4 Boutazoult : Ajout Grove
+V1.5 Amerzaggane  : Ajout linkItOne
+V1.6 oarzazate : Ajout TinkerKit
