@@ -1,0 +1,117 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="technozone_declare_var" id="58" x="14" y="17">
+    <field name="VAR">Temp_C</field>
+    <field name="TYPE">int</field>
+    <next>
+      <block type="technozone_variables_set" id="49" inline="true">
+        <field name="VAR">Temp_C</field>
+        <value name="VALUE">
+          <block type="math_number" id="78">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <next>
+          <block type="technozone_declare_var" id="81">
+            <field name="VAR">Temp_F</field>
+            <field name="TYPE">int</field>
+            <next>
+              <block type="technozone_variables_set" id="79" inline="true">
+                <field name="VAR">Temp_F</field>
+                <value name="VALUE">
+                  <block type="math_number" id="80">
+                    <field name="NUM">0</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="technozone_declare_var" id="82">
+                    <field name="VAR">Val_Numerique</field>
+                    <field name="TYPE">int</field>
+                    <next>
+                      <block type="technozone_variables_set" id="83" inline="true">
+                        <field name="VAR">Val_Numerique</field>
+                        <value name="VALUE">
+                          <block type="math_number" id="84">
+                            <field name="NUM">0</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="controls_repeat_infinite" id="99">
+                            <statement name="DO">
+                              <block type="technozone_variables_set" id="85" inline="true">
+                                <field name="VAR">Val_Numerique</field>
+                                <value name="VALUE">
+                                  <block type="driss_tinkerKit_thermistor" id="9">
+                                    <field name="UNITE">NUM</field>
+                                    <field name="PIN">I0</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="technozone_variables_set" id="138" inline="true">
+                                    <field name="VAR">Temp_C</field>
+                                    <value name="VALUE">
+                                      <block type="driss_tinkerKit_thermistor" id="139">
+                                        <field name="UNITE">C</field>
+                                        <field name="PIN">I0</field>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="technozone_variables_set" id="140" inline="true">
+                                        <field name="VAR">Temp_F</field>
+                                        <value name="VALUE">
+                                          <block type="driss_tinkerKit_thermistor" id="141">
+                                            <field name="UNITE">F</field>
+                                            <field name="PIN">I0</field>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <block type="controls_if" id="16" inline="false">
+                                            <mutation else="1"></mutation>
+                                            <value name="IF0">
+                                              <block type="logic_compare" id="23" inline="true">
+                                                <field name="OP">GT</field>
+                                                <value name="A">
+                                                  <block type="technozone_variables_get" id="119">
+                                                    <field name="VAR">Val_Numerique</field>
+                                                  </block>
+                                                </value>
+                                                <value name="B">
+                                                  <block type="math_number" id="40">
+                                                    <field name="NUM">700</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <statement name="DO0">
+                                              <block type="driss_tinkerKit_red_led" id="132">
+                                                <field name="STAT">HIGH</field>
+                                                <field name="PIN">O0</field>
+                                              </block>
+                                            </statement>
+                                            <statement name="ELSE">
+                                              <block type="driss_tinkerKit_red_led" id="137">
+                                                <field name="STAT">LOW</field>
+                                                <field name="PIN">O0</field>
+                                              </block>
+                                            </statement>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </statement>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

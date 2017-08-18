@@ -1,0 +1,57 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="driss_grove_oled_96x96_init" id="102" x="190" y="115">
+    <next>
+      <block type="technozone_declare_var" id="133">
+        <field name="VAR">variable</field>
+        <field name="TYPE">int</field>
+        <next>
+          <block type="technozone_variables_set" id="145" inline="true">
+            <field name="VAR">variable</field>
+            <value name="VALUE">
+              <block type="math_number" id="162">
+                <field name="NUM">0</field>
+              </block>
+            </value>
+            <next>
+              <block type="controls_repeat_infinite" id="177">
+                <statement name="DO">
+                  <block type="driss_grove_oled_96x96_set_cursot_at_XY" id="112" inline="false">
+                    <value name="OLED_96x96_LIG">
+                      <block type="math_number" id="113">
+                        <field name="NUM">8</field>
+                      </block>
+                    </value>
+                    <value name="OLED_96x96_COL">
+                      <block type="math_number" id="114">
+                        <field name="NUM">8</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="technozone_variables_set" id="163" inline="true">
+                        <field name="VAR">variable</field>
+                        <value name="VALUE">
+                          <block type="driss_grove_moisture_sensor" id="124">
+                            <field name="PIN">A0</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="driss_grove_oled_96x96_show_number" id="115" inline="false">
+                            <value name="OLED_96x96_NUMBER">
+                              <block type="technozone_variables_get" id="186">
+                                <field name="VAR">variable</field>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

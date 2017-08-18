@@ -1,0 +1,41 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="controls_repeat_infinite" id="99" x="-19" y="-35">
+    <statement name="DO">
+      <block type="controls_if" id="21" inline="false">
+        <mutation else="1"></mutation>
+        <value name="IF0">
+          <block type="logic_compare" id="44" inline="true">
+            <field name="OP">LT</field>
+            <value name="A">
+              <block type="driss_grove_gaz_sensor_mq5_ratio" id="14" inline="false">
+                <field name="PIN">A0</field>
+                <value name="R0">
+                  <block type="math_number" id="116">
+                    <field name="NUM">1.09</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <value name="B">
+              <block type="math_number" id="61">
+                <field name="NUM">3</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="driss_grove_red_led" id="68">
+            <field name="STAT">HIGH</field>
+            <field name="PIN">4</field>
+          </block>
+        </statement>
+        <statement name="ELSE">
+          <block type="driss_grove_red_led" id="86">
+            <field name="STAT">LOW</field>
+            <field name="PIN">4</field>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+</xml>

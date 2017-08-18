@@ -229,12 +229,14 @@ Blockly.Arduino.finish = function(code) {
   if (includes.length) {
     includes.push('\n');
   }
+  /* retiré par Driss*/
   for (var name in Blockly.Arduino.variables_) {
     variables.push(Blockly.Arduino.variables_[name]);
   }
   if (variables.length) {
     variables.push('\n');
   }
+  /**/
   for (var name in Blockly.Arduino.definitions_) {
     definitions.push(Blockly.Arduino.definitions_[name]);
   }

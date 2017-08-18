@@ -40,6 +40,7 @@ Blockly.Arduino.variables_declare_ds = function() {
 
 
   Blockly.Arduino.addVariable(varName, varType+" "+varName+";", true)
+  //Blockly.Arduino.definitions_['var_'+varName] = varType+" "+varName+";\n"
 
   return '';
 };
