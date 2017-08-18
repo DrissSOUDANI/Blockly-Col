@@ -790,6 +790,178 @@ Blockly.Blocks.driss_grove_oled_96x96_clear_screen = {
   }
 };
 
+
+
+//-Afficheur Grove - LCD ----------------------------------------------------------------------------------------------------------------------------------------
+//Grove Grove - driss_grove_lcd_rgb_power
+Blockly.Blocks['driss_grove_lcd_rgb_power'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown([["Allumer", "ON"], ["Eteindre", "OFF"]]), "STAT")
+        .appendField("L'ecran LCD RGB")
+        .appendField("Relié à la sortie I2C");
+    this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_CENTRE)
+        .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove _LCD_40.png", Blockly.Arduino.imageSize*1.5,  Blockly.Arduino.imageSize));
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(Blockly.Blocks.drissGrove.HUE);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
+
+
+//Grove Grove - driss_grove_lcd_rgb_cursor_to
+Blockly.Blocks['driss_grove_lcd_rgb_cursor_to'] = {
+  init: function() {
+    this.appendValueInput("LCD_LIG")
+        .setCheck("Number")
+        .appendField("Placer le curseur de  l'ecran LCD RGB")
+        .appendField("sur la ligne");
+    this.appendValueInput("LCD_COL")
+        .setCheck("Number")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("et la colonne");
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(Blockly.Blocks.drissGrove.HUE);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
+
+//Grove Grove - driss_grove_lcd_rgb_clean
+Blockly.Blocks['driss_grove_lcd_rgb_clean'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Effacer l'ecran LCD RGB");
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(Blockly.Blocks.drissGrove.HUE);
+    this.setTooltip('');
+    this.setHelpUrl('http://www.example.com/');
+  }
+};
+
+
+//Grove Grove - driss_grove_lcd_rgb_go_to_col_lig
+Blockly.Blocks['driss_grove_lcd_rgb_go_to_col_lig'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Placer le curseur de  l'ecran LCD RGB");
+    this.appendDummyInput()
+        .appendField("sur la ligne")
+        .appendField(new Blockly.FieldDropdown([["0", "0"], ["1", "1"]]), "LCD_LIG")
+        .appendField("à la colonne")
+        .appendField(new Blockly.FieldDropdown([["0", "0"], ["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"], ["6", "6"], ["7", "7"], ["8", "8"], ["9", "9"], ["10", "10"], ["11", "11"], ["12", "12"], ["13", "13"], ["14", "14"], ["15", "15"]]), "LCD_COL");
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(Blockly.Blocks.drissGrove.HUE);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
+
+
+//Grove Grove - driss_grove_lcd_rgb_write_row
+Blockly.Blocks['driss_grove_lcd_rgb_write_row'] = {
+  init: function() {
+    this.appendValueInput("LCD_L1")
+        .setCheck(null)
+        .appendField("Ecrire sur l'ecran LCD RGB")
+        .appendField("Ligne 1");
+    this.appendValueInput("LCD_L2")
+        .setCheck(null)
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("relié à la sortie I2C")
+        .appendField("Ligne 2");
+    this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_CENTRE)
+        .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove _LCD_40.png", Blockly.Arduino.imageSize*1.5,  Blockly.Arduino.imageSize));
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(Blockly.Blocks.drissGrove.HUE);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
+
+//Grove Grove - driss_grove_lcd_rgb_scroll
+Blockly.Blocks['driss_grove_lcd_rgb_scroll'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Faire défiler l'affichage du LCD RGB");
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown([["à gauche", "LEFT"], ["à  droite", "RIGHT"]]), "DIRECTION");
+    this.appendValueInput("NBRE")
+        .setCheck("Number")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("nombre de fois");
+    this.appendValueInput("DELAY")
+        .setCheck("Number")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("avec un délai de (en ms)");
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(Blockly.Blocks.drissGrove.HUE);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
+
+
+//Grove Grove - driss_grove_lcd_rgb_set_retro_color
+Blockly.Blocks['driss_grove_lcd_rgb_set_retro_color'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Mettre le rétroéclairage du LCD RGB sur ")
+        .appendField(new Blockly.FieldDropdown([["Rouge","RED"], ["Vert","GREEN"], ["Bleu","BLUE"], ["Blanc","WHITE"], ["Noir","BLACK"]]), "LCD_RGB_COLOR");
+    this.setColour(Blockly.Blocks.drissGrove.HUE);
+
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+ 
+
+
+//Grove Grove - driss_grove_lcd_rgb_color 
+Blockly.Blocks['driss_grove_lcd_rgb_color'] = {
+  init: function() {
+    this.appendValueInput("RED")
+        .setCheck("Number")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("Mettre la couleur de l'afficheur LCD RGB à")
+        .appendField("Rouge");
+    this.appendValueInput("GREEN")
+        .setCheck("Number")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("Vert");
+    this.appendValueInput("BLUE")
+        .setCheck("Number")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("Bleu");
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(Blockly.Blocks.drissGrove.HUE);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
+
+
+
 //-Afficheur Grove - 4-Digit Display ----------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -835,7 +1007,7 @@ Blockly.Blocks.driss_grove_4_digit_display_displayDigits = {
 Blockly.Blocks.driss_grove_4_digit_display_displayNumber = {
   category: 'driss_grove : Afficheur 4 Digits',
   helpUrl: '',
-  init: function() {
+  init: function() { 
     this.appendDummyInput()
         .appendField("Ecrire sur l'afficheur 4 digits");
     this.appendDummyInput()

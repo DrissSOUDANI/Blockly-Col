@@ -1,0 +1,227 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <toolboxcategories>CAT_LOGIC,CAT_LOOPS,CAT_MATH,CAT_ARRAY,CAT_TEXT,CAT_VARIABLES_DS,CAT_ARDUINO,CAT_TECHNOZONE,CAT_DRISS_A4,CAT_DRISS_GROVE,CAT_DRISS_LINKIT_ONE</toolboxcategories>
+  <toolbox>undefined</toolbox>
+  <block type="variables_declare_ds" id="HG)KbiGAp^%bMqhyF%Vb" x="250" y="30">
+    <field name="VAR">Rouge</field>
+    <field name="TYPE">NUMBER</field>
+    <next>
+      <block type="variables_declare_ds" id="q}HCV#1PD@5gyy)X];YP">
+        <field name="VAR">Vert</field>
+        <field name="TYPE">NUMBER</field>
+        <next>
+          <block type="variables_declare_ds" id="Ps+[bMe~R=/Qr|6E?@Sb">
+            <field name="VAR">Bleu</field>
+            <field name="TYPE">NUMBER</field>
+            <next>
+              <block type="driss_grove_lcd_rgb_power" id="TuC9;%f~]b^THEQz%A4L">
+                <field name="STAT">ON</field>
+                <next>
+                  <block type="driss_grove_lcd_rgb_clean" id="fP1Vn*-X-9/sWcJ,ybHv">
+                    <next>
+                      <block type="driss_grove_lcd_rgb_write_row" id="]XP5P09fUcMz}k6dvS@w">
+                        <value name="LCD_L1">
+                          <block type="text" id="Z$7|uRcD08`6LoRTLbX7">
+                            <field name="TEXT">     Driss</field>
+                          </block>
+                        </value>
+                        <value name="LCD_L2">
+                          <block type="text" id="+iEo{du,Kxzbhjtw/o8O">
+                            <field name="TEXT">    SOUDANI</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="controls_whileUntil" id="|m#ws,7fz2Ht8(oKk@*(">
+                            <field name="MODE">WHILE</field>
+                            <value name="BOOL">
+                              <block type="logic_boolean" id="*)U:[MQ0VK2n5rH=4x!f">
+                                <field name="BOOL">TRUE</field>
+                              </block>
+                            </value>
+                            <statement name="DO">
+                              <block type="variables_set_ds" id="O4spBf3MKy4qn[|y~9Uw">
+                                <field name="VAR">Rouge</field>
+                                <value name="VALUE">
+                                  <block type="math_number" id="W*KAigat5GowV8gD@-zE">
+                                    <field name="NUM">255</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="variables_set_ds" id="[+L_0nnP@l]aY[PfQtUo">
+                                    <field name="VAR">Vert</field>
+                                    <value name="VALUE">
+                                      <block type="math_number" id="fiZqi01u]~Pu9?u0:ymk">
+                                        <field name="NUM">0</field>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="variables_set_ds" id="RiDx-~-~,Tx3g!:k651{">
+                                        <field name="VAR">Bleu</field>
+                                        <value name="VALUE">
+                                          <block type="math_number" id="y68q~u)f[rGF?]Due|eD">
+                                            <field name="NUM">0</field>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <block type="driss_grove_lcd_rgb_color" id="$:2Gk--NK8m[$z^6v0m1">
+                                            <value name="RED">
+                                              <block type="variables_get_ds" id="Ef!ZBbea-QhI`saMeQ`U">
+                                                <field name="VAR">Rouge</field>
+                                              </block>
+                                            </value>
+                                            <value name="GREEN">
+                                              <block type="variables_get_ds" id="fxXn*Q5UIW~0(9:Cz,4w">
+                                                <field name="VAR">Vert</field>
+                                              </block>
+                                            </value>
+                                            <value name="BLUE">
+                                              <block type="variables_get_ds" id="z{yMCB?Hz_!UJM*cFqTd">
+                                                <field name="VAR">Bleu</field>
+                                              </block>
+                                            </value>
+                                            <next>
+                                              <block type="controls_base_delay" id="a=f7/sT)N5*nzzPvVx,@">
+                                                <value name="DELAY_TIME">
+                                                  <shadow type="math_number" id="MsrXlt79?@1ZyLDgy}e]">
+                                                    <field name="NUM">1000</field>
+                                                  </shadow>
+                                                </value>
+                                                <next>
+                                                  <block type="variables_set_ds" id="0wzm,iT2dbH[zNKx)KA0">
+                                                    <field name="VAR">Rouge</field>
+                                                    <value name="VALUE">
+                                                      <block type="math_number" id="huM9q;@v]gE%(+d69u*w">
+                                                        <field name="NUM">0</field>
+                                                      </block>
+                                                    </value>
+                                                    <next>
+                                                      <block type="variables_set_ds" id="r.v}PzI`gciVI!7i!K33">
+                                                        <field name="VAR">Vert</field>
+                                                        <value name="VALUE">
+                                                          <block type="math_number" id="[PSqc`y4DzIHACx(K;zh">
+                                                            <field name="NUM">255</field>
+                                                          </block>
+                                                        </value>
+                                                        <next>
+                                                          <block type="variables_set_ds" id="c6}Sn[d)h2(S]y]ye6gY">
+                                                            <field name="VAR">Bleu</field>
+                                                            <value name="VALUE">
+                                                              <block type="math_number" id="N[pR~hMwzK3enxms.ADg">
+                                                                <field name="NUM">0</field>
+                                                              </block>
+                                                            </value>
+                                                            <next>
+                                                              <block type="driss_grove_lcd_rgb_color" id="Eo}(D)E{^dH%Oi5XM)y?">
+                                                                <value name="RED">
+                                                                  <block type="variables_get_ds" id="yZFVk/$+n)LyBm8I;TiE">
+                                                                    <field name="VAR">Rouge</field>
+                                                                  </block>
+                                                                </value>
+                                                                <value name="GREEN">
+                                                                  <block type="variables_get_ds" id="YK2r3~+I^+T7$HrV=9$x">
+                                                                    <field name="VAR">Vert</field>
+                                                                  </block>
+                                                                </value>
+                                                                <value name="BLUE">
+                                                                  <block type="variables_get_ds" id=":FxNPdAqe]YHq{a-MQ=P">
+                                                                    <field name="VAR">Bleu</field>
+                                                                  </block>
+                                                                </value>
+                                                                <next>
+                                                                  <block type="controls_base_delay" id="/a-0w5C#^`us%/caZ*~o">
+                                                                    <value name="DELAY_TIME">
+                                                                      <shadow type="math_number" id="M%X/0!_A_C#xz9K8Wnw;">
+                                                                        <field name="NUM">1000</field>
+                                                                      </shadow>
+                                                                    </value>
+                                                                    <next>
+                                                                      <block type="variables_set_ds" id="SJ-9KGVz!6X-k=#U0AUh">
+                                                                        <field name="VAR">Rouge</field>
+                                                                        <value name="VALUE">
+                                                                          <block type="math_number" id="#nJ*Bj4xM@jHfIr6?~7W">
+                                                                            <field name="NUM">0</field>
+                                                                          </block>
+                                                                        </value>
+                                                                        <next>
+                                                                          <block type="variables_set_ds" id="NZn8N$UaIq1;:OxyPtbO">
+                                                                            <field name="VAR">Vert</field>
+                                                                            <value name="VALUE">
+                                                                              <block type="math_number" id="/X4lk=Avbi9A*aeb_Uq2">
+                                                                                <field name="NUM">0</field>
+                                                                              </block>
+                                                                            </value>
+                                                                            <next>
+                                                                              <block type="variables_set_ds" id="5v74JN:t]n%p2hyy`ut@">
+                                                                                <field name="VAR">Bleu</field>
+                                                                                <value name="VALUE">
+                                                                                  <block type="math_number" id="LZ,5OQ_5^T=|$CGQ=fPE">
+                                                                                    <field name="NUM">255</field>
+                                                                                  </block>
+                                                                                </value>
+                                                                                <next>
+                                                                                  <block type="driss_grove_lcd_rgb_color" id="Do2!?ZQ:qY?HMw!Dytj2">
+                                                                                    <value name="RED">
+                                                                                      <block type="variables_get_ds" id="D;q`FQTqwS2xW}i]+Ipg">
+                                                                                        <field name="VAR">Rouge</field>
+                                                                                      </block>
+                                                                                    </value>
+                                                                                    <value name="GREEN">
+                                                                                      <block type="variables_get_ds" id="7+*S`TfeSRE/nJg?e_gp">
+                                                                                        <field name="VAR">Vert</field>
+                                                                                      </block>
+                                                                                    </value>
+                                                                                    <value name="BLUE">
+                                                                                      <block type="variables_get_ds" id="$*UoSi!!?3M=W{lEIhv1">
+                                                                                        <field name="VAR">Bleu</field>
+                                                                                      </block>
+                                                                                    </value>
+                                                                                    <next>
+                                                                                      <block type="controls_base_delay" id="=M|]:{W@zS#S8m:l}{PO">
+                                                                                        <value name="DELAY_TIME">
+                                                                                          <shadow type="math_number" id=",I.ebR!k7=X_I/#ob}aV">
+                                                                                            <field name="NUM">1000</field>
+                                                                                          </shadow>
+                                                                                        </value>
+                                                                                      </block>
+                                                                                    </next>
+                                                                                  </block>
+                                                                                </next>
+                                                                              </block>
+                                                                            </next>
+                                                                          </block>
+                                                                        </next>
+                                                                      </block>
+                                                                    </next>
+                                                                  </block>
+                                                                </next>
+                                                              </block>
+                                                            </next>
+                                                          </block>
+                                                        </next>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </statement>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

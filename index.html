@@ -413,6 +413,14 @@
 		<block type="logic_null"></block>
 	</category>
 	<category name="CAT_LOOPS" colour="#C88330">
+		<block type="controls_base_delay">
+				<value name="DELAY_TIME">
+					<shadow type="math_number">
+						<field name="NUM">1000</field>
+					</shadow>
+				</value>
+			</block>
+		<block type="controls_repeat_indefinitely"></block>
 		<block type="controls_repeat"></block>
 		<block type="controls_repeat_ext">
 			<value name="TIMES">
@@ -1121,7 +1129,7 @@
 
  <!-- Modules Grove par Driss Soudani  --> colour="#8181F7"
     <sep></sep>
-    <category name="CAT_DRISS_GROVE" colour="#8181F7">
+    <category name="CAT_DRISS_GROVE" colour="#8181F7"> 
        
         <category name="CAT_DRISS_GROVE_IN" colour="#8181F7">
             <block type="driss_grove_button"></block>
@@ -1147,6 +1155,17 @@
             <block type="driss_grove_purple_led"></block>
             <block type="driss_grove_servo_setPosition"></block>
             <block type="driss_grove_I2C_Motor_run"></block>
+        </category>
+
+        <category name="CAT_DRISS_GROVE_LCD_RGB" colour="#8181F7">
+        	<block type="driss_grove_lcd_rgb_power"></block>
+        	<block type="driss_grove_lcd_rgb_clean"></block>
+        	<block type="driss_grove_lcd_rgb_cursor_to"></block>
+        	<block type="driss_grove_lcd_rgb_go_to_col_lig"></block>
+         	<block type="driss_grove_lcd_rgb_write_row"></block>
+         	<block type="driss_grove_lcd_rgb_scroll"></block>
+         	<block type="driss_grove_lcd_rgb_set_retro_color"></block>
+         	<block type="driss_grove_lcd_rgb_color"></block>
         </category>
 
          <category name="CAT_DRISS_GROVE_OLED_96x96" colour="#8181F7">

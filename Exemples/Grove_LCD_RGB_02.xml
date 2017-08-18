@@ -1,0 +1,123 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <toolboxcategories>CAT_LOGIC,CAT_LOOPS,CAT_MATH,CAT_ARRAY,CAT_TEXT,CAT_VARIABLES_DS,CAT_ARDUINO,CAT_TECHNOZONE,CAT_DRISS_A4,CAT_DRISS_GROVE,CAT_DRISS_LINKIT_ONE</toolboxcategories>
+  <toolbox>undefined</toolbox>
+  <block type="variables_declare_ds" id="HG)KbiGAp^%bMqhyF%Vb" x="250" y="30">
+    <field name="VAR">Rouge</field>
+    <field name="TYPE">NUMBER</field>
+    <next>
+      <block type="variables_declare_ds" id="q}HCV#1PD@5gyy)X];YP">
+        <field name="VAR">Vert</field>
+        <field name="TYPE">NUMBER</field>
+        <next>
+          <block type="variables_declare_ds" id="Ps+[bMe~R=/Qr|6E?@Sb">
+            <field name="VAR">Bleu</field>
+            <field name="TYPE">NUMBER</field>
+            <next>
+              <block type="driss_grove_lcd_rgb_power" id="TuC9;%f~]b^THEQz%A4L">
+                <field name="STAT">ON</field>
+                <next>
+                  <block type="driss_grove_lcd_rgb_clean" id="fP1Vn*-X-9/sWcJ,ybHv">
+                    <next>
+                      <block type="driss_grove_lcd_rgb_write_row" id="]XP5P09fUcMz}k6dvS@w">
+                        <value name="LCD_L1">
+                          <block type="text" id="Z$7|uRcD08`6LoRTLbX7">
+                            <field name="TEXT">     Driss</field>
+                          </block>
+                        </value>
+                        <value name="LCD_L2">
+                          <block type="text" id="+iEo{du,Kxzbhjtw/o8O">
+                            <field name="TEXT">    SOUDANI</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="controls_whileUntil" id="|m#ws,7fz2Ht8(oKk@*(">
+                            <field name="MODE">WHILE</field>
+                            <value name="BOOL">
+                              <block type="logic_boolean" id="*)U:[MQ0VK2n5rH=4x!f">
+                                <field name="BOOL">TRUE</field>
+                              </block>
+                            </value>
+                            <statement name="DO">
+                              <block type="driss_grove_lcd_rgb_set_retro_color" id="_+)@1`D2k`PM-VW#BUV[">
+                                <field name="LCD_RGB_COLOR">RED</field>
+                                <next>
+                                  <block type="controls_base_delay" id="a=f7/sT)N5*nzzPvVx,@">
+                                    <value name="DELAY_TIME">
+                                      <shadow type="math_number" id="MsrXlt79?@1ZyLDgy}e]">
+                                        <field name="NUM">1000</field>
+                                      </shadow>
+                                    </value>
+                                    <next>
+                                      <block type="driss_grove_lcd_rgb_set_retro_color" id="^?(~aWTu!DN[#tqEZ.%@">
+                                        <field name="LCD_RGB_COLOR">GREEN</field>
+                                        <next>
+                                          <block type="controls_base_delay" id="/a-0w5C#^`us%/caZ*~o">
+                                            <value name="DELAY_TIME">
+                                              <shadow type="math_number" id="M%X/0!_A_C#xz9K8Wnw;">
+                                                <field name="NUM">1000</field>
+                                              </shadow>
+                                            </value>
+                                            <next>
+                                              <block type="driss_grove_lcd_rgb_set_retro_color" id="w!yf:i/tCY7Z)w}g#]5Z">
+                                                <field name="LCD_RGB_COLOR">BLUE</field>
+                                                <next>
+                                                  <block type="controls_base_delay" id="=M|]:{W@zS#S8m:l}{PO">
+                                                    <value name="DELAY_TIME">
+                                                      <shadow type="math_number" id=",I.ebR!k7=X_I/#ob}aV">
+                                                        <field name="NUM">1000</field>
+                                                      </shadow>
+                                                    </value>
+                                                    <next>
+                                                      <block type="driss_grove_lcd_rgb_set_retro_color" id="y*zZvWg_$%_WaRI,GD7a">
+                                                        <field name="LCD_RGB_COLOR">WHITE</field>
+                                                        <next>
+                                                          <block type="controls_base_delay" id="c)+oKsA#ivM2!ZTCQ]$s">
+                                                            <value name="DELAY_TIME">
+                                                              <shadow type="math_number" id="T!7a!a(HVFhVA~ie6iyl">
+                                                                <field name="NUM">1000</field>
+                                                              </shadow>
+                                                            </value>
+                                                            <next>
+                                                              <block type="driss_grove_lcd_rgb_set_retro_color" id="@b1SUr5vB7n#n14_mmR4">
+                                                                <field name="LCD_RGB_COLOR">BLACK</field>
+                                                                <next>
+                                                                  <block type="controls_base_delay" id="S/:KIeP(Y)1KugO5a7!%">
+                                                                    <value name="DELAY_TIME">
+                                                                      <shadow type="math_number" id="umpp:hWN/jK$v5}pOG8A">
+                                                                        <field name="NUM">1000</field>
+                                                                      </shadow>
+                                                                    </value>
+                                                                  </block>
+                                                                </next>
+                                                              </block>
+                                                            </next>
+                                                          </block>
+                                                        </next>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </statement>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

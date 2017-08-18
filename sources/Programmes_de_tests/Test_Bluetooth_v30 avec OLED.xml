@@ -1,0 +1,145 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="technozone_declare_var" id="1" x="132" y="26">
+    <field name="VAR">Msg</field>
+    <field name="TYPE">String</field>
+    <next>
+      <block type="technozone_variables_set" id="2" inline="true">
+        <field name="VAR">Msg</field>
+        <value name="VALUE">
+          <block type="text" id="3">
+            <field name="TEXT"></field>
+          </block>
+        </value>
+        <next>
+          <block type="driss_grove_bluetooth_v30_bt_init" id="4" inline="false">
+            <field name="BT_NAME">Grove_BT_01</field>
+            <field name="BT_PINCODE">5678</field>
+            <value name="PIN_RX">
+              <block type="math_number" id="5">
+                <field name="NUM">10</field>
+              </block>
+            </value>
+            <value name="PIN_TX">
+              <block type="math_number" id="6">
+                <field name="NUM">11</field>
+              </block>
+            </value>
+            <next>
+              <block type="driss_grove_oled_96x96_init" id="7">
+                <next>
+                  <block type="technozone_declare_var" id="49">
+                    <field name="VAR">ligne</field>
+                    <field name="TYPE">int</field>
+                    <next>
+                      <block type="technozone_variables_set" id="8" inline="true">
+                        <field name="VAR">ligne</field>
+                        <value name="VALUE">
+                          <block type="math_number" id="9">
+                            <field name="NUM">0</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="technozone_declare_var" id="59">
+                            <field name="VAR">colonne</field>
+                            <field name="TYPE">int</field>
+                            <next>
+                              <block type="technozone_variables_set" id="60" inline="true">
+                                <field name="VAR">colonne</field>
+                                <value name="VALUE">
+                                  <block type="math_number" id="61">
+                                    <field name="NUM">0</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="controls_repeat_infinite" id="10">
+                                    <statement name="DO">
+                                      <block type="controls_if" id="11" inline="false">
+                                        <value name="IF0">
+                                          <block type="driss_grove_bluetooth_v30_bt_available" id="12"></block>
+                                        </value>
+                                        <statement name="DO0">
+                                          <block type="technozone_variables_set" id="13" inline="true">
+                                            <field name="VAR">Msg</field>
+                                            <value name="VALUE">
+                                              <block type="driss_grove_bluetooth_v30_bt_read" id="14"></block>
+                                            </value>
+                                            <next>
+                                              <block type="driss_grove_oled_96x96_show_text_at_XY" id="55" inline="false">
+                                                <value name="OLED_96x96_TEXTE">
+                                                  <block type="technozone_variables_get" id="56">
+                                                    <field name="VAR">Msg</field>
+                                                  </block>
+                                                </value>
+                                                <value name="OLED_96x96_LIG">
+                                                  <block type="technozone_variables_get" id="70">
+                                                    <field name="VAR">ligne</field>
+                                                  </block>
+                                                </value>
+                                                <value name="OLED_96x96_COL">
+                                                  <block type="technozone_variables_get" id="71">
+                                                    <field name="VAR">colonne</field>
+                                                  </block>
+                                                </value>
+                                                <next>
+                                                  <block type="math_change" id="112" inline="true">
+                                                    <field name="VAR">ligne</field>
+                                                    <value name="DELTA">
+                                                      <block type="math_number" id="113">
+                                                        <field name="NUM">1</field>
+                                                      </block>
+                                                    </value>
+                                                    <next>
+                                                      <block type="controls_if" id="120" inline="false">
+                                                        <value name="IF0">
+                                                          <block type="logic_compare" id="127" inline="true">
+                                                            <field name="OP">EQ</field>
+                                                            <value name="A">
+                                                              <block type="technozone_variables_get" id="136">
+                                                                <field name="VAR">ligne</field>
+                                                              </block>
+                                                            </value>
+                                                            <value name="B">
+                                                              <block type="math_number" id="153">
+                                                                <field name="NUM">11</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                        <statement name="DO0">
+                                                          <block type="technozone_variables_set" id="162" inline="true">
+                                                            <field name="VAR">ligne</field>
+                                                            <value name="VALUE">
+                                                              <block type="math_number" id="179">
+                                                                <field name="NUM">0</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </statement>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </statement>
+                                      </block>
+                                    </statement>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

@@ -1,32 +1,3 @@
-Blockly.Arduino.drissGrove_declare_var = function() {
-  // Variable setter.
-  var argument1 = this.getTitleValue('TYPE');
-  //TODO: settype to variable
-  var varName = Blockly.Arduino.variableDB_.getName(this.getFieldValue('VAR'),
-      Blockly.Variables.NAME_TYPE);
-  //Blockly.Arduino.setups_['setup_var' + varName] = varName + ' = ' + argument0 + ';\n';
-  tableau_type[varName]=argument1;
-  return '';
-};
-
-Blockly.Arduino.drissGrove_variables_set = function() {
-  // Variable setter.
-  var argument0 = Blockly.Arduino.valueToCode(this, 'VALUE',
-      Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
-  //charge le type dans tableau_type 
-  //tableau_type[Blockly.Arduino.variableDB_.getName(this.getFieldValue('VAR'),Blockly.Variables.NAME_TYPE)]=argument1;   
-  var varName = Blockly.Arduino.variableDB_.getName(this.getFieldValue('VAR'),
-      Blockly.Variables.NAME_TYPE);       
-  return varName + ' = ' + argument0 + ';\n';
-};
-
-Blockly.Arduino.drissGrove_variables_get = function() {
-  // Variable getter.
-  var code = Blockly.Arduino.variableDB_.getName(this.getFieldValue('VAR'),
-      Blockly.Variables.NAME_TYPE);
-  return [code, Blockly.Arduino.ORDER_ATOMIC];
-};
-
 
 //Grove Button OK
 Blockly.Arduino.driss_grove_button = function() {
@@ -69,18 +40,18 @@ Blockly.Arduino.driss_temperature_and_humidity_sensor = function() {
 
   var var_dht = 'dht_'+dropdown_pin;
 
-  Blockly.Arduino.definitions_['define_DHT'] = '#include <DHT.h>\n'; 
+  Blockly.Arduino.includes_['define_DHT'] = '#include <DHT.h>\n'; 
   
   switch(dropdown_ref){
     case "DHT22" : Blockly.Arduino.definitions_['define_DHTTYPE'] = '#define DHTTYPE DHT22 ; // DHT 22  (AM2302)';
-                  Blockly.Arduino.definitions_['define_'+var_dht] = 'DHT '+var_dht+'('+dropdown_pin+',DHT22);';
+                  Blockly.Arduino.variables_['define_'+var_dht] = 'DHT '+var_dht+'('+dropdown_pin+',DHT22);';
                   break;
     
     case "DHT21" : Blockly.Arduino.definitions_['define_DHTTYPE'] = '#define DHTTYPE DHT21 ; // DHT 21 (AM2301)';
-                  Blockly.Arduino.definitions_['define_'+var_dht] = 'DHT '+var_dht+'('+dropdown_pin+',DHT21);';
+                  Blockly.Arduino.variables_['define_'+var_dht] = 'DHT '+var_dht+'('+dropdown_pin+',DHT21);';
                   break;
     case "DHT11" : Blockly.Arduino.definitions_['define_DHTTYPE'] = '#define DHTTYPE DHT11 ; // DHT 11 ';
-                  Blockly.Arduino.definitions_['define_'+var_dht] = 'DHT '+var_dht+'('+dropdown_pin+',DHT11);';
+                  Blockly.Arduino.variables_['define_'+var_dht] = 'DHT '+var_dht+'('+dropdown_pin+',DHT11);';
                   break;
     
   }
@@ -88,13 +59,13 @@ Blockly.Arduino.driss_temperature_and_humidity_sensor = function() {
   Blockly.Arduino.setups_['setup_get_temperature_and_humidity_sensor_'+dropdown_pin] = var_dht+'.begin();';
   
    switch(dropdown_grandeur) {
-   case  "TEMPERATURE" : Blockly.Arduino.definitions_['define_get_temperature'] = '\n/*lecture de la température */ \n' + 
+   case  "TEMPERATURE" : Blockly.Arduino.codeFunctions_['define_get_temperature'] = '\n/*lecture de la température */ \n' + 
                           'float get_temperature(DHT dht) {\n'+
                           'float t = dht.readTemperature();\n'+       
                           'return t;\n'+
                           '}\n';
                           break;
-   case  "HUMIDITE" : Blockly.Arduino.definitions_['define_get_humidity'] = '\n/*lecture de l"humidité*/ \n' + 
+   case  "HUMIDITE" : Blockly.Arduino.codeFunctions_['define_get_humidity'] = '\n/*lecture de l"humidité*/ \n' + 
                           'float get_humidity(DHT dht) {\n'+
                           'float h = dht.readHumidity();\n'+       
                           'return h;\n'+
@@ -116,7 +87,7 @@ Blockly.Arduino.driss_grove_gaz_sensor_mq5_ratio = function() {
   var value_r0  = Blockly.Arduino.valueToCode(this, 'R0', Blockly.Arduino.ORDER_ATOMIC);
 
   //dans include fonction 
-  Blockly.Arduino.definitions_['define_get_ratioRSRO'] = '\n/*lecture du ratio RS/R0 */ \n' + 
+  Blockly.Arduino.codeFunctions_['define_get_ratioRSRO'] = '\n/*lecture du ratio RS/R0 */ \n' + 
                           'float get_ratioRSRO() {\n'+
                           ' float sensor_volt;\n'+
                           ' float RS_gas; // Get value of RS in a GAS\n'+
@@ -139,7 +110,7 @@ Blockly.Arduino.driss_grove_gaz_sensor_mq5_rs = function() {
   var dropdown_pin = this.getFieldValue('PIN');
   
   //dans include fonction 
-  Blockly.Arduino.definitions_['define_get_RSMesure'] = '\n/*lecture de la resistance RS du capteur dans le gaz  */ \n' + 
+  Blockly.Arduino.codeFunctions_['define_get_RSMesure'] = '\n/*lecture de la resistance RS du capteur dans le gaz  */ \n' + 
                           'float get_RSMesure() {\n'+
                           ' float sensor_volt;\n'+
                           ' float RS_gas; // Get value of RS in a GAS\n'+
@@ -161,7 +132,7 @@ Blockly.Arduino.driss_grove_gaz_sensor_mq5_r0 = function() {
   
   Blockly.Arduino.setups_['setup_gaz_sensor_mq5_r0_'+dropdown_pin] = 'Serial.begin(9600);';
   //dans include fonction 
-  Blockly.Arduino.definitions_['define_show_R0Mesure'] = '\n/*lecture de la resistance R0 du capteur dans l air pur  */ \n' + 
+  Blockly.Arduino.codeFunctions_['define_show_R0Mesure'] = '\n/*lecture de la resistance R0 du capteur dans l air pur  */ \n' + 
                           'void show_R0Mesure() {\n'+
                           ' float sensor_volt;\n'+
                           ' float RS_air; // Get the value of RS via in a clear air\n'+
@@ -211,8 +182,8 @@ Blockly.Arduino.driss_grove_ultrasonic_ranger = function() {
   var dropdown_pin = this.getTitleValue('PIN');
   var dropdown_unite = this.getFieldValue('UNITE');
   //dans include définition    
-  Blockly.Arduino.definitions_['define_Ultrasonic'] = '#include "Ultrasonic.h"\n'; 
-  Blockly.Arduino.definitions_['define_ultrasonic_'+dropdown_pin ] = 'Ultrasonic ultrasonic_'+dropdown_pin+'('+dropdown_pin+');\n';
+  Blockly.Arduino.includes_['define_Ultrasonic'] = '#include "Ultrasonic.h"\n'; 
+  Blockly.Arduino.variables_['var_ultrasonic_'+dropdown_pin ] = 'Ultrasonic ultrasonic_'+dropdown_pin+'('+dropdown_pin+');\n';
 
   var code = '';
   switch(dropdown_unite){
@@ -239,7 +210,7 @@ Blockly.Arduino.driss_grove_sound_sensor = function() {
   var dropdown_pin = this.getTitleValue('PIN');
 
  //dans fonctions
-  Blockly.Arduino.definitions_['define_getValeurBruit'] = "int getValeurBruit() {\n"+
+  Blockly.Arduino.codeFunctions_['define_getValeurBruit'] = "int getValeurBruit() {\n"+
    " int _bruit=0;\n"+
    "  _bruit = analogRead("+dropdown_pin+");\n"+
    " return (_bruit); \n"+
@@ -310,8 +281,8 @@ Blockly.Arduino.driss_grove_servo_setPosition = function() {
   
   var servo = 'servomoteur_'+dropdown_pin;
   //dans include définition    
-  Blockly.Arduino.definitions_['define_Servo'] = "#include <Servo.h>"; 
-  Blockly.Arduino.definitions_['define_Servo_'+dropdown_pin] = "Servo "+servo+";";
+  Blockly.Arduino.includes_['define_Servo'] = "#include <Servo.h>"; 
+  Blockly.Arduino.variables_['var_Servo_'+dropdown_pin] = "Servo "+servo+";";
 
   Blockly.Arduino.setups_['setup_'+servo] = servo+'.attach('+dropdown_pin+');'; //code à insérer dans le setup Arduino
   var code = servo+'.write('+value_angle+');\n'  //code à insérer dans la loop Arduino
@@ -329,7 +300,7 @@ Blockly.Arduino.driss_grove_I2C_Motor_run = function() {
  
   var Motor = 'Motor_'+i2c_adress;
   //dans include définition    
-  Blockly.Arduino.definitions_['define_Grove_I2C_Motor_Driver'] = "#include <Grove_I2C_Motor_Driver.h>"; 
+  Blockly.Arduino.includes_['define_Grove_I2C_Motor_Driver'] = "#include <Grove_I2C_Motor_Driver.h>"; 
   Blockly.Arduino.definitions_['define_I2C_ADRESS_'+i2c_adress] = "#define I2C_ADRESS_"+i2c_adress+" "+i2c_adress+";";
 
   Blockly.Arduino.setups_['setup_'+Motor] = Motor+'.begin(I2C_ADDRESS_'+i2c_adress+');'; //code à insérer dans le setup Arduino
@@ -354,13 +325,13 @@ Blockly.Arduino.driss_grove_bluetooth_v30_bt_init = function() {
   var bt_pinCode = this.getTitleValue('BT_PINCODE');
 
   //dans include définition    
-  Blockly.Arduino.definitions_['define_SoftwareSerial'] = "#include <SoftwareSerial.h>\n"; 
-  Blockly.Arduino.definitions_['define_var_bt'] = "SoftwareSerial bt("+dropdown_RX_pin+","+dropdown_TX_pin+"); // RX, TX\n"; 
-  Blockly.Arduino.definitions_['define_var_time_out'] = "boolean time_out;\n";
-  Blockly.Arduino.definitions_['define_var_stringOne'] = 'String stringOne = "";\n';
+  Blockly.Arduino.includes_['define_SoftwareSerial'] = "#include <SoftwareSerial.h>\n"; 
+  Blockly.Arduino.variables_['define_var_bt'] = "SoftwareSerial bt("+dropdown_RX_pin+","+dropdown_TX_pin+"); // RX, TX\n"; 
+  Blockly.Arduino.variables_['define_var_time_out'] = "boolean time_out;\n";
+  Blockly.Arduino.variables_['define_var_stringOne'] = 'String stringOne = "";\n';
   
   //dans fonctions
-  Blockly.Arduino.definitions_['define_setupBlueToothConnection'] = '\nvoid setupBlueToothConnection() {\n'+
+  Blockly.Arduino.codeFunctions_['define_setupBlueToothConnection'] = '\nvoid setupBlueToothConnection() {\n'+
    ' //bt.begin(9600);\n'+ 
    ' bt.print("AT");\n'+  
    ' delay(400);\n'+ 
@@ -379,7 +350,7 @@ Blockly.Arduino.driss_grove_bluetooth_v30_bt_init = function() {
    ' bt.flush();\n'+
    '}\n';  
 
-  Blockly.Arduino.definitions_['define_lire_octet'] = "int lire_octet() {\n"+
+  Blockly.Arduino.codeFunctions_['define_lire_octet'] = "int lire_octet() {\n"+
    " time_out=false;\n"+
    " byte counter=0;\n"+
    " while(bt.available()==0 && !time_out) {\n"+
@@ -389,7 +360,7 @@ Blockly.Arduino.driss_grove_bluetooth_v30_bt_init = function() {
    " }\n"+
    " if (!time_out) { return bt.read(); } else { return -1; }\n"+
    "}\n";
-  Blockly.Arduino.definitions_['define_bt_read'] = 'int bt_read() {\n'+
+  Blockly.Arduino.codeFunctions_['define_bt_read'] = 'int bt_read() {\n'+
     ' stringOne = "";\n'+
     ' if (bt.available()>0) {\n'+  
     '   int carac;\n'+
@@ -476,23 +447,23 @@ Blockly.Arduino.driss_grove_rfid_int = function() {
   var tag = 'tag_1';//+dropdown_RX_pin;
   
   //dans include définition    
-  Blockly.Arduino.definitions_['define_SoftwareSerial'] = "#include <SoftwareSerial.h>"; 
-  Blockly.Arduino.definitions_['define_SeeedRFIDLib'] = "#include <SeeedRFIDLib.h>"; 
+  Blockly.Arduino.includes_['define_SoftwareSerial'] = "#include <SoftwareSerial.h>"; 
+  Blockly.Arduino.includes_['define_SeeedRFIDLib'] = "#include <SeeedRFIDLib.h>"; 
 
-  Blockly.Arduino.definitions_['define_'+rfid] = "SeeedRFIDLib "+rfid+"(255, "+dropdown_RX_pin+");\n"; 
-  Blockly.Arduino.definitions_['define_'+tag] = "RFIDTag "+tag+";\n"; 
+  Blockly.Arduino.variables_['var_'+rfid] = "SeeedRFIDLib "+rfid+"(255, "+dropdown_RX_pin+");\n"; 
+  Blockly.Arduino.variables_['var_'+tag] = "RFIDTag "+tag+";\n"; 
   
  
   //dans fonctions
-  Blockly.Arduino.definitions_['define_rfid_read'] = "void rfid_read() {\n"+
+  Blockly.Arduino.codeFunctions_['define_rfid_read'] = "void rfid_read() {\n"+
    " tag_1 = rfid_1.readId();\n"+
    "}\n";
 
-   Blockly.Arduino.definitions_['define_rfid_id'] = "long rfid_id() {\n"+
+   Blockly.Arduino.codeFunctions_['define_rfid_id'] = "long rfid_id() {\n"+
    " return(tag_1.id);\n"+
    "}\n";
 
-   Blockly.Arduino.definitions_['define_rfid_raw'] = "String rfid_raw() {\n"+
+   Blockly.Arduino.codeFunctions_['define_rfid_raw'] = "String rfid_raw() {\n"+
    " return(tag_1.raw);\n"+
    "}\n";
 
@@ -541,18 +512,193 @@ Blockly.Arduino.driss_grove_rfid_id_raw = function() {
 
 
 
+
+//-Afficheur Grove - LCD ----------------------------------------------------------------------------------------------------------------------------------------
+
+//Grove Grove - driss_grove_lcd_rgb_power
+Blockly.Arduino.driss_grove_lcd_rgb_power = function() {
+  var dropdown_stat = this.getFieldValue('STAT');
+
+  Blockly.Arduino.includes_['define_lcd_rgb'] = '#include <rgb_lcd.h>';
+  Blockly.Arduino.includes_['define_Wire'] = '#include <Wire.h>';
+
+  Blockly.Arduino.variables_['var_lcd_rgb'] = 'rgb_lcd lcd_rgb;';
+  
+  Blockly.Arduino.setups_['setup_lcd_rgb'] = 'lcd_rgb.begin(16, 2);\n';
+  
+  var code = 'lcd_rgb';
+  if(dropdown_stat==="ON"){
+    code += '.display();\n';
+  } else {
+    code += '.noDisplay();\n';
+  }
+  return code;
+};
+
+//Grove Grove - driss_grove_lcd_rgb_clean
+Blockly.Arduino.driss_grove_lcd_rgb_clean = function() {
+  var dropdown_stat = this.getFieldValue('STAT');
+
+  Blockly.Arduino.includes_['define_lcd_rgb'] = '#include <rgb_lcd.h>';
+  Blockly.Arduino.includes_['define_Wire'] = '#include <Wire.h>';
+
+  Blockly.Arduino.variables_['var_lcd_rgb'] = 'rgb_lcd lcd_rgb;';
+  
+  Blockly.Arduino.setups_['setup_lcd_rgb'] = 'lcd_rgb.begin(16, 2);\n';
+  
+  var code = 'lcd_rgb.clear();\n';
+  
+  return code;
+};
+
+
+
+//Grove Grove - driss_grove_lcd_rgb_go_cursor_to
+Blockly.Arduino.driss_grove_lcd_rgb_go_cursor_to = function() {
+ 
+  var value_ligne = Blockly.Arduino.valueToCode(this, 'LCD_LIG', Blockly.Arduino.ORDER_ATOMIC);
+  var value_colonne = Blockly.Arduino.valueToCode(this, 'LCD_COL', Blockly.Arduino.ORDER_ATOMIC);
+
+  //dans include définition    
+  Blockly.Arduino.includes_['define_Wire'] = '#include <Wire.h>';
+  Blockly.Arduino.includes_['define_rgb_lcd'] = '#include <rgb_lcd.h>';
+
+  Blockly.Arduino.variables_['var_lcd_rgb'] = 'rgb_lcd lcd_rgb;\n';
+
+  Blockly.Arduino.setups_['setup_lcd_rgb'] = ''+
+  ' lcd_rgb.begin(16, 2);   // set up the LCD s number of columns and rows:\n';
+
+  var code = 'lcd_rgb.setCursor('+value_colonne+', '+value_ligne+');\n';
+  return code;
+};
+
+//Grove Grove - driss_grove_lcd_rgb_go_to_col_lig
+Blockly.Arduino.driss_grove_lcd_rgb_go_to_col_lig = function() {
+ 
+  var value_ligne = this.getTitleValue('LCD_LIG');
+  var value_colonne = this.getTitleValue('LCD_COL');
+
+  //dans include définition    
+  Blockly.Arduino.includes_['define_Wire'] = '#include <Wire.h>';
+  Blockly.Arduino.includes_['define_rgb_lcd'] = '#include <rgb_lcd.h>';
+
+  Blockly.Arduino.variables_['var_lcd_rgb'] = 'rgb_lcd lcd_rgb;\n';
+
+  Blockly.Arduino.setups_['setup_lcd_rgb'] = ''+
+  ' lcd_rgb.begin(16, 2);   // set up the LCD s number of columns and rows:\n';
+
+  var code = 'lcd_rgb.setCursor('+value_colonne+', '+value_ligne+');\n';
+  return code;
+};
+
+
+
+//Grove Grove - driss_grove_lcd_rgb_write_row
+Blockly.Arduino.driss_grove_lcd_rgb_write_row = function() {
+  var value_ligne_0 = Blockly.Arduino.valueToCode(this, 'LCD_L1', Blockly.Arduino.ORDER_ATOMIC);
+  var value_ligne_1 = Blockly.Arduino.valueToCode(this, 'LCD_L2', Blockly.Arduino.ORDER_ATOMIC);
+
+  //dans include définition    
+  Blockly.Arduino.includes_['define_Wire'] = '#include <Wire.h>';
+  Blockly.Arduino.includes_['define_rgb_lcd'] = '#include <rgb_lcd.h>';
+
+  
+  Blockly.Arduino.variables_['var_lcd_rgb'] = 'rgb_lcd lcd_rgb;\n';
+
+  Blockly.Arduino.setups_['setup_lcd_rgb'] = ''+
+  ' lcd_rgb.begin(16, 2);   // set up the LCD s number of columns and rows:\n';
+
+  var code = 'lcd_rgb.setCursor(0, 0);\n' +
+  'lcd_rgb.print('+value_ligne_0+');\n' +
+  'lcd_rgb.setCursor(0, 1);\n' +
+  'lcd_rgb.print('+value_ligne_1+');\n' ;
+  return code;
+};
+
+//Grove Grove - driss_grove_lcd_rgb_scroll
+Blockly.Arduino.driss_grove_lcd_rgb_scroll = function() {
+  var dropdown_dir = this.getFieldValue('DIRECTION');
+  var nbre = Blockly.Arduino.valueToCode(this, 'NBRE', Blockly.Arduino.ORDER_ATOMIC);
+  var delay = Blockly.Arduino.valueToCode(this, 'DELAY', Blockly.Arduino.ORDER_ATOMIC);
+
+  Blockly.Arduino.includes_['define_lcd_rgb'] = '#include <rgb_lcd.h>\n';
+  Blockly.Arduino.includes_['define_Wire'] = '#include <Wire.h>\n';
+
+  Blockly.Arduino.variables_['var_lcd_rgb'] = 'rgb_lcd lcd_rgb;';
+  
+  Blockly.Arduino.setups_['setup_lcd_rgb'] = 'lcd_rgb.begin(16, 2);\n';
+  
+  var code = ''+
+  'for (int i = 0; i < '+nbre+'; i++) {\n'+
+  ' lcd_rgb';
+  if(dropdown_dir==="LEFT"){
+    code += '.scrollDisplayLeft();\n';
+  } else if(dropdown_dir==="RIGHT"){
+    code += '.scrollDisplayRight();\n';
+  } else {
+    code += '.autoscroll();\n';
+  }
+  code += ' delay('+delay+');\n';
+  code += '}\n';
+  return code;
+};
+
+//Grove Grove - driss_grove_lcd_rgb_color
+Blockly.Arduino.driss_grove_lcd_rgb_color = function() {
+  var coul_R = Blockly.Arduino.valueToCode(this, 'RED', Blockly.Arduino.ORDER_ATOMIC);
+  var coul_V = Blockly.Arduino.valueToCode(this, 'GREEN', Blockly.Arduino.ORDER_ATOMIC);
+  var coul_B = Blockly.Arduino.valueToCode(this, 'BLUE', Blockly.Arduino.ORDER_ATOMIC);
+
+  Blockly.Arduino.includes_['define_lcd_rgb'] = '#include <rgb_lcd.h>\n';
+  Blockly.Arduino.includes_['define_Wire'] = '#include <Wire.h>\n';
+
+  Blockly.Arduino.variables_['var_lcd_rgb'] = 'rgb_lcd lcd_rgb;';
+  
+  Blockly.Arduino.setups_['setup_lcd_rgb'] = 'lcd_rgb.begin(16, 2);\n';
+  
+  var code = 'lcd_rgb.setRGB('+coul_R+','+coul_V+','+coul_B+');\n';
+  return code;
+};
+
+
+//Grove Grove - driss_grove_lcd_rgb_set_retro_color
+Blockly.Arduino.driss_grove_lcd_rgb_set_retro_color = function() {
+  var retro_color = this.getTitleValue('LCD_RGB_COLOR'); 
+  var code = "";
+  switch (retro_color) {
+    case "RED" : code = 'lcd_rgb.setRGB(255, 0, 0);\n'; break;
+    case "GREEN" : code = 'lcd_rgb.setRGB(0, 255, 0);\n'; break;
+    case "BLUE" : code = 'lcd_rgb.setRGB(0, 0, 255);\n'; break;
+    case "WHITE" : code = 'lcd_rgb.setRGB(255, 255, 255);\n'; break;
+    case "BLACK" : code = 'lcd_rgb.setRGB(0, 0, 0);\n'; break;
+
+    default : code = 'lcd_rgb.setRGB(128, 128, 128);\n'; break;
+  }
+
+  Blockly.Arduino.includes_['define_lcd_rgb'] = '#include <rgb_lcd.h>\n';
+  Blockly.Arduino.includes_['define_Wire'] = '#include <Wire.h>\n';
+
+  Blockly.Arduino.variables_['var_lcd_rgb'] = 'rgb_lcd lcd_rgb;';
+  
+  Blockly.Arduino.setups_['setup_lcd_rgb'] = 'lcd_rgb.begin(16, 2);\n';
+  
+  return code;
+};
+
+
+
 //-OLED 96x96 ----------------------------------------------------------------------------------------------------------------------------------------
 
 
 //Grove Ecran OLED 96x96 init OK
 Blockly.Arduino.driss_grove_oled_96x96_init = function() {
     //dans include définition    
-  Blockly.Arduino.definitions_['define_Wire'] = '#include <Wire.h>';
-  Blockly.Arduino.definitions_['define_SeeedGrayOLED'] = '#include <SeeedGrayOLED.h>';
-  Blockly.Arduino.definitions_['define_avr_pgmspace'] = '#include <avr/pgmspace.h>';
+  Blockly.Arduino.includes_['define_Wire'] = '#include <Wire.h>';
+  Blockly.Arduino.includes_['define_SeeedGrayOLED'] = '#include <SeeedGrayOLED.h>';
+  Blockly.Arduino.includes_['define_avr_pgmspace'] = '#include <avr/pgmspace.h>';
   
   //dans fonctions
-  Blockly.Arduino.definitions_['define_oled_96x96_displayTexte'] = '\nvoid Oled96x96_DisplayTexte(int lig, int col, String texte, int niveauDeGris) {\n'+
+  Blockly.Arduino.codeFunctions_['define_oled_96x96_displayTexte'] = '\nvoid Oled96x96_DisplayTexte(int lig, int col, String texte, int niveauDeGris) {\n'+
    ' char* txt =  new char[texte.length()+1];\n'+
    ' strcpy(txt, texte.c_str());\n'+
    ' SeeedGrayOled.setTextXY(lig,col);  //set Cursor to ith line, 0th column\n'+ 
@@ -560,28 +706,28 @@ Blockly.Arduino.driss_grove_oled_96x96_init = function() {
    ' SeeedGrayOled.putString(txt);\n'+ 
    '}\n';    
 
-   Blockly.Arduino.definitions_['define_oled_96x96_setCursor'] = '\nvoid Oled96x96_SetCursorAt(int lig, int col) {\n'+
+   Blockly.Arduino.codeFunctions_['define_oled_96x96_setCursor'] = '\nvoid Oled96x96_SetCursorAt(int lig, int col) {\n'+
    ' SeeedGrayOled.setTextXY(lig,col);  //set Cursor to ith line, 0th column\n'+ 
    '}\n';    
 
-   Blockly.Arduino.definitions_['define_oled_96x96_putString'] = '\nvoid Oled96x96_putString(String texte) {\n'+
+   Blockly.Arduino.codeFunctions_['define_oled_96x96_putString'] = '\nvoid Oled96x96_putString(String texte) {\n'+
    ' char* txt =  new char[texte.length()+1];\n'+
    ' strcpy(txt, texte.c_str());\n'+
    ' SeeedGrayOled.setContrastLevel(255); //Set display contrast ratio to half level( i.e 256/2 1 )\n'+ 
    ' SeeedGrayOled.putString(txt);\n'+ 
    '}\n'; 
 
-   Blockly.Arduino.definitions_['define_oled_96x96_putNumber'] = '\nvoid Oled96x96_putNumber(long n) {\n'+
+   Blockly.Arduino.codeFunctions_['define_oled_96x96_putNumber'] = '\nvoid Oled96x96_putNumber(long n) {\n'+
    ' SeeedGrayOled.setContrastLevel(255); //Set display contrast ratio to half level( i.e 256/2 1 )\n'+ 
    ' SeeedGrayOled.putNumber(n);\n'+ 
    '}\n'; 
 
-   Blockly.Arduino.definitions_['define_oled_96x96_drawLogo'] = '\nvoid Oled96x96_drawLogo(unsigned char logo[]) {\n'+
+   Blockly.Arduino.codeFunctions_['define_oled_96x96_drawLogo'] = '\nvoid Oled96x96_drawLogo(unsigned char logo[]) {\n'+
    ' SeeedGrayOled.setContrastLevel(255); //Set display contrast ratio to half level( i.e 256/2 1 )\n'+ 
    ' SeeedGrayOled.drawBitmap(logo,96*96/8);\n'+ 
    '}\n'; 
 
-   Blockly.Arduino.definitions_['define_oled_96x96_clearScreen'] = '\nvoid Oled96x96_clearScreen() {\n'+
+   Blockly.Arduino.codeFunctions_['define_oled_96x96_clearScreen'] = '\nvoid Oled96x96_clearScreen() {\n'+
    ' SeeedGrayOled.clearDisplay();     //Clear Display.\n'+ 
    '}\n'; 
 
@@ -669,14 +815,14 @@ Blockly.Arduino.driss_grove_4_digit_display_displayDigits = function() {
   var data = 'data_'+dropdown_CLK_pin+'_'+dropdown_DIO_pin ;
   
   //dans include définition    
-  Blockly.Arduino.definitions_['define_TM1637Display'] = '#include <TM1637Display.h>';
+  Blockly.Arduino.includes_['define_TM1637Display'] = '#include <TM1637Display.h>';
   Blockly.Arduino.definitions_['define_CLK'] = '#define CLK '+ dropdown_CLK_pin;
   Blockly.Arduino.definitions_['define_DIO'] = '#define DIO '+ dropdown_DIO_pin;
-  Blockly.Arduino.definitions_['define_'+display] = 'TM1637Display '+display+'(CLK, DIO);';
-  Blockly.Arduino.definitions_['define_'+data] = 'uint8_t '+data+'[] = { 0xff, 0xff, 0xff, 0xff };';
+  Blockly.Arduino.variables_['var_'+display] = 'TM1637Display '+display+'(CLK, DIO);';
+  Blockly.Arduino.variables_['var_'+data] = 'uint8_t '+data+'[] = { 0xff, 0xff, 0xff, 0xff };';
   
   //dans fonctions
-  Blockly.Arduino.definitions_['define_4_digits_displayDigits'] = '\nvoid displayDigits(TM1637Display _display, uint8_t digit_1, uint8_t digit_2, uint8_t digit_3, uint8_t digit_4) {\n'+
+  Blockly.Arduino.codeFunctions_['define_4_digits_displayDigits'] = '\nvoid displayDigits(TM1637Display _display, uint8_t digit_1, uint8_t digit_2, uint8_t digit_3, uint8_t digit_4) {\n'+
    ' '+data+'[0] = _display.encodeDigit(digit_1);\n'+
    ' '+data+'[1] = _display.encodeDigit(digit_2);\n'+
    ' '+data+'[2] = _display.encodeDigit(digit_3);\n'+
@@ -706,14 +852,14 @@ Blockly.Arduino.driss_grove_4_digit_display_displayNumber = function() {
   var data = 'data_'+dropdown_CLK_pin+'_'+dropdown_DIO_pin ;
   
   //dans include définition    
-  Blockly.Arduino.definitions_['define_TM1637Display'] = '#include <TM1637Display.h>';
+  Blockly.Arduino.includes_['define_TM1637Display'] = '#include <TM1637Display.h>';
   Blockly.Arduino.definitions_['define_CLK'] = '#define CLK '+ dropdown_CLK_pin;
   Blockly.Arduino.definitions_['define_DIO'] = '#define DIO '+ dropdown_DIO_pin;
-  Blockly.Arduino.definitions_['define_'+display] = 'TM1637Display '+display+'(CLK, DIO);';
+  Blockly.Arduino.variables_['var_'+display] = 'TM1637Display '+display+'(CLK, DIO);';
   //Blockly.Arduino.definitions_['define_'+data] = 'uint8_t '+data+'[] = { 0xff, 0xff, 0xff, 0xff };';
   
   //dans fonctions
-  Blockly.Arduino.definitions_['define_4_digits_displayNumber'] = '\nvoid displayNumber(TM1637Display _display, int nbre, boolean lz) {\n'+
+  Blockly.Arduino.codeFunctions_['define_4_digits_displayNumber'] = '\nvoid displayNumber(TM1637Display _display, int nbre, boolean lz) {\n'+
    ' _display.showNumberDec(nbre, lz);\n'+
    '}\n';    
 
@@ -809,14 +955,14 @@ Blockly.Arduino.driss_grove_4_digit_display_digitsOnOff = function() {
 
   
   //dans include définition    
-  Blockly.Arduino.definitions_['define_TM1637Display'] = '#include <TM1637Display.h>';
+  Blockly.Arduino.includes_['define_TM1637Display'] = '#include <TM1637Display.h>';
   Blockly.Arduino.definitions_['define_CLK'] = '#define CLK '+ dropdown_CLK_pin;
   Blockly.Arduino.definitions_['define_DIO'] = '#define DIO '+ dropdown_DIO_pin;
-  Blockly.Arduino.definitions_['define_'+display] = 'TM1637Display '+display+'(CLK, DIO);';
-  Blockly.Arduino.definitions_['define_'+segments] = 'const uint8_t '+segments+'[] = {\n'+digit_1+digit_2+digit_3+digit_4+'\n};';
+  Blockly.Arduino.variables_['var_'+display] = 'TM1637Display '+display+'(CLK, DIO);';
+  Blockly.Arduino.variables_['var_'+segments] = 'const uint8_t '+segments+'[] = {\n'+digit_1+digit_2+digit_3+digit_4+'\n};';
   
   //dans fonctions
-  Blockly.Arduino.definitions_['define_4_digits_digitsOnOff'] = '\nvoid digitsOnOff(TM1637Display _display) {\n'+
+  Blockly.Arduino.codeFunctions_['define_4_digits_digitsOnOff'] = '\nvoid digitsOnOff(TM1637Display _display) {\n'+
    ' _display.setSegments('+segments+');\n'+
    '}\n';    
 

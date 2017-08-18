@@ -1,11 +1,12 @@
 head.load(
 "generators/BlocklyArduino/array.js",
-"generators/BlocklyArduino/control.js",
+/*"generators/BlocklyArduino/control.js",*/
+"generators/BlocklyArduino/loops.js",
 "generators/BlocklyArduino/logic.js",
 "generators/BlocklyArduino/math.js",
 "generators/BlocklyArduino/procedures.js",
 "generators/BlocklyArduino/text.js",
-"generators/BlocklyArduino/variables.js",
+/*"generators/BlocklyArduino/variables.js",*/
 function() {
     // Call a function when done
     console.log("Done loading BlocklyArduino Generators");

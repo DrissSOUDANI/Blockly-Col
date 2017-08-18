@@ -76,7 +76,7 @@ Blockly.Msg.ARD_TYPE_CHILDBLOCKMISSING = "typage manquant sur un bloc";
 //**********************************catégories***********************************************
 //**********************************catégories***********************************************
 
-Blockly.Msg.CAT_LOOPS = "Boucles";
+Blockly.Msg.CAT_LOOPS = "Boucles - Pause";
 Blockly.Msg.CAT_LOGIC = "Logique";
 Blockly.Msg.CAT_IF = "si...";
 Blockly.Msg.CAT_BOOL = "booléen";
@@ -1807,6 +1807,7 @@ Blockly.Msg.DRISS_A4_TEXT35 = "Sortie lampe  ";
 Blockly.Msg.CAT_DRISS_GROVE = "Grove";
 Blockly.Msg.CAT_DRISS_GROVE_IN = "capteurs";
 Blockly.Msg.CAT_DRISS_GROVE_OUT = "actionneurs";
+Blockly.Msg.CAT_DRISS_GROVE_LCD_RGB = "Afficheur LCD RGB";
 Blockly.Msg.CAT_DRISS_GROVE_OLED_96x96 = "Afficheur OLED 96x96";
 Blockly.Msg.CAT_DRISS_GROVE_4_Digit_Display ="Afficheur 4 digits";
 Blockly.Msg.CAT_DRISS_GROVE_COMMUNICATION ="Communication";

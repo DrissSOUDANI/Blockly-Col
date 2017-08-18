@@ -98,13 +98,26 @@ Blockly.Blocks.variables_set_ds = {
    */
   init: function() {
 
-
+/*
     this.appendDummyInput()
         .appendField(Blockly.Msg.VARIABLES_SET_TITLE)
         .appendField(new Blockly.FieldVariable(Blockly.Msg.VARIABLES_SET_ITEM), "VAR")
-        .appendField(Blockly.Msg.VARIABLES_SET_TO);
+        .appendField(Blockly.Msg.VARIABLES_SET_TO)
+
     this.appendValueInput("VALUE")
         .setCheck(null);
+*/
+
+    this.appendValueInput("VALUE")
+        .setCheck(null)
+        .appendField(Blockly.Msg.VARIABLES_SET_TITLE)
+        .appendField(new Blockly.FieldVariable(Blockly.Msg.VARIABLES_SET_ITEM), "VAR")
+        .appendField("à");
+;
+
+
+
+
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);

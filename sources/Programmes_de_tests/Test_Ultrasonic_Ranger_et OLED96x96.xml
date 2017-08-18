@@ -1,0 +1,170 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="driss_grove_oled_96x96_init" id="1" x="128" y="49">
+    <next>
+      <block type="technozone_declare_var" id="2">
+        <field name="VAR">distance</field>
+        <field name="TYPE">long</field>
+        <next>
+          <block type="technozone_variables_set" id="3" inline="true">
+            <field name="VAR">distance</field>
+            <value name="VALUE">
+              <block type="math_number" id="4">
+                <field name="NUM">0</field>
+              </block>
+            </value>
+            <next>
+              <block type="controls_repeat_infinite" id="5">
+                <statement name="DO">
+                  <block type="driss_grove_oled_96x96_show_text_at_XY" id="6" inline="false">
+                    <value name="OLED_96x96_TEXTE">
+                      <block type="text" id="7">
+                        <field name="TEXT">Distance</field>
+                      </block>
+                    </value>
+                    <value name="OLED_96x96_LIG">
+                      <block type="math_number" id="8">
+                        <field name="NUM">2</field>
+                      </block>
+                    </value>
+                    <value name="OLED_96x96_COL">
+                      <block type="math_number" id="9">
+                        <field name="NUM">2</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="technozone_variables_set" id="10" inline="true">
+                        <field name="VAR">distance</field>
+                        <value name="VALUE">
+                          <block type="driss_grove_ultrasonic_ranger" id="11">
+                            <field name="UNITE">CM</field>
+                            <field name="PIN">6</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="driss_grove_oled_96x96_set_cursot_at_XY" id="32" inline="false">
+                            <value name="OLED_96x96_LIG">
+                              <block type="math_number" id="33">
+                                <field name="NUM">3</field>
+                              </block>
+                            </value>
+                            <value name="OLED_96x96_COL">
+                              <block type="math_number" id="34">
+                                <field name="NUM">2</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="driss_grove_oled_96x96_show_number" id="12" inline="false">
+                                <value name="OLED_96x96_NUMBER">
+                                  <block type="technozone_variables_get" id="13">
+                                    <field name="VAR">distance</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="driss_grove_oled_96x96_show_text" id="14" inline="false">
+                                    <value name="OLED_96x96_TEXTE">
+                                      <block type="text" id="15">
+                                        <field name="TEXT"> Cm</field>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="base_delay" id="16" inline="true">
+                                        <value name="DELAY_TIME">
+                                          <block type="math_number" id="17">
+                                            <field name="NUM">250</field>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <block type="technozone_variables_set" id="18" inline="true">
+                                            <field name="VAR">distance</field>
+                                            <value name="VALUE">
+                                              <block type="driss_grove_ultrasonic_ranger" id="19">
+                                                <field name="UNITE">INCH</field>
+                                                <field name="PIN">6</field>
+                                              </block>
+                                            </value>
+                                            <next>
+                                              <block type="driss_grove_oled_96x96_set_cursot_at_XY" id="20" inline="false">
+                                                <value name="OLED_96x96_LIG">
+                                                  <block type="math_number" id="21">
+                                                    <field name="NUM">5</field>
+                                                  </block>
+                                                </value>
+                                                <value name="OLED_96x96_COL">
+                                                  <block type="math_number" id="22">
+                                                    <field name="NUM">2</field>
+                                                  </block>
+                                                </value>
+                                                <next>
+                                                  <block type="driss_grove_oled_96x96_show_text" id="23" inline="false">
+                                                    <value name="OLED_96x96_TEXTE">
+                                                      <block type="text" id="24">
+                                                        <field name="TEXT">Distance</field>
+                                                      </block>
+                                                    </value>
+                                                    <next>
+                                                      <block type="driss_grove_oled_96x96_set_cursot_at_XY" id="29" inline="false">
+                                                        <value name="OLED_96x96_LIG">
+                                                          <block type="math_number" id="30">
+                                                            <field name="NUM">6</field>
+                                                          </block>
+                                                        </value>
+                                                        <value name="OLED_96x96_COL">
+                                                          <block type="math_number" id="31">
+                                                            <field name="NUM">2</field>
+                                                          </block>
+                                                        </value>
+                                                        <next>
+                                                          <block type="driss_grove_oled_96x96_show_number" id="25" inline="false">
+                                                            <value name="OLED_96x96_NUMBER">
+                                                              <block type="technozone_variables_get" id="26">
+                                                                <field name="VAR">distance</field>
+                                                              </block>
+                                                            </value>
+                                                            <next>
+                                                              <block type="driss_grove_oled_96x96_show_text" id="27" inline="false">
+                                                                <value name="OLED_96x96_TEXTE">
+                                                                  <block type="text" id="28">
+                                                                    <field name="TEXT"> Inche</field>
+                                                                  </block>
+                                                                </value>
+                                                                <next>
+                                                                  <block type="base_delay" id="35" inline="true">
+                                                                    <value name="DELAY_TIME">
+                                                                      <block type="math_number" id="36">
+                                                                        <field name="NUM">250</field>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </next>
+                                                              </block>
+                                                            </next>
+                                                          </block>
+                                                        </next>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
