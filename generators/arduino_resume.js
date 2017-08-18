@@ -1,6 +1,7 @@
 head.load(
 "generators/BlocklyArduino/array.js",
-"generators/BlocklyArduino/control.js",
+/*"generators/BlocklyArduino/control.js",*/
+"generators/BlocklyArduino/loops.js",
 "generators/BlocklyArduino/logic.js",
 "generators/BlocklyArduino/math.js",
 "generators/BlocklyArduino/procedures.js",

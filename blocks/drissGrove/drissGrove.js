@@ -906,7 +906,7 @@ Blockly.Blocks['driss_grove_lcd_rgb_scroll'] = {
     this.appendValueInput("DELAY")
         .setCheck("Number")
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("avec une tempo de");
+        .appendField("avec un délai de (en ms)");
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -915,6 +915,24 @@ Blockly.Blocks['driss_grove_lcd_rgb_scroll'] = {
     this.setHelpUrl('');
   }
 };
+
+
+//Grove Grove - driss_grove_lcd_rgb_set_retro_color
+Blockly.Blocks['driss_grove_lcd_rgb_set_retro_color'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Mettre le rétroéclairage du LCD RGB sur ")
+        .appendField(new Blockly.FieldDropdown([["Rouge","RED"], ["Vert","GREEN"], ["Bleu","BLUE"], ["Blanc","WHITE"], ["Noir","BLACK"]]), "LCD_RGB_COLOR");
+    this.setColour(Blockly.Blocks.drissGrove.HUE);
+
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+ 
 
 
 //Grove Grove - driss_grove_lcd_rgb_color 
@@ -941,6 +959,7 @@ Blockly.Blocks['driss_grove_lcd_rgb_color'] = {
     this.setHelpUrl('');
   }
 };
+
 
 
 //-Afficheur Grove - 4-Digit Display ----------------------------------------------------------------------------------------------------------------------------------------

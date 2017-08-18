@@ -661,6 +661,31 @@ Blockly.Arduino.driss_grove_lcd_rgb_color = function() {
 };
 
 
+//Grove Grove - driss_grove_lcd_rgb_set_retro_color
+Blockly.Arduino.driss_grove_lcd_rgb_set_retro_color = function() {
+  var retro_color = this.getTitleValue('LCD_RGB_COLOR'); 
+  var code = "";
+  switch (retro_color) {
+    case "RED" : code = 'lcd_rgb.setRGB(255, 0, 0);\n'; break;
+    case "GREEN" : code = 'lcd_rgb.setRGB(0, 255, 0);\n'; break;
+    case "BLUE" : code = 'lcd_rgb.setRGB(0, 0, 255);\n'; break;
+    case "WHITE" : code = 'lcd_rgb.setRGB(255, 255, 255);\n'; break;
+    case "BLACK" : code = 'lcd_rgb.setRGB(0, 0, 0);\n'; break;
+
+    default : code = 'lcd_rgb.setRGB(128, 128, 128);\n'; break;
+  }
+
+  Blockly.Arduino.includes_['define_lcd_rgb'] = '#include <rgb_lcd.h>\n';
+  Blockly.Arduino.includes_['define_Wire'] = '#include <Wire.h>\n';
+
+  Blockly.Arduino.variables_['var_lcd_rgb'] = 'rgb_lcd lcd_rgb;';
+  
+  Blockly.Arduino.setups_['setup_lcd_rgb'] = 'lcd_rgb.begin(16, 2);\n';
+  
+  return code;
+};
+
+
 
 //-OLED 96x96 ----------------------------------------------------------------------------------------------------------------------------------------
 

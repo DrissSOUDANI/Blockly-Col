@@ -413,6 +413,14 @@
 		<block type="logic_null"></block>
 	</category>
 	<category name="CAT_LOOPS" colour="#C88330">
+		<block type="controls_base_delay">
+				<value name="DELAY_TIME">
+					<shadow type="math_number">
+						<field name="NUM">1000</field>
+					</shadow>
+				</value>
+			</block>
+		<block type="controls_repeat_indefinitely"></block>
 		<block type="controls_repeat"></block>
 		<block type="controls_repeat_ext">
 			<value name="TIMES">
@@ -1156,6 +1164,7 @@
         	<block type="driss_grove_lcd_rgb_go_to_col_lig"></block>
          	<block type="driss_grove_lcd_rgb_write_row"></block>
          	<block type="driss_grove_lcd_rgb_scroll"></block>
+         	<block type="driss_grove_lcd_rgb_set_retro_color"></block>
          	<block type="driss_grove_lcd_rgb_color"></block>
         </category>
 

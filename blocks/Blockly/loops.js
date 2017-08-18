@@ -24,7 +24,7 @@
  */
 'use strict';
 
-goog.provide('Blockly.Blocks.loops');
+goog.provide('Blockly.Blocks.loops');  
 
 goog.require('Blockly.Blocks');
 
@@ -34,31 +34,7 @@ goog.require('Blockly.Blocks');
  */
 Blockly.Blocks.loops.HUE = 120;
 
-Blockly.Blocks['controls_repeat_ext'] = {
-  /**
-   * Block for repeat n times (external number).
-   * @this Blockly.Block
-   */
-  init: function() {
-    this.jsonInit({
-      "message0": Blockly.Msg.CONTROLS_REPEAT_TITLE,
-      "args0": [
-        {
-          "type": "input_value",
-          "name": "TIMES",
-          "check": "Number"
-        }
-      ],
-      "previousStatement": null,
-      "nextStatement": null,
-      "colour": Blockly.Blocks.loops.HUE,
-      "tooltip": Blockly.Msg.CONTROLS_REPEAT_TOOLTIP,
-      "helpUrl": Blockly.Msg.CONTROLS_REPEAT_HELPURL
-    });
-    this.appendStatementInput('DO')
-        .appendField(Blockly.Msg.CONTROLS_REPEAT_INPUT_DO);
-  }
-};
+
 
 Blockly.Blocks['controls_repeat'] = {
   /**
@@ -88,6 +64,34 @@ Blockly.Blocks['controls_repeat'] = {
         .appendField(Blockly.Msg.CONTROLS_REPEAT_INPUT_DO);
   }
 };
+
+
+Blockly.Blocks['controls_repeat_ext'] = {
+  /**
+   * Block for repeat n times (external number).
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": Blockly.Msg.CONTROLS_REPEAT_TITLE,
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "TIMES",
+          "check": "Number"
+        }
+      ],
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": Blockly.Blocks.loops.HUE,
+      "tooltip": Blockly.Msg.CONTROLS_REPEAT_TOOLTIP,
+      "helpUrl": Blockly.Msg.CONTROLS_REPEAT_HELPURL
+    });
+    this.appendStatementInput('DO')
+        .appendField(Blockly.Msg.CONTROLS_REPEAT_INPUT_DO);
+  }
+};
+
 
 Blockly.Blocks['controls_whileUntil'] = {
   /**
@@ -288,5 +292,5 @@ Blockly.Blocks['controls_flow_statements'] = {
    * Blockly.Blocks['controls_flow_statements'].LOOP_TYPES.push('custom_loop');
    */
   LOOP_TYPES: ['controls_repeat', 'controls_repeat_ext', 'controls_forEach',
-      'controls_for', 'controls_whileUntil']
+      'controls_for', 'controls_whileUntil', 'controls_repeat_indefinitely']
 };

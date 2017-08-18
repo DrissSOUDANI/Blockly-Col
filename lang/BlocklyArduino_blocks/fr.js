@@ -76,7 +76,7 @@ Blockly.Msg.ARD_TYPE_CHILDBLOCKMISSING = "typage manquant sur un bloc";
 //**********************************catégories***********************************************
 //**********************************catégories***********************************************
 
-Blockly.Msg.CAT_LOOPS = "Boucles";
+Blockly.Msg.CAT_LOOPS = "Boucles - Pause";
 Blockly.Msg.CAT_LOGIC = "Logique";
 Blockly.Msg.CAT_IF = "si...";
 Blockly.Msg.CAT_BOOL = "booléen";
