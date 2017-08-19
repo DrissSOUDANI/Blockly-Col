@@ -221,12 +221,107 @@ Blockly.Arduino.driss_grove_sound_sensor = function() {
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-          
-    
-          
+//Grove driss_grove_joystick_clic
+Blockly.Arduino.driss_grove_joystick_clic = function() {
+  var pin_1 = this.getTitleValue('PIN');
+  //Trouver la 2ème entrée analogique (A0 - A1  par exemple)
+  var pin_2= parseInt((pin_1[1]).valueOf(), 10)+1;
+  pin_2='A'+pin_2;
+  
+  Blockly.Arduino.variables_['var_joystick_'+pin_1+'_X0' ] = 'int joystick_'+pin_1+'_X0 ;';
+  Blockly.Arduino.variables_['var_joystick_'+pin_2+'_Y0' ] = 'int joystick_'+pin_2+'_Y0 ;';
+
+  Blockly.Arduino.setups_['setup_joystick_'+pin_1+'_X0' ] = 'joystick_'+pin_1+'_X0 = analogRead('+pin_1+');';
+  Blockly.Arduino.setups_['setup_joystick_'+pin_2+'_Y0' ] = 'joystick_'+pin_2+'_Y0 = analogRead('+pin_2+');';
+
+  var code="analogRead("+pin_1+")>2*joystick_"+pin_1+"_X0";
+ return [code, Blockly.Arduino.ORDER_ATOMIC];
+}
+
+//Grove driss_grove_joystick_valeurs           
+Blockly.Arduino.driss_grove_joystick_valeurs = function() {
+  var pin_1 = this.getTitleValue('PIN');
+  var dropdown_axe = this.getTitleValue('AXE');
+  
+  //Trouver la 2ème entrée analogique (A0 - A1  par exemple)
+  var pin_2= parseInt((pin_1[1]).valueOf(), 10)+1;
+  pin_2='A'+pin_2;
+  
+  Blockly.Arduino.variables_['var_joystick_'+pin_1+'_X0' ] = 'int joystick_'+pin_1+'_X0 ;';
+  Blockly.Arduino.variables_['var_joystick_'+pin_2+'_Y0' ] = 'int joystick_'+pin_2+'_Y0 ;';
+
+  Blockly.Arduino.setups_['setup_joystick_'+pin_1+'_X0' ] = 'joystick_'+pin_1+'_X0 = analogRead('+pin_1+');';
+  Blockly.Arduino.setups_['setup_joystick_'+pin_2+'_Y0' ] = 'joystick_'+pin_2+'_Y0 = analogRead('+pin_2+');';
+
+  var code="";
+  switch(dropdown_axe){
+    case "AXE_X" : code = 'analogRead('+pin_1+')'; break;
+    case "AXE_Y" : code = 'analogRead('+pin_2+')'; break;
+  }
+  //code = 'analogRead('+dropdown_pin+')';
+
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+}         
+
+
+// Grove driss_grove_joystick_direction
+Blockly.Arduino.driss_grove_joystick_direction = function() {
+  var pin_1 = this.getTitleValue('PIN');
+  //var dropdown_dir = this.getTitleValue('DIRECTION');
+
+  //Trouver la 2ème entrée analogique (A0 - A1  par exemple)
+  var pin_2= parseInt((pin_1[1]).valueOf(), 10)+1;
+  pin_2='A'+pin_2;
+
+  Blockly.Arduino.variables_['var_joystick_'+pin_1+'_X0' ] = 'int joystick_'+pin_1+'_X0 ;';
+  Blockly.Arduino.variables_['var_joystick_'+pin_2+'_Y0' ] = 'int joystick_'+pin_2+'_Y0 ;';
+
+  Blockly.Arduino.setups_['setup_joystick_'+pin_1+'_X0' ] = 'joystick_'+pin_1+'_X0 = analogRead('+pin_1+');';
+  Blockly.Arduino.setups_['setup_joystick_'+pin_2+'_Y0' ] = 'joystick_'+pin_2+'_Y0 = analogRead('+pin_2+');';
+   
+  Blockly.Arduino.codeFunctions_['define_getJoystickDirection'] = 'String getJoystickDirection() {\n'+
+   ' int dx = analogRead('+pin_1+') - '+'joystick_'+pin_1+'_X0 ; \n'+
+   ' int dy = analogRead('+pin_2+') - '+'joystick_'+pin_2+'_Y0 ; \n'+
+   ' //lorsque le bouton du Joystick est cliqué la lecture sur x est > 2 *x0\n' +
+   ' if((dx+'+'joystick_'+pin_1+'_X0'+')>=2*joystick_'+pin_1+'_X0 ) return(""); \n' +
+
+   ' if(dy>=153) { \n'+
+   '  if(dx>=167) {return("HAUT-DROITE");} \n'+
+   '  if(dx<=-159) {return("HAUT-GAUCHE");} \n'+
+   '  return("HAUT"); \n'+
+   ' }; \n'+
+
+   ' if(dy<=-137) { \n'+
+   '  if(dx>=167) {return("BAS-DROITE");} \n'+
+   '  if(dx<=-159) {return("BAS-GAUCHE");} \n'+
+   '  return("BAS"); \n'+
+   ' }; \n'+
+
+   ' if(dx>=167) { return("DROITE"); } \n'+
+   ' if(dx<=-159) { return("GAUCHE");} \n'+
+  
+   ' return("CENTRE");   \n'+
+   '}\n';
+
+var code ="getJoystickDirection()";
+/*
+switch (dropdown_dir) {
+  case "HAUT" : code = 'getJoystickDirection() == "H"'; break;
+  case "BAS" : code = 'getJoystickDirection() == "B"'; break;
+  case "GAUCHE" : code = 'getJoystickDirection() == "G"'; break;
+  case "DROITE" : code = 'getJoystickDirection() == "D"'; break;
+  case "HAUT_DROITE" : code = 'getJoystickDirection() == "HD"'; break;
+  case "HAUT_GAUCHE" : code = 'getJoystickDirection() == "HG"'; break;
+  case "BAS_DROITE" : code = 'getJoystickDirection() == "BD"'; break;
+  case "BAS_GAUCHE" : code = 'getJoystickDirection() == "BG"'; break;
+}
+*/
+
+ return [code, Blockly.Arduino.ORDER_ATOMIC];
+} 
 
     
-
+//-Actionneurs ----------------------------------------------------------------------------------------------------------------------------------------
 
 //Grove red LED OK
 Blockly.Arduino.driss_grove_red_led = function() {

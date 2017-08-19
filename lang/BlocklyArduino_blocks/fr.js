@@ -1773,8 +1773,8 @@ Blockly.Msg.CAT_VARIABLES_DS = "Variables & Conversions";
 
 
 Blockly.Msg.CAT_DRISS_A4 = "A4 Technologie";
-Blockly.Msg.CAT_DRISS_A4_IN = "capteurs";
-Blockly.Msg.CAT_DRISS_A4_OUT = "actionneurs";
+Blockly.Msg.CAT_DRISS_A4_IN = "- Capteurs";
+Blockly.Msg.CAT_DRISS_A4_OUT = "- Actionneurs";
 
 Blockly.Msg.DRISS_A4_TEXT1 = "Le capteur ";
 Blockly.Msg.DRISS_A4_TEXT2 = "sur la broche ";
@@ -1805,12 +1805,12 @@ Blockly.Msg.DRISS_A4_TEXT35 = "Sortie lampe  ";
 //---Grove ---------------------------------------------------------------------------
 
 Blockly.Msg.CAT_DRISS_GROVE = "Grove";
-Blockly.Msg.CAT_DRISS_GROVE_IN = "capteurs";
-Blockly.Msg.CAT_DRISS_GROVE_OUT = "actionneurs";
-Blockly.Msg.CAT_DRISS_GROVE_LCD_RGB = "Afficheur LCD RGB";
-Blockly.Msg.CAT_DRISS_GROVE_OLED_96x96 = "Afficheur OLED 96x96";
-Blockly.Msg.CAT_DRISS_GROVE_4_Digit_Display ="Afficheur 4 digits";
-Blockly.Msg.CAT_DRISS_GROVE_COMMUNICATION ="Communication";
+Blockly.Msg.CAT_DRISS_GROVE_IN = "- Capteurs";
+Blockly.Msg.CAT_DRISS_GROVE_OUT = "- Actionneurs";
+Blockly.Msg.CAT_DRISS_GROVE_LCD_RGB = "- Afficheur LCD RGB";
+Blockly.Msg.CAT_DRISS_GROVE_OLED_96x96 = "- Afficheur OLED 96x96";
+Blockly.Msg.CAT_DRISS_GROVE_4_Digit_Display ="- Afficheur 4 digits";
+Blockly.Msg.CAT_DRISS_GROVE_COMMUNICATION ="- Communication";
 
 Blockly.Msg.DRISS_GROVE_ENTREE = "Entrée";
 Blockly.Msg.DRISS_GROVE_SORTIE = "Sortie";
@@ -1852,16 +1852,16 @@ Blockly.Msg.DRISS_GROVE_TEXT40 = "Violette";
 
 
 Blockly.Msg.CAT_DRISS_LINKIT_ONE = "LinkItOne";
-Blockly.Msg.CAT_DRISS_LINKIT_ONE_GSM_GPRS = "GSM/GPRS";
-Blockly.Msg.CAT_DRISS_LINKIT_ONE_GPS = "GPS";
-Blockly.Msg.CAT_DRISS_LINKIT_ONE_STOCKAGE = "Carte SD / Mem Flash";
+Blockly.Msg.CAT_DRISS_LINKIT_ONE_GSM_GPRS = "- GSM/GPRS";
+Blockly.Msg.CAT_DRISS_LINKIT_ONE_GPS = "- GPS";
+Blockly.Msg.CAT_DRISS_LINKIT_ONE_STOCKAGE = "- Carte SD / Mem Flash";
 
 
 
 Blockly.Msg.CAT_DRISS_TINKERKIT = "TinkerKit";
-Blockly.Msg.CAT_DRISS_TINKERKIT_IN = "Capteurs";
-Blockly.Msg.CAT_DRISS_TINKERKIT_OUT = "Actionneurs";
-Blockly.Msg.CAT_DRISS_TINKERKIT_DISPLAY = "Afficheur";
+Blockly.Msg.CAT_DRISS_TINKERKIT_IN = "- Capteurs";
+Blockly.Msg.CAT_DRISS_TINKERKIT_OUT = "- Actionneurs";
+Blockly.Msg.CAT_DRISS_TINKERKIT_DISPLAY = "- Afficheur";
 
 
 

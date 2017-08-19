@@ -290,7 +290,68 @@ Blockly.Blocks.driss_grove_sound_sensor = {
 };
 
 
+//Grove driss_grove_joystick_clic
+Blockly.Blocks['driss_grove_joystick_clic'] = {
+  init: function() {
+   
+    this.appendDummyInput()
+        .appendField("Le bouton du Joystick relié à l'entré analogique")
+        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownAnalogPins), "PIN")
+        .appendField("est appuyé")
+    this.setOutput(true, null);
+    this.setColour(Blockly.Blocks.drissGrove.HUE);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
 
+
+//Grove driss_grove_joystick_valeurs
+Blockly.Blocks['driss_grove_joystick_valeurs'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Lire la position ")
+        .appendField(new Blockly.FieldDropdown([["X","AXE_X"], ["Y","AXE_Y"]]), "AXE");
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_Thumb_Joystick.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize, "*"))
+        .appendField("du Joystick relié à l'entré analogique")
+        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownAnalogPins), "PIN");
+    this.setOutput(true, null);
+    this.setColour(Blockly.Blocks.drissGrove.HUE);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+// Grove driss_grove_joystick_direction
+/*
+Blockly.Blocks['driss_grove_joystick_direction'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Le Joystick relié à l'entrée analogique")
+        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownAnalogPins), "PIN");
+    this.appendDummyInput()
+        .appendField("est orienté vers")
+        .appendField(new Blockly.FieldDropdown([["le haut","HAUT"], ["le bas","BAS"], ["la gauche","GAUCHE"], ["la droite","DROITE"], ["le haut et à droite","HAUT_DROITE"], ["le haut et à gauche","HAUT_GAUCHE"], ["le bas et à droite","BAS_DROITE"], ["le bas et à gauche","BAS_GAUCHE"]]), "DIRECTION");
+    this.setOutput(true, null);
+    this.setColour(Blockly.Blocks.drissGrove.HUE);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+*/
+
+Blockly.Blocks['driss_grove_joystick_direction'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("  l'orientation du Joystick relié à l'entrée ")
+        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownAnalogPins), "PIN");
+    this.setOutput(true, null);
+    this.setColour(Blockly.Blocks.drissGrove.HUE);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
 
 //-Actionneurs ----------------------------------------------------------------------------------------------------------------------------------------
 
