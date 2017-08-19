@@ -103,6 +103,14 @@ function() {
 
 /* Ajout de Driss */
 head.load(
+"blocks/drissConsole/drissConsole.js",
+function() {
+    // Call a function when done
+    console.log("Done loading driss Console Blocks");
+});
+
+
+head.load(
 "blocks/BlocklyArduino/variables_ds.js",
 function() {
     // Call a function when done

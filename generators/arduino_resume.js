@@ -79,6 +79,15 @@ function() {
 
 /* Ajout de Driss */
 head.load(
+"generators/arduino/drissConsole.js",
+function() {
+    // Call a function when done
+    console.log("Done loading Driss Console Generators");
+});
+
+
+
+head.load(
 "generators/BlocklyArduino/variables_ds.js",
 function() {
     // Call a function when done

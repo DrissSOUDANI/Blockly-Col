@@ -1,0 +1,33 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <toolboxcategories>CAT_LOGIC,CAT_LOOPS,CAT_MATH,CAT_ARRAY,CAT_TEXT,CAT_DRISS_CONSOLE,CAT_VARIABLES_DS,CAT_ARDUINO,CAT_TECHNOZONE,CAT_DRISS_A4,CAT_DRISS_GROVE,CAT_DRISS_LINKIT_ONE</toolboxcategories>
+  <toolbox>undefined</toolbox>
+  <block type="driss_console_init_serial" id="#srK)c26C|yy4V,)@!$R" x="150" y="130">
+    <field name="VITESSE">9600</field>
+    <next>
+      <block type="variables_declare_ds" id="pR=d`fS+ZwK,G`DHLFy!">
+        <field name="VAR">direction</field>
+        <field name="TYPE">TEXT</field>
+        <next>
+          <block type="variables_set_ds" id="P`Kz,7*I1r4]tpH;H4:]">
+            <field name="VAR">direction</field>
+            <value name="VALUE">
+              <block type="driss_grove_joystick_direction" id="OIgFZ?xx`~cD[a(0wu)N">
+                <field name="PIN">A0</field>
+              </block>
+            </value>
+            <next>
+              <block type="driss_console_write" id="NJq+ZrpKx:xcFYC]XW*c">
+                <field name="RL">AVEC</field>
+                <value name="TEXT">
+                  <block type="variables_get_ds" id="=]+?Pp`fyk~Rxt-#zd2H">
+                    <field name="VAR">direction</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
