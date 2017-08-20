@@ -17,8 +17,8 @@ Blockly.Arduino.driss_console_write = function() {
   var code = ''  ;
 
   switch (retour_ligne){
-    case "SANS" : code = 'Serial.print('+texte+');' ; break;
-    case "AVEC" : code = 'Serial.println('+texte+');' ; break;
+    case "SANS" : code = 'Serial.print('+texte+');\n' ; break;
+    case "AVEC" : code = 'Serial.println('+texte+');\n' ; break;
   }
   
   return code;

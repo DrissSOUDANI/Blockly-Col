@@ -304,21 +304,10 @@ Blockly.Arduino.driss_grove_joystick_direction = function() {
    '}\n';
 
 var code ="getJoystickDirection()";
-/*
-switch (dropdown_dir) {
-  case "HAUT" : code = 'getJoystickDirection() == "H"'; break;
-  case "BAS" : code = 'getJoystickDirection() == "B"'; break;
-  case "GAUCHE" : code = 'getJoystickDirection() == "G"'; break;
-  case "DROITE" : code = 'getJoystickDirection() == "D"'; break;
-  case "HAUT_DROITE" : code = 'getJoystickDirection() == "HD"'; break;
-  case "HAUT_GAUCHE" : code = 'getJoystickDirection() == "HG"'; break;
-  case "BAS_DROITE" : code = 'getJoystickDirection() == "BD"'; break;
-  case "BAS_GAUCHE" : code = 'getJoystickDirection() == "BG"'; break;
-}
-*/
 
  return [code, Blockly.Arduino.ORDER_ATOMIC];
 } 
+
 
     
 //-Actionneurs ----------------------------------------------------------------------------------------------------------------------------------------
@@ -406,6 +395,47 @@ Blockly.Arduino.driss_grove_I2C_Motor_run = function() {
   return code;
 };
 
+
+
+
+// Claviers  KeyPad ----------------------------------------------------------------------------------------------------------------------------
+// Grove driss_grove_keypad_12_init
+Blockly.Arduino.driss_grove_keypad_12_init = function() {
+  var row0 = this.getTitleValue('ROW0');
+  var row1 = this.getTitleValue('ROW1');
+  var row2 = this.getTitleValue('ROW2');
+  var row3 = this.getTitleValue('ROW3');
+  var col0 = this.getTitleValue('COL0');
+  var col1 = this.getTitleValue('COL1');
+  var col2 = this.getTitleValue('COL2');
+
+
+  Blockly.Arduino.includes_['define_Keypad'] = "#include <Keypad.h>"; 
+  Blockly.Arduino.variables_['define_Keypad_rows'] = "const byte ROWS = 4; //4 lignes\n"; 
+  Blockly.Arduino.variables_['define_Keypad_cols'] = "const byte COLS = 3; //3 colonnes\n"; 
+  Blockly.Arduino.variables_['define_Keypad_keys'] = "char keys[ROWS][COLS] = {\n"+
+                                                        " {'1','2','3'},\n" + 
+                                                        " {'4','5','6'},\n" + 
+                                                        " {'7','8','9'},\n" + 
+                                                        " {'*','0','#'}\n" + 
+                                                        "};\n";
+  Blockly.Arduino.variables_['define_Keypad_rowPins'] = "byte rowPins[ROWS] = {"+row0+", "+row1+", "+row2+", "+row3+"};\n"; 
+  Blockly.Arduino.variables_['define_Keypad_colPins'] = "byte colPins[COLS] = {"+col0+", "+col1+", "+col2+"};\n"; 
+
+  Blockly.Arduino.variables_['define_Keypad_keypad_12'] = "Keypad keypad_12 = Keypad( makeKeymap(keys), rowPins, colPins, ROWS, COLS );\n"; 
+
+  
+  
+  var code = ''  //code à insérer dans la loop Arduino
+  return code;
+};
+
+
+// Grove driss_grove_keypad_12_getkey
+Blockly.Arduino.driss_grove_keypad_12_getkey = function() {
+  var code = 'keypad_12.getKey()'  ;
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+}
 
 
 

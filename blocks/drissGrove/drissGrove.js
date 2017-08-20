@@ -324,23 +324,6 @@ Blockly.Blocks['driss_grove_joystick_valeurs'] = {
 };
 
 // Grove driss_grove_joystick_direction
-/*
-Blockly.Blocks['driss_grove_joystick_direction'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("Le Joystick relié à l'entrée analogique")
-        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownAnalogPins), "PIN");
-    this.appendDummyInput()
-        .appendField("est orienté vers")
-        .appendField(new Blockly.FieldDropdown([["le haut","HAUT"], ["le bas","BAS"], ["la gauche","GAUCHE"], ["la droite","DROITE"], ["le haut et à droite","HAUT_DROITE"], ["le haut et à gauche","HAUT_GAUCHE"], ["le bas et à droite","BAS_DROITE"], ["le bas et à gauche","BAS_GAUCHE"]]), "DIRECTION");
-    this.setOutput(true, null);
-    this.setColour(Blockly.Blocks.drissGrove.HUE);
- this.setTooltip("");
- this.setHelpUrl("");
-  }
-};
-*/
-
 Blockly.Blocks['driss_grove_joystick_direction'] = {
   init: function() {
     this.appendDummyInput()
@@ -352,6 +335,9 @@ Blockly.Blocks['driss_grove_joystick_direction'] = {
  this.setHelpUrl("");
   }
 };
+
+
+
 
 //-Actionneurs ----------------------------------------------------------------------------------------------------------------------------------------
 
@@ -511,6 +497,50 @@ Blockly.Blocks.driss_grove_I2C_Motor_run = {
 
 
 
+// Claviers   KeyPad -----------------------------------------------------------------------------------------------------------------------------
+
+// Grove driss_grove_keypad_12_init
+Blockly.Blocks['driss_grove_keypad_12_init'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Définir le branchement du clavier 12 touches");
+    this.appendDummyInput()
+        .appendField("Lig 0")
+        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownIRQPins), "ROW0")
+        .appendField("-  Lig 1")
+        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownIRQPins), "ROW1")
+        .appendField("-  Lig 2")
+        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownIRQPins), "ROW2")
+        .appendField("-  Lig 3")
+        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownIRQPins), "ROW3");
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_keyPad_12.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize, "*"))
+        .appendField("Col 0")
+        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownIRQPins), "COL0")
+        .appendField("-  Col 1")
+        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownIRQPins), "COL1")
+        .appendField("-  Col 2")
+        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownIRQPins), "COL2");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(36);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+
+// Grove driss_grove_keypad_12_getkey
+Blockly.Blocks['driss_grove_keypad_12_getkey'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Touche appuyée sur le clavier 12 touches");
+    this.setOutput(true, null);
+    this.setColour(Blockly.Blocks.drissGrove.HUE);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
 
 
 

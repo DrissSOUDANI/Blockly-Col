@@ -1767,7 +1767,9 @@ Blockly.Msg.AUTODUINO_EDGE_UP_DOWN = [["front montant", "UP"], ["front descedant
 //Ajouts de Driss 
 
 Blockly.Msg.CAT_VARIABLES_DS = "Variables & Conversions";
-Blockly.Msg.CAT_DRISS_CONSOLE = "Console série"
+Blockly.Msg.CAT_DRISS_CONSOLE = "Console série";
+Blockly.Msg.CAT_DRISS_GROVE_KEYPAD ="- Claviers";
+
 
 
 
