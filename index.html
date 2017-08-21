@@ -290,13 +290,11 @@
 			  <br />
 			  <span><b>Blockly@Col</b></span> (<a href="#" target='blank'>Github</a>)
               <span id="aboutBody" style="font-style: italic;"> </span>
-              <br /> - <a href = "https://github.com/technologiescollege/Blockly-at-rduino" target='blank'>Blockly@rduino</a> (Sebastien CANET)
-              <br /> - <a href = "http://www.technozone51.fr/BlocklyDuinotest/" target='blank'>BlocklyDuinotest</a> (Christophe GROSSE)
-              <br /> - <a href = "https://github.com/BlocklyDuino/BlocklyDuino" target='blank'>BlocklyDuino</a> (Fred Lin)
-               <br /> - <a href = "https://github.com/carlosperate/ardublockly" target='blank'>Ardublockly</a>(Carlos PEREIRA ATENCIO) 
-		
-              
-              <br /> - <a href = "https://developers.google.com/blockly" target='blank'>Blockly</a> (Google)
+              <br /> - Sebastien CANET : <a href = "https://github.com/technologiescollege/Blockly-at-rduino" target='blank'>Blockly@rduino</a>
+              <br /> - Christophe GROSSE : <a href = "http://www.technozone51.fr/BlocklyDuinotest/" target='blank'>BlocklyDuinotest</a> 
+              <br /> <br /><b>Merci à eux</b>
+              <br /><br />
+              <br /> Utilise :
               <br /> - Bootstrap (<a href='http://getbootstrap.com' target='blank'>http://getbootstrap.com</a>)
               <br /> - Bootstrap Toggle (<a href='http://www.bootstraptoggle.com/' target='blank'>http://www.bootstraptoggle.com/</a>)
 			 
@@ -307,7 +305,7 @@
 			  <br />	  
 			  <b><div align="center"><a href="#" target='blank'><font size="12"><span id="span_forms_about" style="font-style: bold;"> </span></font></a></div></b>
 			  
-			  <br /><i>version 14-08-2017 - v1.4 "Boutazoult"</i>
+			  <br /><i>version 21-08-2017 - v1.4 "Boutazoult"</i>
 			  
 			  
 			  
@@ -1220,6 +1218,18 @@
             <block type="driss_grove_rfid_read"></block>
             <block type="driss_grove_rfid_id_raw"></block>
            
+        </category>
+
+        <category name="CAT_DRISS_GROVE_BIOMETRIE" colour="#8181F7">
+        	<block type="driss_grove_finger_clip_heart_begin">
+        		<value name="ADRESSE_I2C">
+					<shadow type="math_number">
+						<field name="NUM">80</field>
+					</shadow>
+				</value>
+        	</block>
+        	<block type="driss_grove_finger_clip_heart_pouls_dispo"></block>
+            <block type="driss_grove_finger_clip_heart_rate"></block>
         </category>
     </category>
     <sep gap="50"></sep>

@@ -1770,6 +1770,7 @@ Blockly.Msg.CAT_VARIABLES_DS = "Variables & Conversions";
 Blockly.Msg.CAT_DRISS_CONSOLE = "Console série";
 Blockly.Msg.CAT_DRISS_GROVE_KEYPAD ="- Claviers";
 Blockly.Msg.CAT_DRISS_GROVE_MOTORS="- Moteurs & Servomoteur";
+Blockly.Msg.CAT_DRISS_GROVE_BIOMETRIE="- Biométrie"
 
 
 
