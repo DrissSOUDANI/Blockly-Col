@@ -794,6 +794,62 @@ Blockly.Blocks.driss_grove_rfid_id_raw = {
 };
 
 
+
+//  Biométrie ----------------------------------------------------------------------------------------------------------------------------------
+
+
+//Grove : driss_grove_finger_clip_heart_begin
+Blockly.Blocks['driss_grove_finger_clip_heart_begin'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Lancer une mesure du rythme cardiaque ");
+    this.appendDummyInput()
+        .appendField("par le capteur de pouls");
+    this.appendValueInput("ADRESSE_I2C")
+        .setCheck(null)
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("accessible par le bus I2C à l'adresse");
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_Finger-clip_Heart_Rate.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize, "*"));
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(Blockly.Blocks.drissGrove.HUE);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+
+
+//Grove : driss_grove_finger_clip_heart_pouls_dispo
+Blockly.Blocks['driss_grove_finger_clip_heart_pouls_dispo'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Un pouls est présent au niveau du capteur");
+    this.setOutput(true, null);
+    this.setColour(Blockly.Blocks.drissGrove.HUE);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+
+//Grove : driss_grove_finger_clip_heart_rate
+Blockly.Blocks['driss_grove_finger_clip_heart_rate'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("nombre de battements du cœur par minute   ");
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_Finger-clip_Heart_Rate.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize, "*"))
+        .appendField("(rythme cardiaque)");
+    this.setOutput(true, null);
+    this.setColour(Blockly.Blocks.drissGrove.HUE);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+
 //-OLED 96x96 ----------------------------------------------------------------------------------------------------------------------------------------
 
 
