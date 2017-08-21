@@ -373,7 +373,7 @@ Blockly.Arduino.driss_grove_servo_setPosition = function() {
   return code;
 };
 
-
+/*
 //Grove I2C Motor OK
 Blockly.Arduino.driss_grove_I2C_Motor_run = function() {
   var dropdown_motor = this.getTitleValue('MOTOR');
@@ -395,7 +395,7 @@ Blockly.Arduino.driss_grove_I2C_Motor_run = function() {
   return code;
 };
 
-
+*/
 
 
 // Claviers  KeyPad ----------------------------------------------------------------------------------------------------------------------------
@@ -434,8 +434,82 @@ Blockly.Arduino.driss_grove_keypad_12_init = function() {
 // Grove driss_grove_keypad_12_getkey
 Blockly.Arduino.driss_grove_keypad_12_getkey = function() {
   var code = 'keypad_12.getKey()'  ;
+
+
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 }
+
+
+
+
+
+
+
+
+
+// Motors --------------------------------------------------------------------------------------------------------------------------------
+
+// Grove : driss_grove_DC_motor_turn
+Blockly.Arduino.driss_grove_DC_motor_turn = function() {
+  var i2c_adress = this.getFieldValue('ADRESSE');
+  var sens = this.getFieldValue('SENS');
+  var vitesse = Blockly.Arduino.valueToCode(this, 'VITESSE', Blockly.Arduino.ORDER_ATOMIC);
+  var moteur = this.getFieldValue('MOTEUR');
+
+  var code = "";
+  
+
+  Blockly.Arduino.includes_['define_Grove_I2C_Motor_Driver'] = "#include <Grove_I2C_Motor_Driver.h>"; 
+  Blockly.Arduino.definitions_['define_I2C_ADRESS_'+i2c_adress] = "#define I2C_ADRESS_"+i2c_adress+" "+i2c_adress;
+  
+  Blockly.Arduino.setups_['setup_I2C_ADRESS_'+i2c_adress] = "Motor.begin(I2C_ADRESS_"+i2c_adress+");" ;
+
+
+  if(sens=="SENS_HORAIRE")
+    var code = 'Motor.speed('+moteur+', '+vitesse+');\n';
+  else
+    var code = 'Motor.speed('+moteur+', -'+vitesse+');\n';
+  return code;
+}
+
+
+
+// Grove : driss_grove_DC_motor_stop
+Blockly.Arduino.driss_grove_DC_motor_stop = function() {
+  var i2c_adress = this.getFieldValue('ADRESSE');
+  var moteur = this.getFieldValue('MOTEUR');
+ 
+  Blockly.Arduino.includes_['define_Grove_I2C_Motor_Driver'] = "#include <Grove_I2C_Motor_Driver.h>"; 
+  Blockly.Arduino.definitions_['define_I2C_ADRESS_'+i2c_adress] = "#define I2C_ADRESS_"+i2c_adress+" "+i2c_adress;
+  
+  Blockly.Arduino.setups_['setup_I2C_ADRESS_'+i2c_adress] = "Motor.begin(I2C_ADRESS_"+i2c_adress+");" ;
+
+
+  var code = "Motor.stop("+moteur+");\n";
+  return code;
+}
+
+// Grove : driss_grove_step_motor_turn
+Blockly.Arduino.driss_grove_step_motor_turn = function() {
+  var i2c_adress = this.getFieldValue('ADRESSE');
+  var nbre_pas = Blockly.Arduino.valueToCode(this, 'NBRE_PAS', Blockly.Arduino.ORDER_ATOMIC);
+  
+  var sens = this.getFieldValue('SENS');
+ 
+  Blockly.Arduino.includes_['define_Grove_I2C_Motor_Driver'] = "#include <Grove_I2C_Motor_Driver.h>"; 
+  Blockly.Arduino.definitions_['define_I2C_ADRESS_'+i2c_adress] = "#define I2C_ADRESS_"+i2c_adress+" "+i2c_adress;
+  
+  Blockly.Arduino.setups_['setup_I2C_ADRESS_'+i2c_adress] = "Motor.begin(I2C_ADRESS_"+i2c_adress+");" ;
+
+ if(sens=="SENS_HORAIRE")
+    var code = 'Motor.StepperRun('+nbre_pas+');\n';
+  else
+    var code = 'Motor.StepperRun(-'+nbre_pas+');\n';
+  return code;
+}
+
+
+
 
 
 

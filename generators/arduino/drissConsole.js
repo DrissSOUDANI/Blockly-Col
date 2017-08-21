@@ -4,8 +4,8 @@ Blockly.Arduino.driss_console_init_serial = function() {
   var vitesse = this.getTitleValue('VITESSE');
   
   Blockly.Arduino.setups_['setup_serial_console'] = 'Serial.begin('+vitesse+');';
-  var code = ''  //code à insérer dans la loop Arduino
-  return code;
+  var code = '';  //code à insérer dans la loop Arduino
+   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
 

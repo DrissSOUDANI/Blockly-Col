@@ -1,0 +1,42 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <toolboxcategories>CAT_LOGIC,CAT_LOOPS,CAT_MATH,CAT_ARRAY,CAT_TEXT,CAT_DRISS_CONSOLE,CAT_VARIABLES_DS,CAT_ARDUINO,CAT_TECHNOZONE,CAT_DRISS_A4,CAT_DRISS_GROVE,CAT_DRISS_LINKIT_ONE</toolboxcategories>
+  <toolbox>undefined</toolbox>
+  <block type="driss_grove_step_motor_turn" id="v53FERxU7fbT0Pte~I,/" x="170" y="30">
+    <field name="ADRESSE">0x0F</field>
+    <field name="SENS">SENS_HORAIRE</field>
+    <value name="NBRE_PAS">
+      <block type="math_number" id="yyag+@lb6-R0ob!+[3PZ">
+        <field name="NUM">512</field>
+      </block>
+    </value>
+    <next>
+      <block type="controls_base_delay" id="7tlHKG1N]0y#Xu0Tt(+f">
+        <value name="DELAY_TIME">
+          <shadow type="math_number" id="kgyhP,gB0h;MLE()Yzw2">
+            <field name="NUM">3000</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="driss_grove_step_motor_turn" id=".Ik8;:v^u@FL3W_oH6TE">
+            <field name="ADRESSE">0x0F</field>
+            <field name="SENS">SENS_ANTI_HORAIRE</field>
+            <value name="NBRE_PAS">
+              <block type="math_number" id="Dh|--/heYg#VJ7ZGp*tT">
+                <field name="NUM">512</field>
+              </block>
+            </value>
+            <next>
+              <block type="controls_base_delay" id="2vf7`nuJPYfD`I=V^B`o">
+                <value name="DELAY_TIME">
+                  <shadow type="math_number" id="o$Hi9QYlfrR%KI7{dd43">
+                    <field name="NUM">3000</field>
+                  </shadow>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
