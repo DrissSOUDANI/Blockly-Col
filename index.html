@@ -1169,9 +1169,37 @@
 
          <category name="CAT_DRISS_GROVE_MOTORS" colour="#8181F7">
          	<block type="driss_grove_servo_setPosition"></block>
-        	<block type="driss_grove_DC_motor_turn"></block>
-            <block type="driss_grove_DC_motor_stop"></block>
-            <block type="driss_grove_step_motor_turn"></block>
+        	<block type="driss_grove_dc_motor_turn">
+        		<value name="ADRESSE_I2C">
+				<shadow type="math_number">
+					<field name="NUM">15</field>
+				</shadow>
+				</value>
+				<value name="VITESSE">
+				<shadow type="math_number">
+					<field name="NUM">100</field>
+				</shadow>
+				</value>
+        	</block>
+            <block type="driss_grove_dc_motor_stop">
+            	<value name="ADRESSE_I2C">
+				<shadow type="math_number">
+					<field name="NUM">15</field>
+				</shadow>
+				</value>
+            </block>
+            <block type="driss_grove_step_motor_turn">
+            	<value name="ADRESSE_I2C">
+				<shadow type="math_number">
+					<field name="NUM">15</field>
+				</shadow>
+				</value>
+				<value name="NBRE_PAS">
+				<shadow type="math_number">
+					<field name="NUM">512</field>
+				</shadow>
+				</value>
+            </block>
             
         </category>
 

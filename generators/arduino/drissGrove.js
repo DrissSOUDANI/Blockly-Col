@@ -449,9 +449,10 @@ Blockly.Arduino.driss_grove_keypad_12_getkey = function() {
 
 // Motors --------------------------------------------------------------------------------------------------------------------------------
 
-// Grove : driss_grove_DC_motor_turn
-Blockly.Arduino.driss_grove_DC_motor_turn = function() {
-  var i2c_adress = this.getFieldValue('ADRESSE');
+// Grove : driss_grove_dc_motor_turn
+Blockly.Arduino.driss_grove_dc_motor_turn = function() {
+  
+  var i2c_adress = Blockly.Arduino.valueToCode(this, 'ADRESSE_I2C', Blockly.Arduino.ORDER_ATOMIC);
   var sens = this.getFieldValue('SENS');
   var vitesse = Blockly.Arduino.valueToCode(this, 'VITESSE', Blockly.Arduino.ORDER_ATOMIC);
   var moteur = this.getFieldValue('MOTEUR');
@@ -474,9 +475,9 @@ Blockly.Arduino.driss_grove_DC_motor_turn = function() {
 
 
 
-// Grove : driss_grove_DC_motor_stop
-Blockly.Arduino.driss_grove_DC_motor_stop = function() {
-  var i2c_adress = this.getFieldValue('ADRESSE');
+// Grove : driss_grove_dc_motor_stop
+Blockly.Arduino.driss_grove_dc_motor_stop = function() {
+  var i2c_adress = Blockly.Arduino.valueToCode(this, 'ADRESSE_I2C', Blockly.Arduino.ORDER_ATOMIC);
   var moteur = this.getFieldValue('MOTEUR');
  
   Blockly.Arduino.includes_['define_Grove_I2C_Motor_Driver'] = "#include <Grove_I2C_Motor_Driver.h>"; 
@@ -491,7 +492,7 @@ Blockly.Arduino.driss_grove_DC_motor_stop = function() {
 
 // Grove : driss_grove_step_motor_turn
 Blockly.Arduino.driss_grove_step_motor_turn = function() {
-  var i2c_adress = this.getFieldValue('ADRESSE');
+  var i2c_adress = Blockly.Arduino.valueToCode(this, 'ADRESSE_I2C', Blockly.Arduino.ORDER_ATOMIC);
   var nbre_pas = Blockly.Arduino.valueToCode(this, 'NBRE_PAS', Blockly.Arduino.ORDER_ATOMIC);
   
   var sens = this.getFieldValue('SENS');

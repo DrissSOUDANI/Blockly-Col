@@ -545,34 +545,24 @@ Blockly.Blocks['driss_grove_keypad_12_getkey'] = {
 
 // Motors --------------------------------------------------------------------------------------------------------------------------------
 
-// Grove : driss_grove_DC_motor_turn
-Blockly.Blocks['driss_grove_DC_motor_turn'] = {
+// Grove : driss_grove_dc_motor_turn
+Blockly.Blocks['driss_grove_dc_motor_turn'] = {
   init: function() {
-   /* this.appendDummyInput()
-        .appendField("Faire tourner, ")
+    this.appendDummyInput()
+        .appendField("Faire tourner le moteur ")
+        .appendField(new Blockly.FieldDropdown([["1","MOTOR1"], ["2","MOTOR2"]]), "MOTEUR")
         .appendField("dans le sens")
         .appendField(new Blockly.FieldDropdown([["horaire","SENS_HORAIRE"], ["anti-horaire","SENS_ANTI_HORAIRE"]]), "SENS");
-      */
     this.appendValueInput("VITESSE")
-        .appendField("Faire tourner, dans le sens")
-
-        .appendField(new Blockly.FieldDropdown([["horaire","SENS_HORAIRE"], ["anti-horaire","SENS_ANTI_HORAIRE"]]), "SENS")
-        .setCheck("Number")
+        .setCheck(null)
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("et à la vitesse (1 à 100)");
-    this.appendDummyInput()
-        .appendField("le")
-        .appendField(new Blockly.FieldDropdown([["Moteur 1","MOTOR1"], ["Moteur 2","MOTOR2"]]), "MOTEUR")//;
-    
-        .appendField("branché sur le circuit de commande");
-    this.appendDummyInput()
-        
-        .appendField("dont l'adresse I2C est : ")
-        .appendField(new Blockly.FieldDropdown([["0x00","0x00"], ["0x01","0x01"], ["0x02","0x02"], ["0x03","0x03"], ["0x04","0x04"], ["0x05","0x05"], ["0x06","0x06"], ["0x07","0x07"],
-                                                ["0x08","0x08"], ["0x09","0x09"], ["0x0A","0x0A"], ["0x0B","0x0B"], ["0x0C","0x0C"], ["0x0D","0x0D"], ["0x0E","0x0E"],
-                                                ["0x0F","0x0F"]]), "ADRESSE");
-    this.appendDummyInput()
-        .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_I2C_MotorCC_Driver.png", Blockly.Arduino.imageSize*2,  Blockly.Arduino.imageSize, "*"));
+        .appendField("vitesse de rotation");
+    this.appendValueInput("ADRESSE_I2C")
+        .setCheck(null)
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_I2C_MotorCC_Driver.png", Blockly.Arduino.imageSize*2,  Blockly.Arduino.imageSize, "*"))
+        .appendField("adresse du circuit de commande sur le bus I2C");
+    this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(Blockly.Blocks.drissGrove.HUE);
@@ -583,18 +573,17 @@ Blockly.Blocks['driss_grove_DC_motor_turn'] = {
 
 
 
-// Grove : driss_grove_DC_motor_stop
-Blockly.Blocks['driss_grove_DC_motor_stop'] = {
+// Grove : driss_grove_dc_motor_stop
+Blockly.Blocks['driss_grove_dc_motor_stop'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Arrêter le")
-        .appendField(new Blockly.FieldDropdown([["Moteur 1","MOTOR1"], ["Moteur 2","MOTOR2"]]), "MOTEUR")
-        .appendField("branché sur le circuit de commande");
-    this.appendDummyInput()
-        .appendField("dont l'adresse I2C est :")
-        .appendField(new Blockly.FieldDropdown([["0x00","0x00"], ["0x01","0x01"], ["0x02","0x02"], ["0x03","0x03"], ["0x04","0x04"], ["0x05","0x05"], ["0x06","0x06"], ["0x07","0x07"],
-                                                ["0x08","0x08"], ["0x09","0x09"], ["0x0A","0x0A"], ["0x0B","0x0B"], ["0x0C","0x0C"], ["0x0D","0x0D"], ["0x0E","0x0E"],
-                                                ["0x0F","0x0F"]]), "ADRESSE");
+        .appendField("Arrêrer le moteur")
+        .appendField(new Blockly.FieldDropdown([["1","MOTOR1"], ["2","MOTOR2"]]), "MOTEUR");
+    this.appendValueInput("ADRESSE_I2C")
+        .setCheck(null)
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("adresse du circuit de commande sur le bus I2C");
+    this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(Blockly.Blocks.drissGrove.HUE);
@@ -608,21 +597,19 @@ Blockly.Blocks['driss_grove_DC_motor_stop'] = {
 Blockly.Blocks['driss_grove_step_motor_turn'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Effectuer au moteur pas à pas ");
-    this.appendDummyInput()
-        .appendField("accessible à l'adresse I2C")
-        .appendField(new Blockly.FieldDropdown([["0x00","0x00"], ["0x01","0x01"], ["0x02","0x02"], ["0x03","0x03"], ["0x04","0x04"], ["0x05","0x05"], ["0x06","0x06"], ["0x07","0x07"],
-                                                ["0x08","0x08"], ["0x09","0x09"], ["0x0A","0x0A"], ["0x0B","0x0B"], ["0x0C","0x0C"], ["0x0D","0x0D"], ["0x0E","0x0E"],
-                                                ["0x0F","0x0F"]]), "ADRESSE");
-    this.appendDummyInput()
-        .appendField(" le nombre de pas indiqué dans  le sens ")
+        .appendField("Faire tourner le moteur  Pas à Pas")
+        .appendField("dans le sens")
         .appendField(new Blockly.FieldDropdown([["horaire","SENS_HORAIRE"], ["anti-horaire","SENS_ANTI_HORAIRE"]]), "SENS");
     this.appendValueInput("NBRE_PAS")
         .setCheck(null)
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField("nombre de pas");
-    this.appendDummyInput()
-        .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_I2C_MotorSTEPER_Driver.png", Blockly.Arduino.imageSize*2,  Blockly.Arduino.imageSize, "*"));
+    this.appendValueInput("ADRESSE_I2C")
+        .setCheck(null)
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_I2C_MotorSTEPER_Driver.png", Blockly.Arduino.imageSize*2,  Blockly.Arduino.imageSize, "*"))
+        .appendField("adresse du circuit de commande sur le bus I2C");
+    this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(Blockly.Blocks.drissGrove.HUE);
