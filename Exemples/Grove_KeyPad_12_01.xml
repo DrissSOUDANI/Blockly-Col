@@ -1,0 +1,148 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <toolboxcategories>CAT_LOGIC,CAT_LOOPS,CAT_MATH,CAT_ARRAY,CAT_TEXT,CAT_DRISS_CONSOLE,CAT_VARIABLES_DS,CAT_ARDUINO,CAT_TECHNOZONE,CAT_DRISS_A4,CAT_DRISS_GROVE,CAT_DRISS_LINKIT_ONE</toolboxcategories>
+  <toolbox>undefined</toolbox>
+  <block type="driss_console_init_serial" id="[rJ(sAX}sZCKzZ~7{jCc" x="190" y="30">
+    <field name="VITESSE">9600</field>
+    <next>
+      <block type="driss_grove_keypad_12_init" id="jOx6Cz7h0lW)A_ZV8l{H">
+        <field name="ROW0">7</field>
+        <field name="ROW1">5</field>
+        <field name="ROW2">3</field>
+        <field name="ROW3">2</field>
+        <field name="COL0">4</field>
+        <field name="COL1">15</field>
+        <field name="COL2">14</field>
+        <next>
+          <block type="variables_declare_ds" id="/I6!7x!E_cdF{1tV@[MZ">
+            <field name="VAR">touche</field>
+            <field name="TYPE">CHARACTER</field>
+            <next>
+              <block type="variables_declare_ds" id="|G/s.;1w48K0YYMxMoA7">
+                <field name="VAR">Code</field>
+                <field name="TYPE">TEXT</field>
+                <next>
+                  <block type="variables_set_ds" id="rDsIxWTzW+Uu^5iUaslw">
+                    <field name="VAR">Code</field>
+                    <value name="VALUE">
+                      <block type="text" id="@m|-iYvFI5xc2^7JCbna">
+                        <field name="TEXT"></field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="controls_repeat_indefinitely" id="JUt*NcK7KTC}[R0E`,,2">
+                        <statement name="DO">
+                          <block type="variables_set_ds" id="VsAlWFo7iTjqAgH3)Hp?">
+                            <field name="VAR">touche</field>
+                            <value name="VALUE">
+                              <block type="driss_grove_keypad_12_getkey" id="xQfv.FeTDEcC/%_lgpG,"></block>
+                            </value>
+                            <next>
+                              <block type="text_append" id="DGBWCw=g~8+n-5U98~nR">
+                                <field name="VAR">Code</field>
+                                <value name="TEXT">
+                                  <shadow type="text" id="wwk+$tYmibz+xMrUD9Yf">
+                                    <field name="TEXT"></field>
+                                  </shadow>
+                                  <block type="variables_get_ds" id="Dc4)zXX+R}(XgZ)OO{G2">
+                                    <field name="VAR">touche</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="controls_if" id="EdMdsi{]Rn]$#ZYud[Sa">
+                                    <value name="IF0">
+                                      <block type="logic_compare" id="nv-xzLMqrO`n*8_7Pgx^">
+                                        <field name="OP">EQ</field>
+                                        <value name="A">
+                                          <block type="text_length" id="Sm[hWMFTF^P$h_ms)]mc">
+                                            <value name="VALUE">
+                                              <block type="variables_get_ds" id="Rm|6eoU!JwSN#8S|I~w=">
+                                                <field name="VAR">Code</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <value name="B">
+                                          <block type="math_number" id="z]`=j8Pll9QYP=I[L^%A">
+                                            <field name="NUM">4</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <statement name="DO0">
+                                      <block type="controls_if" id="=@+BAil!yMRDjT(c3o|M">
+                                        <value name="IF0">
+                                          <block type="logic_compare" id="^z8/y4|PB$1B:*3ywcNS">
+                                            <field name="OP">EQ</field>
+                                            <value name="A">
+                                              <block type="variables_get_ds" id="7bv`bK=Y)/5g}kF8yY:v">
+                                                <field name="VAR">Code</field>
+                                              </block>
+                                            </value>
+                                            <value name="B">
+                                              <block type="text" id="em2Y}NC^pT.({dUj@)O]">
+                                                <field name="TEXT">1234</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <statement name="DO0">
+                                          <block type="driss_console_write" id="naxvp:Kn3,nqXfs|QOx+">
+                                            <field name="RL">AVEC</field>
+                                            <value name="TEXT">
+                                              <block type="text" id="@*L0D8i}~B8X^3umY__N">
+                                                <field name="TEXT">Code correct</field>
+                                              </block>
+                                            </value>
+                                            <next>
+                                              <block type="driss_grove_green_led" id="i*t][O87NT5SzjTl:cx9">
+                                                <field name="STAT">HIGH</field>
+                                                <field name="PIN">8</field>
+                                                <next>
+                                                  <block type="controls_base_delay" id="+#1Uz2^(2r$uYN6YKt/Y">
+                                                    <value name="DELAY_TIME">
+                                                      <shadow type="math_number" id="f2d_a^/9KOW=paRE^MH=">
+                                                        <field name="NUM">2000</field>
+                                                      </shadow>
+                                                    </value>
+                                                    <next>
+                                                      <block type="driss_grove_green_led" id="FPJ:[bMZ`:QdgBOegA}`">
+                                                        <field name="STAT">LOW</field>
+                                                        <field name="PIN">8</field>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </statement>
+                                        <next>
+                                          <block type="variables_set_ds" id="+(t*fyNUue4v|bC9i[8:">
+                                            <field name="VAR">Code</field>
+                                            <value name="VALUE">
+                                              <block type="text" id="MS+08gh/!T]R3:l;Zv[a">
+                                                <field name="TEXT"></field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </statement>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

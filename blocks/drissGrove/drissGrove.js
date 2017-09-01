@@ -324,23 +324,6 @@ Blockly.Blocks['driss_grove_joystick_valeurs'] = {
 };
 
 // Grove driss_grove_joystick_direction
-/*
-Blockly.Blocks['driss_grove_joystick_direction'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("Le Joystick relié à l'entrée analogique")
-        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownAnalogPins), "PIN");
-    this.appendDummyInput()
-        .appendField("est orienté vers")
-        .appendField(new Blockly.FieldDropdown([["le haut","HAUT"], ["le bas","BAS"], ["la gauche","GAUCHE"], ["la droite","DROITE"], ["le haut et à droite","HAUT_DROITE"], ["le haut et à gauche","HAUT_GAUCHE"], ["le bas et à droite","BAS_DROITE"], ["le bas et à gauche","BAS_GAUCHE"]]), "DIRECTION");
-    this.setOutput(true, null);
-    this.setColour(Blockly.Blocks.drissGrove.HUE);
- this.setTooltip("");
- this.setHelpUrl("");
-  }
-};
-*/
-
 Blockly.Blocks['driss_grove_joystick_direction'] = {
   init: function() {
     this.appendDummyInput()
@@ -352,6 +335,9 @@ Blockly.Blocks['driss_grove_joystick_direction'] = {
  this.setHelpUrl("");
   }
 };
+
+
+
 
 //-Actionneurs ----------------------------------------------------------------------------------------------------------------------------------------
 
@@ -478,7 +464,7 @@ Blockly.Blocks.driss_grove_servo_setPosition = {
   }
 };
 
-
+/*
 //Grove I2C Motor OK
 Blockly.Blocks.driss_grove_I2C_Motor_run = {
   category: 'driss_grove : actionneurs',
@@ -508,12 +494,129 @@ Blockly.Blocks.driss_grove_I2C_Motor_run = {
   }
 
 };
+*/
+
+
+// Claviers   KeyPad -----------------------------------------------------------------------------------------------------------------------------
+
+// Grove driss_grove_keypad_12_init
+Blockly.Blocks['driss_grove_keypad_12_init'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Définir le branchement du clavier 12 touches");
+    this.appendDummyInput()
+        .appendField("Lig 0")
+        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownIRQPins), "ROW0")
+        .appendField("-  Lig 1")
+        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownIRQPins), "ROW1")
+        .appendField("-  Lig 2")
+        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownIRQPins), "ROW2")
+        .appendField("-  Lig 3")
+        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownIRQPins), "ROW3");
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_keyPad_12.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize, "*"))
+        .appendField("Col 0")
+        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownIRQPins), "COL0")
+        .appendField("-  Col 1")
+        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownIRQPins), "COL1")
+        .appendField("-  Col 2")
+        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownIRQPins), "COL2");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(36);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+
+// Grove driss_grove_keypad_12_getkey
+Blockly.Blocks['driss_grove_keypad_12_getkey'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Touche appuyée sur le clavier 12 touches");
+    this.setOutput(true, null);
+    this.setColour(Blockly.Blocks.drissGrove.HUE);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+
+// Motors --------------------------------------------------------------------------------------------------------------------------------
+
+// Grove : driss_grove_dc_motor_turn
+Blockly.Blocks['driss_grove_dc_motor_turn'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Faire tourner le moteur ")
+        .appendField(new Blockly.FieldDropdown([["1","MOTOR1"], ["2","MOTOR2"]]), "MOTEUR")
+        .appendField("dans le sens")
+        .appendField(new Blockly.FieldDropdown([["horaire","SENS_HORAIRE"], ["anti-horaire","SENS_ANTI_HORAIRE"]]), "SENS");
+    this.appendValueInput("VITESSE")
+        .setCheck(null)
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("vitesse de rotation");
+    this.appendValueInput("ADRESSE_I2C")
+        .setCheck(null)
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_I2C_MotorCC_Driver.png", Blockly.Arduino.imageSize*2,  Blockly.Arduino.imageSize, "*"))
+        .appendField("adresse du circuit de commande sur le bus I2C");
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(Blockly.Blocks.drissGrove.HUE);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
 
 
 
+// Grove : driss_grove_dc_motor_stop
+Blockly.Blocks['driss_grove_dc_motor_stop'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Arrêrer le moteur")
+        .appendField(new Blockly.FieldDropdown([["1","MOTOR1"], ["2","MOTOR2"]]), "MOTEUR");
+    this.appendValueInput("ADRESSE_I2C")
+        .setCheck(null)
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("adresse du circuit de commande sur le bus I2C");
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(Blockly.Blocks.drissGrove.HUE);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+ 
 
-
-
+//Grove : driss_grove_step_motor_turn
+Blockly.Blocks['driss_grove_step_motor_turn'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Faire tourner le moteur  Pas à Pas")
+        .appendField("dans le sens")
+        .appendField(new Blockly.FieldDropdown([["horaire","SENS_HORAIRE"], ["anti-horaire","SENS_ANTI_HORAIRE"]]), "SENS");
+    this.appendValueInput("NBRE_PAS")
+        .setCheck(null)
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("nombre de pas");
+    this.appendValueInput("ADRESSE_I2C")
+        .setCheck(null)
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_I2C_MotorSTEPER_Driver.png", Blockly.Arduino.imageSize*2,  Blockly.Arduino.imageSize, "*"))
+        .appendField("adresse du circuit de commande sur le bus I2C");
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(Blockly.Blocks.drissGrove.HUE);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
 
 //-Communication ----------------------------------------------------------------------------------------------------------------------------------------
 
@@ -660,7 +763,7 @@ Blockly.Blocks.driss_grove_rfid_read = {
   helpUrl: '',
   init: function() {
     this.appendDummyInput()
-        .appendField("Lire les donnée en provenance du Tag ou de la carte ");
+        .appendField("Lire les données en provenance du Tag ou de la carte ");
     this.appendDummyInput()
         .appendField("située devant le lecteur RFID");
     this.setPreviousStatement(true, null);
@@ -687,6 +790,62 @@ Blockly.Blocks.driss_grove_rfid_id_raw = {
     this.setColour(Blockly.Blocks.drissGrove.HUE);
     this.setTooltip('');
     this.setHelpUrl('');
+  }
+};
+
+
+
+//  Biométrie ----------------------------------------------------------------------------------------------------------------------------------
+
+
+//Grove : driss_grove_finger_clip_heart_begin
+Blockly.Blocks['driss_grove_finger_clip_heart_begin'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Lancer une mesure du rythme cardiaque ");
+    this.appendDummyInput()
+        .appendField("par le capteur de pouls");
+    this.appendValueInput("ADRESSE_I2C")
+        .setCheck(null)
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("accessible par le bus I2C à l'adresse");
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_Finger-clip_Heart_Rate.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize, "*"));
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(Blockly.Blocks.drissGrove.HUE);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+
+
+//Grove : driss_grove_finger_clip_heart_pouls_dispo
+Blockly.Blocks['driss_grove_finger_clip_heart_pouls_dispo'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Un pouls est présent au niveau du capteur");
+    this.setOutput(true, null);
+    this.setColour(Blockly.Blocks.drissGrove.HUE);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+
+//Grove : driss_grove_finger_clip_heart_rate
+Blockly.Blocks['driss_grove_finger_clip_heart_rate'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("nombre de battements du cœur par minute   ");
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_Finger-clip_Heart_Rate.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize, "*"))
+        .appendField("(rythme cardiaque)");
+    this.setOutput(true, null);
+    this.setColour(Blockly.Blocks.drissGrove.HUE);
+ this.setTooltip("");
+ this.setHelpUrl("");
   }
 };
 

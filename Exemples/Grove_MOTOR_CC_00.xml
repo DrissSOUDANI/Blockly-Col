@@ -1,0 +1,129 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <toolboxcategories>CAT_LOGIC,CAT_LOOPS,CAT_MATH,CAT_TEXT,CAT_DRISS_CONSOLE,CAT_VARIABLES_DS,CAT_DRISS_GROVE</toolboxcategories>
+  <toolbox>undefined</toolbox>
+  <block type="driss_console_init_serial" id="~KmFoHw$oYb6z`T$erHZ" x="31" y="61">
+    <field name="VITESSE">9600</field>
+    <next>
+      <block type="variables_declare_ds" id="gDA,Z[@i9aY7BDB=jfHU">
+        <field name="VAR">vitesse</field>
+        <field name="TYPE">NUMBER</field>
+        <next>
+          <block type="variables_set_ds" id="!G`QRTgSj?RHMtMkP|]r">
+            <field name="VAR">vitesse</field>
+            <value name="VALUE">
+              <block type="math_number" id="!gf}S[5eM%0hC$GvyfTe">
+                <field name="NUM">50</field>
+              </block>
+            </value>
+            <next>
+              <block type="controls_repeat_indefinitely" id="|tdl0CN8g^=8%gef^B1B">
+                <statement name="DO">
+                  <block type="driss_console_write" id="MQ:nucl-X~?OCgdDY:=x">
+                    <field name="RL">AVEC</field>
+                    <value name="TEXT">
+                      <block type="text" id="OO)}dxA09;t/;3*rX[e+">
+                        <field name="TEXT">Rotation du moteur 1 dans le sens horaire à 50% de la vitesse max</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="driss_grove_dc_motor_turn" id="{tnR[jXvB,_L||xsCoi%">
+                        <field name="MOTEUR">MOTOR1</field>
+                        <field name="SENS">SENS_HORAIRE</field>
+                        <value name="VITESSE">
+                          <shadow type="math_number" id="4lWd6}F7j/`/)0)3nm)~">
+                            <field name="NUM">100</field>
+                          </shadow>
+                          <block type="variables_get_ds" id="ej3h^fd}+.pH{hW|UIX8">
+                            <field name="VAR">vitesse</field>
+                          </block>
+                        </value>
+                        <value name="ADRESSE_I2C">
+                          <shadow type="math_number" id="-Z=Ha4,C0._YSCAF{YQR">
+                            <field name="NUM">15</field>
+                          </shadow>
+                        </value>
+                        <next>
+                          <block type="controls_base_delay" id="!F:L,dk#])fBN+w)0dQ:">
+                            <value name="DELAY_TIME">
+                              <shadow type="math_number" id="1H8UiAUX8GN5QFOS;/Zu">
+                                <field name="NUM">2000</field>
+                              </shadow>
+                            </value>
+                            <next>
+                              <block type="driss_console_write" id="OqYQn{#}/v65$1ArNB@g">
+                                <field name="RL">AVEC</field>
+                                <value name="TEXT">
+                                  <block type="text" id="Nv9bD-T:(vQpg#7kel-P">
+                                    <field name="TEXT">Rotation du moteur 1 dans le sens anti-horaire à 100% de la vitesse max</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="driss_grove_dc_motor_turn" id="64R*FcQnJ~3(k-lrCGbD">
+                                    <field name="MOTEUR">MOTOR1</field>
+                                    <field name="SENS">SENS_ANTI_HORAIRE</field>
+                                    <value name="VITESSE">
+                                      <shadow type="math_number" id="jtGc9{?4v$aze.i2_PGN">
+                                        <field name="NUM">100</field>
+                                      </shadow>
+                                    </value>
+                                    <value name="ADRESSE_I2C">
+                                      <shadow type="math_number" id="t8Xw-;Jc@mX}5:^(w1,T">
+                                        <field name="NUM">15</field>
+                                      </shadow>
+                                    </value>
+                                    <next>
+                                      <block type="controls_base_delay" id="10vL@YQ(G$xd+M*JMu#%">
+                                        <value name="DELAY_TIME">
+                                          <shadow type="math_number" id="U?cAA(0L:z)1GqHa*nSq">
+                                            <field name="NUM">2000</field>
+                                          </shadow>
+                                        </value>
+                                        <next>
+                                          <block type="driss_grove_dc_motor_stop" id="jC[XqJk41v02Gwi4d5zO">
+                                            <field name="MOTEUR">MOTOR1</field>
+                                            <value name="ADRESSE_I2C">
+                                              <shadow type="math_number" id="_KnB^I+v-It}Q|9dlQzG">
+                                                <field name="NUM">15</field>
+                                              </shadow>
+                                            </value>
+                                            <next>
+                                              <block type="driss_console_write" id="58mJZ*Ah5pry]u7hd^NG">
+                                                <field name="RL">AVEC</field>
+                                                <value name="TEXT">
+                                                  <block type="text" id="KIXWzo_b$}%N$TJo#Y=k">
+                                                    <field name="TEXT">Arrêt du moteur 1</field>
+                                                  </block>
+                                                </value>
+                                                <next>
+                                                  <block type="controls_base_delay" id="kEIKyTh*zFxQC/GZym=U">
+                                                    <value name="DELAY_TIME">
+                                                      <shadow type="math_number" id="H|h{vn^{hyPWOc02L3rb">
+                                                        <field name="NUM">2000</field>
+                                                      </shadow>
+                                                    </value>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

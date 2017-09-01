@@ -108,7 +108,7 @@ var MSG = {
   arduino_card:"delete all and select a card",
   span_about:"about",
   aboutModalLabel:"about ...",
-  aboutBody:"<br />- This version of blockly is an adaptation of Driss SOUDANI (<a href='mailto:driss.soudani@ac-nancy-metz.fr' traget=_blank> driss.soudani@ac-nancy-metz.fr </a>) , Based on the work of Sébastien CANET, Christophe GROSSE, Carlos PEREIRA ATENCIO."
+  aboutBody:"<br />- This version of blockly is an adaptation of Driss SOUDANI (<a href='mailto:driss.soudani@ac-nancy-metz.fr' traget=_blank> driss.soudani@ac-nancy-metz.fr </a>) , Based on the Google library for building visual programming editors."
 	+ "<br />"
 	+ "<br />Thanks to:",
   msg_ajax_ko:"AJAX requests are not supported by your browser, the following features\n"

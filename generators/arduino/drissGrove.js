@@ -304,21 +304,10 @@ Blockly.Arduino.driss_grove_joystick_direction = function() {
    '}\n';
 
 var code ="getJoystickDirection()";
-/*
-switch (dropdown_dir) {
-  case "HAUT" : code = 'getJoystickDirection() == "H"'; break;
-  case "BAS" : code = 'getJoystickDirection() == "B"'; break;
-  case "GAUCHE" : code = 'getJoystickDirection() == "G"'; break;
-  case "DROITE" : code = 'getJoystickDirection() == "D"'; break;
-  case "HAUT_DROITE" : code = 'getJoystickDirection() == "HD"'; break;
-  case "HAUT_GAUCHE" : code = 'getJoystickDirection() == "HG"'; break;
-  case "BAS_DROITE" : code = 'getJoystickDirection() == "BD"'; break;
-  case "BAS_GAUCHE" : code = 'getJoystickDirection() == "BG"'; break;
-}
-*/
 
  return [code, Blockly.Arduino.ORDER_ATOMIC];
 } 
+
 
     
 //-Actionneurs ----------------------------------------------------------------------------------------------------------------------------------------
@@ -384,7 +373,7 @@ Blockly.Arduino.driss_grove_servo_setPosition = function() {
   return code;
 };
 
-
+/*
 //Grove I2C Motor OK
 Blockly.Arduino.driss_grove_I2C_Motor_run = function() {
   var dropdown_motor = this.getTitleValue('MOTOR');
@@ -405,6 +394,122 @@ Blockly.Arduino.driss_grove_I2C_Motor_run = function() {
     var code = Motor+'.speed(MOTOR'+dropdown_motor+', -'+value_vitesse+');';
   return code;
 };
+
+*/
+
+
+// Claviers  KeyPad ----------------------------------------------------------------------------------------------------------------------------
+// Grove driss_grove_keypad_12_init
+Blockly.Arduino.driss_grove_keypad_12_init = function() {
+  var row0 = this.getTitleValue('ROW0');
+  var row1 = this.getTitleValue('ROW1');
+  var row2 = this.getTitleValue('ROW2');
+  var row3 = this.getTitleValue('ROW3');
+  var col0 = this.getTitleValue('COL0');
+  var col1 = this.getTitleValue('COL1');
+  var col2 = this.getTitleValue('COL2');
+
+
+  Blockly.Arduino.includes_['define_Keypad'] = "#include <Keypad.h>"; 
+  Blockly.Arduino.variables_['define_Keypad_rows'] = "const byte ROWS = 4; //4 lignes\n"; 
+  Blockly.Arduino.variables_['define_Keypad_cols'] = "const byte COLS = 3; //3 colonnes\n"; 
+  Blockly.Arduino.variables_['define_Keypad_keys'] = "char keys[ROWS][COLS] = {\n"+
+                                                        " {'1','2','3'},\n" + 
+                                                        " {'4','5','6'},\n" + 
+                                                        " {'7','8','9'},\n" + 
+                                                        " {'*','0','#'}\n" + 
+                                                        "};\n";
+  Blockly.Arduino.variables_['define_Keypad_rowPins'] = "byte rowPins[ROWS] = {"+row0+", "+row1+", "+row2+", "+row3+"};\n"; 
+  Blockly.Arduino.variables_['define_Keypad_colPins'] = "byte colPins[COLS] = {"+col0+", "+col1+", "+col2+"};\n"; 
+
+  Blockly.Arduino.variables_['define_Keypad_keypad_12'] = "Keypad keypad_12 = Keypad( makeKeymap(keys), rowPins, colPins, ROWS, COLS );\n"; 
+
+  
+  
+  var code = ''  //code à insérer dans la loop Arduino
+  return code;
+};
+
+
+// Grove driss_grove_keypad_12_getkey
+Blockly.Arduino.driss_grove_keypad_12_getkey = function() {
+  var code = 'keypad_12.getKey()'  ;
+
+
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+}
+
+
+
+
+
+
+
+
+
+// Motors --------------------------------------------------------------------------------------------------------------------------------
+
+// Grove : driss_grove_dc_motor_turn
+Blockly.Arduino.driss_grove_dc_motor_turn = function() {
+  
+  var i2c_adress = Blockly.Arduino.valueToCode(this, 'ADRESSE_I2C', Blockly.Arduino.ORDER_ATOMIC);
+  var sens = this.getFieldValue('SENS');
+  var vitesse = Blockly.Arduino.valueToCode(this, 'VITESSE', Blockly.Arduino.ORDER_ATOMIC);
+  var moteur = this.getFieldValue('MOTEUR');
+
+  var code = "";
+  
+
+  Blockly.Arduino.includes_['define_Grove_I2C_Motor_Driver'] = "#include <Grove_I2C_Motor_Driver.h>"; 
+  Blockly.Arduino.definitions_['define_I2C_ADRESS_'+i2c_adress] = "#define I2C_ADRESS_"+i2c_adress+" "+i2c_adress;
+  
+  Blockly.Arduino.setups_['setup_I2C_ADRESS_'+i2c_adress] = "Motor.begin(I2C_ADRESS_"+i2c_adress+");" ;
+
+
+  if(sens=="SENS_HORAIRE")
+    var code = 'Motor.speed('+moteur+', '+vitesse+');\n';
+  else
+    var code = 'Motor.speed('+moteur+', -'+vitesse+');\n';
+  return code;
+}
+
+
+
+// Grove : driss_grove_dc_motor_stop
+Blockly.Arduino.driss_grove_dc_motor_stop = function() {
+  var i2c_adress = Blockly.Arduino.valueToCode(this, 'ADRESSE_I2C', Blockly.Arduino.ORDER_ATOMIC);
+  var moteur = this.getFieldValue('MOTEUR');
+ 
+  Blockly.Arduino.includes_['define_Grove_I2C_Motor_Driver'] = "#include <Grove_I2C_Motor_Driver.h>"; 
+  Blockly.Arduino.definitions_['define_I2C_ADRESS_'+i2c_adress] = "#define I2C_ADRESS_"+i2c_adress+" "+i2c_adress;
+  
+  Blockly.Arduino.setups_['setup_I2C_ADRESS_'+i2c_adress] = "Motor.begin(I2C_ADRESS_"+i2c_adress+");" ;
+
+
+  var code = "Motor.stop("+moteur+");\n";
+  return code;
+}
+
+// Grove : driss_grove_step_motor_turn
+Blockly.Arduino.driss_grove_step_motor_turn = function() {
+  var i2c_adress = Blockly.Arduino.valueToCode(this, 'ADRESSE_I2C', Blockly.Arduino.ORDER_ATOMIC);
+  var nbre_pas = Blockly.Arduino.valueToCode(this, 'NBRE_PAS', Blockly.Arduino.ORDER_ATOMIC);
+  
+  var sens = this.getFieldValue('SENS');
+ 
+  Blockly.Arduino.includes_['define_Grove_I2C_Motor_Driver'] = "#include <Grove_I2C_Motor_Driver.h>"; 
+  Blockly.Arduino.definitions_['define_I2C_ADRESS_'+i2c_adress] = "#define I2C_ADRESS_"+i2c_adress+" "+i2c_adress;
+  
+  Blockly.Arduino.setups_['setup_I2C_ADRESS_'+i2c_adress] = "Motor.begin(I2C_ADRESS_"+i2c_adress+");" ;
+
+ if(sens=="SENS_HORAIRE")
+    var code = 'Motor.StepperRun('+nbre_pas+');\n';
+  else
+    var code = 'Motor.StepperRun(-'+nbre_pas+');\n';
+  return code;
+}
+
+
 
 
 
@@ -605,6 +710,40 @@ Blockly.Arduino.driss_grove_rfid_id_raw = function() {
 
 
 
+
+//  Biométrie ----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//Grove : driss_grove_finger_clip_heart_begin
+Blockly.Arduino.driss_grove_finger_clip_heart_begin = function() {
+  var adresse_I2C = Blockly.Arduino.valueToCode(this, 'ADRESSE_I2C',Blockly.Arduino.ORDER_UNARY_POSTFIX);
+  
+
+  Blockly.Arduino.includes_['define_Wire'] = "#include <Wire.h>"; 
+  Blockly.Arduino.setups_['setup_I2C_ADRESS_'+adresse_I2C] = "Wire.begin();" ;
+  
+  var code = "Wire.requestFrom("+adresse_I2C+", 1);\n";
+  return code;
+};
+
+
+
+// Grove : driss_grove_finger_clip_heart_pouls_dispo
+Blockly.Arduino.driss_grove_finger_clip_heart_pouls_dispo = function() {
+
+  var code = "Wire.available()";
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+//Grove : driss_grove_finger_clip_heart_rate
+Blockly.Arduino.driss_grove_finger_clip_heart_rate = function() {
+  
+  var code = 'Wire.read()';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
 
 
 
