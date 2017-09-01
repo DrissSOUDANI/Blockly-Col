@@ -17,6 +17,8 @@ body {
     top: 90px;
     bottom: 5px;
     width: 100%;
+    /*driss
+    height:100%;*/
 }
 
 
@@ -109,6 +111,9 @@ html[dir="RTL"] #select_all {
 
 .blocklySvg {
 	border-top: none !important;
+
+	/*driss*/
+	height:100%;
 }
 
 
@@ -118,6 +123,9 @@ html[dir="RTL"] #select_all {
 	top:0px;
 	padding-top:30px;
 	border-right: 1px solid #c6c6c6;
+
+	/*driss + 
+	height:100%;*/
 
 }
 
