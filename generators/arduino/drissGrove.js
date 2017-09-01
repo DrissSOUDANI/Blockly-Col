@@ -711,40 +711,6 @@ Blockly.Arduino.driss_grove_rfid_id_raw = function() {
 
 
 
-//  Biométrie ----------------------------------------------------------------------------------------------------------------------------------
-
-
-
-
-
-//Grove : driss_grove_finger_clip_heart_begin
-Blockly.Arduino.driss_grove_finger_clip_heart_begin = function() {
-  var adresse_I2C = Blockly.Arduino.valueToCode(this, 'ADRESSE_I2C',Blockly.Arduino.ORDER_UNARY_POSTFIX);
-  
-
-  Blockly.Arduino.includes_['define_Wire'] = "#include <Wire.h>"; 
-  Blockly.Arduino.setups_['setup_I2C_ADRESS_'+adresse_I2C] = "Wire.begin();" ;
-  
-  var code = "Wire.requestFrom("+adresse_I2C+", 1);\n";
-  return code;
-};
-
-
-
-// Grove : driss_grove_finger_clip_heart_pouls_dispo
-Blockly.Arduino.driss_grove_finger_clip_heart_pouls_dispo = function() {
-
-  var code = "Wire.available()";
-  return [code, Blockly.Arduino.ORDER_ATOMIC];
-};
-
-//Grove : driss_grove_finger_clip_heart_rate
-Blockly.Arduino.driss_grove_finger_clip_heart_rate = function() {
-  
-  var code = 'Wire.read()';
-  return [code, Blockly.Arduino.ORDER_ATOMIC];
-};
-
 
 
 //-Afficheur Grove - LCD ----------------------------------------------------------------------------------------------------------------------------------------
@@ -1206,4 +1172,52 @@ Blockly.Arduino.driss_grove_4_digit_display_digitsOnOff = function() {
   'digitsOnOff('+display+');\n';
 
   return code;
+};
+
+
+
+//  Biométrie ----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+//Grove : driss_grove_finger_clip_heart_begin
+Blockly.Arduino.driss_grove_finger_clip_heart_begin = function() {
+  var adresse_I2C = Blockly.Arduino.valueToCode(this, 'ADRESSE_I2C',Blockly.Arduino.ORDER_UNARY_POSTFIX);
+  
+
+  Blockly.Arduino.includes_['define_Wire'] = "#include <Wire.h>"; 
+  Blockly.Arduino.setups_['setup_I2C_ADRESS_'+adresse_I2C] = "Wire.begin();" ;
+  
+  var code = "Wire.requestFrom("+adresse_I2C+", 1);\n";
+  return code;
+};
+
+
+
+// Grove : driss_grove_finger_clip_heart_pouls_dispo
+Blockly.Arduino.driss_grove_finger_clip_heart_pouls_dispo = function() {
+
+  var code = "Wire.available()";
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+//Grove : driss_grove_finger_clip_heart_rate
+Blockly.Arduino.driss_grove_finger_clip_heart_rate = function() {
+  
+  var code = 'Wire.read()';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+
+//Grove : driss_grove_gsr_read
+Blockly.Arduino.driss_grove_gsr_read = function() {
+  var pin = this.getTitleValue('PIN');
+  
+  Blockly.Arduino.includes_['define_Wire'] = "#include <Wire.h>"; 
+  //Blockly.Arduino.setups_['setup_I2C_ADRESS_'+adresse_I2C] = "Wire.begin();" ;
+  
+  var code = 'analogRead('+pin+')';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
