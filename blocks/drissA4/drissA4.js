@@ -55,7 +55,7 @@ Blockly.Blocks.driss_A4_commande_moteur_CC = {
     this.appendDummyInput()
         .appendField("Faire tourner le moteur ");
     this.appendDummyInput()
-        .appendField("relié aux pins")
+        .appendField("relié aux broches")
         .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN1")
         .appendField("et")
         .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN2")
@@ -81,7 +81,7 @@ Blockly.Blocks.driss_A4_arreter_moteur_CC = {
     this.appendDummyInput()
         .appendField("Arrêter le moteur ");
     this.appendDummyInput()
-        .appendField("relié aux pins")
+        .appendField("relié aux broches")
         .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN1")
         .appendField("et")
         .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN2")
@@ -213,10 +213,10 @@ Blockly.Blocks['cyril_A4_lcd_axe033_init'] = {
     this.appendDummyInput()
         .appendField("Initialiser l'afficheur LCD")
         .appendField(new Blockly.FieldImage("blocks/drissA4/lcd_axe033.png",Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize));
-    this.appendValueInput("A4_Pin")
+    this.appendValueInput("A4_lcd_axe033_Pin")
         .setCheck(null)
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("branché sur le pin");
+        .appendField("branché sur la broche");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(36);
