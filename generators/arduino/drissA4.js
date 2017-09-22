@@ -100,4 +100,105 @@ Blockly.Arduino.driss_A4_pir = function() {
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
+// AFFICHEURS -------------------------------------------------------------------------------
 
+
+//LCD axe033
+
+Blockly.Arduino.cyril_A4_lcd_axe033_init = function() {
+  var A4_Pin = Blockly.Arduino.valueToCode(this, 'A4_lcd_axe033_Pin', Blockly.Arduino.ORDER_ATOMIC);; 
+  Blockly.Arduino.includes_['define_AXE133Y'] = '#include <AXE133Y.h>';
+  Blockly.Arduino.variables_['var_OLED'] = 'AXE133Y OLED = AXE133Y('+A4_Pin+');';
+  Blockly.Arduino.setups_['Efface_LCD'] = 'OLED.clearScreen();';
+  var code='';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+
+//cyril_A4_LCD
+Blockly.Arduino.cyril_A4_LCD = function() {
+  var A4_Text1 = Blockly.Arduino.valueToCode(this, 'cyril_A4_Text1', Blockly.Arduino.ORDER_ATOMIC);;
+  var A4_Text2 = Blockly.Arduino.valueToCode(this, 'cyril_A4_Text2', Blockly.Arduino.ORDER_ATOMIC);;
+  var code='OLED.cursorHome(1);\n'+
+  'OLED.print('+A4_Text1+');\n'+
+  'OLED.cursorHome(2);\n'+
+  'OLED.print('+A4_Text2+');\n'+
+  'delay(800);';
+  return code;
+};
+
+//cyril_A4_LCD_Horloge
+Blockly.Arduino.cyril_A4_LCD_Horloge = function() { 
+  var code='OLED.writeByte(0);\n'+
+  'delay(800);';
+  return code;
+};
+
+//cyril_A4_LCD_Message
+Blockly.Arduino['cyril_A4_LCD_Message'] = function() {
+  var dropdown_A4_Num_Message = this.getFieldValue('cyril_A4_Num_Message');
+  code = 'delay(200);\n'+
+  'OLED.writeByte('+dropdown_A4_Num_Message+');\n'+
+  'delay(800);';
+  return code;
+};
+
+//cyril_A4_LCD_Efface
+Blockly.Arduino.cyril_A4_LCD_Efface = function() {
+  var code='OLED.clearScreen();\n'+
+  'delay(800);';
+  return code;
+};
+
+
+//driss_A4_Buzzer
+Blockly.Arduino.driss_A4_Buzzer = function() {
+  var dropdown_pin = this.getTitleValue('PIN');
+  var Freq = Blockly.Arduino.valueToCode(this, 'A4_BUZZER_FREQUENCE', Blockly.Arduino.ORDER_ATOMIC);;
+  var Duree = Blockly.Arduino.valueToCode(this, 'A4_BUZZER_DUREE', Blockly.Arduino.ORDER_ATOMIC);;
+  code = 'tone('+dropdown_pin+','+Freq+','+Duree+');\n';
+  return code;
+};
+
+
+//driss_A4_Temp_DS18B20
+Blockly.Arduino.driss_A4_Temp_DS18B20 = function() {
+  var dropdown_pin = this.getTitleValue('PIN');
+  Blockly.Arduino.includes_['define_OneWire'] = '#include <OneWire.h>';
+
+  Blockly.Arduino.variables_['var_A4_DS18B20'] = 
+  'const int broche_OneWire='+dropdown_pin+';\n'+
+  'const int modeLecture=0xBE;\n'+
+  'const int lancerMesure=0x44;\n'+
+  'byte data[12];\n'+
+  'byte adresse[8];\n'+
+  'int tempet=0;\n'+
+  'float tempetf=0.0; \n'+
+  'OneWire  capteur(broche_OneWire);\n';
+
+  Blockly.Arduino.definitions_['A4_DS18B20_mesurer_temperature'] = 
+  'float mesurer_temperature(){ //--------- lancer une mesure --------\n'+
+  '  capteur.reset(); \n'+
+  '  capteur.select(adresse);\n'+
+  '  capteur.write(lancerMesure,1);\n'+ 
+  '  delay(1000);     // au moins 750 ms\n'+
+  '  //---------- mode LECTURE -------------\n'+
+  '  capteur.reset();\n'+ 
+  '  capteur.select(adresse);\n'+ 
+  '  capteur.write(modeLecture,1);\n'+
+  '  for ( int i = 0; i < 9; i++) {\n'+
+  '    data[i] = capteur.read();\n'+
+  '  }\n'+
+  '  //----- calcul de la température mesurée  ---------\n'+
+  '  data[1]=data[1] & B10000111; // met à 0 les bits de signes inutiles\n'+
+  '  tempet=data[1];\n'+
+  '  tempet=tempet<<8;\n'+
+  '  tempet=tempet+data[0]; // bits de poids faible\n'+
+  '  tempetf=float(tempet)*6.25;\n'+
+  '  tempetf=tempetf/100.0;\n'+
+  'return tempetf;\n'+
+  '}';
+  Blockly.Arduino.setups_['cherche_addresse'] = 'capteur.search(adresse);';
+  code = 'mesurer_temperature()';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};

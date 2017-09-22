@@ -573,7 +573,7 @@ Blockly.Blocks['driss_grove_dc_motor_turn'] = {
 
 
 
-// Grove : driss_grove_dc_motor_stop
+// Grove : driss_grove_dc_motor_stop 
 Blockly.Blocks['driss_grove_dc_motor_stop'] = {
   init: function() {
     this.appendDummyInput()

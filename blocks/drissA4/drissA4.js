@@ -201,3 +201,150 @@ Blockly.Blocks.driss_A4_pir = {
     this.setTooltip(Blockly.Msg.DRISS_A4_TEXT21);
   }
 };
+
+
+
+// AFFICHEURS -------------------------------------------------------------------------------
+
+
+//LCD axe033
+Blockly.Blocks['cyril_A4_lcd_axe033_init'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Initialiser l'afficheur LCD")
+        .appendField(new Blockly.FieldImage("blocks/drissA4/lcd_axe033.png",Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize));
+    this.appendValueInput("A4_Pin")
+        .setCheck(null)
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("branché sur le pin");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(36);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+
+//cyril_A4_LCD
+Blockly.Blocks['cyril_A4_LCD'] = {
+  init: function() {
+    this.setColour(Blockly.Blocks.drissA4.HUE);
+    this.setHelpUrl('');
+    this.appendDummyInput()
+        .appendField("Afficher sur l'écran LCD")
+        .appendField(new Blockly.FieldImage("blocks/drissA4/lcd_axe033.png", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+    this.appendValueInput("cyril_A4_Text1")
+        .setCheck('String')
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("sur la ligne 1 :")
+    this.appendValueInput("cyril_A4_Text2")
+        .setCheck('String')
+        .setAlign(Blockly.ALIGN_RIGHT)
+  .appendField('et sur la ligne 2 :')
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip("");
+  }
+};
+
+//cyril_A4_LCD_Horloge
+Blockly.Blocks['cyril_A4_LCD_Horloge'] = {
+  init: function() {
+    this.setColour(Blockly.Blocks.drissA4.HUE);
+    this.setHelpUrl('');
+    this.appendDummyInput()
+        .appendField("Afficher l'heure sur l'écran LCD")
+        .appendField(new Blockly.FieldImage("blocks/drissA4/lcd_axe033.png", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+    //this.appendDummyInput()
+    //    .appendField(Blockly.Msg.A4_TEXT9)
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip("");
+  }
+};
+
+//cyril_A4_LCD_Message
+Blockly.Blocks['cyril_A4_LCD_Message'] = {
+  init: function() {
+    this.setColour(Blockly.Blocks.drissA4.HUE);
+    this.setHelpUrl('');
+    this.appendDummyInput()
+        .appendField("Afficher le message numéro")
+        .appendField(new Blockly.FieldDropdown([["1","1"], ["2","2"], ["3","3"], ["4","4"], ["5","5"], ["6","6"], ["7","7"]]), 'cyril_A4_Num_Message')
+        .appendField(new Blockly.FieldImage("blocks/drissA4/lcd_axe033.png", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+    this.appendDummyInput()
+//    this.appendValueInput('A4_Num_Message')
+      .setAlign(Blockly.ALIGN_LEFT)
+        .appendField("sur l'écran LCD")
+      //.appendField(new Blockly.FieldDropdown([["1","1"], ["2","2"], ["3","3"], ["4","4"], ["5","5"], ["6","6"], ["7","7"]]), 'cyril_A4_Num_Message')
+//      .setCheck('Number')
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip("");
+  }
+};
+
+//cyril_A4_LCD_Efface
+Blockly.Blocks['cyril_A4_LCD_Efface'] = {
+  init: function() {
+    this.setColour(Blockly.Blocks.drissA4.HUE);
+    this.setHelpUrl('');
+    this.appendDummyInput()
+        .appendField("Effacer l'écran LCD")
+        .appendField(new Blockly.FieldImage("blocks/drissA4/lcd_axe033.png", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize));
+    /*
+    this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_LEFT)
+        .appendField(Blockly.Msg.A4_TEXT14);  
+      */    
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip("");
+  }
+};
+
+
+//driss_A4_Buzzer
+Blockly.Blocks['driss_A4_Buzzer'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Emettre un son sur le buzzer relié la broche")
+        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN");
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage("blocks/drissA4/buzzer.png", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize));
+    this.appendValueInput("A4_BUZZER_FREQUENCE")
+
+        .setCheck("Number")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("Fréquence (en Hertz)");
+    this.appendValueInput("A4_BUZZER_DUREE")
+        .setCheck("Number")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("Durée (en secondes)");
+    this.setColour(Blockly.Blocks.drissA4.HUE);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+
+//driss_A4_Temp_DS18B20
+Blockly.Blocks['driss_A4_Temp_DS18B20'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Température mesurée par le capteur de température");
+    this.appendDummyInput()
+        .appendField("DS18B20 relié à la broche")
+        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownAnalogPins), "PIN");
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage("blocks/drissA4/temperature_ds18b20.png", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize));
+    this.setOutput(true, null);
+    this.setColour(Blockly.Blocks.drissA4.HUE);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+

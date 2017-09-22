@@ -1780,6 +1780,7 @@ Blockly.Msg.CAT_DRISS_GROVE_BIOMETRIE="- Biométrie"
 Blockly.Msg.CAT_DRISS_A4 = "A4 Technologie";
 Blockly.Msg.CAT_DRISS_A4_IN = "- Capteurs";
 Blockly.Msg.CAT_DRISS_A4_OUT = "- Actionneurs";
+Blockly.Msg.CAT_DRISS_A4_AFFICHAGE = "- Afficheur LCD AXE033";
 
 Blockly.Msg.DRISS_A4_TEXT1 = "Le capteur ";
 Blockly.Msg.DRISS_A4_TEXT2 = "sur la broche ";
