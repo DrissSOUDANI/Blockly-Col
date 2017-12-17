@@ -66,6 +66,23 @@ Blockly.Blocks.driss_grove_switch_p_off = {
 };
 
 
+//Grove MicroSwitch OK
+Blockly.Blocks.driss_grove_microswitch = {
+    category: 'driss_grove : capteurs',
+    helpUrl: '',
+    init: function() {
+      this.setColour(Blockly.Blocks.drissGrove.HUE);
+      this.appendDummyInput("")
+          .appendTitle("Le microrupteur ")
+          .appendTitle(new Blockly.FieldImage("blocks/drissGrove/Grove_MicroSwitch.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize))
+          .appendTitle("sur l'entrée ")
+          .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN")
+          .appendTitle("est appuyé");
+      this.setOutput(true, 'Boolean');
+      this.setTooltip(Blockly.Msg.DRISS_GROVE_ENTREE);
+    }
+  };
+
 //Grove Light Sensor OK
 Blockly.Blocks.driss_grove_light_sensor = {
   category: 'driss_grove : capteurs',
