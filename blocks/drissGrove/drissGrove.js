@@ -108,7 +108,6 @@ Blockly.Blocks.driss_grove_light_sensor = {
 
 
 
-
 //Grove Temperature & humidity sensor pro mesure OK
 Blockly.Blocks.driss_temperature_and_humidity_sensor = {
   category: 'driss_grove : capteurs',
@@ -454,6 +453,135 @@ Blockly.Blocks.driss_grove_purple_led = {
   }
 };
 
+//Grove driss_grove_piezo_buzzer
+Blockly.Blocks.driss_grove_piezo_buzzer = {
+   
+  };
+
+
+
+//Telecommandes -----------------------------------------------------------------
+//Grove driss_grove_Telecommande_GM_IR38_init
+Blockly.Blocks['driss_grove_Telecommande_GM_IR38_init'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField("Déclarer l'utilisation de la Télécommande")
+            .appendField(new Blockly.FieldDropdown([["GM IR38","GM_IR38"], ["YK-001","YK_001"], ["Makeblock","Makeblock"]]), "TELECOMMANDE")
+            
+        this.appendValueInput("DELETE_AFTER_TIME")
+            .setCheck("Number")
+            .setAlign(Blockly.ALIGN_RIGHT)
+            .appendField(new Blockly.FieldImage("blocks/drissGrove/Telecommande_GM_IR38.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize, "*"), "IMG_TELECOMMANDE")
+            //.appendField(new Blockly.FieldImage("blocks/drissGrove/Telecommande_YK-001.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize, "*"), "YK_001")
+            .appendField(new Blockly.FieldCheckbox("TRUE"), "OPTION_DELETE")
+            .appendField("Effacer le code de la touche appuyée")
+            .appendField(" après  (ms)");
+        this.setInputsInline(false);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(36);
+     this.setTooltip("");
+     this.setHelpUrl("");
+      },
+
+      onchange: function(ev) {
+        var telecommande = this.getTitleValue('TELECOMMANDE');
+        var image = "";
+        if(telecommande == "GM_IR38") image = "blocks/drissGrove/Telecommande_GM_IR38.png";
+        if(telecommande == "YK_001") image = "blocks/drissGrove/Telecommande_YK-001.png";
+        if(telecommande == "Makeblock") image = "blocks/drissGrove/Telecommande_Makeblock.png";
+        this.getField("IMG_TELECOMMANDE").setValue(image);
+       }
+  };
+
+
+//Grove driss_grove_Telecommande_GM_IR38_test_touche 
+Blockly.Blocks['driss_grove_Telecommande_GM_IR38_test_touche'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField("le récepteur infrarouge relié à l'entrée")
+            .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN")
+            .appendField("détecte que ")
+        this.appendDummyInput()
+            .appendField("la touche")
+            .appendField(new Blockly.FieldDropdown([["ON/OFF","POWER"], ["MENU","MENU"], ["TEST","TEST"], ["+","PLUS"], ["retour rapide","RETOUR_RAPIDE"], ["lecture","LECTURE"], ["avance rapide","AVANCE_RAPIDE"], ["0","0"], ["-","MOINS"], ["C","C"], ["1","1"], ["2","2"], ["3","3"], [" 4","4"], ["5","5"], ["6","6"], ["7","7"], ["8","8"], ["9","9"]]), "TOUCHES")
+            .appendField("est appuyée sur la télécommande GM IR38");
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_Telecommande_GM_IR38.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize))
+            .appendField("(ce bloc retourne Vrai ou Faux)");
+        this.setInputsInline(false);
+        this.setOutput(true, null);
+        this.setColour(Blockly.Blocks.drissGrove.HUE);
+     this.setTooltip("");
+     this.setHelpUrl("");
+      }
+  };
+
+//Grove driss_grove_Telecommande_YK_001_test_touche 
+Blockly.Blocks['driss_grove_Telecommande_YK_001_test_touche'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField("le récepteur infrarouge relié à l'entrée")
+            .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN")
+            .appendField("détecte que ")
+        this.appendDummyInput()
+            .appendField("la touche")
+            .appendField(new Blockly.FieldDropdown([["ON/OFF","POWER"], ["MODE","MODE"], ["VOLUME OFF","VOLUME_OFF"], ["PREV","PREV"], ["NEXT","NEXT"], ["PLAY/PAUSE","PLAY_PAUSE"], ["Vol-","VOL-"], ["Vol+","VOL+"], ["EQ","EQ"], ["0","0"], ["100+","100+"], ["Annuler","ANNULER"], ["1","1"], ["2","2"], ["3","3"], [" 4","4"], ["5","5"], ["6","6"], ["7","7"], ["8","8"], ["9","9"]]), "TOUCHES")
+            .appendField("est appuyée sur la télécommande YK-001");
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_Telecommande_YK-001.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize))
+            .appendField("(ce bloc retourne Vrai ou Faux)");
+        this.setInputsInline(false);
+        this.setOutput(true, null);
+        this.setColour(Blockly.Blocks.drissGrove.HUE);
+     this.setTooltip("");
+     this.setHelpUrl("");
+      }
+  };
+
+  //Grove driss_grove_Telecommande_Makeblock_test_touche 
+Blockly.Blocks['driss_grove_Telecommande_Makeblock_test_touche'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField("le récepteur infrarouge relié à l'entrée")
+            .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN")
+            .appendField("détecte que ")
+        this.appendDummyInput()
+            .appendField("la touche")
+            .appendField(new Blockly.FieldDropdown([["A","A"], ["B","B"], ["C","C"], ["D","D"], ["E","E"], ["F","F"], ["haut","HAUT"], ["bas","BAS"], ["gauche","GAUCHE"], ["Droite","DROITE"], ["Roue dentée","ROUE_DENTEE"], ["0","0"], ["1","1"], ["2","2"], ["3","3"], [" 4","4"], ["5","5"], ["6","6"], ["7","7"], ["8","8"], ["9","9"]]), "TOUCHES")
+            .appendField("est appuyée sur la télécommande Makeblock");
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_Telecommande_Makeblock.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize))
+            .appendField("(ce bloc retourne Vrai ou Faux)");
+        this.setInputsInline(false);
+        this.setOutput(true, null);
+        this.setColour(Blockly.Blocks.drissGrove.HUE);
+     this.setTooltip("");
+     this.setHelpUrl("");
+      }
+  };
+
+  //Grove driss_grove_Infrared_Receiver_read_code
+  Blockly.Blocks['driss_grove_Infrared_Receiver_read_code'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField("le code lu par le recépteur infrarouge ");
+        this.appendDummyInput()
+            .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_Infrared_Receiver.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize))
+            .appendField("relié à l'entrée")
+            .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN");
+        //this.appendDummyInput()
+        //    .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_Infrared_Receiver.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize));
+        this.setInputsInline(false);
+        this.setOutput(true, null);
+        this.setColour(Blockly.Blocks.drissGrove.HUE);
+     this.setTooltip("");
+     this.setHelpUrl("");
+      }
+  };
+
+//Moteurs -----------------------------------------------------------------
+
 //Grove Servo setPosition OK
 Blockly.Blocks.driss_grove_servo_setPosition = {
   category: 'driss_grove : actionneurs',
@@ -480,6 +608,8 @@ Blockly.Blocks.driss_grove_servo_setPosition = {
     this.setHelpUrl('');
   }
 };
+
+
 
 /*
 //Grove I2C Motor OK
@@ -512,55 +642,6 @@ Blockly.Blocks.driss_grove_I2C_Motor_run = {
 
 };
 */
-
-
-// Claviers   KeyPad -----------------------------------------------------------------------------------------------------------------------------
-
-// Grove driss_grove_keypad_12_init
-Blockly.Blocks['driss_grove_keypad_12_init'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("Définir le branchement du clavier 12 touches");
-    this.appendDummyInput()
-        .appendField("Lig 0")
-        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownIRQPins), "ROW0")
-        .appendField("-  Lig 1")
-        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownIRQPins), "ROW1")
-        .appendField("-  Lig 2")
-        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownIRQPins), "ROW2")
-        .appendField("-  Lig 3")
-        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownIRQPins), "ROW3");
-    this.appendDummyInput()
-        .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_keyPad_12.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize, "*"))
-        .appendField("Col 0")
-        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownIRQPins), "COL0")
-        .appendField("-  Col 1")
-        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownIRQPins), "COL1")
-        .appendField("-  Col 2")
-        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownIRQPins), "COL2");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(36);
- this.setTooltip("");
- this.setHelpUrl("");
-  }
-};
-
-
-// Grove driss_grove_keypad_12_getkey
-Blockly.Blocks['driss_grove_keypad_12_getkey'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("Touche appuyée sur le clavier 12 touches");
-    this.setOutput(true, null);
-    this.setColour(Blockly.Blocks.drissGrove.HUE);
- this.setTooltip("");
- this.setHelpUrl("");
-  }
-};
-
-
-// Motors --------------------------------------------------------------------------------------------------------------------------------
 
 // Grove : driss_grove_dc_motor_turn
 Blockly.Blocks['driss_grove_dc_motor_turn'] = {
@@ -634,6 +715,55 @@ Blockly.Blocks['driss_grove_step_motor_turn'] = {
  this.setHelpUrl("");
   }
 };
+
+
+// Claviers   KeyPad -----------------------------------------------------------------------------------------------------------------------------
+
+// Grove driss_grove_keypad_12_init
+Blockly.Blocks['driss_grove_keypad_12_init'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("Définir le branchement du clavier 12 touches");
+      this.appendDummyInput()
+          .appendField("Lig 0")
+          .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownIRQPins), "ROW0")
+          .appendField("-  Lig 1")
+          .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownIRQPins), "ROW1")
+          .appendField("-  Lig 2")
+          .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownIRQPins), "ROW2")
+          .appendField("-  Lig 3")
+          .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownIRQPins), "ROW3");
+      this.appendDummyInput()
+          .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_keyPad_12.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize, "*"))
+          .appendField("Col 0")
+          .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownIRQPins), "COL0")
+          .appendField("-  Col 1")
+          .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownIRQPins), "COL1")
+          .appendField("-  Col 2")
+          .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownIRQPins), "COL2");
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(36);
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+  };
+  
+  
+  
+  // Grove driss_grove_keypad_12_getkey
+  Blockly.Blocks['driss_grove_keypad_12_getkey'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("Touche appuyée sur le clavier 12 touches");
+      this.setOutput(true, null);
+      this.setColour(Blockly.Blocks.drissGrove.HUE);
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+  };
+  
+  
 
 //-Communication ----------------------------------------------------------------------------------------------------------------------------------------
 

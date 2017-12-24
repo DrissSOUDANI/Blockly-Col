@@ -1768,9 +1768,7 @@ Blockly.Msg.AUTODUINO_EDGE_UP_DOWN = [["front montant", "UP"], ["front descedant
 
 Blockly.Msg.CAT_VARIABLES_DS = "Variables & Conversions";
 Blockly.Msg.CAT_DRISS_CONSOLE = "Console série";
-Blockly.Msg.CAT_DRISS_GROVE_KEYPAD ="- Claviers";
-Blockly.Msg.CAT_DRISS_GROVE_MOTORS="- Moteurs & Servomoteur";
-Blockly.Msg.CAT_DRISS_GROVE_BIOMETRIE="- Biométrie"
+
 
 
 
@@ -1813,10 +1811,14 @@ Blockly.Msg.DRISS_A4_TEXT35 = "Sortie lampe  ";
 Blockly.Msg.CAT_DRISS_GROVE = "Grove";
 Blockly.Msg.CAT_DRISS_GROVE_IN = "- Capteurs";
 Blockly.Msg.CAT_DRISS_GROVE_OUT = "- Actionneurs";
+Blockly.Msg.CAT_DRISS_GROVE_TELECOMMANDE = "- Télécommandes";
+Blockly.Msg.CAT_DRISS_GROVE_MOTORS="- Moteurs & Servomoteur";
+Blockly.Msg.CAT_DRISS_GROVE_KEYPAD ="- Claviers";
 Blockly.Msg.CAT_DRISS_GROVE_LCD_RGB = "- Afficheur LCD RGB";
 Blockly.Msg.CAT_DRISS_GROVE_OLED_96x96 = "- Afficheur OLED 96x96";
 Blockly.Msg.CAT_DRISS_GROVE_4_Digit_Display ="- Afficheur 4 digits";
 Blockly.Msg.CAT_DRISS_GROVE_COMMUNICATION ="- Communication";
+Blockly.Msg.CAT_DRISS_GROVE_BIOMETRIE="- Biométrie";
 
 Blockly.Msg.DRISS_GROVE_ENTREE = "Entrée";
 Blockly.Msg.DRISS_GROVE_SORTIE = "Sortie";

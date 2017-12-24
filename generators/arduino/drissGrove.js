@@ -357,14 +357,158 @@ Blockly.Arduino.driss_grove_blue_led = function() {
   return code;
 };
 
-//Grove purple LED OK
-Blockly.Arduino.driss_grove_purple_led = function() {
-  var dropdown_pin = this.getTitleValue('PIN');
-  var dropdown_stat = this.getTitleValue('STAT');
-  Blockly.Arduino.setups_['setup_purple_led'+dropdown_pin] = 'pinMode('+dropdown_pin+', OUTPUT);'; //code à insérer dans le setup Arduino
-  var code = 'digitalWrite('+dropdown_pin+','+dropdown_stat+');\n'  //code à insérer dans la loop Arduino
+
+
+
+// Telecommandes --------------------------------------------------------------------
+//Grove driss_grove_Telecommande_GM_IR38_init
+Blockly.Arduino.driss_grove_Telecommande_GM_IR38_init = function() {
+  var checkbox_option_delete = this.getFieldValue('OPTION_DELETE') == 'TRUE';
+  var value_delete_after_time = Blockly.Arduino.valueToCode(this, 'DELETE_AFTER_TIME', Blockly.Arduino.ORDER_ATOMIC);
+
+  //IRREMOTE_MEMORISER_TOUCHE = Memoriser la dernière touche -- IRREMOTE_NE_PAS_MEMORISER = Ne pas mémorise  -- "" (rien) pour lecture Live
+  var option= "IRREMOTE_MEMORISER_TOUCHE";
+  if(checkbox_option_delete) option = value_delete_after_time;
+
+  //dans include définition    
+  Blockly.Arduino.includes_['define_IRremote'] = "#include <IRremote.h>"; 
+
+  // Dans la zone des définitions
+  
+  //Création des variables
+  Blockly.Arduino.variables_['struct_IR_Code'] =  'typedef struct {\n'+
+                                                  ' char* touche;\n'+
+                                                  ' long int codeTouche;\n'+
+                                                  '} IR_Code;\n';
+                                             
+
+  //dans la zone des fonctions globales
+  //Fonction qui teste si une touche particulière a été appuyée
+  Blockly.Arduino.codeFunctions_['define_testerSiLaToucheEstAppuyee'] = '//Fonction qui teste si une touche particulière a été appuyée\n'+
+  'bool testerSiLaToucheEstAppuyee(IR_Code telecommande[], int nbreDeTouche, char* touche, IRrecv &recepteurIR) {\n'+
+  '  for( int i=0; i < nbreDeTouche ; i++){\n' +
+  '   if(strcmp(touche, telecommande[i].touche) == 0 && recepteurIR.codeIrReadLong('+option+')== telecommande[i].codeTouche  ){return true;}\n' +
+  '  }\n' +
+  '  return false;\n' +
+  '}\n';
+
+  //Fonction qui retoure le code de la touche appuyée
+  Blockly.Arduino.codeFunctions_['define_getCodeTouche'] = '//Fonction qui retoure le code de la touche appuyée\n'+
+  'long int getCodeTouche( IRrecv &recepteurIR) {\n'+
+  '  long int codeTouche;\n' +
+  '  codeTouche = recepteurIR.codeIrReadLong('+option+');\n' +
+  '  return(codeTouche);\n' +
+  '}\n';
+
+  var code = ''  //code à insérer dans la loop Arduino
   return code;
+}
+
+
+
+//Grove driss_grove_Telecommande_GM_IR38_test_touche 
+Blockly.Arduino.driss_grove_Telecommande_GM_IR38_test_touche = function() {
+  var dropdown_pin = this.getTitleValue('PIN');
+  var dropdown_touche = this.getTitleValue('TOUCHES');
+  
+  var irrecv = 'recepteurIR_'+dropdown_pin;
+  
+  //dans include définition    
+  Blockly.Arduino.includes_['define_IRremote'] = "#include <IRremote.h>"; 
+
+  //dans la zone variables globales
+  Blockly.Arduino.variables_['array_GM_IR38'] =  'IR_Code GM_IR38[21] = { \n'+
+  '     { "POWER", 16753245 }, {"MENU",16769565}, {"TEST",16720605}, { "PLUS",16712445}, {"ANNULER",16761405},\n'+
+  '     { "RETOUR_RAPIDE",16769055}, {"LECTURE",16754775}, {"AVANCE_RAPIDE",16748655}, {"MOINS",16750695},\n'+
+  '     { "C",16756815}, {"0",16738455}, {"1",16724175}, {"2",16718055}, {"3",16743045}, {"4",16716015},\n'+
+  '     { "5",16726215}, {"6",16734885}, {"7",16728765}, {"8",16730805}, {"9",16732845} };\n';
+  
+  Blockly.Arduino.variables_['var_'+irrecv] = "IRrecv "+irrecv+"("+dropdown_pin+");";
+
+  //code à insérer dans le setup Arduino
+  Blockly.Arduino.setups_['setup_'+irrecv] = irrecv+'.brancher();'; 
+
+  var code = 'testerSiLaToucheEstAppuyee(GM_IR38, 21, "'+dropdown_touche+'", '+irrecv+')'
+  //return code;
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+
 };
+
+//Grove driss_grove_Telecommande_YK_001_test_touche 
+Blockly.Arduino.driss_grove_Telecommande_YK_001_test_touche = function() {
+  var dropdown_pin = this.getTitleValue('PIN');
+  var dropdown_touche = this.getTitleValue('TOUCHES');
+  
+  var irrecv = 'recepteurIR_'+dropdown_pin;
+  
+  //dans include définition    
+  Blockly.Arduino.includes_['define_IRremote'] = "#include <IRremote.h>"; 
+
+  //dans la zone variables globales
+  Blockly.Arduino.variables_['array_YK_001'] =  'IR_Code YK_001[21] = { \n'+
+  '     { "POWER", 16753245 }, {"MODE",16736925}, {"VOLUME_OFF",16769565}, { "PREV",16720605}, {"NEXT",16712445},\n'+
+  '     { "PLAY-PAUSE",16761405}, {"VOL-",16769055}, {"VOL+",16754775}, {"EQ",16748655},\n'+
+  '     { "0",16738455}, { "100+",16750695}, { "ANNULER",16756815}, {"1",16724175}, {"2",16718055}, {"3",16743045}, {"4",16716015},\n'+
+  '     { "5",16726215}, {"6",16734885}, {"7",16728765}, {"8",16730805}, {"9",16732845} };\n';
+  
+  Blockly.Arduino.variables_['var_'+irrecv] = "IRrecv "+irrecv+"("+dropdown_pin+");";
+
+  //code à insérer dans le setup Arduino
+  Blockly.Arduino.setups_['setup_'+irrecv] = irrecv+'.brancher();'; 
+
+  var code = 'testerSiLaToucheEstAppuyee(YK_001, 21, "'+dropdown_touche+'", '+irrecv+')'
+  //return code;
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+
+};
+
+//Grove driss_grove_Telecommande_Makeblock_test_touche 
+Blockly.Arduino.driss_grove_Telecommande_Makeblock_test_touche = function() {
+  var dropdown_pin = this.getTitleValue('PIN');
+  var dropdown_touche = this.getTitleValue('TOUCHES');
+  
+  var irrecv = 'recepteurIR_'+dropdown_pin;
+  
+  //dans include définition    
+  Blockly.Arduino.includes_['define_IRremote'] = "#include <IRremote.h>"; 
+
+  //dans la zone variables globales
+  Blockly.Arduino.variables_['array_Makeblock'] =  'IR_Code Makeblock[21] = { \n'+
+  '     { "A", 16753245 }, {"B",16736925}, {"C",16769565}, { "D",16720605}, {"E",16761405},\n'+
+  '     { "F",16756815}, {"HAUT",16712445}, {"BAS",16750695}, {"GAUCHE",16769055},\n'+
+  '     { "DROITE",16748655}, { "ROUE_DENTEE",16754775}, { "0",16738455}, {"1",16724175}, {"2",16718055}, {"3",16743045}, {"4",16716015},\n'+
+  '     { "5",16726215}, {"6",16734885}, {"7",16728765}, {"8",16730805}, {"9",16732845} };\n';
+  
+  Blockly.Arduino.variables_['var_'+irrecv] = "IRrecv "+irrecv+"("+dropdown_pin+");";
+
+  //code à insérer dans le setup Arduino
+  Blockly.Arduino.setups_['setup_'+irrecv] = irrecv+'.brancher();'; 
+
+  var code = 'testerSiLaToucheEstAppuyee(Makeblock, 21, "'+dropdown_touche+'", '+irrecv+')'
+  //return code;
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+
+};
+
+//Grove driss_grove_Infrared_Receiver_read_code
+Blockly.Arduino.driss_grove_Infrared_Receiver_read_code = function() {
+  var dropdown_pin = this.getTitleValue('PIN');
+  
+  var irrecv = 'recepteurIR_'+dropdown_pin;
+  
+  //dans include définition    
+  Blockly.Arduino.includes_['define_IRremote'] = "#include <IRremote.h>"; 
+
+  Blockly.Arduino.variables_['var_'+irrecv] = "IRrecv "+irrecv+"("+dropdown_pin+");";
+
+  Blockly.Arduino.setups_['setup_'+irrecv] = irrecv+'.brancher();'; 
+  
+  var code = 'getCodeTouche('+irrecv+')';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+// Moteurs et servomoteurs 
+
 
 //Grove Servo setPosition OK
 Blockly.Arduino.driss_grove_servo_setPosition = function() {
@@ -405,57 +549,6 @@ Blockly.Arduino.driss_grove_I2C_Motor_run = function() {
 
 */
 
-
-// Claviers  KeyPad ----------------------------------------------------------------------------------------------------------------------------
-// Grove driss_grove_keypad_12_init
-Blockly.Arduino.driss_grove_keypad_12_init = function() {
-  var row0 = this.getTitleValue('ROW0');
-  var row1 = this.getTitleValue('ROW1');
-  var row2 = this.getTitleValue('ROW2');
-  var row3 = this.getTitleValue('ROW3');
-  var col0 = this.getTitleValue('COL0');
-  var col1 = this.getTitleValue('COL1');
-  var col2 = this.getTitleValue('COL2');
-
-
-  Blockly.Arduino.includes_['define_Keypad'] = "#include <Keypad.h>"; 
-  Blockly.Arduino.variables_['define_Keypad_rows'] = "const byte ROWS = 4; //4 lignes\n"; 
-  Blockly.Arduino.variables_['define_Keypad_cols'] = "const byte COLS = 3; //3 colonnes\n"; 
-  Blockly.Arduino.variables_['define_Keypad_keys'] = "char keys[ROWS][COLS] = {\n"+
-                                                        " {'1','2','3'},\n" + 
-                                                        " {'4','5','6'},\n" + 
-                                                        " {'7','8','9'},\n" + 
-                                                        " {'*','0','#'}\n" + 
-                                                        "};\n";
-  Blockly.Arduino.variables_['define_Keypad_rowPins'] = "byte rowPins[ROWS] = {"+row0+", "+row1+", "+row2+", "+row3+"};\n"; 
-  Blockly.Arduino.variables_['define_Keypad_colPins'] = "byte colPins[COLS] = {"+col0+", "+col1+", "+col2+"};\n"; 
-
-  Blockly.Arduino.variables_['define_Keypad_keypad_12'] = "Keypad keypad_12 = Keypad( makeKeymap(keys), rowPins, colPins, ROWS, COLS );\n"; 
-
-  
-  
-  var code = ''  //code à insérer dans la loop Arduino
-  return code;
-};
-
-
-// Grove driss_grove_keypad_12_getkey
-Blockly.Arduino.driss_grove_keypad_12_getkey = function() {
-  var code = 'keypad_12.getKey()'  ;
-
-
-  return [code, Blockly.Arduino.ORDER_ATOMIC];
-}
-
-
-
-
-
-
-
-
-
-// Motors --------------------------------------------------------------------------------------------------------------------------------
 
 // Grove : driss_grove_dc_motor_turn
 Blockly.Arduino.driss_grove_dc_motor_turn = function() {
@@ -516,6 +609,50 @@ Blockly.Arduino.driss_grove_step_motor_turn = function() {
     var code = 'Motor.StepperRun(-'+nbre_pas+');\n';
   return code;
 }
+
+
+
+// Claviers  KeyPad ----------------------------------------------------------------------------------------------------------------------------
+// Grove driss_grove_keypad_12_init
+Blockly.Arduino.driss_grove_keypad_12_init = function() {
+  var row0 = this.getTitleValue('ROW0');
+  var row1 = this.getTitleValue('ROW1');
+  var row2 = this.getTitleValue('ROW2');
+  var row3 = this.getTitleValue('ROW3');
+  var col0 = this.getTitleValue('COL0');
+  var col1 = this.getTitleValue('COL1');
+  var col2 = this.getTitleValue('COL2');
+
+
+  Blockly.Arduino.includes_['define_Keypad'] = "#include <Keypad.h>"; 
+  Blockly.Arduino.variables_['define_Keypad_rows'] = "const byte ROWS = 4; //4 lignes\n"; 
+  Blockly.Arduino.variables_['define_Keypad_cols'] = "const byte COLS = 3; //3 colonnes\n"; 
+  Blockly.Arduino.variables_['define_Keypad_keys'] = "char keys[ROWS][COLS] = {\n"+
+                                                        " {'1','2','3'},\n" + 
+                                                        " {'4','5','6'},\n" + 
+                                                        " {'7','8','9'},\n" + 
+                                                        " {'*','0','#'}\n" + 
+                                                        "};\n";
+  Blockly.Arduino.variables_['define_Keypad_rowPins'] = "byte rowPins[ROWS] = {"+row0+", "+row1+", "+row2+", "+row3+"};\n"; 
+  Blockly.Arduino.variables_['define_Keypad_colPins'] = "byte colPins[COLS] = {"+col0+", "+col1+", "+col2+"};\n"; 
+
+  Blockly.Arduino.variables_['define_Keypad_keypad_12'] = "Keypad keypad_12 = Keypad( makeKeymap(keys), rowPins, colPins, ROWS, COLS );\n"; 
+
+  
+  
+  var code = ''  //code à insérer dans la loop Arduino
+  return code;
+};
+
+
+// Grove driss_grove_keypad_12_getkey
+Blockly.Arduino.driss_grove_keypad_12_getkey = function() {
+  var code = 'keypad_12.getKey()'  ;
+
+
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+}
+
 
 
 

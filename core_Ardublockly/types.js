@@ -178,9 +178,9 @@ Blockly.Types.getValidTypeArray = function() {
         (typeKey !== 'NULL') && (typeKey !== 'ARRAY') &&
         (typeof Blockly.Types[typeKey] !== 'function') &&
         !(Blockly.Types[typeKey] instanceof RegExp) 
-        //ajoutés par Driss pour retirer de la liste des types 'entier volatil, Entier (short), entier long et entier long positif'
+        //ajoutés par Driss pour retirer de la liste des types 'entier volatil, Entier (short) et entier long positif'
         && (typeKey !== 'VOLATIL_NUMBER') && (typeKey !== 'SHORT_NUMBER')
-        && (typeKey !== 'LARGE_NUMBER') && (typeKey !== 'LARGE_UNS_NUMBER')
+        && (typeKey !== 'LARGE_UNS_NUMBER')
         //Fin Ajouts de Driss
          ) {
       typesArray.push([Blockly.Types[typeKey].typeName, typeKey]);
