@@ -1188,7 +1188,15 @@
 			<block type="driss_grove_switch_p_off"></block>
 			<block type="driss_grove_microswitch"></block>
 			<block type="driss_grove_light_sensor"></block>
-			<!--<block type="driss_grove_IR_Receiver"></block>-->
+			<block type="driss_grove_IR_Receiver"></block>
+			<block type="driss_grove_IR_Receiver_etat"></block>
+			<block type="driss_grove_IR_Receiver_code">
+				<value name="DELETE_AFTER_TIME">
+					<shadow type="math_number">
+						<field name="NUM">200</field>
+					</shadow>
+				</value>
+			</block>
             <block type="driss_temperature_and_humidity_sensor"></block>
             <block type="driss_grove_gaz_sensor_mq5_ratio"></block>
             <block type="driss_grove_gaz_sensor_mq5_rs"></block>
@@ -1210,7 +1218,26 @@
             <block type="driss_grove_white_led"></block>
             <block type="driss_grove_green_led"></block>
             <block type="driss_grove_blue_led"></block>
-            <block type="driss_grove_purple_led"></block>
+			<block type="driss_grove_purple_led"></block>
+			<block type="driss_grove_IR_emitter">
+				<value name="IR_FREQUENCE">
+						<shadow type="math_number">
+							<field name="NUM">38</field>
+						</shadow>
+				</value>
+			</block>
+			<block type="driss_grove_IR_emitter_Code">
+				<value name="IR_CODE">
+					<shadow type="math_number">
+						<field name="NUM">16753245</field>
+					</shadow>
+				</value>
+				<value name="IR_FREQUENCE">
+					<shadow type="math_number">
+						<field name="NUM">38</field>
+					</shadow>
+				</value>
+			</block>
            <!-- <block type="driss_grove_piezo_buzzer"></block>-->
         </category>
 

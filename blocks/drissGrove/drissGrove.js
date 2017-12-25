@@ -105,8 +105,57 @@ Blockly.Blocks.driss_grove_light_sensor = {
   }
 };
 
+//Grove driss_grove_IR_Receiver ok
+Blockly.Blocks['driss_grove_IR_Receiver'] = {
+        init: function() {
+          this.appendDummyInput()
+              .appendField("Le récepteur infrarouge relié à l'entrée ")
+              .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN");
+          this.appendDummyInput()
+            .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_Infrared_Receiver.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize))
+            .appendField("reçoit un signal IR   ( Vrai ou Faux)");
+          this.setOutput(true, null);
+          this.setColour(Blockly.Blocks.drissGrove.HUE);
+       this.setTooltip("");
+       this.setHelpUrl("");
+        }
+  };
 
+  //Grove driss_grove_IR_Receiver_etat ok
+  Blockly.Blocks['driss_grove_IR_Receiver_etat'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("Etat du récepteur IR relié à l'entrée ")
+          .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN");
+      this.appendDummyInput()
+          .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_Infrared_Receiver.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize))
+          .appendField("0 = Signal IR détecté   1 = Signal IR non détecté");
+      this.setOutput(true, null);
+      this.setColour(Blockly.Blocks.drissGrove.HUE);
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+  };
 
+  //Grove driss_grove_IR_Receiver_code ok
+  Blockly.Blocks['driss_grove_IR_Receiver_code'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField("Le code reçu sur le récepteur IR relié à l'entrée")
+            .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN")
+            .appendField(" ");
+        this.appendValueInput("DELETE_AFTER_TIME")
+            .setCheck("Number")
+            .setAlign(Blockly.ALIGN_RIGHT)
+            .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_Infrared_Receiver.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize))
+            .appendField(new Blockly.FieldCheckbox("TRUE"), "OPTION_DELETE")
+            .appendField(" Effacer le code après  (ms)");
+        this.setOutput(true, null);
+        this.setColour(Blockly.Blocks.drissGrove.HUE);
+     this.setTooltip("");
+     this.setHelpUrl("");
+      }
+  };
 
 //Grove Temperature & humidity sensor pro mesure OK
 Blockly.Blocks.driss_temperature_and_humidity_sensor = {
@@ -453,12 +502,51 @@ Blockly.Blocks.driss_grove_purple_led = {
   }
 };
 
-//Grove driss_grove_piezo_buzzer
-//Blockly.Blocks.driss_grove_piezo_buzzer = {
-   
- // };
+//Grove driss_grove_IR_emitter ok
+Blockly.Blocks['driss_grove_IR_emitter'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("Emettre un signal infrarouge continu");
+      this.appendDummyInput()
+          .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_Infrared_Emitter.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize, "*"), "IMG_TELECOMMANDE")
+          .appendField("à partir de l'emetteur IR relié à la sortie")
+          .appendField(new Blockly.FieldDropdown([["3","3"]]), "PIN");
+      this.appendValueInput("IR_FREQUENCE")
+          .setCheck("Number")
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("Fréquence (KHz)");
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(Blockly.Blocks.drissGrove.HUE);
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+  };
 
-
+//Grove driss_grove_IR_emitter_Code ok
+Blockly.Blocks['driss_grove_IR_emitter_Code'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("Emettre le code en utilisant");
+      this.appendDummyInput()
+          .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_Infrared_Emitter.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize, "*"), "IMG_TELECOMMANDE")
+          .appendField(" l'émetteur IR relié à la sortie")
+          .appendField(new Blockly.FieldDropdown([["3","3"]]), "PIN");
+      this.appendValueInput("IR_CODE")
+          .setCheck("Number")
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("Code");
+      this.appendValueInput("IR_FREQUENCE")
+          .setCheck("Number")
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("Fréquence (KHz)");
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(Blockly.Blocks.drissGrove.HUE);
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+  };
 
 //Telecommandes -----------------------------------------------------------------
 //Grove driss_grove_Telecommande_GM_IR38_init
@@ -565,10 +653,10 @@ Blockly.Blocks['driss_grove_Telecommande_Makeblock_test_touche'] = {
   Blockly.Blocks['driss_grove_Infrared_Receiver_read_code'] = {
     init: function() {
         this.appendDummyInput()
-            .appendField("le code lu par le recépteur infrarouge ");
+            .appendField("le code envoyé par la télecommande");
         this.appendDummyInput()
             .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_Infrared_Receiver.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize))
-            .appendField("relié à l'entrée")
+            .appendField("et lu par le recépteur infrarouge relié à l'entrée")
             .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN");
         //this.appendDummyInput()
         //    .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_Infrared_Receiver.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize));

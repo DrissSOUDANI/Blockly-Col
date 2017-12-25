@@ -39,6 +39,62 @@ Blockly.Arduino.driss_grove_light_sensor = function() {
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
+//Grove  driss_grove_IR_Receiver  ok
+Blockly.Arduino.driss_grove_IR_Receiver = function() {
+  var dropdown_pin = this.getTitleValue('PIN');
+  var code = '!digitalRead('+dropdown_pin+')';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+
+//Grove  driss_grove_IR_Receiver_etat  ok
+Blockly.Arduino.driss_grove_IR_Receiver_etat = function() {
+  var dropdown_pin = this.getTitleValue('PIN');
+
+//dans include fonction 
+Blockly.Arduino.codeFunctions_['define_get_etat_recepteurIR'] = '\n/*lecture de l"état du recepteur IR */ \n' + 
+'int get_etat_recepteurIR() {\n'+
+' int etat = digitalRead('+dropdown_pin+');\n'+
+' return (etat);\n'+
+'}\n';
+
+  var code = 'get_etat_recepteurIR()';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+//Grove driss_grove_IR_Receiver_code
+Blockly.Arduino.driss_grove_IR_Receiver_code = function() {
+  var dropdown_pin = this.getTitleValue('PIN');
+  var checkbox_option_delete = this.getFieldValue('OPTION_DELETE') == 'TRUE';
+  var value_delete_after_time = Blockly.Arduino.valueToCode(this, 'DELETE_AFTER_TIME', Blockly.Arduino.ORDER_ATOMIC);
+
+  //IRREMOTE_MEMORISER_TOUCHE = Memoriser la dernière touche -- IRREMOTE_NE_PAS_MEMORISER = Ne pas mémorise  -- "" (rien) pour lecture Live
+  var option= "IRREMOTE_MEMORISER_TOUCHE";
+  if(checkbox_option_delete) option = value_delete_after_time;
+  
+  var irrecv = 'recepteurIR_'+dropdown_pin;
+  
+  //dans include définition    
+  Blockly.Arduino.includes_['define_IRremote'] = "#include <IRremote.h>"; 
+
+  Blockly.Arduino.variables_['var_'+irrecv] = "IRrecv "+irrecv+"("+dropdown_pin+");";
+
+  //Fonction qui retoure le code de la touche appuyée
+  Blockly.Arduino.codeFunctions_['define_getCodeTouche'] = '//Fonction qui retoure le code de la touche appuyée\n'+
+  'long int getCodeTouche( IRrecv &recepteurIR) {\n'+
+  '  long int codeTouche;\n' +
+  '  codeTouche = recepteurIR.codeIrReadLong('+option+');\n' +
+  '  return(codeTouche);\n' +
+  '}\n';
+
+  Blockly.Arduino.setups_['setup_'+irrecv] = irrecv+'.brancher();'; 
+  
+  
+  var code = 'getCodeTouche('+irrecv+')';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+
 
 //Grove Temperature & humidity sensor pro mesure OK
 Blockly.Arduino.driss_temperature_and_humidity_sensor = function() {
@@ -357,7 +413,62 @@ Blockly.Arduino.driss_grove_blue_led = function() {
   return code;
 };
 
+//Grove driss_grove_IR_emitter ok
+Blockly.Arduino.driss_grove_IR_emitter = function() {
+  var dropdown_pin = this.getTitleValue('PIN');
+  var irFrequence = Blockly.Arduino.valueToCode(this, 'IR_FREQUENCE', Blockly.Arduino.ORDER_ATOMIC);
+  
+  var irsend = 'emetteurIR_'+dropdown_pin;
 
+  //dans include définition    
+  Blockly.Arduino.includes_['define_IRremote'] = "#include <IRremote.h>"; 
+
+  Blockly.Arduino.variables_['var_'+irsend] = "IRsend "+irsend+";";
+
+  //code à insérer dans le setup Arduino
+  Blockly.Arduino.setups_['setup_enable_'+irsend] = irsend+'.enableIROut('+irFrequence+');'; 
+  Blockly.Arduino.setups_['setup_mark'+irsend] = irsend+'.mark(0);'; 
+
+  //code à insérer dans la loop Arduino
+  var code = ''  
+  return code;
+};
+
+//Grove driss_grove_IR_emitter_Code ok
+Blockly.Arduino.driss_grove_IR_emitter_Code = function() {
+  var dropdown_pin = this.getTitleValue('PIN');
+  var irFrequence = Blockly.Arduino.valueToCode(this, 'IR_FREQUENCE', Blockly.Arduino.ORDER_ATOMIC);
+  var code = Blockly.Arduino.valueToCode(this, 'IR_CODE', Blockly.Arduino.ORDER_ATOMIC);
+
+  var irsend = 'emetteurIR_'+dropdown_pin;
+  //dans include définition    
+  Blockly.Arduino.includes_['define_IRremote'] = "#include <IRremote.h>";
+
+  Blockly.Arduino.variables_['var_irsend'] = "IRsend "+irsend+";";
+
+   //Fonction qui convertie un Decimal en Hexadécimal
+   /*
+   Blockly.Arduino.codeFunctions_['define_hexToDec'] = '//Fonction qui converti un HEX en DEC\n'+
+   'unsigned int hexToDec(String hexString) {\n'+
+   '  unsigned int decValue = 0; \n' +
+   '  int nextInt;\n' +
+   '  for (int i = 0; i < hexString.length(); i++) {\n' +
+   '    nextInt = int(hexString.charAt(i));\n' +
+   '    if (nextInt >= 48 && nextInt <= 57) nextInt = map(nextInt, 48, 57, 0, 9);\n' +
+   '    if (nextInt >= 65 && nextInt <= 70) nextInt = map(nextInt, 65, 70, 10, 15);\n' +
+   '    if (nextInt >= 97 && nextInt <= 102) nextInt = map(nextInt, 97, 102, 10, 15);\n' +
+   '    nextInt = constrain(nextInt, 0, 15);\n' +
+   '    decValue = (decValue * 16) + nextInt;\n' +
+   '  }\n' +
+   '  return decValue;\n' +
+   '}\n'; 
+  */
+  var code = irsend+'.sendNEC('+code+', 4*(String('+code+', HEX)).length());\n'+
+  'delay(40);\n';
+ 
+  return code;
+
+}
 
 
 // Telecommandes --------------------------------------------------------------------
@@ -502,6 +613,7 @@ Blockly.Arduino.driss_grove_Infrared_Receiver_read_code = function() {
   Blockly.Arduino.variables_['var_'+irrecv] = "IRrecv "+irrecv+"("+dropdown_pin+");";
 
   Blockly.Arduino.setups_['setup_'+irrecv] = irrecv+'.brancher();'; 
+  
   
   var code = 'getCodeTouche('+irrecv+')';
   return [code, Blockly.Arduino.ORDER_ATOMIC];

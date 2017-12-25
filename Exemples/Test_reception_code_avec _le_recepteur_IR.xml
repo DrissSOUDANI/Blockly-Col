@@ -1,0 +1,39 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <toolboxcategories>CAT_LOGIC,CAT_LOOPS,CAT_MATH,CAT_ARRAY,CAT_TEXT,CAT_DRISS_CONSOLE,CAT_VARIABLES_DS,CAT_ARDUINO,CAT_TECHNOZONE,CAT_DRISS_A4,CAT_DRISS_GROVE</toolboxcategories>
+  <toolbox>undefined</toolbox>
+  <block type="driss_console_init_serial" id="_8yC5|B|;t*BlOY!|qMv" inline="false" x="230" y="190">
+    <field name="VITESSE">9600</field>
+    <next>
+      <block type="variables_declare_ds" id="MlZBJ#ZxvxrURa]uwC?(" inline="false">
+        <field name="VAR">Code</field>
+        <field name="TYPE">LARGE_NUMBER</field>
+        <next>
+          <block type="variables_set_ds" id="+xBvj{v8=]wY$Diq.(eR" inline="false">
+            <field name="VAR">Code</field>
+            <value name="VALUE">
+              <block type="driss_grove_IR_Receiver_code" id="k;N-egk)8;-_!4A_.ge0" inline="false">
+                <field name="PIN">2</field>
+                <field name="OPTION_DELETE">TRUE</field>
+                <value name="DELETE_AFTER_TIME">
+                  <shadow type="math_number" id="^j2dbM!]8Z5rFXRH(DwK">
+                    <field name="NUM">200</field>
+                  </shadow>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="driss_console_write" id="yhQ8+8uro*b)glDZ)BA2" inline="false">
+                <field name="RL">AVEC</field>
+                <value name="TEXT">
+                  <block type="variables_get_ds" id="i7sSjM^N$`=N`|u52.r)" inline="false">
+                    <field name="VAR">Code</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
