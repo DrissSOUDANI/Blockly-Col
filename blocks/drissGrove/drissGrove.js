@@ -502,6 +502,27 @@ Blockly.Blocks.driss_grove_purple_led = {
   }
 };
 
+
+
+//Grove driss_grove_piezo_buzzer ok
+Blockly.Blocks['driss_grove_piezo_buzzer'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("Mettre à l'état ")
+          .appendField(new Blockly.FieldDropdown([["haut","HIGH"], ["bas","LOW"]]), "STAT")
+          .appendField("Le buzzer piézo-électrique");
+      this.appendDummyInput()
+          .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_buzzer_piezo_electrique.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize, "*"), "IMG_TELECOMMANDE")
+          .appendField("relié à la sortie")
+          .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN");
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(Blockly.Blocks.drissGrove.HUE);
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+  };
+
 //Grove driss_grove_IR_emitter ok
 Blockly.Blocks['driss_grove_IR_emitter'] = {
     init: function() {

@@ -413,6 +413,25 @@ Blockly.Arduino.driss_grove_blue_led = function() {
   return code;
 };
 
+
+//Grove driss_grove_purple_led OK
+Blockly.Arduino.driss_grove_purple_led = function() {
+  var dropdown_pin = this.getTitleValue('PIN');
+  var dropdown_stat = this.getTitleValue('STAT');
+  Blockly.Arduino.setups_['setup_purple_led'+dropdown_pin] = 'pinMode('+dropdown_pin+', OUTPUT);'; //code à insérer dans le setup Arduino
+  var code = 'digitalWrite('+dropdown_pin+','+dropdown_stat+');\n'  //code à insérer dans la loop Arduino
+  return code;
+};
+
+//Grove driss_grove_piezo_buzzer ok
+Blockly.Arduino.driss_grove_piezo_buzzer = function() {
+  var dropdown_pin = this.getTitleValue('PIN');
+  var dropdown_stat = this.getTitleValue('STAT');
+  Blockly.Arduino.setups_['setup_piezo_buzzer'+dropdown_pin] = 'pinMode('+dropdown_pin+', OUTPUT);'; //code à insérer dans le setup Arduino
+  var code = 'digitalWrite('+dropdown_pin+','+dropdown_stat+');\n'  //code à insérer dans la loop Arduino
+  return code;
+};
+
 //Grove driss_grove_IR_emitter ok
 Blockly.Arduino.driss_grove_IR_emitter = function() {
   var dropdown_pin = this.getTitleValue('PIN');
