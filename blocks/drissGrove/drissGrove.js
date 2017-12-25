@@ -454,9 +454,9 @@ Blockly.Blocks.driss_grove_purple_led = {
 };
 
 //Grove driss_grove_piezo_buzzer
-Blockly.Blocks.driss_grove_piezo_buzzer = {
+//Blockly.Blocks.driss_grove_piezo_buzzer = {
    
-  };
+ // };
 
 
 
