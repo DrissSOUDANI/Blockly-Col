@@ -1,0 +1,103 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="technozone_declare_var" id="7" x="159" y="62">
+    <field name="VAR">val</field>
+    <field name="TYPE">int</field>
+    <next>
+      <block type="technozone_variables_set" id="8" inline="true">
+        <field name="VAR">val</field>
+        <value name="VALUE">
+          <block type="math_number" id="9">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <next>
+          <block type="controls_repeat_infinite" id="10">
+            <statement name="DO">
+              <block type="controls_if" id="11" inline="false">
+                <value name="IF0">
+                  <block type="driss_tinkerKit_hallSensor" id="12">
+                    <field name="POLE">NORTH</field>
+                    <field name="PIN">I0</field>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="driss_tinkerKit_yellow_led" id="13">
+                    <field name="STAT">HIGH</field>
+                    <field name="PIN">O0</field>
+                  </block>
+                </statement>
+                <next>
+                  <block type="controls_if" id="14" inline="false">
+                    <value name="IF0">
+                      <block type="driss_tinkerKit_hallSensor" id="15">
+                        <field name="POLE">SOUTH</field>
+                        <field name="PIN">I0</field>
+                      </block>
+                    </value>
+                    <statement name="DO0">
+                      <block type="driss_tinkerKit_yellow_led" id="16">
+                        <field name="STAT">LOW</field>
+                        <field name="PIN">O0</field>
+                      </block>
+                    </statement>
+                    <next>
+                      <block type="base_delay" id="17" inline="true">
+                        <value name="DELAY_TIME">
+                          <block type="math_number" id="18">
+                            <field name="NUM">10</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="technozone_variables_set" id="19" inline="true">
+                            <field name="VAR">val</field>
+                            <value name="VALUE">
+                              <block type="driss_tinkerKit_hallSensor_val" id="26">
+                                <field name="PIN">I0</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="controls_if" id="33" inline="false">
+                                <mutation else="1"></mutation>
+                                <value name="IF0">
+                                  <block type="logic_compare" id="49" inline="true">
+                                    <field name="OP">GT</field>
+                                    <value name="A">
+                                      <block type="technozone_variables_get" id="42">
+                                        <field name="VAR">val</field>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <block type="math_number" id="66">
+                                        <field name="NUM">520</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <statement name="DO0">
+                                  <block type="driss_tinkerKit_green_led" id="72">
+                                    <field name="STAT">HIGH</field>
+                                    <field name="PIN">O1</field>
+                                  </block>
+                                </statement>
+                                <statement name="ELSE">
+                                  <block type="driss_tinkerKit_green_led" id="77">
+                                    <field name="STAT">LOW</field>
+                                    <field name="PIN">O1</field>
+                                  </block>
+                                </statement>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

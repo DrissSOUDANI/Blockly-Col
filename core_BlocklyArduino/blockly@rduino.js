@@ -205,7 +205,7 @@ BlocklyDuino.saveXmlFile = function () {
 	var datenow = Date.now();
 	var uri = 'data:text/xml;charset=utf-8,' + encodeURIComponent(data);
 	$(this).attr({
-	            'download': "blockly_arduino"+datenow+".xml",
+	            'download': "blockly@col_"+datenow+".xml",
 				'href': uri,
 				'target': '_blank'
 	});
@@ -283,7 +283,7 @@ BlocklyDuino.load = function (event) {
 };
 
 /**
- * Discard all blocks from the workspace.
+ * Discard all blocks from the workspace. 
  */
 BlocklyDuino.discard = function () {
   var count = BlocklyDuino.workspace.getAllBlocks().length;

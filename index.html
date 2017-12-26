@@ -1320,10 +1320,53 @@
         </category>
 
          <category name="CAT_DRISS_GROVE_4_Digit_Display" colour="#8181F7">
-            <block type="driss_grove_4_digit_display_displayDigits"></block>
-            <block type="driss_grove_4_digit_display_displayNumber"></block>
+            <block type="driss_grove_4_digit_display_displayDigits">
+				<value name="DIGIT_1">
+					<shadow type="math_number">
+						<field name="NUM">0</field>
+					</shadow>
+				</value>
+				<value name="DIGIT_2">
+					<shadow type="math_number">
+						<field name="NUM">0</field>
+					</shadow>
+				</value>
+				<value name="DIGIT_3">
+					<shadow type="math_number">
+						<field name="NUM">0</field>
+					</shadow>
+				</value>
+				<value name="DIGIT_4">
+					<shadow type="math_number">
+						<field name="NUM">0</field>
+					</shadow>
+				</value>
+			</block>
+            <block type="driss_grove_4_digit_display_displayNumberDec">
+				<value name="NUMBER">
+					<shadow type="math_number">
+						<field name="NUM">1234</field>
+					</shadow>
+				</value>
+				<value name="NBRE_DIGITS">
+					<shadow type="math_number">
+						<field name="NUM">4</field>
+					</shadow>
+				</value>
+				<value name="POSITION_DIGIT">
+					<shadow type="math_number">
+						<field name="NUM">0</field>
+					</shadow>
+				</value>
+			</block>
             <block type="driss_grove_4_digit_display_digitsOnOff"></block>
-            
+            <block type="driss_grove_4_digit_display_setBrightness">
+				<value name="LUMINOSITE">
+					<shadow type="math_number">
+						<field name="NUM">3</field>
+					</shadow>
+				</value>
+			</block>
         </category>
         
 

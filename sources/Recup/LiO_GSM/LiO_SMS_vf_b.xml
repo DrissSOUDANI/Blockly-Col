@@ -1,0 +1,168 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="procedures_callnoreturn" id="268" x="409" y="505">
+    <mutation name="Declaration et initialisation des variables"></mutation>
+    <next>
+      <block type="driss_grove_green_led" id="269">
+        <field name="STAT">LOW</field>
+        <field name="PIN">4</field>
+        <next>
+          <block type="driss_linkItOne_GSM_initialisation" id="270">
+            <next>
+              <block type="driss_grove_green_led" id="271">
+                <field name="STAT">HIGH</field>
+                <field name="PIN">4</field>
+                <next>
+                  <block type="controls_repeat_infinite" id="272">
+                    <statement name="DO">
+                      <block type="math_change" id="312" inline="true">
+                        <field name="VAR">compteur</field>
+                        <value name="DELTA">
+                          <block type="math_number" id="313">
+                            <field name="NUM">1</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="controls_if" id="320" inline="false">
+                            <value name="IF0">
+                              <block type="logic_compare" id="336" inline="true">
+                                <field name="OP">GT</field>
+                                <value name="A">
+                                  <block type="technozone_variables_get" id="329">
+                                    <field name="VAR">compteur</field>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="math_number" id="357">
+                                    <field name="NUM">500</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <statement name="DO0">
+                              <block type="technozone_variables_set" id="358" inline="true">
+                                <field name="VAR">compteur</field>
+                                <value name="VALUE">
+                                  <block type="math_number" id="359">
+                                    <field name="NUM">0</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="controls_if" id="275" inline="false">
+                                    <value name="IF0">
+                                      <block type="logic_compare" id="276" inline="true">
+                                        <field name="OP">GT</field>
+                                        <value name="A">
+                                          <block type="driss_grove_gaz_sensor_MQ9_mesure" id="274">
+                                            <field name="PIN">A0</field>
+                                          </block>
+                                        </value>
+                                        <value name="B">
+                                          <block type="math_number" id="363">
+                                            <field name="NUM">300</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <statement name="DO0">
+                                      <block type="technozone_variables_set" id="279" inline="true">
+                                        <field name="VAR">message_envoye</field>
+                                        <value name="VALUE">
+                                          <block type="logic_boolean" id="280">
+                                            <field name="BOOL">TRUE</field>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <block type="driss_linkItOne_SMS_envoyerMessage" id="281" inline="false">
+                                            <value name="CONTACT_NUM">
+                                              <block type="technozone_variables_get" id="282">
+                                                <field name="VAR">Numero</field>
+                                              </block>
+                                            </value>
+                                            <value name="MESSAGE_TO_SEND">
+                                              <block type="text" id="258">
+                                                <field name="TEXT">La concentration de monoxyde de carbone est elevee</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </statement>
+                                  </block>
+                                </next>
+                              </block>
+                            </statement>
+                            <next>
+                              <block type="base_delay" id="355" inline="true">
+                                <value name="DELAY_TIME">
+                                  <block type="math_number" id="356">
+                                    <field name="NUM">10</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+  <block type="procedures_defnoreturn" id="252" x="849" y="573">
+    <mutation></mutation>
+    <field name="NAME">Declaration et initialisation des variables</field>
+    <statement name="STACK">
+      <block type="technozone_declare_var" id="253">
+        <field name="VAR">Numero</field>
+        <field name="TYPE">String</field>
+        <next>
+          <block type="technozone_variables_set" id="254" inline="true">
+            <field name="VAR">Numero</field>
+            <value name="VALUE">
+              <block type="text" id="255">
+                <field name="TEXT">0755553312</field>
+              </block>
+            </value>
+            <next>
+              <block type="technozone_declare_var" id="265">
+                <field name="VAR">message_envoye</field>
+                <field name="TYPE">boolean</field>
+                <next>
+                  <block type="technozone_variables_set" id="266" inline="true">
+                    <field name="VAR">message_envoye</field>
+                    <value name="VALUE">
+                      <block type="logic_boolean" id="267">
+                        <field name="BOOL">FALSE</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="technozone_declare_var" id="287">
+                        <field name="VAR">compteur</field>
+                        <field name="TYPE">boolean</field>
+                        <next>
+                          <block type="technozone_variables_set" id="288" inline="true">
+                            <field name="VAR">compteur</field>
+                            <value name="VALUE">
+                              <block type="math_number" id="290">
+                                <field name="NUM">0</field>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

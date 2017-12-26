@@ -1,0 +1,83 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <toolboxcategories>CAT_LOGIC,CAT_LOOPS,CAT_MATH,CAT_TEXT,CAT_DRISS_CONSOLE,CAT_VARIABLES_DS,CAT_FUNCTIONS,CAT_DRISS_GROVE,CAT_DRISS_LINKIT_ONE</toolboxcategories>
+  <toolbox>undefined</toolbox>
+  <block type="procedures_callnoreturn" id="?LkdfNh4?Z5qo`83Vy1)" x="-590" y="-50">
+    <mutation name="Declaration et initialisation des variables"></mutation>
+    <next>
+      <block type="procedures_callnoreturn" id=".^e)e5cP^)aEh+xBSWmG">
+        <mutation name="Initialisation des modules"></mutation>
+        <next>
+          <block type="driss_linkItOne_GSM_initialisation" id="u7J`C/o%]^5ZTeHj/K}u">
+            <next>
+              <block type="driss_grove_green_led" id="%fgrR$O6dnE}q?Pd7EFl">
+                <field name="STAT">HIGH</field>
+                <field name="PIN">3</field>
+                <next>
+                  <block type="controls_repeat_indefinitely" id="I.f|OD;,R$iLp|),~w81"></block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+  <block type="procedures_defnoreturn" id="l+|CY8{f;Zw4c,}(5xyr" x="-110" y="-50">
+    <field name="NAME">Declaration et initialisation des variables</field>
+    <comment pinned="false" h="80" w="160">Décrire cette fonction</comment>
+    <statement name="STACK">
+      <block type="variables_declare_ds" id="X;`-Gg;---c-(g7x4k7y">
+        <field name="VAR">Numero</field>
+        <field name="TYPE">TEXT</field>
+        <next>
+          <block type="variables_set_ds" id="WX{C~^SHxUI?@W!mQBaA">
+            <field name="VAR">Numero</field>
+            <value name="VALUE">
+              <block type="text" id="U_UY(VoW}H-)=J^u1_[d">
+                <field name="TEXT"></field>
+              </block>
+            </value>
+            <next>
+              <block type="variables_declare_ds" id="k`X;-1jDax=Zl{+Z$PrZ">
+                <field name="VAR">Message</field>
+                <field name="TYPE">TEXT</field>
+                <next>
+                  <block type="variables_set_ds" id="?m~.%w}$cw$nKH3;MZww">
+                    <field name="VAR">Message</field>
+                    <value name="VALUE">
+                      <block type="text" id="OLuD^xy(_V1wDh$_a9gI">
+                        <field name="TEXT"></field>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="procedures_defnoreturn" id="=6*m#0`MbJTS;V@F|`*b" x="430" y="-30">
+    <field name="NAME">Initialisation des modules</field>
+    <comment pinned="false" h="80" w="160">Décrire cette fonction</comment>
+    <statement name="STACK">
+      <block type="driss_grove_green_led" id="5hcSD12rK)s9q;^gO#Hn">
+        <field name="STAT">LOW</field>
+        <field name="PIN">4</field>
+        <next>
+          <block type="driss_grove_blue_led" id="Pd)_R5b~6Z!k|J9y.t{v">
+            <field name="STAT">LOW</field>
+            <field name="PIN">3</field>
+            <next>
+              <block type="driss_grove_red_led" id="w0Vti]Rst:S+$x:EBlU|">
+                <field name="STAT">LOW</field>
+                <field name="PIN">2</field>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

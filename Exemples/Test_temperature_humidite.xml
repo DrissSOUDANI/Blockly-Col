@@ -1,0 +1,102 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="technozone_declare_var" id="1" x="234" y="195">
+    <field name="VAR">Temp</field>
+    <field name="TYPE">int</field>
+    <next>
+      <block type="technozone_variables_set" id="2" inline="true">
+        <field name="VAR">Temp</field>
+        <value name="VALUE">
+          <block type="math_number" id="3">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <next>
+          <block type="technozone_declare_var" id="376">
+            <field name="VAR">Humidite</field>
+            <field name="TYPE">int</field>
+            <next>
+              <block type="technozone_variables_set" id="377" inline="true">
+                <field name="VAR">Humidite</field>
+                <value name="VALUE">
+                  <block type="math_number" id="378">
+                    <field name="NUM">0</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="controls_repeat_infinite" id="4">
+                    <statement name="DO">
+                      <block type="technozone_variables_set" id="5" inline="true">
+                        <field name="VAR">Temp</field>
+                        <value name="VALUE">
+                          <block type="driss_temperature_and_humidity_sensor" id="452">
+                            <field name="GRANDEUR">TEMPERATURE</field>
+                            <field name="REF">DHT22</field>
+                            <field name="PIN">A0</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="driss_grove_4_digit_display_displayNumber" id="471" inline="false">
+                            <field name="PIN_CLK">2</field>
+                            <field name="PIN_DIO">3</field>
+                            <field name="ZEROS">FALSE</field>
+                            <value name="NUMBER">
+                              <block type="technozone_variables_get" id="472">
+                                <field name="VAR">Temp</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="base_delay" id="397" inline="true">
+                                <value name="DELAY_TIME">
+                                  <block type="math_number" id="398">
+                                    <field name="NUM">2000</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="technozone_variables_set" id="399" inline="true">
+                                    <field name="VAR">Humidite</field>
+                                    <value name="VALUE">
+                                      <block type="driss_temperature_and_humidity_sensor" id="453">
+                                        <field name="GRANDEUR">HUMIDITE</field>
+                                        <field name="REF">DHT22</field>
+                                        <field name="PIN">A0</field>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="driss_grove_4_digit_display_displayNumber" id="461" inline="false">
+                                        <field name="PIN_CLK">2</field>
+                                        <field name="PIN_DIO">3</field>
+                                        <field name="ZEROS">FALSE</field>
+                                        <value name="NUMBER">
+                                          <block type="technozone_variables_get" id="470">
+                                            <field name="VAR">Humidite</field>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <block type="base_delay" id="473" inline="true">
+                                            <value name="DELAY_TIME">
+                                              <block type="math_number" id="474">
+                                                <field name="NUM">2000</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

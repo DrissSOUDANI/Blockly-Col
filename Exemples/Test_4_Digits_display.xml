@@ -30,7 +30,7 @@
           </block>
         </value>
         <next>
-          <block type="driss_grove_4_digit_display_displayNumberDec" id="12" inline="false">
+          <block type="driss_grove_4_digit_display_displayNumber" id="12" inline="false">
             <field name="PIN_CLK">2</field>
             <field name="PIN_DIO">3</field>
             <field name="ZEROS">FALSE</field>
@@ -47,7 +47,7 @@
                   </block>
                 </value>
                 <next>
-                  <block type="driss_grove_4_digit_display_displayNumberDec" id="16" inline="false">
+                  <block type="driss_grove_4_digit_display_displayNumber" id="16" inline="false">
                     <field name="PIN_CLK">2</field>
                     <field name="PIN_DIO">3</field>
                     <field name="ZEROS">TRUE</field>
@@ -64,7 +64,7 @@
                           </block>
                         </value>
                         <next>
-                          <block type="driss_grove_4_digit_display_displayNumberDec" id="20" inline="false">
+                          <block type="driss_grove_4_digit_display_displayNumber" id="20" inline="false">
                             <field name="PIN_CLK">2</field>
                             <field name="PIN_DIO">3</field>
                             <field name="ZEROS">FALSE</field>

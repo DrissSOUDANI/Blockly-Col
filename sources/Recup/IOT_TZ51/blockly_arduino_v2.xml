@@ -1,0 +1,605 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="procedures_callnoreturn" id="76" x="-431" y="-548">
+    <mutation name="Initialisation"></mutation>
+    <next>
+      <block type="controls_whileUntil" id="1" inline="false">
+        <field name="MODE">WHILE</field>
+        <value name="BOOL">
+          <block type="logic_boolean" id="2">
+            <field name="BOOL">TRUE</field>
+          </block>
+        </value>
+        <statement name="DO">
+          <block type="technozone_ds18b20" id="45">
+            <field name="PIN">14</field>
+            <next>
+              <block type="technozone_variables_set" id="748" inline="true">
+                <field name="VAR">Temperature</field>
+                <value name="VALUE">
+                  <block type="math_arithmetic" id="107" inline="true">
+                    <field name="OP">DIVIDE</field>
+                    <value name="A">
+                      <block type="technozone_ds18b20_gettemp" id="148">
+                        <field name="PIN">14</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="math_number" id="130">
+                        <field name="NUM">100</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="technozone_variables_set" id="800" inline="true">
+                    <field name="VAR">Lumiere</field>
+                    <value name="VALUE">
+                      <block type="driss_A4_ldr" id="791">
+                        <field name="PIN">A3</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="base_delay" id="1147" inline="true">
+                        <value name="DELAY_TIME">
+                          <block type="math_number" id="1148">
+                            <field name="NUM">10</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="controls_if" id="450" inline="false">
+                            <value name="IF0">
+                              <block type="technozone_wf_available" id="483"></block>
+                            </value>
+                            <statement name="DO0">
+                              <block type="controls_if" id="1275" inline="false">
+                                <value name="IF0">
+                                  <block type="technozone_wf_switch" id="1276" inline="true">
+                                    <field name="LOGIQUE">true</field>
+                                    <value name="FIELD">
+                                      <block type="math_number" id="1277">
+                                        <field name="NUM">2</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <statement name="DO0">
+                                  <block type="technozone_variables_set" id="1241" inline="true">
+                                    <field name="VAR">LampePiece_1</field>
+                                    <value name="VALUE">
+                                      <block type="logic_boolean" id="1288">
+                                        <field name="BOOL">TRUE</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </statement>
+                                <next>
+                                  <block type="controls_if" id="1280" inline="false">
+                                    <value name="IF0">
+                                      <block type="technozone_wf_switch" id="1281" inline="true">
+                                        <field name="LOGIQUE">false</field>
+                                        <value name="FIELD">
+                                          <block type="math_number" id="1282">
+                                            <field name="NUM">2</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <statement name="DO0">
+                                      <block type="technozone_variables_set" id="1285" inline="true">
+                                        <field name="VAR">LampePiece_1</field>
+                                        <value name="VALUE">
+                                          <block type="logic_boolean" id="1289">
+                                            <field name="BOOL">FALSE</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </statement>
+                                    <next>
+                                      <block type="controls_if" id="1290" inline="false">
+                                        <value name="IF0">
+                                          <block type="technozone_wf_switch" id="1291" inline="true">
+                                            <field name="LOGIQUE">true</field>
+                                            <value name="FIELD">
+                                              <block type="math_number" id="1292">
+                                                <field name="NUM">5</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <statement name="DO0">
+                                          <block type="technozone_variables_set" id="1293" inline="true">
+                                            <field name="VAR">LampePiece_2</field>
+                                            <value name="VALUE">
+                                              <block type="logic_boolean" id="1294">
+                                                <field name="BOOL">TRUE</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </statement>
+                                        <next>
+                                          <block type="controls_if" id="1295" inline="false">
+                                            <value name="IF0">
+                                              <block type="technozone_wf_switch" id="1296" inline="true">
+                                                <field name="LOGIQUE">false</field>
+                                                <value name="FIELD">
+                                                  <block type="math_number" id="1297">
+                                                    <field name="NUM">5</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                            <statement name="DO0">
+                                              <block type="technozone_variables_set" id="1298" inline="true">
+                                                <field name="VAR">LampePiece_2</field>
+                                                <value name="VALUE">
+                                                  <block type="logic_boolean" id="1299">
+                                                    <field name="BOOL">FALSE</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </statement>
+                                            <next>
+                                              <block type="controls_if" id="864" inline="false">
+                                                <value name="IF0">
+                                                  <block type="technozone_wf_switch" id="904" inline="true">
+                                                    <field name="LOGIQUE">true</field>
+                                                    <value name="FIELD">
+                                                      <block type="math_number" id="905">
+                                                        <field name="NUM">8</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                                <statement name="DO0">
+                                                  <block type="technozone_variables_set" id="1019" inline="true">
+                                                    <field name="VAR">Allumer_Lampe_Exterieur</field>
+                                                    <value name="VALUE">
+                                                      <block type="logic_boolean" id="1026">
+                                                        <field name="BOOL">TRUE</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </statement>
+                                                <next>
+                                                  <block type="controls_if" id="967" inline="false">
+                                                    <value name="IF0">
+                                                      <block type="technozone_wf_switch" id="968" inline="true">
+                                                        <field name="LOGIQUE">false</field>
+                                                        <value name="FIELD">
+                                                          <block type="math_number" id="969">
+                                                            <field name="NUM">8</field>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </value>
+                                                    <statement name="DO0">
+                                                      <block type="technozone_variables_set" id="1027" inline="true">
+                                                        <field name="VAR">Allumer_Lampe_Exterieur</field>
+                                                        <value name="VALUE">
+                                                          <block type="logic_boolean" id="1028">
+                                                            <field name="BOOL">FALSE</field>
+                                                          </block>
+                                                        </value>
+                                                      </block>
+                                                    </statement>
+                                                    <next>
+                                                      <block type="technozone_wf_reset" id="516"></block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </statement>
+                            <next>
+                              <block type="controls_if" id="24" inline="false">
+                                <mutation else="1"></mutation>
+                                <value name="IF0">
+                                  <block type="technozone_variables_get" id="364">
+                                    <field name="VAR">LampePiece_1</field>
+                                  </block>
+                                </value>
+                                <statement name="DO0">
+                                  <block type="driss_A4_eclairage" id="26">
+                                    <field name="STAT">HIGH</field>
+                                    <field name="PIN">7</field>
+                                    <next>
+                                      <block type="technozone_wf_led" id="286" inline="true">
+                                        <field name="COLOR">yellow</field>
+                                        <value name="FIELD">
+                                          <block type="math_number" id="287">
+                                            <field name="NUM">3</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </statement>
+                                <statement name="ELSE">
+                                  <block type="driss_A4_eclairage" id="1205">
+                                    <field name="STAT">LOW</field>
+                                    <field name="PIN">7</field>
+                                    <next>
+                                      <block type="technozone_wf_led" id="1206" inline="true">
+                                        <field name="COLOR">none</field>
+                                        <value name="FIELD">
+                                          <block type="math_number" id="1207">
+                                            <field name="NUM">3</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </statement>
+                                <next>
+                                  <block type="controls_if" id="8" inline="false">
+                                    <mutation else="1"></mutation>
+                                    <value name="IF0">
+                                      <block type="technozone_variables_get" id="639">
+                                        <field name="VAR">LampePiece_2</field>
+                                      </block>
+                                    </value>
+                                    <statement name="DO0">
+                                      <block type="driss_A4_eclairage" id="10">
+                                        <field name="STAT">HIGH</field>
+                                        <field name="PIN">4</field>
+                                        <next>
+                                          <block type="technozone_wf_led" id="640" inline="true">
+                                            <field name="COLOR">orange</field>
+                                            <value name="FIELD">
+                                              <block type="math_number" id="641">
+                                                <field name="NUM">6</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </statement>
+                                    <statement name="ELSE">
+                                      <block type="driss_A4_eclairage" id="11">
+                                        <field name="STAT">LOW</field>
+                                        <field name="PIN">4</field>
+                                        <next>
+                                          <block type="technozone_wf_led" id="642" inline="true">
+                                            <field name="COLOR">none</field>
+                                            <value name="FIELD">
+                                              <block type="math_number" id="643">
+                                                <field name="NUM">6</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </statement>
+                                    <next>
+                                      <block type="controls_if" id="354" inline="false">
+                                        <value name="IF0">
+                                          <block type="driss_A4_btn_white" id="355">
+                                            <field name="PIN">8</field>
+                                          </block>
+                                        </value>
+                                        <statement name="DO0">
+                                          <block type="technozone_variables_set" id="307" inline="true">
+                                            <field name="VAR">LampePiece_1</field>
+                                            <value name="VALUE">
+                                              <block type="logic_negate" id="331" inline="false">
+                                                <value name="BOOL">
+                                                  <block type="technozone_variables_get" id="324">
+                                                    <field name="VAR">LampePiece_1</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </statement>
+                                        <next>
+                                          <block type="controls_if" id="634" inline="false">
+                                            <value name="IF0">
+                                              <block type="driss_A4_btn_white" id="9">
+                                                <field name="PIN">15</field>
+                                              </block>
+                                            </value>
+                                            <statement name="DO0">
+                                              <block type="technozone_variables_set" id="636" inline="true">
+                                                <field name="VAR">LampePiece_2</field>
+                                                <value name="VALUE">
+                                                  <block type="logic_negate" id="637" inline="false">
+                                                    <value name="BOOL">
+                                                      <block type="technozone_variables_get" id="638">
+                                                        <field name="VAR">LampePiece_2</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </statement>
+                                            <next>
+                                              <block type="controls_if" id="856" inline="false">
+                                                <mutation else="1"></mutation>
+                                                <value name="IF0">
+                                                  <block type="driss_A4_pir" id="857">
+                                                    <field name="PIN">16</field>
+                                                  </block>
+                                                </value>
+                                                <statement name="DO0">
+                                                  <block type="technozone_wf_led" id="859" inline="true">
+                                                    <field name="COLOR">red</field>
+                                                    <value name="FIELD">
+                                                      <block type="math_number" id="860">
+                                                        <field name="NUM">11</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </statement>
+                                                <statement name="ELSE">
+                                                  <block type="technozone_wf_led" id="862" inline="true">
+                                                    <field name="COLOR">none</field>
+                                                    <value name="FIELD">
+                                                      <block type="math_number" id="863">
+                                                        <field name="NUM">11</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </statement>
+                                                <next>
+                                                  <block type="controls_if" id="1066" inline="false">
+                                                    <mutation else="1"></mutation>
+                                                    <value name="IF0">
+                                                      <block type="technozone_variables_get" id="1059">
+                                                        <field name="VAR">Allumer_Lampe_Exterieur</field>
+                                                      </block>
+                                                    </value>
+                                                    <statement name="DO0">
+                                                      <block type="driss_A4_eclairage" id="1069">
+                                                        <field name="STAT">HIGH</field>
+                                                        <field name="PIN">11</field>
+                                                        <next>
+                                                          <block type="technozone_wf_led" id="1067" inline="true">
+                                                            <field name="COLOR">blue</field>
+                                                            <value name="FIELD">
+                                                              <block type="math_number" id="1068">
+                                                                <field name="NUM">9</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </next>
+                                                      </block>
+                                                    </statement>
+                                                    <statement name="ELSE">
+                                                      <block type="controls_if" id="14" inline="false">
+                                                        <mutation else="1"></mutation>
+                                                        <value name="IF0">
+                                                          <block type="logic_compare" id="15" inline="true">
+                                                            <field name="OP">LT</field>
+                                                            <value name="A">
+                                                              <block type="technozone_variables_get" id="809">
+                                                                <field name="VAR">Lumiere</field>
+                                                              </block>
+                                                            </value>
+                                                            <value name="B">
+                                                              <block type="math_number" id="17">
+                                                                <field name="NUM">700</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </value>
+                                                        <statement name="DO0">
+                                                          <block type="controls_if" id="18" inline="false">
+                                                            <mutation else="1"></mutation>
+                                                            <value name="IF0">
+                                                              <block type="driss_A4_pir" id="19">
+                                                                <field name="PIN">16</field>
+                                                              </block>
+                                                            </value>
+                                                            <statement name="DO0">
+                                                              <block type="driss_A4_eclairage" id="20">
+                                                                <field name="STAT">HIGH</field>
+                                                                <field name="PIN">11</field>
+                                                                <next>
+                                                                  <block type="technozone_wf_led" id="1029" inline="true">
+                                                                    <field name="COLOR">blue</field>
+                                                                    <value name="FIELD">
+                                                                      <block type="math_number" id="1030">
+                                                                        <field name="NUM">9</field>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </next>
+                                                              </block>
+                                                            </statement>
+                                                            <statement name="ELSE">
+                                                              <block type="driss_A4_eclairage" id="1190">
+                                                                <field name="STAT">LOW</field>
+                                                                <field name="PIN">11</field>
+                                                                <next>
+                                                                  <block type="technozone_wf_led" id="1191" inline="true">
+                                                                    <field name="COLOR">none</field>
+                                                                    <value name="FIELD">
+                                                                      <block type="math_number" id="1192">
+                                                                        <field name="NUM">9</field>
+                                                                      </block>
+                                                                    </value>
+                                                                  </block>
+                                                                </next>
+                                                              </block>
+                                                            </statement>
+                                                          </block>
+                                                        </statement>
+                                                        <statement name="ELSE">
+                                                          <block type="driss_A4_eclairage" id="1074">
+                                                            <field name="STAT">LOW</field>
+                                                            <field name="PIN">11</field>
+                                                            <next>
+                                                              <block type="technozone_wf_led" id="1075" inline="true">
+                                                                <field name="COLOR">none</field>
+                                                                <value name="FIELD">
+                                                                  <block type="math_number" id="1076">
+                                                                    <field name="NUM">9</field>
+                                                                  </block>
+                                                                </value>
+                                                              </block>
+                                                            </next>
+                                                          </block>
+                                                        </statement>
+                                                      </block>
+                                                    </statement>
+                                                    <next>
+                                                      <block type="technozone_wf_gauge" id="676" inline="true">
+                                                        <value name="FIELD">
+                                                          <block type="math_number" id="677">
+                                                            <field name="NUM">14</field>
+                                                          </block>
+                                                        </value>
+                                                        <value name="POSITION">
+                                                          <block type="technozone_variables_get" id="766">
+                                                            <field name="VAR">Temperature</field>
+                                                          </block>
+                                                        </value>
+                                                        <next>
+                                                          <block type="technozone_wf_gauge" id="767" inline="true">
+                                                            <value name="FIELD">
+                                                              <block type="math_number" id="768">
+                                                                <field name="NUM">16</field>
+                                                              </block>
+                                                            </value>
+                                                            <value name="POSITION">
+                                                              <block type="technozone_variables_get" id="769">
+                                                                <field name="VAR">Lumiere</field>
+                                                              </block>
+                                                            </value>
+                                                          </block>
+                                                        </next>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+  <block type="procedures_defnoreturn" id="67" x="-984" y="-511">
+    <mutation></mutation>
+    <field name="NAME">Initialisation</field>
+    <statement name="STACK">
+      <block type="technozone_lcdinit" id="51">
+        <field name="I2C_adress">39</field>
+        <field name="nbcol">16</field>
+        <field name="nblig">2</field>
+        <field name="backlight">TRUE</field>
+        <field name="cursor">FALSE</field>
+        <field name="blink">FALSE</field>
+        <next>
+          <block type="technozone_wf_init" id="219">
+            <field name="RXpin">9</field>
+            <field name="TXpin">10</field>
+            <next>
+              <block type="technozone_declare_var" id="691">
+                <field name="VAR">Temperature</field>
+                <field name="TYPE">int</field>
+                <next>
+                  <block type="technozone_declare_var" id="709">
+                    <field name="VAR">Lumiere</field>
+                    <field name="TYPE">int</field>
+                    <next>
+                      <block type="technozone_declare_var" id="298">
+                        <field name="VAR">LampePiece_1</field>
+                        <field name="TYPE">boolean</field>
+                        <next>
+                          <block type="technozone_declare_var" id="626">
+                            <field name="VAR">LampePiece_2</field>
+                            <field name="TYPE">boolean</field>
+                            <next>
+                              <block type="technozone_declare_var" id="1000">
+                                <field name="VAR">Allumer_Lampe_Exterieur</field>
+                                <field name="TYPE">boolean</field>
+                                <next>
+                                  <block type="technozone_variables_set" id="718" inline="true">
+                                    <field name="VAR">Temperature</field>
+                                    <value name="VALUE">
+                                      <block type="math_number" id="735">
+                                        <field name="NUM">0</field>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="technozone_variables_set" id="738" inline="true">
+                                        <field name="VAR">Lumiere</field>
+                                        <value name="VALUE">
+                                          <block type="math_number" id="739">
+                                            <field name="NUM">0</field>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <block type="technozone_variables_set" id="627" inline="true">
+                                            <field name="VAR">LampePiece_1</field>
+                                            <value name="VALUE">
+                                              <block type="logic_boolean" id="628">
+                                                <field name="BOOL">FALSE</field>
+                                              </block>
+                                            </value>
+                                            <next>
+                                              <block type="technozone_variables_set" id="373" inline="true">
+                                                <field name="VAR">LampePiece_2</field>
+                                                <value name="VALUE">
+                                                  <block type="logic_boolean" id="380">
+                                                    <field name="BOOL">FALSE</field>
+                                                  </block>
+                                                </value>
+                                                <next>
+                                                  <block type="technozone_variables_set" id="1009" inline="true">
+                                                    <field name="VAR">Allumer_Lampe_Exterieur</field>
+                                                    <value name="VALUE">
+                                                      <block type="logic_boolean" id="1010">
+                                                        <field name="BOOL">FALSE</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

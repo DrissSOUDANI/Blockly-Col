@@ -1,0 +1,71 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="driss_linkItOne_GPS_initialisation" id="23" x="-998" y="-446">
+    <next>
+      <block type="driss_linkItOne_SDCard_initialisation" id="24">
+        <next>
+          <block type="technozone_declare_var" id="65">
+            <field name="VAR">Nom de fichier</field>
+            <field name="TYPE">String</field>
+            <next>
+              <block type="technozone_variables_set" id="74" inline="true">
+                <field name="VAR">Nom de fichier</field>
+                <value name="VALUE">
+                  <block type="text" id="94">
+                    <field name="TEXT">toto.txt</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="controls_repeat_infinite" id="25">
+                    <statement name="DO">
+                      <block type="driss_linkItOne_GPS_lireDonnees" id="26">
+                        <next>
+                          <block type="controls_if" id="27" inline="false">
+                            <value name="IF0">
+                              <block type="logic_compare" id="28" inline="true">
+                                <field name="OP">GT</field>
+                                <value name="A">
+                                  <block type="driss_linkItOne_GPS_NbreSatellites" id="29"></block>
+                                </value>
+                                <value name="B">
+                                  <block type="math_number" id="30">
+                                    <field name="NUM">3</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <statement name="DO0">
+                              <block type="driss_linkItOne_WriteData" id="31" inline="false">
+                                <value name="FILE_NAME">
+                                  <block type="technozone_variables_get" id="106">
+                                    <field name="VAR">Nom de fichier</field>
+                                  </block>
+                                </value>
+                                <value name="DATA_TO_SAVE">
+                                  <block type="text_join" id="33" inline="false">
+                                    <mutation items="2"></mutation>
+                                    <value name="ADD0">
+                                      <block type="driss_linkItOne_GPS_NbreSatellites" id="34"></block>
+                                    </value>
+                                    <value name="ADD1">
+                                      <block type="text" id="35">
+                                        <field name="TEXT">-</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </statement>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

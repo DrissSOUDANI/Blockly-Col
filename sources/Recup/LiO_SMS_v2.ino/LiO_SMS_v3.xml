@@ -1,0 +1,365 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="technozone_declare_var" id="1" x="292" y="-80">
+    <field name="VAR">MessageRecu</field>
+    <field name="TYPE">boolean</field>
+    <next>
+      <block type="technozone_variables_set" id="2" inline="true">
+        <field name="VAR">MessageRecu</field>
+        <value name="VALUE">
+          <block type="logic_boolean" id="3">
+            <field name="BOOL">FALSE</field>
+          </block>
+        </value>
+        <next>
+          <block type="technozone_declare_var" id="4">
+            <field name="VAR">Numero</field>
+            <field name="TYPE">String</field>
+            <next>
+              <block type="technozone_variables_set" id="5" inline="true">
+                <field name="VAR">Numero</field>
+                <value name="VALUE">
+                  <block type="text" id="6">
+                    <field name="TEXT"></field>
+                  </block>
+                </value>
+                <next>
+                  <block type="technozone_declare_var" id="7">
+                    <field name="VAR">Message</field>
+                    <field name="TYPE">String</field>
+                    <next>
+                      <block type="technozone_variables_set" id="8" inline="true">
+                        <field name="VAR">Message</field>
+                        <value name="VALUE">
+                          <block type="text" id="9">
+                            <field name="TEXT"></field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="technozone_declare_var" id="10">
+                            <field name="VAR">DEL_Blanche_allumee</field>
+                            <field name="TYPE">boolean</field>
+                            <next>
+                              <block type="technozone_variables_set" id="11" inline="true">
+                                <field name="VAR">DEL_Blanche_allumee</field>
+                                <value name="VALUE">
+                                  <block type="logic_boolean" id="12">
+                                    <field name="BOOL">FALSE</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="driss_grove_white_led" id="16">
+                                    <field name="STAT">LOW</field>
+                                    <field name="PIN">3</field>
+                                    <next>
+                                      <block type="driss_grove_green_led" id="17">
+                                        <field name="STAT">LOW</field>
+                                        <field name="PIN">6</field>
+                                        <next>
+                                          <block type="driss_grove_blue_led" id="18">
+                                            <field name="STAT">LOW</field>
+                                            <field name="PIN">5</field>
+                                            <next>
+                                              <block type="driss_grove_red_led" id="19">
+                                                <field name="STAT">LOW</field>
+                                                <field name="PIN">4</field>
+                                                <next>
+                                                  <block type="driss_linkItOne_GSM_initialisation" id="20">
+                                                    <next>
+                                                      <block type="driss_grove_green_led" id="21">
+                                                        <field name="STAT">HIGH</field>
+                                                        <field name="PIN">6</field>
+                                                        <next>
+                                                          <block type="controls_repeat_infinite" id="22">
+                                                            <statement name="DO">
+                                                              <block type="controls_if" id="23" inline="false">
+                                                                <value name="IF0">
+                                                                  <block type="driss_linkItOne_SMS_disponible" id="24"></block>
+                                                                </value>
+                                                                <statement name="DO0">
+                                                                  <block type="driss_grove_blue_led" id="25">
+                                                                    <field name="STAT">HIGH</field>
+                                                                    <field name="PIN">5</field>
+                                                                    <next>
+                                                                      <block type="base_delay" id="26" inline="true">
+                                                                        <value name="DELAY_TIME">
+                                                                          <block type="math_number" id="27">
+                                                                            <field name="NUM">1000</field>
+                                                                          </block>
+                                                                        </value>
+                                                                        <next>
+                                                                          <block type="driss_grove_blue_led" id="28">
+                                                                            <field name="STAT">LOW</field>
+                                                                            <field name="PIN">5</field>
+                                                                            <next>
+                                                                              <block type="technozone_variables_set" id="29" inline="true">
+                                                                                <field name="VAR">MessageRecu</field>
+                                                                                <value name="VALUE">
+                                                                                  <block type="logic_boolean" id="30">
+                                                                                    <field name="BOOL">TRUE</field>
+                                                                                  </block>
+                                                                                </value>
+                                                                                <next>
+                                                                                  <block type="technozone_variables_set" id="31" inline="true">
+                                                                                    <field name="VAR">Numero</field>
+                                                                                    <value name="VALUE">
+                                                                                      <block type="driss_linkItOne_SMS_lireNumero" id="32"></block>
+                                                                                    </value>
+                                                                                    <next>
+                                                                                      <block type="technozone_variables_set" id="33" inline="true">
+                                                                                        <field name="VAR">Message</field>
+                                                                                        <value name="VALUE">
+                                                                                          <block type="driss_linkItOne_SMS_lireMessage" id="34"></block>
+                                                                                        </value>
+                                                                                        <next>
+                                                                                          <block type="driss_linkItOne_SMS_effacer" id="35">
+                                                                                            <next>
+                                                                                              <block type="controls_if" id="40" inline="false">
+                                                                                                <value name="IF0">
+                                                                                                  <block type="logic_compare" id="41" inline="true">
+                                                                                                    <field name="OP">EQ</field>
+                                                                                                    <value name="A">
+                                                                                                      <block type="technozone_variables_get" id="42">
+                                                                                                        <field name="VAR">Message</field>
+                                                                                                      </block>
+                                                                                                    </value>
+                                                                                                    <value name="B">
+                                                                                                      <block type="text" id="43">
+                                                                                                        <field name="TEXT">WON</field>
+                                                                                                      </block>
+                                                                                                    </value>
+                                                                                                  </block>
+                                                                                                </value>
+                                                                                                <statement name="DO0">
+                                                                                                  <block type="driss_grove_white_led" id="80">
+                                                                                                    <field name="STAT">HIGH</field>
+                                                                                                    <field name="PIN">3</field>
+                                                                                                    <next>
+                                                                                                      <block type="technozone_variables_set" id="50" inline="true">
+                                                                                                        <field name="VAR">DEL_Blanche_allumee</field>
+                                                                                                        <value name="VALUE">
+                                                                                                          <block type="logic_boolean" id="51">
+                                                                                                            <field name="BOOL">TRUE</field>
+                                                                                                          </block>
+                                                                                                        </value>
+                                                                                                      </block>
+                                                                                                    </next>
+                                                                                                  </block>
+                                                                                                </statement>
+                                                                                                <next>
+                                                                                                  <block type="controls_if" id="46" inline="false">
+                                                                                                    <value name="IF0">
+                                                                                                      <block type="logic_compare" id="47" inline="true">
+                                                                                                        <field name="OP">EQ</field>
+                                                                                                        <value name="A">
+                                                                                                          <block type="technozone_variables_get" id="48">
+                                                                                                            <field name="VAR">Message</field>
+                                                                                                          </block>
+                                                                                                        </value>
+                                                                                                        <value name="B">
+                                                                                                          <block type="text" id="49">
+                                                                                                            <field name="TEXT">WOFF</field>
+                                                                                                          </block>
+                                                                                                        </value>
+                                                                                                      </block>
+                                                                                                    </value>
+                                                                                                    <statement name="DO0">
+                                                                                                      <block type="driss_grove_white_led" id="85">
+                                                                                                        <field name="STAT">LOW</field>
+                                                                                                        <field name="PIN">3</field>
+                                                                                                        <next>
+                                                                                                          <block type="technozone_variables_set" id="44" inline="true">
+                                                                                                            <field name="VAR">DEL_Blanche_allumee</field>
+                                                                                                            <value name="VALUE">
+                                                                                                              <block type="logic_boolean" id="45">
+                                                                                                                <field name="BOOL">FALSE</field>
+                                                                                                              </block>
+                                                                                                            </value>
+                                                                                                          </block>
+                                                                                                        </next>
+                                                                                                      </block>
+                                                                                                    </statement>
+                                                                                                    <next>
+                                                                                                      <block type="controls_if" id="52" inline="false">
+                                                                                                        <value name="IF0">
+                                                                                                          <block type="logic_compare" id="53" inline="true">
+                                                                                                            <field name="OP">EQ</field>
+                                                                                                            <value name="A">
+                                                                                                              <block type="technozone_variables_get" id="54">
+                                                                                                                <field name="VAR">Message</field>
+                                                                                                              </block>
+                                                                                                            </value>
+                                                                                                            <value name="B">
+                                                                                                              <block type="text" id="55">
+                                                                                                                <field name="TEXT">RON</field>
+                                                                                                              </block>
+                                                                                                            </value>
+                                                                                                          </block>
+                                                                                                        </value>
+                                                                                                        <statement name="DO0">
+                                                                                                          <block type="driss_grove_red_led" id="56">
+                                                                                                            <field name="STAT">HIGH</field>
+                                                                                                            <field name="PIN">4</field>
+                                                                                                          </block>
+                                                                                                        </statement>
+                                                                                                        <next>
+                                                                                                          <block type="controls_if" id="57" inline="false">
+                                                                                                            <value name="IF0">
+                                                                                                              <block type="logic_compare" id="58" inline="true">
+                                                                                                                <field name="OP">EQ</field>
+                                                                                                                <value name="A">
+                                                                                                                  <block type="technozone_variables_get" id="59">
+                                                                                                                    <field name="VAR">Message</field>
+                                                                                                                  </block>
+                                                                                                                </value>
+                                                                                                                <value name="B">
+                                                                                                                  <block type="text" id="60">
+                                                                                                                    <field name="TEXT">ROFF</field>
+                                                                                                                  </block>
+                                                                                                                </value>
+                                                                                                              </block>
+                                                                                                            </value>
+                                                                                                            <statement name="DO0">
+                                                                                                              <block type="driss_grove_red_led" id="61">
+                                                                                                                <field name="STAT">LOW</field>
+                                                                                                                <field name="PIN">4</field>
+                                                                                                              </block>
+                                                                                                            </statement>
+                                                                                                            <next>
+                                                                                                              <block type="driss_linkItOne_SMS_envoyerMessage" id="62" inline="false">
+                                                                                                                <value name="CONTACT_NUM">
+                                                                                                                  <block type="technozone_variables_get" id="63">
+                                                                                                                    <field name="VAR">Numero</field>
+                                                                                                                  </block>
+                                                                                                                </value>
+                                                                                                                <value name="MESSAGE_TO_SEND">
+                                                                                                                  <block type="text_join" id="64" inline="false">
+                                                                                                                    <mutation items="2"></mutation>
+                                                                                                                    <value name="ADD0">
+                                                                                                                      <block type="text" id="65">
+                                                                                                                        <field name="TEXT">Message recu : </field>
+                                                                                                                      </block>
+                                                                                                                    </value>
+                                                                                                                    <value name="ADD1">
+                                                                                                                      <block type="technozone_variables_get" id="66">
+                                                                                                                        <field name="VAR">Message</field>
+                                                                                                                      </block>
+                                                                                                                    </value>
+                                                                                                                  </block>
+                                                                                                                </value>
+                                                                                                              </block>
+                                                                                                            </next>
+                                                                                                          </block>
+                                                                                                        </next>
+                                                                                                      </block>
+                                                                                                    </next>
+                                                                                                  </block>
+                                                                                                </next>
+                                                                                              </block>
+                                                                                            </next>
+                                                                                          </block>
+                                                                                        </next>
+                                                                                      </block>
+                                                                                    </next>
+                                                                                  </block>
+                                                                                </next>
+                                                                              </block>
+                                                                            </next>
+                                                                          </block>
+                                                                        </next>
+                                                                      </block>
+                                                                    </next>
+                                                                  </block>
+                                                                </statement>
+                                                                <next>
+                                                                  <block type="controls_if" id="67" inline="false">
+                                                                    <value name="IF0">
+                                                                      <block type="driss_grove_button" id="68">
+                                                                        <field name="PIN">2</field>
+                                                                      </block>
+                                                                    </value>
+                                                                    <statement name="DO0">
+                                                                      <block type="controls_whileUntil" id="100" inline="false">
+                                                                        <field name="MODE">WHILE</field>
+                                                                        <value name="BOOL">
+                                                                          <block type="driss_grove_button" id="101">
+                                                                            <field name="PIN">2</field>
+                                                                          </block>
+                                                                        </value>
+                                                                        <next>
+                                                                          <block type="controls_if" id="69" inline="false">
+                                                                            <mutation else="1"></mutation>
+                                                                            <value name="IF0">
+                                                                              <block type="technozone_variables_get" id="70">
+                                                                                <field name="VAR">DEL_Blanche_allumee</field>
+                                                                              </block>
+                                                                            </value>
+                                                                            <statement name="DO0">
+                                                                              <block type="driss_grove_white_led" id="102">
+                                                                                <field name="STAT">LOW</field>
+                                                                                <field name="PIN">3</field>
+                                                                                <next>
+                                                                                  <block type="technozone_variables_set" id="104" inline="true">
+                                                                                    <field name="VAR">DEL_Blanche_allumee</field>
+                                                                                    <value name="VALUE">
+                                                                                      <block type="logic_boolean" id="105">
+                                                                                        <field name="BOOL">FALSE</field>
+                                                                                      </block>
+                                                                                    </value>
+                                                                                  </block>
+                                                                                </next>
+                                                                              </block>
+                                                                            </statement>
+                                                                            <statement name="ELSE">
+                                                                              <block type="driss_grove_white_led" id="103">
+                                                                                <field name="STAT">HIGH</field>
+                                                                                <field name="PIN">3</field>
+                                                                                <next>
+                                                                                  <block type="technozone_variables_set" id="106" inline="true">
+                                                                                    <field name="VAR">DEL_Blanche_allumee</field>
+                                                                                    <value name="VALUE">
+                                                                                      <block type="logic_boolean" id="107">
+                                                                                        <field name="BOOL">TRUE</field>
+                                                                                      </block>
+                                                                                    </value>
+                                                                                  </block>
+                                                                                </next>
+                                                                              </block>
+                                                                            </statement>
+                                                                          </block>
+                                                                        </next>
+                                                                      </block>
+                                                                    </statement>
+                                                                  </block>
+                                                                </next>
+                                                              </block>
+                                                            </statement>
+                                                          </block>
+                                                        </next>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

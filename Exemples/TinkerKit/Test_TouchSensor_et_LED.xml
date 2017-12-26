@@ -1,0 +1,26 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="controls_repeat_infinite" id="34" x="130" y="100">
+    <statement name="DO">
+      <block type="controls_if" id="41" inline="false">
+        <mutation else="1"></mutation>
+        <value name="IF0">
+          <block type="driss_tinkerKit_touchSensor" id="15">
+            <field name="PIN">I0</field>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="driss_tinkerKit_blue_led" id="46">
+            <field name="STAT">HIGH</field>
+            <field name="PIN">O0</field>
+          </block>
+        </statement>
+        <statement name="ELSE">
+          <block type="driss_tinkerKit_blue_led" id="123">
+            <field name="STAT">LOW</field>
+            <field name="PIN">O0</field>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+</xml>

@@ -107,14 +107,14 @@ Blockly.Arduino.driss_temperature_and_humidity_sensor = function() {
   Blockly.Arduino.includes_['define_DHT'] = '#include <DHT.h>\n'; 
   
   switch(dropdown_ref){
-    case "DHT22" : Blockly.Arduino.definitions_['define_DHTTYPE'] = '#define DHTTYPE DHT22 ; // DHT 22  (AM2302)';
+    case "DHT22" : //Blockly.Arduino.definitions_['define_DHTTYPE'] = '#define DHTTYPE DHT22 ; // DHT 22  (AM2302)';
                   Blockly.Arduino.variables_['define_'+var_dht] = 'DHT '+var_dht+'('+dropdown_pin+',DHT22);';
                   break;
     
-    case "DHT21" : Blockly.Arduino.definitions_['define_DHTTYPE'] = '#define DHTTYPE DHT21 ; // DHT 21 (AM2301)';
+    case "DHT21" : //Blockly.Arduino.definitions_['define_DHTTYPE'] = '#define DHTTYPE DHT21 ; // DHT 21 (AM2301)';
                   Blockly.Arduino.variables_['define_'+var_dht] = 'DHT '+var_dht+'('+dropdown_pin+',DHT21);';
                   break;
-    case "DHT11" : Blockly.Arduino.definitions_['define_DHTTYPE'] = '#define DHTTYPE DHT11 ; // DHT 11 ';
+    case "DHT11" : //Blockly.Arduino.definitions_['define_DHTTYPE'] = '#define DHTTYPE DHT11 ; // DHT 11 ';
                   Blockly.Arduino.variables_['define_'+var_dht] = 'DHT '+var_dht+'('+dropdown_pin+',DHT11);';
                   break;
     
@@ -1288,39 +1288,39 @@ Blockly.Arduino.driss_grove_4_digit_display_displayDigits = function() {
   var value_digit_4 = Blockly.Arduino.valueToCode(this, 'DIGIT_4', Blockly.Arduino.ORDER_ATOMIC);
 
   var display = 'display_'+dropdown_CLK_pin+'_'+dropdown_DIO_pin ;
-  var data = 'data_'+dropdown_CLK_pin+'_'+dropdown_DIO_pin ;
+  //var data = 'data_'+dropdown_CLK_pin+'_'+dropdown_DIO_pin ;
   
   //dans include définition    
   Blockly.Arduino.includes_['define_TM1637Display'] = '#include <TM1637Display.h>';
-  Blockly.Arduino.definitions_['define_CLK'] = '#define CLK '+ dropdown_CLK_pin;
-  Blockly.Arduino.definitions_['define_DIO'] = '#define DIO '+ dropdown_DIO_pin;
-  Blockly.Arduino.variables_['var_'+display] = 'TM1637Display '+display+'(CLK, DIO);';
-  Blockly.Arduino.variables_['var_'+data] = 'uint8_t '+data+'[] = { 0xff, 0xff, 0xff, 0xff };';
+  
+  Blockly.Arduino.variables_['var_'+display] = 'TM1637Display '+display+'('+dropdown_CLK_pin+', '+dropdown_DIO_pin+');';
+  //Blockly.Arduino.variables_['var_'+data] = 'uint8_t '+data+'[] = { 0xff, 0xff, 0xff, 0xff };';
   
   //dans fonctions
-  Blockly.Arduino.codeFunctions_['define_4_digits_displayDigits'] = '\nvoid displayDigits(TM1637Display _display, uint8_t digit_1, uint8_t digit_2, uint8_t digit_3, uint8_t digit_4) {\n'+
-   ' '+data+'[0] = _display.encodeDigit(digit_1);\n'+
-   ' '+data+'[1] = _display.encodeDigit(digit_2);\n'+
-   ' '+data+'[2] = _display.encodeDigit(digit_3);\n'+
-   ' '+data+'[3] = _display.encodeDigit(digit_4);\n'+
-   ' //setSegments(const uint8_t segments[], uint8_t length, uint8_t pos)\n'+ 
-   ' _display.setSegments('+data+', 4, 0);\n'+
-   '}\n';    
+  Blockly.Arduino.codeFunctions_['define_4_digits_displayDigits'] = '//Fonction qui affiche encode les nombres avant de les afficher \n'+
+  'void displayDigits(TM1637Display _display, uint8_t digit_1, uint8_t digit_2, uint8_t digit_3, uint8_t digit_4) {\n'+
+  ' uint8_t data[] = { 0xff, 0xff, 0xff, 0xff };\n'+
+  ' data[0] = _display.encodeDigit(digit_1);\n'+
+  ' data[1] = _display.encodeDigit(digit_2);\n'+
+  ' data[2] = _display.encodeDigit(digit_3);\n'+
+  ' data[3] = _display.encodeDigit(digit_4);\n'+
+  ' _display.setSegments(data, 4, 0);\n'+
+  '}\n';    
 
    
-   var code = ''+
-  display+'.setBrightness(0x0f);\n'+
-  'displayDigits('+display+', '+value_digit_1+', '+value_digit_2+', '+value_digit_3+', '+value_digit_4+');\n';
+   var code = 'displayDigits('+display+', '+value_digit_1+', '+value_digit_2+', '+value_digit_3+', '+value_digit_4+');\n';
 
   return code;
 };
 
 //Grove Grove - 4-Digit Display  displayNumber
-Blockly.Arduino.driss_grove_4_digit_display_displayNumber = function() {
+Blockly.Arduino.driss_grove_4_digit_display_displayNumberDec = function() {
   var dropdown_CLK_pin = this.getTitleValue('PIN_CLK');
   var dropdown_DIO_pin = this.getTitleValue('PIN_DIO');
 
   var value_number = Blockly.Arduino.valueToCode(this, 'NUMBER', Blockly.Arduino.ORDER_ATOMIC);
+  var position = Blockly.Arduino.valueToCode(this, 'POSITION_DIGIT', Blockly.Arduino.ORDER_ATOMIC);
+  var nbreDigits = Blockly.Arduino.valueToCode(this, 'NBRE_DIGITS', Blockly.Arduino.ORDER_ATOMIC);
   var checkbox_zeros = this.getFieldValue('ZEROS') == 'TRUE';
 
 
@@ -1329,20 +1329,9 @@ Blockly.Arduino.driss_grove_4_digit_display_displayNumber = function() {
   
   //dans include définition    
   Blockly.Arduino.includes_['define_TM1637Display'] = '#include <TM1637Display.h>';
-  Blockly.Arduino.definitions_['define_CLK'] = '#define CLK '+ dropdown_CLK_pin;
-  Blockly.Arduino.definitions_['define_DIO'] = '#define DIO '+ dropdown_DIO_pin;
-  Blockly.Arduino.variables_['var_'+display] = 'TM1637Display '+display+'(CLK, DIO);';
-  //Blockly.Arduino.definitions_['define_'+data] = 'uint8_t '+data+'[] = { 0xff, 0xff, 0xff, 0xff };';
+  Blockly.Arduino.variables_['var_'+display] = 'TM1637Display '+display+'('+dropdown_CLK_pin+', '+dropdown_DIO_pin+');';
   
-  //dans fonctions
-  Blockly.Arduino.codeFunctions_['define_4_digits_displayNumber'] = '\nvoid displayNumber(TM1637Display _display, int nbre, boolean lz) {\n'+
-   ' _display.showNumberDec(nbre, lz);\n'+
-   '}\n';    
-
-   
-   var code = ''+
-  display+'.setBrightness(0x0f);\n'+
-  'displayNumber('+display+', '+value_number+', '+checkbox_zeros+');\n';
+  var code = display+'.showNumberDec('+value_number+', '+checkbox_zeros+', '+nbreDigits+', '+position+');\n';
 
   return code;
 };
@@ -1352,9 +1341,6 @@ Blockly.Arduino.driss_grove_4_digit_display_displayNumber = function() {
 Blockly.Arduino.driss_grove_4_digit_display_digitsOnOff = function() {
   var dropdown_CLK_pin = this.getTitleValue('PIN_CLK');
   var dropdown_DIO_pin = this.getTitleValue('PIN_DIO');
-
-  var display = 'display_'+dropdown_CLK_pin+'_'+dropdown_DIO_pin ;
-  var segments = 'seg_'+dropdown_CLK_pin+'_'+dropdown_DIO_pin ;
 
   var checkbox_digit_1_a = this.getFieldValue('DIGIT_1_A') == 'TRUE';
   var checkbox_digit_1_b = this.getFieldValue('DIGIT_1_B') == 'TRUE';
@@ -1385,71 +1371,72 @@ Blockly.Arduino.driss_grove_4_digit_display_digitsOnOff = function() {
   var checkbox_digit_4_f = this.getFieldValue('DIGIT_4_F') == 'TRUE';
   var checkbox_digit_4_g = this.getFieldValue('DIGIT_4_G') == 'TRUE';
 
-  var digit_1 = "" ;
-  if (checkbox_digit_1_a) digit_1 += "SEG_A |";
-  if (checkbox_digit_1_b) digit_1 += "SEG_B |";
-  if (checkbox_digit_1_c) digit_1 += "SEG_C |";
-  if (checkbox_digit_1_d) digit_1 += "SEG_D |";
-  if (checkbox_digit_1_e) digit_1 += "SEG_E |";
-  if (checkbox_digit_1_f) digit_1 += "SEG_F |";
-  if (checkbox_digit_1_g) digit_1 += "SEG_G |";
-  digit_1 = digit_1.substr(0, digit_1.lastIndexOf('|'));
-  digit_1 += ",\n";
+  var digit_1b = "0b0";
+  var id1=0;
+  if (checkbox_digit_1_g) {digit_1b += "1"; id1+=64;} else digit_1b += "0";
+  if (checkbox_digit_1_f) {digit_1b += "1"; id1+=32;} else digit_1b += "0";
+  if (checkbox_digit_1_e) {digit_1b += "1"; id1+=16;} else digit_1b += "0";
+  if (checkbox_digit_1_d) {digit_1b += "1"; id1+=08;} else digit_1b += "0";
+  if (checkbox_digit_1_c) {digit_1b += "1"; id1+=04;} else digit_1b += "0";
+  if (checkbox_digit_1_b) {digit_1b += "1"; id1+=02;} else digit_1b += "0";
+  if (checkbox_digit_1_a) {digit_1b += "1"; id1+=01;} else digit_1b += "0";
+  
+  var id2=0;
+  var digit_2b = "0b0";
+  if (checkbox_digit_2_g) {digit_2b += "1"; id2+=64;} else digit_2b += "0";
+  if (checkbox_digit_2_f) {digit_2b += "1"; id2+=32;} else digit_2b += "0";
+  if (checkbox_digit_2_e) {digit_2b += "1"; id2+=16;} else digit_2b += "0";
+  if (checkbox_digit_2_d) {digit_2b += "1"; id2+=8;} else digit_2b += "0";
+  if (checkbox_digit_2_c) {digit_2b += "1"; id2+=4;} else digit_2b += "0";
+  if (checkbox_digit_2_b) {digit_2b += "1"; id2+=2;} else digit_2b += "0";
+  if (checkbox_digit_2_a) {digit_2b += "1"; id2+=1;} else digit_2b += "0";
 
-  var digit_2 = "" ;
-  if (checkbox_digit_2_a) digit_2 += "SEG_A |";
-  if (checkbox_digit_2_b) digit_2 += "SEG_B |";
-  if (checkbox_digit_2_c) digit_2 += "SEG_C |";
-  if (checkbox_digit_2_d) digit_2 += "SEG_D |";
-  if (checkbox_digit_2_e) digit_2 += "SEG_E |";
-  if (checkbox_digit_2_f) digit_2 += "SEG_F |";
-  if (checkbox_digit_2_g) digit_2 += "SEG_G |";
-  digit_2 = digit_2.substr(0, digit_2.lastIndexOf('|'));
-  digit_2 += ",\n";
+  var id3=0;
+  var digit_3b = "0b0";
+  if (checkbox_digit_3_g) {digit_3b += "1"; id3+=64;} else digit_3b += "0";
+  if (checkbox_digit_3_f) {digit_3b += "1"; id3+=32;} else digit_3b += "0";
+  if (checkbox_digit_3_e) {digit_3b += "1"; id3+=16;} else digit_3b += "0";
+  if (checkbox_digit_3_d) {digit_3b += "1"; id3+=8;} else digit_3b += "0";
+  if (checkbox_digit_3_c) {digit_3b += "1"; id3+=4;} else digit_3b += "0";
+  if (checkbox_digit_3_b) {digit_3b += "1"; id3+=2;} else digit_3b += "0";
+  if (checkbox_digit_3_a) {digit_3b += "1"; id3+=1;} else digit_3b += "0";
 
-  var digit_3 = "" ;
-  if (checkbox_digit_3_a) digit_3 += "SEG_A |";
-  if (checkbox_digit_3_b) digit_3 += "SEG_B |";
-  if (checkbox_digit_3_c) digit_3 += "SEG_C |";
-  if (checkbox_digit_3_d) digit_3 += "SEG_D |";
-  if (checkbox_digit_3_e) digit_3 += "SEG_E |";
-  if (checkbox_digit_3_f) digit_3 += "SEG_F |";
-  if (checkbox_digit_3_g) digit_3 += "SEG_G |";
-  digit_3 = digit_3.substr(0, digit_3.lastIndexOf('|'));
-  digit_3 += ",\n";
+  var id4=0;
+  var digit_4b = "0b0";
+  if (checkbox_digit_4_g) {digit_4b += "1"; id4+=64;} else digit_4b += "0";
+  if (checkbox_digit_4_f) {digit_4b += "1"; id4+=32;} else digit_4b += "0";
+  if (checkbox_digit_4_e) {digit_4b += "1"; id4+=16;} else digit_4b += "0";
+  if (checkbox_digit_4_d) {digit_4b += "1"; id4+=8;} else digit_4b += "0";
+  if (checkbox_digit_4_c) {digit_4b += "1"; id4+=4;} else digit_4b += "0";
+  if (checkbox_digit_4_b) {digit_4b += "1"; id4+=2;} else digit_4b += "0";
+  if (checkbox_digit_4_a) {digit_4b += "1"; id4+=1;} else digit_4b += "0";
 
-  var digit_4 = "" ;
-  if (checkbox_digit_4_a) digit_4 += "SEG_A |";
-  if (checkbox_digit_4_b) digit_4 += "SEG_B |";
-  if (checkbox_digit_4_c) digit_4 += "SEG_C |";
-  if (checkbox_digit_4_d) digit_4 += "SEG_D |";
-  if (checkbox_digit_4_e) digit_4 += "SEG_E |";
-  if (checkbox_digit_4_f) digit_4 += "SEG_F |";
-  if (checkbox_digit_4_g) digit_4 += "SEG_G |";
-  digit_4 = digit_4.substr(0, digit_4.lastIndexOf('|'));
-  digit_4 += "\n";
-
+  var digits = digit_1b+', '+digit_2b+', '+digit_3b+', '+digit_4b;
+  var id=id1+'_'+id2+'_'+id3+'_'+id4;
+  var segments = 'seg_'+dropdown_CLK_pin+'_'+dropdown_DIO_pin+'_'+id ;
+  var display = 'display_'+dropdown_CLK_pin+'_'+dropdown_DIO_pin ;
   
   //dans include définition    
   Blockly.Arduino.includes_['define_TM1637Display'] = '#include <TM1637Display.h>';
-  Blockly.Arduino.definitions_['define_CLK'] = '#define CLK '+ dropdown_CLK_pin;
-  Blockly.Arduino.definitions_['define_DIO'] = '#define DIO '+ dropdown_DIO_pin;
-  Blockly.Arduino.variables_['var_'+display] = 'TM1637Display '+display+'(CLK, DIO);';
-  Blockly.Arduino.variables_['var_'+segments] = 'const uint8_t '+segments+'[] = {\n'+digit_1+digit_2+digit_3+digit_4+'\n};';
+  Blockly.Arduino.variables_['var_'+display] = 'TM1637Display '+display+'('+dropdown_CLK_pin+', '+dropdown_DIO_pin+');';
   
-  //dans fonctions
-  Blockly.Arduino.codeFunctions_['define_4_digits_digitsOnOff'] = '\nvoid digitsOnOff(TM1637Display _display) {\n'+
-   ' _display.setSegments('+segments+');\n'+
-   '}\n';    
-
-   
-   var code = ''+
-  display+'.setBrightness(0x0f);\n'+
-  'digitsOnOff('+display+');\n';
+  Blockly.Arduino.variables_['var_'+segments] = 'const uint8_t '+segments+'[] = {'+digits+'};';
+     
+   var code = display+'.setSegments('+segments+');\n';
 
   return code;
 };
 
+//Grove  driss_grove_4_digit_display_setBrightness
+Blockly.Arduino.driss_grove_4_digit_display_setBrightness = function() {
+  var dropdown_CLK_pin = this.getTitleValue('PIN_CLK');
+  var dropdown_DIO_pin = this.getTitleValue('PIN_DIO');
+   var luminosite = Blockly.Arduino.valueToCode(this, 'LUMINOSITE', Blockly.Arduino.ORDER_ATOMIC);
+   var display = 'display_'+dropdown_CLK_pin+'_'+dropdown_DIO_pin ;
+   var code =  display+'.setBrightness('+luminosite+');\n';
+  
+  return code;
+};
 
 
 //  Biométrie ----------------------------------------------------------------------------------------------------------------------------------

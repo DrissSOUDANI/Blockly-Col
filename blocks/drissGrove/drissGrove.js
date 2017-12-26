@@ -186,10 +186,10 @@ Blockly.Blocks.driss_grove_gaz_sensor_mq5_ratio = {
   helpUrl: '',
   init: function() {
     this.appendDummyInput()
-        .appendField("Le rapport  RS/R0 calculé à partir de la mesure envoyée ");
+        .appendField("Le rapport RS/R0 calculé à partir de la mesure");
     this.appendDummyInput()
         .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_gas_sensor_MQ5.png", Blockly.Arduino.imageSize*1.1,  Blockly.Arduino.imageSize/1.1, "*"))
-        .appendField("par le capteur de gaz relié à l'entrée ")
+        .appendField("envoyée par le capteur de gaz relié à l'entrée ")
         .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownAnalogPins), "PIN");
     this.appendValueInput("R0")
         .setCheck(null)
@@ -344,7 +344,8 @@ Blockly.Blocks.driss_grove_sound_sensor = {
         .appendField("par le capteur de son à l'entrée ")
         .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownAnalogPins), "PIN");
     this.appendDummyInput()
-        .appendField("(La valeur numérique renvoyée est comprise entre 0 et 1023)");
+        .appendField("(La valeur numérique renvoyée est ")
+        .appendField("comprise entre 0 et 1023)");
     this.setInputsInline(false);
     this.setOutput(true, null);
     this.setColour(Blockly.Blocks.drissGrove.HUE);
@@ -1426,34 +1427,38 @@ Blockly.Blocks.driss_grove_4_digit_display_displayDigits = {
 };
 
 //Grove Grove - 4-Digit Display  displayNumber
-Blockly.Blocks.driss_grove_4_digit_display_displayNumber = {
-  category: 'driss_grove : Afficheur 4 Digits',
-  helpUrl: '',
-  init: function() { 
-    this.appendDummyInput()
-        .appendField("Ecrire sur l'afficheur 4 digits");
-    this.appendDummyInput()
-        .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_4_digit_display.png", 70, 59, "*"))
-        .appendField("relié à la sortie CLK")
-        .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN_CLK")
-        .appendField("et DIO")
-        .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN_DIO");
-    this.appendValueInput("NUMBER")
-        .setCheck("Number")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("Nombre");
-    this.appendDummyInput()
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField(new Blockly.FieldCheckbox("FALSE"), "ZEROS")
-        .appendField("Avec des '0' devant");
-    this.setInputsInline(false);
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(Blockly.Blocks.drissGrove.HUE);
-    this.setTooltip('');
-    this.setHelpUrl('');
-  }
-};
+Blockly.Blocks['driss_grove_4_digit_display_displayNumberDec'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("Ecrire sur l'afficheur 4 digits");
+      this.appendDummyInput()
+          .appendField("relié à la sortie CLK")
+          .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN_CLK")
+          .appendField("et DIO")
+          .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN_DIO");
+      this.appendValueInput("NUMBER")
+          .setCheck("Number")
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_4_digit_display.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize, "*"))
+          .appendField("Le nombre");
+     this.appendValueInput("NBRE_DIGITS")
+          .setCheck("Number")
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("Nombre de digits à utiliser (1 à 4)");
+      this.appendValueInput("POSITION_DIGIT")
+          .setCheck("Number")
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("Commencer  l'écriture sur le digit n° (0-1-2-3)");
+      this.appendDummyInput()
+          .appendField(new Blockly.FieldCheckbox("FALSE"), "ZEROS")
+          .appendField("Afficher les '0' devant le nombre");
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(Blockly.Blocks.drissGrove.HUE);
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+  };
 
 
 //Grove Grove - 4-Digit Display  DigitsOnOff
@@ -1543,6 +1548,29 @@ Blockly.Blocks.driss_grove_4_digit_display_digitsOnOff = {
 
 };
 
+//Grove  driss_grove_4_digit_display_setBrightness
+Blockly.Blocks['driss_grove_4_digit_display_setBrightness'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("Régler la luminosité de l'afficheur ");
+      this.appendDummyInput()
+          .appendField("relié à la sortie CLK ")
+          .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN_CLK")
+          .appendField("et DIO")
+          .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN_DIO");
+      this.appendValueInput("LUMINOSITE")
+          .setCheck("Number")
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_4_digit_display.png", Blockly.Arduino.imageSize*1.1,  Blockly.Arduino.imageSize, "*"))
+          .appendField("valeur de luminosité (0=sombre...maximale=7)");
+      this.setInputsInline(false);
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(Blockly.Blocks.drissGrove.HUE);
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+  };
 
 //  Biométrie ----------------------------------------------------------------------------------------------------------------------------------
 
