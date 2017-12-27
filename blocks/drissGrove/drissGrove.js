@@ -168,15 +168,22 @@ Blockly.Blocks.driss_temperature_and_humidity_sensor = {
         .appendField("mesurée par le capteur")
         .appendField(new Blockly.FieldDropdown([["DHT11","DHT11"], ["DHT21","DHT21"], ["DHT22","DHT22"]]), "REF");
     this.appendDummyInput()
-        .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_temperature_and_humidity_sensor_pro.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize/1.1, "*"))
+        .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_temperature_and_humidity_sensor_pro.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize/1.1, "*"), "IMG_CAPTEUR_TEMP_HUM")
         .appendField(Blockly.Msg.DRISS_GROVE_TEXT2)
         .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownAnalogPins), "PIN");
     this.setOutput(true, null);
     this.setColour(Blockly.Blocks.drissGrove.HUE);
     this.setTooltip('');
     this.setHelpUrl('');
-
-  }
+  },
+  
+        onchange: function(ev) {
+          var ref_capteur = this.getTitleValue('REF');
+          var image = "";
+          if(ref_capteur == "DHT11") image = "blocks/drissGrove/Grove_temperature_and_humidity_sensor.png";
+          if(ref_capteur == "DHT22") image = "blocks/drissGrove/Grove_temperature_and_humidity_sensor_pro.png";
+          this.getField("IMG_CAPTEUR_TEMP_HUM").setValue(image);
+         }
 };
 
 
@@ -194,7 +201,7 @@ Blockly.Blocks.driss_grove_gaz_sensor_mq5_ratio = {
     this.appendValueInput("R0")
         .setCheck(null)
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("Résistance du capteur dans l'air pur : R0");
+        .appendField("Résistance du capteur dans l'air propre : R0");
     this.setInputsInline(false);
     this.setOutput(true, null);
     this.setColour(Blockly.Blocks.drissGrove.HUE);
@@ -1057,51 +1064,52 @@ Blockly.Blocks.driss_grove_rfid_id_raw = {
 
 
 //Grove Ecran OLED 96x96 init OK
-Blockly.Blocks.driss_grove_oled_96x96_init = {
-  category: 'driss_grove : Afficheur OLED 96x96',
-  helpUrl: '',
-  init: function() {
-    this.appendDummyInput()
-        .appendField("Initialiser l'écran OLED 96x96");
-    this.setInputsInline(false);
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(36);
-    this.setTooltip('');
-    this.setHelpUrl('');
-  }
-};
+Blockly.Blocks['driss_grove_oled_96x96_init'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("Initialiser l'écran OLED 96x96");
+      this.appendDummyInput()
+          .appendField("Version du module OLED")
+          .appendField(new Blockly.FieldDropdown([["SSD1327","SSD1327"], ["SH1107G","SH1107G"]]), "VERSION");
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(36);
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+  };
+
 
 //Grove Ecran OLED 96x96 show text at XY OK
 Blockly.Blocks.driss_grove_oled_96x96_show_text_at_XY = {
-  category: 'driss_grove : Afficheur OLED 96x96',
-  helpUrl: '',
-  init: function() {
-    this.appendDummyInput()
-        .appendField("Afficher le texte sur l'écran OLED 96x96");
-    this.appendValueInput("OLED_96x96_TEXTE")
-        .setCheck("String")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("Texte");
-    this.appendDummyInput()
-        .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_OLED_Display_96x96.png", Blockly.Arduino.imageSize*1.1,  Blockly.Arduino.imageSize, "*"));
-    this.appendValueInput("OLED_96x96_LIG")
-        .setCheck("Number")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("Commencer l'écrirure à la position :")
-        .appendField("Ligne");
-    this.appendValueInput("OLED_96x96_COL")
-        .setCheck("Number")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("Colonne");
-    this.setInputsInline(false);
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(Blockly.Blocks.drissGrove.HUE);
-    this.setTooltip('');
-    this.setHelpUrl('');
-  }
-
+    init: function() {
+        this.appendDummyInput()
+            .appendField("Afficher le texte sur l'écran OLED 96x96");
+        this.appendValueInput("OLED_96x96_TEXTE")
+            .setCheck("String")
+            .setAlign(Blockly.ALIGN_RIGHT)
+            .appendField("Texte");
+        this.appendValueInput("GRAY_LEVEL")
+            .setCheck("Number")
+            .setAlign(Blockly.ALIGN_RIGHT)
+            .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_OLED_Display_96x96.png", Blockly.Arduino.imageSize*1.1,  Blockly.Arduino.imageSize, "*"))
+            .appendField("Niveau de gris (0-15)");
+        this.appendValueInput("OLED_96x96_LIG")
+            .setCheck("Number")
+            .setAlign(Blockly.ALIGN_RIGHT)
+            .appendField("Commencer l'écrirure à la position :")
+            .appendField("Ligne");
+        this.appendValueInput("OLED_96x96_COL")
+            .setCheck("Number")
+            .setAlign(Blockly.ALIGN_RIGHT)
+            .appendField("Colonne");
+        this.setInputsInline(false);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(Blockly.Blocks.drissGrove.HUE);
+     this.setTooltip("");
+     this.setHelpUrl("");
+      }
 };
 
 
@@ -1113,12 +1121,11 @@ Blockly.Blocks.driss_grove_oled_96x96_set_cursot_at_XY = {
   init: function() {
     this.appendDummyInput()
         .appendField("Déplacer le curseur sur l'écran");
-    this.appendDummyInput()
-        .appendField("OLED 96x96 à la position");
     this.appendValueInput("OLED_96x96_LIG")
         .setCheck("Number")
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("Ligne");
+        .appendField("OLED 96x96 à la position")
+        .appendField("         Ligne");
     this.appendValueInput("OLED_96x96_COL")
         .setCheck("Number")
         .setAlign(Blockly.ALIGN_RIGHT)
@@ -1127,8 +1134,8 @@ Blockly.Blocks.driss_grove_oled_96x96_set_cursot_at_XY = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(Blockly.Blocks.drissGrove.HUE);
-    this.setTooltip('');
-    this.setHelpUrl('');
+ this.setTooltip("");
+ this.setHelpUrl("");
   }
 
 };
@@ -1144,6 +1151,10 @@ Blockly.Blocks.driss_grove_oled_96x96_show_text = {
         .setCheck("String")
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField("Texte");
+    this.appendValueInput("GRAY_LEVEL")
+        .setCheck("Number")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("Niveau de gris (0-15)");
     //this.appendDummyInput()
     //    .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_OLED_Display_96x96.png", 70, 60, "*"));
     this.setInputsInline(false);
@@ -1167,6 +1178,10 @@ Blockly.Blocks.driss_grove_oled_96x96_show_number = {
         .setCheck("Number")
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField("Nombre");
+    this.appendValueInput("GRAY_LEVEL")
+        .setCheck("Number")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("Niveau de gris (0-15)");
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -1188,6 +1203,10 @@ Blockly.Blocks.driss_grove_oled_96x96_show_logo = {
         .setCheck("String")
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField("Logo");
+        this.appendValueInput("GRAY_LEVEL")
+        .setCheck("Number")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("Niveau de gris (0-15)");
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);

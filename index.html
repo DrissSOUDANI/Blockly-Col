@@ -1311,11 +1311,35 @@
 
          <category name="CAT_DRISS_GROVE_OLED_96x96" colour="#8181F7">
             <block type="driss_grove_oled_96x96_init"></block>
-            <block type="driss_grove_oled_96x96_show_text_at_XY"></block>
+            <block type="driss_grove_oled_96x96_show_text_at_XY">
+				<value name="GRAY_LEVEL">
+					<shadow type="math_number">
+						<field name="NUM">15</field>
+					</shadow>
+				</value>
+			</block>
             <block type="driss_grove_oled_96x96_set_cursot_at_XY"></block>
-            <block type="driss_grove_oled_96x96_show_text"></block>
-            <block type="driss_grove_oled_96x96_show_number"></block>
-            <block type="driss_grove_oled_96x96_show_logo"></block>
+            <block type="driss_grove_oled_96x96_show_text">
+				<value name="GRAY_LEVEL">
+					<shadow type="math_number">
+						<field name="NUM">15</field>
+					</shadow>
+				</value>
+			</block>
+            <block type="driss_grove_oled_96x96_show_number">
+				<value name="GRAY_LEVEL">
+					<shadow type="math_number">
+						<field name="NUM">15</field>
+					</shadow>
+				</value>
+			</block>
+            <block type="driss_grove_oled_96x96_show_logo">
+				<value name="GRAY_LEVEL">
+					<shadow type="math_number">
+						<field name="NUM">15</field>
+					</shadow>
+				</value>
+			</block>
             <block type="driss_grove_oled_96x96_clear_screen"></block> 
         </category>
 

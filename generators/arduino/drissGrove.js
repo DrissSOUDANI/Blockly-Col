@@ -808,21 +808,21 @@ Blockly.Arduino.driss_grove_bluetooth_v30_bt_init = function() {
   
   //dans fonctions
   Blockly.Arduino.codeFunctions_['define_setupBlueToothConnection'] = '\nvoid setupBlueToothConnection() {\n'+
-   ' //bt.begin(9600);\n'+ 
+   //' //bt.begin(9600);\n'+ 
    ' bt.print("AT");\n'+  
    ' delay(400);\n'+ 
-   ' bt.print("AT+DEFAULT");             // Restore all setup value to factory setup\n'+ 
+   ' bt.print("AT+DEFAULT");             // restauration au valeurs d"usine\n'+ 
    ' delay(2000);\n'+      
-   ' bt.print("AT+NAME'+bt_name+'");    // set the bluetooth name as "SeeedBTSlave" ,the length of bluetooth name must less than 12 characters.\n'+
+   ' bt.print("AT+NAME'+bt_name+'");    // Définir le nom du Bluetooth (12 caractères maxi).\n'+
    ' delay(400);\n'+
-   ' bt.print("AT+PIN'+bt_pinCode+'");             // set the pair code to connect \n'+
+   ' bt.print("AT+PIN'+bt_pinCode+'");  // Définir le code PIN \n'+
    ' delay(400);\n'+
-   ' //bt.print("AT+ROLEM");             // set the bluetooth work in slave mode\n'+
-   ' //delay(400);\n'+
+   //' //bt.print("AT+ROLEM");             // Mode Esclave\n'+
+   //' //delay(400);\n'+
    ' bt.print("AT+AUTH1");\n'+
    ' delay(400);\n'+
-   ' //blueToothSerial.print("AT+CLEAR");             // Clear connected device mac address\n'+
-   ' //delay(400);\n'+
+   //' //blueToothSerial.print("AT+CLEAR"); // Clear connected device mac address\n'+
+   //' //delay(400);\n'+
    ' bt.flush();\n'+
    '}\n';  
 
@@ -995,7 +995,7 @@ Blockly.Arduino.driss_grove_rfid_id_raw = function() {
 Blockly.Arduino.driss_grove_lcd_rgb_power = function() {
   var dropdown_stat = this.getFieldValue('STAT');
 
-  Blockly.Arduino.includes_['define_lcd_rgb'] = '#include <rgb_lcd.h>';
+  Blockly.Arduino.includes_['define_rgb_lcd'] = '#include <rgb_lcd.h>';
   Blockly.Arduino.includes_['define_Wire'] = '#include <Wire.h>';
 
   Blockly.Arduino.variables_['var_lcd_rgb'] = 'rgb_lcd lcd_rgb;';
@@ -1015,7 +1015,7 @@ Blockly.Arduino.driss_grove_lcd_rgb_power = function() {
 Blockly.Arduino.driss_grove_lcd_rgb_clean = function() {
   var dropdown_stat = this.getFieldValue('STAT');
 
-  Blockly.Arduino.includes_['define_lcd_rgb'] = '#include <rgb_lcd.h>';
+  Blockly.Arduino.includes_['define_rgb_lcd'] = '#include <rgb_lcd.h>';
   Blockly.Arduino.includes_['define_Wire'] = '#include <Wire.h>';
 
   Blockly.Arduino.variables_['var_lcd_rgb'] = 'rgb_lcd lcd_rgb;';
@@ -1082,7 +1082,7 @@ Blockly.Arduino.driss_grove_lcd_rgb_write_row = function() {
   Blockly.Arduino.variables_['var_lcd_rgb'] = 'rgb_lcd lcd_rgb;\n';
 
   Blockly.Arduino.setups_['setup_lcd_rgb'] = ''+
-  ' lcd_rgb.begin(16, 2);   // set up the LCD s number of columns and rows:\n';
+  ' lcd_rgb.begin(16, 2);   // Définir le nombre de lignes et de colonnes du LCD:\n';
 
   var code = 'lcd_rgb.setCursor(0, 0);\n' +
   'lcd_rgb.print('+value_ligne_0+');\n' +
@@ -1097,7 +1097,7 @@ Blockly.Arduino.driss_grove_lcd_rgb_scroll = function() {
   var nbre = Blockly.Arduino.valueToCode(this, 'NBRE', Blockly.Arduino.ORDER_ATOMIC);
   var delay = Blockly.Arduino.valueToCode(this, 'DELAY', Blockly.Arduino.ORDER_ATOMIC);
 
-  Blockly.Arduino.includes_['define_lcd_rgb'] = '#include <rgb_lcd.h>\n';
+  Blockly.Arduino.includes_['define_rgb_lcd'] = '#include <rgb_lcd.h>\n';
   Blockly.Arduino.includes_['define_Wire'] = '#include <Wire.h>\n';
 
   Blockly.Arduino.variables_['var_lcd_rgb'] = 'rgb_lcd lcd_rgb;';
@@ -1151,7 +1151,7 @@ Blockly.Arduino.driss_grove_lcd_rgb_set_retro_color = function() {
     default : code = 'lcd_rgb.setRGB(128, 128, 128);\n'; break;
   }
 
-  Blockly.Arduino.includes_['define_lcd_rgb'] = '#include <rgb_lcd.h>\n';
+  Blockly.Arduino.includes_['define_rgb_lcd'] = '#include <rgb_lcd.h>\n';
   Blockly.Arduino.includes_['define_Wire'] = '#include <Wire.h>\n';
 
   Blockly.Arduino.variables_['var_lcd_rgb'] = 'rgb_lcd lcd_rgb;';
@@ -1168,50 +1168,56 @@ Blockly.Arduino.driss_grove_lcd_rgb_set_retro_color = function() {
 
 //Grove Ecran OLED 96x96 init OK
 Blockly.Arduino.driss_grove_oled_96x96_init = function() {
+
+  var version = this.getFieldValue('VERSION');
     //dans include définition    
   Blockly.Arduino.includes_['define_Wire'] = '#include <Wire.h>';
   Blockly.Arduino.includes_['define_SeeedGrayOLED'] = '#include <SeeedGrayOLED.h>';
   Blockly.Arduino.includes_['define_avr_pgmspace'] = '#include <avr/pgmspace.h>';
   
   //dans fonctions
-  Blockly.Arduino.codeFunctions_['define_oled_96x96_displayTexte'] = '\nvoid Oled96x96_DisplayTexte(int lig, int col, String texte, int niveauDeGris) {\n'+
+  Blockly.Arduino.codeFunctions_['define_oled_96x96_displayTexte'] = '\nvoid Oled96x96_DisplayTexte(int lig, int col, String texte, int grayLevel) {\n'+
    ' char* txt =  new char[texte.length()+1];\n'+
    ' strcpy(txt, texte.c_str());\n'+
-   ' SeeedGrayOled.setTextXY(lig,col);  //set Cursor to ith line, 0th column\n'+ 
-   ' SeeedGrayOled.setGrayLevel(niveauDeGris); //Set Grayscale level. Any number between 0 - 15.\n'+  
+   ' SeeedGrayOled.setTextXY(lig,col);  //position du curseur Lig - Col\n'+ 
+   //' SeeedGrayOled.setGrayLevel(niveauDeGris); //niveau de gris 0-15.\n'+ 
+   ' SeeedGrayOled.setGrayLevel(grayLevel);\n'+ 
    ' SeeedGrayOled.putString(txt);\n'+ 
    '}\n';    
 
    Blockly.Arduino.codeFunctions_['define_oled_96x96_setCursor'] = '\nvoid Oled96x96_SetCursorAt(int lig, int col) {\n'+
-   ' SeeedGrayOled.setTextXY(lig,col);  //set Cursor to ith line, 0th column\n'+ 
+   ' SeeedGrayOled.setTextXY(lig,col);  //Positionner le curseur : Ligne - Colonne\n'+ 
    '}\n';    
 
-   Blockly.Arduino.codeFunctions_['define_oled_96x96_putString'] = '\nvoid Oled96x96_putString(String texte) {\n'+
+   Blockly.Arduino.codeFunctions_['define_oled_96x96_putString'] = '\nvoid Oled96x96_putString(String texte, int grayLevel) {\n'+
    ' char* txt =  new char[texte.length()+1];\n'+
    ' strcpy(txt, texte.c_str());\n'+
-   ' SeeedGrayOled.setContrastLevel(255); //Set display contrast ratio to half level( i.e 256/2 1 )\n'+ 
+   //' SeeedGrayOled.setContrastLevel(255); \n'+ 
+   ' SeeedGrayOled.setGrayLevel(grayLevel);\n'+
    ' SeeedGrayOled.putString(txt);\n'+ 
    '}\n'; 
 
-   Blockly.Arduino.codeFunctions_['define_oled_96x96_putNumber'] = '\nvoid Oled96x96_putNumber(long n) {\n'+
-   ' SeeedGrayOled.setContrastLevel(255); //Set display contrast ratio to half level( i.e 256/2 1 )\n'+ 
+   Blockly.Arduino.codeFunctions_['define_oled_96x96_putNumber'] = '\nvoid Oled96x96_putNumber(long n, int grayLevel) {\n'+
+   //' SeeedGrayOled.setContrastLevel(255); \n'+ 
+   ' SeeedGrayOled.setGrayLevel(grayLevel);\n'+
    ' SeeedGrayOled.putNumber(n);\n'+ 
    '}\n'; 
 
-   Blockly.Arduino.codeFunctions_['define_oled_96x96_drawLogo'] = '\nvoid Oled96x96_drawLogo(unsigned char logo[]) {\n'+
-   ' SeeedGrayOled.setContrastLevel(255); //Set display contrast ratio to half level( i.e 256/2 1 )\n'+ 
+   Blockly.Arduino.codeFunctions_['define_oled_96x96_drawLogo'] = '\nvoid Oled96x96_drawLogo(unsigned char logo[], int grayLevel) {\n'+
+   //' SeeedGrayOled.setContrastLevel(255); //Reglage du contraste\n'+ 
+   ' SeeedGrayOled.setGrayLevel(grayLevel);\n'+
    ' SeeedGrayOled.drawBitmap(logo,96*96/8);\n'+ 
    '}\n'; 
 
    Blockly.Arduino.codeFunctions_['define_oled_96x96_clearScreen'] = '\nvoid Oled96x96_clearScreen() {\n'+
-   ' SeeedGrayOled.clearDisplay();     //Clear Display.\n'+ 
+   ' SeeedGrayOled.clearDisplay();     //Effacer l"affichage.\n'+ 
    '}\n'; 
 
   Blockly.Arduino.setups_['setup_oled_96x96'] = 'Wire.begin();\n'+
-  ' SeeedGrayOled.init();             //initialize SEEED OLED display\n'+
-  ' SeeedGrayOled.clearDisplay();     //Clear Display.\n'+
-  ' SeeedGrayOled.setNormalDisplay(); //Set Normal Display Mode\n'+
-  ' SeeedGrayOled.setVerticalMode();  // Set to vertical mode for displaying text\n';
+  ' SeeedGrayOled.init('+version+');  //initializer L"écran OLED 2 versions :SH1107G ou SSD1327 \n'+
+  ' SeeedGrayOled.clearDisplay();     //Effacer l"affichage.\n'+
+  ' SeeedGrayOled.setNormalDisplay(); //Mode normal\n'+
+  ' SeeedGrayOled.setVerticalMode();  // Mode vertical pour afficher le texte\n';
   var code = '';
 
   return code;
@@ -1241,29 +1247,32 @@ Blockly.Arduino.driss_grove_oled_96x96_set_cursot_at_XY = function() {
 //Grove Ecran OLED 96x96 show text OK
 Blockly.Arduino.driss_grove_oled_96x96_show_text = function() {
   var value_oled_96x96_texte = Blockly.Arduino.valueToCode(this, 'OLED_96x96_TEXTE', Blockly.Arduino.ORDER_ATOMIC);
-  
-  var code = 'Oled96x96_putString('+value_oled_96x96_texte+') ;\n';
+  var grayLevel = Blockly.Arduino.valueToCode(this, 'GRAY_LEVEL', Blockly.Arduino.ORDER_ATOMIC);
+  var code = 'Oled96x96_putString('+value_oled_96x96_texte+', '+grayLevel+') ;\n';
   return code;
 };
 
 //Grove Ecran OLED 96x96 show text OK
 Blockly.Arduino.driss_grove_oled_96x96_show_number = function() {
   var value_oled_96x96_number = Blockly.Arduino.valueToCode(this, 'OLED_96x96_NUMBER', Blockly.Arduino.ORDER_ATOMIC);
-  
-  var code = 'Oled96x96_putNumber('+value_oled_96x96_number+') ;\n';
+  var grayLevel = Blockly.Arduino.valueToCode(this, 'GRAY_LEVEL', Blockly.Arduino.ORDER_ATOMIC);
+
+  var code = 'Oled96x96_putNumber('+value_oled_96x96_number+', '+grayLevel+') ;\n';
   return code;
 };
 
 //Grove Ecran OLED 96x96 show logo OK
 Blockly.Arduino.driss_grove_oled_96x96_show_logo = function() {
   var Oled96x96_drawLogo = Blockly.Arduino.valueToCode(this, 'OLED_96x96_LOGO', Blockly.Arduino.ORDER_ATOMIC);
+  var grayLevel = Blockly.Arduino.valueToCode(this, 'GRAY_LEVEL', Blockly.Arduino.ORDER_ATOMIC);
+  
   Oled96x96_drawLogo = Oled96x96_drawLogo.substr(1);
    Oled96x96_drawLogo = Oled96x96_drawLogo.substr(0,Oled96x96_drawLogo.length-1);
   var code = 'static const unsigned char logo[] PROGMEM = \n'+
              '{\n'+
              Oled96x96_drawLogo +'\n'+
              '};\n' +
-             'Oled96x96_drawLogo(logo) ;\n';
+             'Oled96x96_drawLogo(logo, '+grayLevel+') ;\n';
   return code;
 };
 
