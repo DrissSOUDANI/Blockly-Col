@@ -124,6 +124,12 @@ var MSG = {
   //Driss +
   btn_about:" A propos...",
   span_fichier : " Fichier",
-  span_configurer :"  Configurer"
+  span_exemples : " Exemples",
+  
+  span_exemple_01 : " Télécommandes",
+
+  span_configurer :"  Configurer",
+
+  exemplesModalLabel:"Exemples de programmes ..."
 
 };

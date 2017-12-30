@@ -238,7 +238,7 @@ select#pinout{width:90%; margin:1px auto;}
 /*pour ecrans xs*/
 #tab_arduino, #tab_blocks, #btn_Programme, #btn_Code_Arduino {width:100%; }
 
-#btn_about {margin-top:10px;}
+#btn_about, #btn_exemples {margin-top:10px;}
 
 .navbar-header{width:25%;}
 .navbar-right{padding-top:10px;}

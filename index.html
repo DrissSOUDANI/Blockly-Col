@@ -123,7 +123,7 @@
 									<span class="glyphicon glyphicon glyphicon-download-alt"></span> 
 									Télécharger
 							</a></li>
-
+							
 							
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-folder-open"></span> <span id="span_fichier"></span> <span class="caret"></span></a>
@@ -170,14 +170,18 @@
 								</ul>
 							</li>
 						
-						
-
-
+						<!--
+							<li>
+								<button id="btn_exemples" href="#" class="btn btn-default" data-toggle="modal" data-target="#exemplesModal">
+								<span class="glyphicon glyphicon-hand-right"> </span><span id="span_exemples" class="hidden-md hidden-sm hidden-xs"> </span></button>
+							</li>
+						-->
 						
 							<li>
 								<button id="btn_about" href="#" class="btn btn-default" data-toggle="modal" data-target="#aboutModal">
 								<span class="glyphicon glyphicon-user"> </span><span id="span_about" class="hidden-md hidden-sm hidden-xs"> </span></button>
 							</li>
+						
 						</ul>
 						</div><!-- /.navbar-collapse -->
 					</div><!-- /.container-fluid -->
@@ -210,11 +214,6 @@
 					<span id="span_delete"> </span>
 				</button>
 				<div id="btns_blocks">
-					
-					
-					
-					
-					
 					<button id="btn_size" class="btn btn-default">
 						<span id="icon_btn_size" class="glyphicon glyphicon-fullscreen"> </span>
 					</button>
@@ -313,7 +312,7 @@
 			  <br />	  
 			  <b><div align="center"><a href="#" target='blank'><font size="12"><span id="span_forms_about" style="font-style: bold;"> </span></font></a></div></b>
 			  
-			  <br /><i>version 21-08-2017 - v1.4 "Boutazoult"</i>
+			  <br /><i>version 27/12/2017 - v2 "Tim99it"</i>
 			  
 			  
 			  
@@ -321,6 +320,24 @@
     </div>
   </div>
 </div>
+
+<!-- exemples modal -->
+<div class="modal fade" id="exemplesModal" tabindex="-1" role="dialog" aria-labelledby="exemplesModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+		  <div class="modal-content">
+			<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&#215;</span></button>
+			  <h4 class="modal-title" id="exemplesModalLabel"></h4>
+			</div>
+			<div class="modal-body">
+				<b>Télécommandes et recepteurs IR Grove</b>
+				<ul>
+					<li><a href="#" onclick="chghtml()" id="testdriss">Test_Telecommande_01</a></li>
+				</ul>
+			</div>
+		  </div>
+		</div>
+	  </div>
 
 
 <!-- picture modal -->
@@ -1395,15 +1412,24 @@
         
 
         <category name="CAT_DRISS_GROVE_COMMUNICATION" colour="#8181F7">
-            <block type="driss_grove_bluetooth_v30_bt_init"></block>
-            <block type="driss_grove_bluetooth_v30_bt_available"></block>
-            <block type="driss_grove_bluetooth_v30_bt_read"></block>
-            <block type="driss_grove_bluetooth_v30_bt_send"></block>
-            <block type="driss_grove_rfid_int"></block>
-            <block type="driss_grove_rfid_available"></block>
-            <block type="driss_grove_rfid_read"></block>
-            <block type="driss_grove_rfid_id_raw"></block>
-           
+			<category name="CAT_DRISS_GROVE_BLUETOOTH" colour="#8181F7">
+				<block type="driss_grove_bluetooth_v30_bt_init"></block>
+				<block type="driss_grove_bluetooth_v30_bt_available"></block>
+				<block type="driss_grove_bluetooth_v30_bt_read"></block>
+				<block type="driss_grove_bluetooth_v30_bt_send"></block>
+			</category>
+			<category name="CAT_DRISS_GROVE_RFID" colour="#8181F7">
+				<!--<block type="driss_grove_rfid_init"></block>-->
+				
+				<block type="driss_grove_rfid_write_code"></block>
+				<block type="driss_grove_rfid_write_list_of_codes"></block>
+				<block type="driss_grove_rfid_read_tag"></block>
+				<block type="driss_grove_rfid_test_tag_code"></block>
+			</category>
+
+			<category name="CAT_DRISS_GROVE_NFC" colour="#8181F7">
+
+			</category>
         </category>
 
         <category name="CAT_DRISS_GROVE_BIOMETRIE" colour="#8181F7">
@@ -1506,6 +1532,5 @@ $(window).trigger( "resize" );
 */
 
 </script>
-
 </body>
 </html>

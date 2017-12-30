@@ -1817,7 +1817,10 @@ Blockly.Msg.CAT_DRISS_GROVE_KEYPAD ="- Claviers";
 Blockly.Msg.CAT_DRISS_GROVE_LCD_RGB = "- Afficheur LCD RGB";
 Blockly.Msg.CAT_DRISS_GROVE_OLED_96x96 = "- Afficheur OLED 96x96";
 Blockly.Msg.CAT_DRISS_GROVE_4_Digit_Display ="- Afficheur 4 digits";
-Blockly.Msg.CAT_DRISS_GROVE_COMMUNICATION ="- Communication";
+Blockly.Msg.CAT_DRISS_GROVE_COMMUNICATION =" Communication";
+Blockly.Msg.CAT_DRISS_GROVE_BLUETOOTH =" - Bluetooth";
+Blockly.Msg.CAT_DRISS_GROVE_RFID =" - RFID";
+Blockly.Msg.CAT_DRISS_GROVE_NFC =" - NFC";
 Blockly.Msg.CAT_DRISS_GROVE_BIOMETRIE="- Biométrie";
 
 Blockly.Msg.DRISS_GROVE_ENTREE = "Entrée";

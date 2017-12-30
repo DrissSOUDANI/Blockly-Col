@@ -289,8 +289,11 @@ Code.initLanguage = function() {
   // Driss +
   $('#btn_about').attr('title', MSG['btn_about']);
   $('#span_fichier').text(MSG['span_fichier']);
+  $('#span_exemples').text(MSG['span_exemples']);
+  $('#span_exemple_01').text(MSG['span_exemple_01']);
   $('#span_configurer').text(MSG['span_configurer']);
-
+  $('#span_configurer').text(MSG['span_configurer']);
+  $('#exemplesModalLabel').text(MSG['exemplesModalLabel']);
   // Fin Driss +
 
   

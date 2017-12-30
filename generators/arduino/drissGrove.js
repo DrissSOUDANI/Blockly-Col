@@ -914,80 +914,119 @@ Blockly.Arduino.driss_grove_bluetooth_v30_bt_send = function() {
 };
 
 
+//Grove RFID driss_grove_rfid_init
+/*
+Blockly.Arduino.driss_grove_rfid_init = function() {
+  var Rx_pin = this.getTitleValue('PIN_RX');
+  var Tx_pin = Number(Rx_pin) + 1;
 
-//Grove RFID Init
-Blockly.Arduino.driss_grove_rfid_int = function() {
-  var dropdown_RX_pin = Blockly.Arduino.valueToCode(this, 'PIN_RX', Blockly.Arduino.ORDER_ATOMIC);
-  
-  var rfid = 'rfid_1';//+dropdown_RX_pin;
-  var tag = 'tag_1';//+dropdown_RX_pin;
+  var rfid = 'rfid_'+Rx_pin+"_"+Tx_pin;
   
   //dans include définition    
   Blockly.Arduino.includes_['define_SoftwareSerial'] = "#include <SoftwareSerial.h>"; 
-  Blockly.Arduino.includes_['define_SeeedRFIDLib'] = "#include <SeeedRFIDLib.h>"; 
+  Blockly.Arduino.includes_['define_RFID125'] = "#include <RFID125.h>"; 
 
-  Blockly.Arduino.variables_['var_'+rfid] = "SeeedRFIDLib "+rfid+"(255, "+dropdown_RX_pin+");\n"; 
-  Blockly.Arduino.variables_['var_'+tag] = "RFIDTag "+tag+";\n"; 
-  
- 
-  //dans fonctions
-  Blockly.Arduino.codeFunctions_['define_rfid_read'] = "void rfid_read() {\n"+
-   " tag_1 = rfid_1.readId();\n"+
-   "}\n";
-
-   Blockly.Arduino.codeFunctions_['define_rfid_id'] = "long rfid_id() {\n"+
-   " return(tag_1.id);\n"+
-   "}\n";
-
-   Blockly.Arduino.codeFunctions_['define_rfid_raw'] = "String rfid_raw() {\n"+
-   " return(tag_1.raw);\n"+
-   "}\n";
-
+  Blockly.Arduino.variables_['var_'+rfid] = "RFID125 "+rfid+";\n"; 
   
   //dans setup    
-  Blockly.Arduino.setups_['setup_rfid'] = ''+
-  'Serial.begin(9600);\n'+
-  'Serial.println("Serial Ready");\n';   
+  Blockly.Arduino.setups_['setup_'+rfid] = rfid+'.brancher('+Rx_pin+', '+Tx_pin+');\n';   
   
 
   var code = '';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
+*/
 
 
-//Grove RFID tag available
-Blockly.Arduino.driss_grove_rfid_available = function() {
-  var code = 'rfid_1.isIdAvailable()';
-  return [code, Blockly.Arduino.ORDER_ATOMIC];
-};
+//Grove RFID driss_grove_rfid_write_code
+Blockly.Arduino.driss_grove_rfid_write_code = function() {
+  var code = Blockly.Arduino.valueToCode(this, 'CODE', Blockly.Arduino.ORDER_ATOMIC);
+  var Rx_pin = this.getTitleValue('PIN_RX');
+  var Tx_pin = Number(Rx_pin) + 1;
 
-
-//Grove RFID  read
-Blockly.Arduino.driss_grove_rfid_read = function() {
+  var rfid = 'rfid_'+Rx_pin+"_"+Tx_pin;
   
-   var code = 'rfid_read();\n';
+  //dans include définition    
+  Blockly.Arduino.includes_['define_SoftwareSerial'] = "#include <SoftwareSerial.h>"; 
+  Blockly.Arduino.includes_['define_RFID125'] = "#include <RFID125.h>"; 
+
+  Blockly.Arduino.variables_['var_'+rfid] = "RFID125 "+rfid+";\n"; 
+
+  //dans setup    
+  Blockly.Arduino.setups_['setup_'+rfid] = rfid+'.brancher('+Rx_pin+', '+Tx_pin+');\n'; 
+
+  var code = rfid+'.ecrireCode("'+code+'");\n';
   return code;
-  };
+}
 
+//Grove RFID driss_grove_rfid_write_list_of_codes
+Blockly.Arduino.driss_grove_rfid_write_list_of_codes = function() {
+  var Rx_pin = this.getTitleValue('PIN_RX');
+  var Tx_pin = Number(Rx_pin) + 1;
+  var code_array = Blockly.Arduino.valueToCode(this, 'CODES', Blockly.Arduino.ORDER_ATOMIC);
 
-//Grove RFID id et raw
-Blockly.Arduino.driss_grove_rfid_id_raw = function() {
-  var dropdown_field = this.getFieldValue('ITEM');
-  var code = '';
-  switch(dropdown_field){
-    case "ID" : code = 'rfid_id()';
-                break;
-    case "RAW" : code = 'rfid_raw()';
-                break;
-  }
+  var rfid = 'rfid_'+Rx_pin+"_"+Tx_pin;
   
+  //dans include définition    
+  Blockly.Arduino.includes_['define_SoftwareSerial'] = "#include <SoftwareSerial.h>"; 
+  Blockly.Arduino.includes_['define_RFID125'] = "#include <RFID125.h>"; 
+
+  Blockly.Arduino.variables_['var_'+rfid] = "RFID125 "+rfid+";\n"; 
+
+  //dans setup    
+  Blockly.Arduino.setups_['setup_'+rfid] = rfid+'.brancher('+Rx_pin+', '+Tx_pin+');\n'; 
+
+  var liste_of_codes = '"';
+  for(var i=0; i<code_array.length; i++){
+    if(code_array[i] != '{' && code_array[i] != '}' && code_array[i] != ",") {
+      liste_of_codes += code_array[i];
+    }
+  }
+  liste_of_codes += '"';
+
+  var code = rfid+'.ecrireCodes('+liste_of_codes+');\n';
+ 
+  return code;
+}
+
+//Grove RFID driss_grove_rfid_read_tag
+Blockly.Arduino.driss_grove_rfid_read_tag = function() {
+  var Rx_pin = this.getTitleValue('PIN_RX');
+  var Tx_pin = Number(Rx_pin) + 1;
+  var rfid = 'rfid_'+Rx_pin+"_"+Tx_pin;
+
+  //dans include définition    
+  Blockly.Arduino.includes_['define_SoftwareSerial'] = "#include <SoftwareSerial.h>"; 
+  Blockly.Arduino.includes_['define_RFID125'] = "#include <RFID125.h>"; 
+
+  Blockly.Arduino.variables_['var_'+rfid] = "RFID125 "+rfid+";\n"; 
+
+  //dans setup    
+  Blockly.Arduino.setups_['setup_'+rfid] = rfid+'.brancher('+Rx_pin+', '+Tx_pin+');\n'; 
+
+  var code = rfid+'.lireCode()';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
-};
+}
 
+//Grove RFID driss_grove_rfid_test_tag_code
+Blockly.Arduino.driss_grove_rfid_test_tag_code = function() {
+  var code = Blockly.Arduino.valueToCode(this, 'CODE', Blockly.Arduino.ORDER_ATOMIC);
+  var Rx_pin = this.getTitleValue('PIN_RX');
+  var Tx_pin = Number(Rx_pin) + 1;
+  var rfid = 'rfid_'+Rx_pin+"_"+Tx_pin;
 
+  //dans include définition    
+  Blockly.Arduino.includes_['define_SoftwareSerial'] = "#include <SoftwareSerial.h>"; 
+  Blockly.Arduino.includes_['define_RFID125'] = "#include <RFID125.h>"; 
 
+  Blockly.Arduino.variables_['var_'+rfid] = "RFID125 "+rfid+";\n"; 
 
+  //dans setup    
+  Blockly.Arduino.setups_['setup_'+rfid] = rfid+'.brancher('+Rx_pin+', '+Tx_pin+');\n'; 
 
+  var code = rfid+'.testerCode('+code+')';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+}
 
 //-Afficheur Grove - LCD ----------------------------------------------------------------------------------------------------------------------------------------
 

@@ -228,7 +228,7 @@ BlocklyDuino.load = function (event) {
   if (files.length != 1) {
     return;
   }
-
+  
   // FileReader
   var reader = new FileReader();
   reader.onloadend = function(event) {
@@ -281,6 +281,7 @@ BlocklyDuino.load = function (event) {
   };
   reader.readAsText(files[0]);
 };
+
 
 /**
  * Discard all blocks from the workspace. 
@@ -340,7 +341,7 @@ BlocklyDuino.bindFunctions = function() {
 	$('#btn_fakeload').on("click", function() {
 		$('#load').click();
 	});
-	
+
 	
 	$('#menuPanelBlockly li[id^=tab_]').on("click", function() {
 		BlocklyDuino.selectedTab = $(this).attr('id').substring(4);
@@ -623,6 +624,7 @@ BlocklyDuino.init = function() {
 	// load blocks stored in session or passed by url
 	//var urlFile = BlocklyDuino.getStringParamFromUrl('url', '');
 	var urlFile ="";
+
 	var loadOnce = null;
 	try {
 			loadOnce = window.localStorage.loadOnceBlocks;
@@ -635,7 +637,7 @@ BlocklyDuino.init = function() {
 		if (loadOnce != null)
 			{
 			if (!confirm(MSG['xmlLoad']))
-				{
+				{;
 				BlocklyDuino.loadBlocks();
 				}
 			}

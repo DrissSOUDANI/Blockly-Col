@@ -977,87 +977,136 @@ Blockly.Blocks.driss_grove_bluetooth_v30_bt_send = {
 };
 
 
-//Grove RFID Init
-Blockly.Blocks.driss_grove_rfid_int = {
-  category: 'driss_grove : communication',
-  helpUrl: '',
-  init: function() {
-    this.appendDummyInput()
-        .appendField("Initialiser le module RFID");
-    this.appendValueInput("PIN_RX")
-        .setCheck(null)
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_rfid.png", Blockly.Arduino.imageSize*1.1,  Blockly.Arduino.imageSize, "*"))
-        .appendField("Le pin Tx du module RFID est relié à l'entrée");
-    this.appendDummyInput()
-        .appendField("Attention : Pins utilisables  sur arduino Mega :");
-    this.appendDummyInput()
-        .appendField("10, 11, 12, 13, 14, 15, 50, 51, 52, 53, A8 (62), A9 (63),");
-    this.appendDummyInput()
-        .appendField("A10 (64), A11 (65), A12 (66), A13 (67), A14 (68), A15 (69). ");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(36);
-    this.setTooltip('');
-    this.setHelpUrl('');
-  }
-};
+//Grove RFID driss_grove_rfid_init
+/*
+Blockly.Blocks['driss_grove_rfid_init'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("Initialiser le lecteur RFID");
+      this.appendDummyInput()
+          .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_rfid_125.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize, "*"))
+          .appendField("relié à la broche")
+          .appendField(new Blockly.FieldDropdown(Blockly.Arduino.dropdownDigitalRFID), "PIN_RX")
+          .appendField("(Rx) et  3 (Tx)", "PIN_TX");
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(36);
+   this.setTooltip("");
+   this.setHelpUrl("");
+    },
+     onchange: function(ev) {
+        var pin_Rx = this.getTitleValue('PIN_RX');
+        var pin_Tx = Number(pin_Rx) + 1;
+        this.getField("PIN_TX").setValue("(Rx) et  "+pin_Tx+" (Tx)", "PIN_TX");
+        }
+  };
+*/
 
 
+//Grove RFID driss_grove_rfid_write_code
+Blockly.Blocks['driss_grove_rfid_write_code'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("Enregistrer le code dans la base de données");
+      this.appendDummyInput()
+          .appendField("du module RFID relié à la broche")
+          .appendField(new Blockly.FieldDropdown(Blockly.Arduino.dropdownDigitalRFID), "PIN_RX")
+          .appendField("(Rx) et 3 (Tx)", "PIN_TX");
+      this.appendValueInput("CODE")
+          .setCheck("Number")
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_rfid_125.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize, "*"))
+          .appendField("Code");
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(Blockly.Blocks.drissGrove.HUE);
+   this.setTooltip("");
+   this.setHelpUrl("");
+    },
+    onchange: function(ev) {
+       var pin_Rx = this.getTitleValue('PIN_RX');
+       var pin_Tx = Number(pin_Rx) + 1;
+       this.getField("PIN_TX").setValue("(Rx) et  "+pin_Tx+" (Tx)", "PIN_TX");
+       }
+  };
 
-//Grove RFID tag available
-Blockly.Blocks.driss_grove_rfid_available = {
-  category: 'driss_grove : communication',
-  helpUrl: '',
-  init: function() {
-    this.appendDummyInput()
-        .appendField("Un tag ou une carte est détectée par le lecteur RFID");
-    this.setOutput(true, null);
-    this.setColour(Blockly.Blocks.drissGrove.HUE);
-    this.setTooltip('');
-    this.setHelpUrl('');
-  }
-};
+  //Grove RFID driss_grove_rfid_write_list_of_codes
+  Blockly.Blocks['driss_grove_rfid_write_list_of_codes'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("Enregistrer la liste des codes")
+          .appendField("dans la base de données");
+      this.appendDummyInput()
+          //.appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_rfid_125.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize, "*"))
+          .appendField("du module RFID relié à la broche")
+          .appendField(new Blockly.FieldDropdown(Blockly.Arduino.dropdownDigitalRFID), "PIN_RX")
+          .appendField("(Rx) et 3 (Tx)", "PIN_TX");
+      this.appendValueInput("CODES")
+          .setCheck("Array")
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_rfid_125.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize, "*"))
+          
+          .appendField("Liste des codes");
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(Blockly.Blocks.drissGrove.HUE);
+   this.setTooltip("");
+   this.setHelpUrl("");
+    },
+    onchange: function(ev) {
+       var pin_Rx = this.getTitleValue('PIN_RX');
+       var pin_Tx = Number(pin_Rx) + 1;
+       this.getField("PIN_TX").setValue("(Rx) et  "+pin_Tx+" (Tx)", "PIN_TX");
+       }
+  };
 
+  //Grove RFID driss_grove_rfid_read_tag
+  Blockly.Blocks['driss_grove_rfid_read_tag'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("Le code lu par le lecteur RFID");
+      this.appendDummyInput()
+          .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_rfid_125.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize, "*"))
+          .appendField("relié à la broche ")
+          .appendField(new Blockly.FieldDropdown(Blockly.Arduino.dropdownDigitalRFID), "PIN_RX")
+          .appendField("(Rx) et 3 (Tx)", "PIN_TX");
+      this.setOutput(true, null);
+      this.setColour(Blockly.Blocks.drissGrove.HUE);
+   this.setTooltip("");
+   this.setHelpUrl("");
+    },
+    onchange: function(ev) {
+       var pin_Rx = this.getTitleValue('PIN_RX');
+       var pin_Tx = Number(pin_Rx) + 1;
+       this.getField("PIN_TX").setValue("(Rx) et  "+pin_Tx+" (Tx)", "PIN_TX");
+       }
+  };
 
-
-//Grove RFID read
-Blockly.Blocks.driss_grove_rfid_read = {
-  category: 'driss_grove : communication',
-  helpUrl: '',
-  init: function() {
-    this.appendDummyInput()
-        .appendField("Lire les données en provenance du Tag ou de la carte ");
-    this.appendDummyInput()
-        .appendField("située devant le lecteur RFID");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(Blockly.Blocks.drissGrove.HUE);
-    this.setTooltip('');
-    this.setHelpUrl('');
-  }
-};
-
-
-//Grove RFID ID et RAW
-Blockly.Blocks.driss_grove_rfid_id_raw = {
-  category: 'driss_grove : communication',
-  helpUrl: '',
-  init: function() {
-    this.appendDummyInput()
-        .appendField(new Blockly.FieldDropdown([["L'identifiant (ID)","ID"], ["Le numéro","RAW"]]), "ITEM")
-        .appendField(" du tag détecté par ");
-    this.appendDummyInput()
-        .appendField(new Blockly.FieldImage("blocks/drissGrove//tag_rfid.png", Blockly.Arduino.imageSize/1.3,  Blockly.Arduino.imageSize/1.7, "*"))
-        .appendField("le lecteur RFID ");
-    this.setOutput(true, null);
-    this.setColour(Blockly.Blocks.drissGrove.HUE);
-    this.setTooltip('');
-    this.setHelpUrl('');
-  }
-};
-
-
+  //Grove RFID  driss_grove_rfid_test_tag_code
+  Blockly.Blocks['driss_grove_rfid_test_tag_code'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("Ce code est enregistré dans la base de données ");
+      this.appendDummyInput()
+          .appendField("du module RFID relié à la broche")
+          .appendField(new Blockly.FieldDropdown(Blockly.Arduino.dropdownDigitalRFID), "PIN_RX")
+          .appendField("(Rx) et 3 (Tx)", "PIN_TX");
+      this.appendValueInput("CODE")
+          .setCheck("String")
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("Code");
+      this.setInputsInline(false);
+      this.setOutput(true, "Boolean");
+      this.setColour(Blockly.Blocks.drissGrove.HUE);
+   this.setTooltip("");
+   this.setHelpUrl("");
+    },
+    onchange: function(ev) {
+       var pin_Rx = this.getTitleValue('PIN_RX');
+       var pin_Tx = Number(pin_Rx) + 1;
+       this.getField("PIN_TX").setValue("(Rx) et  "+pin_Tx+" (Tx)", "PIN_TX");
+       }
+  };
 
 
 //-OLED 96x96 ----------------------------------------------------------------------------------------------------------------------------------------

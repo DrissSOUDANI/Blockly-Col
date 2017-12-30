@@ -122,5 +122,6 @@ var MSG = {
   span_forms:"--",
 
   //Driss +
-  btn_about:"About..."
+  btn_about:"About...",
+  btn_exemples:"Example..."
 };
