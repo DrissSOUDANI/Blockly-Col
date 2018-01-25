@@ -1109,6 +1109,90 @@ Blockly.Blocks['driss_grove_rfid_write_code'] = {
   };
 
 
+  // Grove driss_grove_RF_433MHz_send_text
+  Blockly.Blocks['driss_grove_RF_433MHz_send_text'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("Transmettre le texte par ondes radio");
+      this.appendDummyInput()
+          .appendField("à l'aide de l'émetteur relié à la sortie")
+          .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN");
+      this.appendDummyInput()
+          .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_433MHz_RF_emetteur.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize, "*"));
+      this.appendValueInput("TEXT")
+          .setCheck("String")
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("Texte");
+      this.setInputsInline(false);
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(Blockly.Blocks.drissGrove.HUE);
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+  };
+  
+// Grove driss_grove_RF_433MHz_send_number
+Blockly.Blocks['driss_grove_RF_433MHz_send_number'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("Transmettre le nombre par ondes radio");
+      this.appendDummyInput()
+          .appendField("à l'aide de l'émetteur relié à la sortie")
+          .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN");
+      this.appendDummyInput()
+          .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_433MHz_RF_emetteur.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize, "*"));
+      this.appendValueInput("NUMBER")
+          .setCheck("Number")
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("Nombre");
+      this.setInputsInline(false);
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(Blockly.Blocks.drissGrove.HUE);
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+  };
+
+// Grove driss_grove_RF_433MHz_receive_text
+Blockly.Blocks['driss_grove_RF_433MHz_receive_text'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("le texte reçu par ondes radio");
+      this.appendDummyInput()
+          .appendField("sur le récepteur relié à l'entrée")
+          .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN");
+      this.appendDummyInput()
+          .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_433MHz_RF_recepteur.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize, "*"));
+      this.setInputsInline(false);
+      this.setOutput(true, null);
+      this.setColour(Blockly.Blocks.drissGrove.HUE);
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+  };
+
+
+
+// Grove driss_grove_RF_433MHz_receive_number
+Blockly.Blocks['driss_grove_RF_433MHz_receive_number'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField("le nombre reçu par ondes radio");
+      this.appendDummyInput()
+          .appendField("sur le récepteur relié à l'entrée")
+          .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN");
+      this.appendDummyInput()
+          .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_433MHz_RF_recepteur.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize, "*"));
+      this.setInputsInline(false);
+      this.setOutput(true, null);
+      this.setColour(Blockly.Blocks.drissGrove.HUE);
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+  };
+
 
 //NFC
 

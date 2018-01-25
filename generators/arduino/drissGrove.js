@@ -1029,6 +1029,79 @@ Blockly.Arduino.driss_grove_rfid_test_tag_code = function() {
 }
 
 
+// Grove driss_grove_RF_433MHz_send_text
+Blockly.Arduino.driss_grove_RF_433MHz_send_text = function() {
+  var dropdown_pin = this.getFieldValue('PIN');
+  var text  = Blockly.Arduino.valueToCode(this, 'TEXT', Blockly.Arduino.ORDER_ATOMIC);
+
+  //var RF_emetteur = 'rf_'+dropdown_pin;
+  var RF_emetteur = 'rf_emetteur';
+
+  //dans include définition    
+  Blockly.Arduino.includes_['define_VirtualWire'] = "#include <VirtualWire.h>";  
+
+  //dans setup    
+  Blockly.Arduino.setups_['setup_'+RF_emetteur] = 'brancherEmetteur('+dropdown_pin+');\n'; 
+
+  var code = 'emettreTexte('+text+');\n';
+  return code;
+}
+
+
+// Grove driss_grove_RF_433MHz_receive_text
+Blockly.Arduino.driss_grove_RF_433MHz_receive_text = function() {
+  var dropdown_pin = this.getFieldValue('PIN');
+
+  var RF_recepteur = 'rf_recepteur';
+
+  //dans include définition    
+  Blockly.Arduino.includes_['define_VirtualWire'] = "#include <VirtualWire.h>";  
+
+  //dans setup    
+  Blockly.Arduino.setups_['setup_'+RF_recepteur] = 'brancherRecepteur('+dropdown_pin+');\n'; 
+
+  var code = 'recevoirTexte()';
+  return code;
+}
+
+// Grove driss_grove_RF_433MHz_receive_number
+Blockly.Arduino.driss_grove_RF_433MHz_receive_number = function() {
+  var dropdown_pin = this.getFieldValue('PIN');
+
+  var RF_recepteur = 'rf_recepteur';
+
+  //dans include définition    
+  Blockly.Arduino.includes_['define_VirtualWire'] = "#include <VirtualWire.h>";  
+
+  //dans setup    
+  Blockly.Arduino.setups_['setup_'+RF_recepteur] = 'brancherRecepteur('+dropdown_pin+');\n'; 
+
+  var code = 'recevoirNombre()';
+  return code;
+}
+
+
+
+// Grove driss_grove_RF_433MHz_send_number
+Blockly.Arduino.driss_grove_RF_433MHz_send_number = function() {
+  var dropdown_pin = this.getFieldValue('PIN');
+  var number  = Blockly.Arduino.valueToCode(this, 'NUMBER', Blockly.Arduino.ORDER_ATOMIC);
+
+  //var RF_emetteur = 'rf_'+dropdown_pin;
+  var RF_emetteur = 'rf_emetteur';
+
+  //dans include définition    
+  Blockly.Arduino.includes_['define_VirtualWire'] = "#include <VirtualWire.h>";   
+
+  //dans setup    
+  Blockly.Arduino.setups_['setup_'+RF_emetteur] = 'brancherEmetteur('+dropdown_pin+');\n'; 
+
+  var code = 'emettreNombre('+number+');\n';
+  return code;
+}
+
+
+
 //NFC Tag
 //Grove RFID driss_grove_nfc_init
 
