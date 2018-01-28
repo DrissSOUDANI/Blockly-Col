@@ -1061,7 +1061,7 @@ Blockly.Arduino.driss_grove_RF_433MHz_receive_text = function() {
   Blockly.Arduino.setups_['setup_'+RF_recepteur] = 'brancherRecepteur('+dropdown_pin+');\n'; 
 
   var code = 'recevoirTexte()';
-  return code;
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
 }
 
 // Grove driss_grove_RF_433MHz_receive_number
@@ -1077,7 +1077,7 @@ Blockly.Arduino.driss_grove_RF_433MHz_receive_number = function() {
   Blockly.Arduino.setups_['setup_'+RF_recepteur] = 'brancherRecepteur('+dropdown_pin+');\n'; 
 
   var code = 'recevoirNombre()';
-  return code;
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
 }
 
 
