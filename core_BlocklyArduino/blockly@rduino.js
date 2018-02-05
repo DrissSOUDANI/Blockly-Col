@@ -133,7 +133,7 @@ BlocklyDuino.getStringParamFromUrl = function(name, defaultValue) {
  *            defaultXml Text representation of default blocks.
  */
 BlocklyDuino.loadBlocks = function(defaultXml) {
-	
+	//alert(5);
 	if (defaultXml) {
 		// Load the editor with default starting blocks.
 		var xml = Blockly.Xml.textToDom(defaultXml);
@@ -244,12 +244,16 @@ BlocklyDuino.load = function (event) {
       var count = BlocklyDuino.workspace.getAllBlocks().length;
       if (count && confirm(MSG['xmlLoad'])) {
     	  BlocklyDuino.workspace.clear();
-      }
+	  }
+	  
+
       $('#tab_blocks a').tab('show');
       Blockly.Xml.domToWorkspace(BlocklyDuino.workspace, xml);
       BlocklyDuino.selectedTab = 'blocks';
       BlocklyDuino.renderContent();
-      
+	  
+	  
+	  
 	  // load toolbox
       var elem = xml.getElementsByTagName("toolbox")[0];
       if (elem != undefined) {
@@ -263,16 +267,20 @@ BlocklyDuino.load = function (event) {
 			node = elem.childNodes[0];
 			window.localStorage.toolboxids = node.nodeValue;
 		}
-
-		window.location = window.location.protocol + '//'
-				+ window.location.host + window.location.pathname;
-		/*
-		var search = BlocklyDuino.addReplaceParamToUrl(window.location.search, 'toolbox', $("#toolboxes").val());
-		window.location = window.location.protocol + '//'
-				+ window.location.host + window.location.pathname
-				+ search;
-		*/
-	}
+		//alert(5);
+		//retiré par Driss pour bug de chargement de xml  : les pins changent si arduino mega
+		//window.location = window.location.protocol + '//'
+		//		+ window.location.host + window.location.pathname;
+		
+		
+				
+		//var search = BlocklyDuino.addReplaceParamToUrl(window.location.search, 'toolbox', $("#toolboxes").val());
+		//window.location = window.location.protocol + '//'
+		//		+ window.location.host + window.location.pathname
+		//		+ search;
+		
+		}
+		
 
     }
     // Reset value of input after loading because Chrome will not fire
