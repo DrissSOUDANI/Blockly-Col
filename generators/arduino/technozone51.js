@@ -110,7 +110,7 @@ Blockly.Arduino.technozone_robot_lcdspecial = function() {
 };
 
 Blockly.Arduino.technozone_robot_lcdclear = function() {
-  var code = 'lcd.clear();';
+  var code = 'lcd.clear();\n';
   Blockly.Arduino.definitions_['define_LiquidCrystal'] = '#include <ShiftRegLCD123.h>\n'; 
   Blockly.Arduino.definitions_['var_lcd'] = 'ShiftRegLCD123 lcd(12,13,SRLCD123);\n';  
   //dans le setup    

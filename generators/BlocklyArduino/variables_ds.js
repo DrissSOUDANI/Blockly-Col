@@ -84,7 +84,8 @@ var value_name = Blockly.Arduino.valueToCode(block, 'NAME', Blockly.Arduino.ORDE
 Blockly.Arduino['conversion_toint'] = function(block) {
 var value_name = Blockly.Arduino.valueToCode(block, 'NAME', Blockly.Arduino.ORDER_ATOMIC);
   // TODO: Assemble JavaScript into code variable.
-  var code = 'int('+value_name+')';
+  //var code = 'int('+value_name+')';
+  var code = 'atoi('+value_name+'.c_str())';
   return [code, Blockly.Arduino.ORDER_ATOMIC]; 
 }
 

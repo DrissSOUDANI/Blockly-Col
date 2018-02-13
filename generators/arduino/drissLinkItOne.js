@@ -120,7 +120,8 @@ Blockly.Arduino.driss_linkItOne_SMS_envoyerMessage = function() {
              'char* msg = new char[buf.length()+1];\n'+
              'strcpy(msg, buf.c_str());\n'+
              'sendSMS(num, msg);\n';
-  return [code, Blockly.Arduino.ORDER_ATOMIC];
+  //return [code, Blockly.Arduino.ORDER_ATOMIC];
+  return code;
 };
 
 //LinkIt One  SMS effacer OK

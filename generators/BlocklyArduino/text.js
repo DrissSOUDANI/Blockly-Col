@@ -281,3 +281,39 @@ Blockly.Arduino['text_changeCase'] = function(block) {
 Blockly.Arduino['text_prompt'] = function(block) {
   return ['', Blockly.Arduino.ORDER_UNARY_POSTFIX];
 };
+
+
+Blockly.Arduino['explode_text'] = function(block) {
+  
+//dans fonctions
+Blockly.Arduino.definitions_['define_explode_text'] = "String explode_text(int index,String data, char separator) {\n"+
+"  index--;\n"+
+"  int found = 0;\n"+
+"  int strIndex[] = { 0, -1 };\n"+
+"  int maxIndex = data.length() - 1;\n"+
+"  for (int i = 0; i <= maxIndex && found <= index; i++) {\n"+
+"      if (data.charAt(i) == separator || i == maxIndex) {\n"+
+"          found++;\n"+
+"          strIndex[0] = strIndex[1] + 1;\n"+
+"          strIndex[1] = (i == maxIndex) ? i+1 : i;\n"+
+"      }\n"+
+"  }\n"+
+'  return found > index ? data.substring(strIndex[0], strIndex[1]) : "";\n'+
+"}\n";
+
+//var argument0 = Blockly.Arduino.valueToCode(block, 'NB', Blockly.JavaScript.ORDER_ATOMIC);
+var argument0 = Blockly.Arduino.valueToCode(block, 'NB',Blockly.Arduino.ORDER_ATOMIC);
+var argument1 = Blockly.Arduino.valueToCode(block, 'CHAINE',Blockly.Arduino.ORDER_ATOMIC);
+var argument2 = Blockly.Arduino.valueToCode(block, 'SEPARATEUR',Blockly.Arduino.ORDER_ATOMIC);
+var myreg = new RegExp('["]', 'gi');
+argument2=argument2.replace(myreg,"\'"); 
+//if (argument1 == '') {
+//  argument1 = '""';
+//} 
+//if (argument2 == '') {
+//  argument2 = '" "';
+//} 
+var code = 'explode_text(' + argument0 + ','+argument1+','+argument2+')';
+//var code='test();'
+return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
+};

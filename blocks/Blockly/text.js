@@ -689,3 +689,24 @@ Blockly.Blocks['text_prompt'] = {
   mutationToDom: Blockly.Blocks['text_prompt_ext'].mutationToDom,
   domToMutation: Blockly.Blocks['text_prompt_ext'].domToMutation
 };
+
+//Ajouté par Driss
+Blockly.Blocks['explode_text'] = {
+  init: function() {
+    this.appendValueInput("NB")
+        .setCheck("Number")
+        .appendField("Extraire la chaîne n°");
+    this.appendValueInput("CHAINE")
+        .setCheck("String")
+        .appendField("du texte");
+    this.appendValueInput("SEPARATEUR")
+        .setCheck("String")
+        .appendField("en utilisant le séparateur");
+        this.setInputsInline(true);
+        this.setOutput(true, null);
+    this.setColour(Blockly.Blocks.texts.HUE);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
