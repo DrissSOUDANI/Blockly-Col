@@ -803,27 +803,57 @@ Blockly.Arduino.driss_grove_bluetooth_v30_bt_init = function() {
   //dans include définition    
   Blockly.Arduino.includes_['define_SoftwareSerial'] = "#include <SoftwareSerial.h>\n"; 
   Blockly.Arduino.variables_['define_var_bt'] = "SoftwareSerial bt("+dropdown_RX_pin+","+dropdown_TX_pin+"); // RX, TX\n"; 
-  Blockly.Arduino.variables_['define_var_time_out'] = "boolean time_out;\n";
-  Blockly.Arduino.variables_['define_var_stringOne'] = 'String stringOne = "";\n';
-  
+  Blockly.Arduino.variables_['define_var_time_out'] = "boolean time_out;";
+  Blockly.Arduino.variables_['define_var_stringOne'] = 'String stringOne = "";';
+  Blockly.Arduino.variables_['define_var_baudrate'] = 'unsigned long baudrate[] = {9600,19200,38400,57600,115200,230400,460800,};';
+  Blockly.Arduino.variables_['define_var_code_commande_baudrate'] = 'char code_commande_baudrate[6] ="456789A";';
+
   //dans fonctions
+  Blockly.Arduino.codeFunctions_['define_reponse_bt'] = '\nboolean reponse_bt() {\n'+
+  ' if (bt.find("OK")) {\n'+
+  '   return true; //le mode répond bien, c"est donc le bon baudrate trouvé\n'+
+  ' }\n'+
+  ' else {\n'+
+  '   return false; // on ne comprend pas la réponse, il faut modifier le baudrate\n'+
+  ' }\n'+
+  ' //bt.flush();\n'+
+  ' //delay(1000);\n'+
+  '}\n'; 
+
+
   Blockly.Arduino.codeFunctions_['define_setupBlueToothConnection'] = '\nvoid setupBlueToothConnection() {\n'+
-   //' //bt.begin(9600);\n'+ 
-   ' bt.print("AT");\n'+  
-   ' delay(400);\n'+ 
-   ' bt.print("AT+DEFAULT");             // restauration au valeurs d"usine\n'+ 
-   ' delay(2000);\n'+      
-   ' bt.print("AT+NAME'+bt_name+'");    // Définir le nom du Bluetooth (12 caractères maxi).\n'+
-   ' delay(400);\n'+
-   ' bt.print("AT+PIN'+bt_pinCode+'");  // Définir le code PIN \n'+
-   ' delay(400);\n'+
-   //' //bt.print("AT+ROLEM");             // Mode Esclave\n'+
-   //' //delay(400);\n'+
-   ' bt.print("AT+AUTH1");\n'+
-   ' delay(400);\n'+
-   //' //blueToothSerial.print("AT+CLEAR"); // Clear connected device mac address\n'+
-   //' //delay(400);\n'+
-   ' bt.flush();\n'+
+   ' const String nom_bluetooth= "'+bt_name+'"; //nom du module Bluetooth\n'+ 
+   ' const String code_pin= "'+bt_pinCode+'"; //code pin de sécurité Bluetooth de 4 chiffres\n'+  
+   ' boolean baudrate_trouve = false;\n'+ 
+   ' byte index_baudrate=0;\n'+ 
+   ' while ((baudrate_trouve == false) && (index_baudrate<7 )) {\n'+ 
+   '  bt.begin(baudrate[index_baudrate]);\n'+ 
+   '  //Serial.println("Baudrate teste="+String(baudrate[index_baudrate]));\n'+ 
+   '  bt.print("AT");\n'+ 
+   '  if (reponse_bt()) {\n'+ 
+   '    baudrate_trouve=true;\n'+ 
+   '    //Serial.println("Baudrate trouve="+String(baudrate[index_baudrate]));\n'+ 
+   '    //on parametre le module bluetooth en 9600 bauds\n'+ 
+   '    bt.print("AT+DEFAULT");\n'+ 
+   '    delay(1000);\n'+ 
+   '    bt.begin(9600);\n'+ 
+   '    delay(1000);\n'+ 
+   '    bt.print("AT+NAME"+nom_bluetooth);\n'+
+   '    delay(1000);\n'+
+   '    bt.print("AT+PIN"+code_pin);\n'+
+   '    delay(1000);\n'+
+   '    bt.print("AT+ROLESM");\n'+
+   '    delay(1000);\n'+
+   '    //Serial.println("ModuleBluetooth programme en 9600bds");\n'+
+   '  }\n'+
+   '  else {\n'+
+   '    index_baudrate+=1;\n'+
+   '  }\n'+
+   ' }\n'+
+   ' if (baudrate_trouve == false) {\n'+
+   '  //Serial.println("Impossible de dialoguer avec le module Bluetooth!");\n'+
+   '  //Serial.println("Vérifier les connexion du module Bluetooth V3.0 sur port D2");\n'+
+   ' }\n'+
    '}\n';  
 
   Blockly.Arduino.codeFunctions_['define_lire_octet'] = "int lire_octet() {\n"+
@@ -901,7 +931,7 @@ Blockly.Arduino.driss_grove_bluetooth_v30_bt_send = function() {
    message_to_sent = message_to_sent.substr(0,message_to_sent.length-1);
   //alert(message_to_sent);
 
-  message_to_sent = '"\\r\\n'+message_to_sent+'\\r\\n"';
+  //message_to_sent = '"\\r\\n'+message_to_sent+'\\r\\n"';
       //\n= chr(10)  et  \r=chr(13) 
   //dans include définition    
   //Rien déjà fait dans : driss_grove_bluetooth_v30_init
@@ -909,7 +939,7 @@ Blockly.Arduino.driss_grove_bluetooth_v30_bt_send = function() {
   //dans setup     
   //Rien déjà fait dans : driss_grove_bluetooth_v30_init
 
-  var code = 'bt.print('+message_to_sent+');\n';
+  var code = 'bt.println('+message_to_sent+');\n';
   return code;
 };
 

@@ -963,13 +963,14 @@ Blockly.Blocks.driss_grove_bluetooth_v30_bt_send = {
     this.appendDummyInput()
         .appendField("par la liaison Bluetooth");
     this.appendValueInput("BT_MESSAGE_TO_SEND")
-        .setCheck(null)
+        .setCheck("String")
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField("Message");
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(Blockly.Blocks.drissGrove.HUE);
+
     this.setTooltip('');
     this.setHelpUrl('');
   }
