@@ -648,11 +648,22 @@ Blockly.Arduino.driss_grove_servo_setPosition = function() {
   
   var servo = 'servomoteur_'+dropdown_pin;
   //dans include définition    
-  Blockly.Arduino.includes_['define_Servo'] = "#include <Servo.h>"; 
-  Blockly.Arduino.variables_['var_Servo_'+dropdown_pin] = "Servo "+servo+";";
+  //Blockly.Arduino.includes_['define_Servo'] = "#include <Servo.h>"; 
+  Blockly.Arduino.includes_['define_ServoTimer2'] = "#include <ServoTimer2.h>";
+  //Blockly.Arduino.variables_['var_Servo_'+dropdown_pin] = "Servo "+servo+";";
+  Blockly.Arduino.variables_['var_ServoTimer2_'+dropdown_pin] = "ServoTimer2 "+servo+";";
+
+  Blockly.Arduino.codeFunctions_['define_writeServoTimer2'] = '//Envoi d"une largeur d"impulsion au servo\n'+
+  'void writeServoTimer2(int angle) {\n'+
+  ' //remplacer : MIN_PULSE_WIDTH par 544 et MAX_PULSE_WIDTH par 2400\n'+
+  '  int puls_width= map(angle, 0, 180, MAX_PULSE_WIDTH, MIN_PULSE_WIDTH); \n' +
+  '  servomoteur_2.write(puls_width);\n' +
+  '}\n';
+
 
   Blockly.Arduino.setups_['setup_'+servo] = servo+'.attach('+dropdown_pin+');'; //code à insérer dans le setup Arduino
-  var code = servo+'.write('+value_angle+');\n'  //code à insérer dans la loop Arduino
+  //var code = servo+'.write('+value_angle+');\n'  //code à insérer dans la loop Arduino
+  var code = 'writeServoTimer2('+value_angle+');\n'  //code à insérer dans la loop Arduino
   return code;
 };
 
@@ -751,7 +762,7 @@ Blockly.Arduino.driss_grove_keypad_12_init = function() {
   var row2 = this.getTitleValue('ROW2');
   var row3 = this.getTitleValue('ROW3');
   var col0 = this.getTitleValue('COL0');
-  var col1 = this.getTitleValue('COL1');
+  var col1 = this.getTitleValue('COL1'); 
   var col2 = this.getTitleValue('COL2');
 
 
