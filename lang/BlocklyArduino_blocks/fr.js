@@ -1875,6 +1875,8 @@ Blockly.Msg.CAT_DRISS_TINKERKIT_OUT = "- Actionneurs";
 Blockly.Msg.CAT_DRISS_TINKERKIT_DISPLAY = "- Afficheur";
 
 
+Blockly.Msg.CAT_DRISS_AUTRES = "Autres";
+
 
 
 // Fin des ajouts de Driss

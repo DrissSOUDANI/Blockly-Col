@@ -136,39 +136,47 @@ Blockly.Arduino.driss_linkItOne_SMS_effacer = function() {
 
 //LinkIt One  GPS initialisation OK
 Blockly.Arduino.driss_linkItOne_GPS_initialisation = function() {
-  Blockly.Arduino.definitions_['define_LinItOne_GPS'] = '#include <LGPS.h>'; 
+  Blockly.Arduino.includes_['define_LinItOne_GPS'] = '#include <LGPS.h>'; 
+  Blockly.Arduino.includes_['define_LinItOne_LGPRS'] = '#include <LGPRS.h>'; 
 
-  Blockly.Arduino.definitions_['define_gpsSentenceInfoStruct'] = 'gpsSentenceInfoStruct info; //needed to get GPS data';
-  Blockly.Arduino.definitions_['define_latitude'] = 'double latitude = 0.00;';
-  Blockly.Arduino.definitions_['define_longitude'] = 'double longitude = 0.00;';
-  Blockly.Arduino.definitions_['define_lat_format'] = 'String lat_format = "0.00000";'; 
-  Blockly.Arduino.definitions_['define_lon_format'] = 'String lon_format = "0.00000";'; 
-  Blockly.Arduino.definitions_['define_altitude'] = 'float altitude = 0.00;'; 
-  Blockly.Arduino.definitions_['define_dop'] = 'float dop = 100.00; //dilution of precision'; 
-  Blockly.Arduino.definitions_['define_geoid'] = 'float geoid = 0.00;'; 
-  Blockly.Arduino.definitions_['define_k_speed'] = 'float k_speed = 0.00, m_speed = 0.00; //speed in knots and speed in m/s'; 
-  Blockly.Arduino.definitions_['define_track_angle'] = 'float track_angle = 0.00;'; 
-  Blockly.Arduino.definitions_['define_fix'] = 'int fix = 0;'; 
-  Blockly.Arduino.definitions_['define_time'] = 'String time_format = "00:00:00";'; 
-  Blockly.Arduino.definitions_['define_date'] = 'String date_format = "00:00:00";'; 
-   Blockly.Arduino.definitions_['define_sat_num'] = 'int sat_num = 0; //number of visible satellites'; 
-  
-
-  
-
-  Blockly.Arduino.definitions_['define_setPauseGPS'] = '\n/*Pause pour que traiter les infos GPS */ \n' +
+  Blockly.Arduino.codeFunctions_['define_setPauseGPS'] = '\n/*Pause pour que traiter les infos GPS */ \n' +
   'void setPauseGPS() {\n'+
   ' delay(3000);\n'+ 
   '}\n';
-  Blockly.Arduino.setups_['setup_GPS'] = 'LGPS.powerOn();\n'; 
+  Blockly.Arduino.setups_['setup_GPS'] = 'LGPS.powerOn();\n'+ 
+  '  //Serial.println("Activation du recepteur GPS ...OK.");\n'+
+  '  //Serial.print("Tentative de joindre GPRS...");\n'+
+  '  while (!LGPRS.attachGPRS())delay(500);\n'+
+  '  //Serial.println("..OK.. réussi");\n';
+  
   var code = 'setPauseGPS();\n';
-  return [code, Blockly.Arduino.ORDER_ATOMIC];
+  return code;
 };
 
 //LinkIt One  GPS Lire les données OK
 Blockly.Arduino.driss_linkItOne_GPS_lireDonnees = function() {
 
-  Blockly.Arduino.definitions_['define_convert_degrees'] = '\n/*Converts degrees from (d)ddmm.mmmm to (d)dd.mmmmmm*/ \n' + 
+  Blockly.Arduino.variables_['define_gpsSentenceInfoStruct'] = '\n// Cette structure est nécessaire pour stocker les données qui arrivent des satellites\n'+
+                                                                'gpsSentenceInfoStruct info;\n';
+  Blockly.Arduino.variables_['define_latitude'] = 'double latitude = 0.00;';
+  Blockly.Arduino.variables_['define_longitude'] = 'double longitude = 0.00;';
+  Blockly.Arduino.variables_['define_lat_format'] = 'String lat_format = "0.00000";'; 
+  Blockly.Arduino.variables_['define_lon_format'] = 'String lon_format = "0.00000";'; 
+  Blockly.Arduino.variables_['define_altitude'] = 'float altitude = 0.00;'; 
+  Blockly.Arduino.variables_['define_alt_format'] = 'String alt_format = "0.00000";'; 
+  Blockly.Arduino.variables_['define_dop'] = 'float dop = 100.00; //dilution of precision'; 
+  Blockly.Arduino.variables_['define_geoid'] = 'float geoid = 0.00;'; 
+  Blockly.Arduino.variables_['define_k_speed'] = 'float k_speed = 0.00;  //speed in knots ';
+  Blockly.Arduino.variables_['define_m_speed'] = 'float m_speed = 0.00; //speed in m/s';  
+  Blockly.Arduino.variables_['define_m_speed_format'] = 'String m_speed_format = "0";'; 
+  Blockly.Arduino.variables_['define_track_angle'] = 'float track_angle = 0.00;'; 
+  Blockly.Arduino.variables_['define_fix'] = 'int fix = 0;'; 
+  Blockly.Arduino.variables_['define_time'] = 'String time_format = "00:00:00";'; 
+  Blockly.Arduino.variables_['define_date'] = 'String date_format = "00:00:00";'; 
+  Blockly.Arduino.variables_['define_sat_num'] = 'int sat_num = 0; //number of visible satellites'; 
+  
+
+  Blockly.Arduino.codeFunctions_['define_convert_degrees'] = '\n/*Obtenir les degrés à partir de (d)ddmm.mmmm to (d)dd.mmmmmm*/ \n' + 
    'float convert_degrees(String str, boolean dir) {\n'+
    ' double mm, dd;\n'+       
    ' int point = str.indexOf(".");\n'+
@@ -177,7 +185,7 @@ Blockly.Arduino.driss_linkItOne_GPS_lireDonnees = function() {
    ' return (dir ? -1 : 1) * (dd + mm);\n'+
    '}\n';  
 
-  Blockly.Arduino.definitions_['define_doubleToStr'] = '\n/*Converts double to string */ \n' +
+  Blockly.Arduino.codeFunctions_['define_doubleToStr'] = '\n/*Convertir un double en string */ \n' +
   'String doubleToStr(double val) {\n'+
    ' int buf = (int) (val *1000000);\n'+ 
    ' String str_Val = "";\n'+  
@@ -198,8 +206,8 @@ Blockly.Arduino.driss_linkItOne_GPS_lireDonnees = function() {
    ' return str_Val;\n'+
    '}\n';    
   
-  Blockly.Arduino.definitions_['define_getGPSData'] = '\n/*Gets gps informations */ \n' +
-   'void getGPSData(gpsSentenceInfoStruct* info) {\n'+
+  Blockly.Arduino.codeFunctions_['define_getSatellitesDatas'] = '\n/*obtient les informations des satellites */ \n' +
+   'void getSatellitesDatas(gpsSentenceInfoStruct* info) {\n'+
    ' LGPS.getData(info);\n'+ 
    ' if (info->GPGGA[0] == \'$\') {\n'+
    '  String str = (char*)(info->GPGGA);\n'+  
@@ -219,6 +227,8 @@ Blockly.Arduino.driss_linkItOne_GPS_lireDonnees = function() {
    '  dop = str.substring(0, str.indexOf(",")).toFloat();\n'+ 
    '  str = str.substring(str.indexOf(",") + 1);\n'+ 
    '  altitude = str.substring(0, str.indexOf(",")).toFloat();\n'+ 
+   '  alt_format = doubleToStr( altitude);\n'+ 
+   '  alt_format = alt_format + str.substring(str.indexOf(",") + 1,1);\n'+
    '  str = str.substring(str.indexOf(",") + 3);\n'+ 
    '  geoid = str.substring(0, str.indexOf(",")).toFloat();\n'+ 
    ' \n'+ 
@@ -237,6 +247,7 @@ Blockly.Arduino.driss_linkItOne_GPS_lireDonnees = function() {
    '    str = str.substring(comma);\n'+ 
    '    k_speed = str.substring(0, str.indexOf(",")).toFloat();\n'+ 
    '    m_speed = k_speed * 0.514;\n'+ 
+   '    m_speed_format = doubleToStr( m_speed);\n'+ 
    '    str = str.substring(str.indexOf(",") + 1);\n'+ 
    '    track_angle = str.substring(0, str.indexOf(",")).toFloat();\n'+ 
    '    str = str.substring(str.indexOf(",") + 1);\n'+ 
@@ -252,21 +263,102 @@ Blockly.Arduino.driss_linkItOne_GPS_lireDonnees = function() {
    
    '}';   
 
-  var code = 'getGPSData(&info);\n';
-  return code;
+  var code = 'getSatellitesDatas(&info);\n';
+  return code ;
 };
 
 //LinkIt One  GPS : Nombre de satellites
 Blockly.Arduino.driss_linkItOne_GPS_NbreSatellites = function() {
-  Blockly.Arduino.definitions_['define_getSatellitesNbre'] = '\n/*Renvoyer le nombre de satellites captés */ \n' +
-  'int getSatellitesNbre() {\n'+
+  Blockly.Arduino.codeFunctions_['define_GPSgetSatellitesNbre'] = '\n/*Renvoyer le nombre de satellites captés */ \n' +
+  'int GPSgetSatellitesNbre() {\n'+
   ' return sat_num;\n'+ 
   '}\n';
-  var code = 'getSatellitesNbre()';
+  var code = 'GPSgetSatellitesNbre()';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
 
+//LinkIt One  GPS : Date
+Blockly.Arduino.driss_linkItOne_GPS_getDate = function() {
+  Blockly.Arduino.codeFunctions_['define_GPSgetDate'] = '\n/*Renvoyer la date */ \n' +
+  'String GPSgetDate() {\n'+
+  ' return date_format;\n'+ 
+  '}\n';
+  var code = 'GPSgetDate()';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+
+//LinkIt One  GPS : Time
+Blockly.Arduino.driss_linkItOne_GPS_getTime = function() {
+  Blockly.Arduino.codeFunctions_['define_GPSgetTime'] = '\n/*Renvoyer l"heure */ \n' +
+  'String GPSgetTime() {\n'+
+  ' return time_format;\n'+ 
+  '}\n';
+  var code = 'GPSgetTime()';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+//LinkIt One  GPS : Lattitude
+Blockly.Arduino.driss_linkItOne_GPS_getLatitude = function() {
+  Blockly.Arduino.codeFunctions_['define_GPSgetLatitude'] = '\n/*Renvoyer la latitude */ \n' +
+  'String GPSgetLatitude() {\n'+
+  ' return lat_format;\n'+ 
+  '}\n';
+  var code = 'GPSgetLatitude()';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+//LinkIt One  GPS : Longitude
+Blockly.Arduino.driss_linkItOne_GPS_getLongitude = function() {
+  Blockly.Arduino.codeFunctions_['define_GPSgetLattitude'] = '\n/*Renvoyer la longitude */ \n' +
+  'String GPSgetLongitude() {\n'+
+  ' return lon_format;\n'+ 
+  '}\n';
+  var code = 'GPSgetLongitude()';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+//LinkIt One  GPS : Altitude
+Blockly.Arduino.driss_linkItOne_GPS_getAltitude = function() {
+  Blockly.Arduino.codeFunctions_['define_GPSgetLattitude'] = '\n/*Renvoyer l"altitude */ \n' +
+  'String GPSgetAltitude() {\n'+
+  ' return alt_format;\n'+ 
+  '}\n';
+  var code = 'GPSgetAltitude()';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+//LinkIt One  GPS : Vitesse
+Blockly.Arduino.driss_linkItOne_GPS_getVitesse = function() {
+  Blockly.Arduino.codeFunctions_['define_GPSgetVitesse'] = '\n/*Renvoyer la vitesse */ \n' +
+  'String GPSgetVitesse() {\n'+
+  ' return m_speed_format;\n'+ 
+  '}\n';
+  var code = 'GPSgetVitesse()';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+
+//LinkIt One  GPS : Vitesse
+Blockly.Arduino.driss_linkItOne_GPS_get_GGA_GPRMC_Trame = function() {
+  Blockly.Arduino.codeFunctions_['define_GPSget_GGA_GPRMC_Trame'] = '\n/*Renvoyer la trame : date, heure, latitude, longitude, altitude, vitesse, nbre de satellites */ \n' +
+  'String GPSget_GGA_GPRMC_Trame() {\n'+
+  ' String Trame_GGA_GPRMC= "" ;\n'+
+  ' Trame_GGA_GPRMC = Trame_GGA_GPRMC + date_format + "," ; \n'+
+  ' Trame_GGA_GPRMC = Trame_GGA_GPRMC + time_format + "," ; \n'+
+  ' Trame_GGA_GPRMC = Trame_GGA_GPRMC + lat_format  + "," ; \n'+
+  ' Trame_GGA_GPRMC = Trame_GGA_GPRMC + lon_format  + "," ; \n'+
+  ' Trame_GGA_GPRMC = Trame_GGA_GPRMC + alt_format  + "," ; \n'+
+  ' Trame_GGA_GPRMC = Trame_GGA_GPRMC + m_speed_format + ","   ; \n'+
+  ' Trame_GGA_GPRMC = Trame_GGA_GPRMC + sat_num ; \n'+
+
+  ' return Trame_GGA_GPRMC;\n'+ 
+  '}\n';
+
+  var code = 'GPSget_GGA_GPRMC_Trame()';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
 
 
 
@@ -282,20 +374,24 @@ Blockly.Arduino.driss_linkItOne_GPS_NbreSatellites = function() {
 
 //LinkIt One  SD Card initialisation OK
 Blockly.Arduino.driss_linkItOne_SDCard_initialisation = function() {
-  Blockly.Arduino.definitions_['define_SD_CARD'] = '#include <LSD.h>'; 
+  Blockly.Arduino.includes_['define_SD_CARD'] = '#include <LSD.h>'; 
   Blockly.Arduino.definitions_['define_Drv'] = '#define Drv LSD\n ';
-  Blockly.Arduino.setups_['setup_SD_Card'] = 'pinMode(10, OUTPUT); //needed for SD card\n'+ 
-  '   if(!Drv.begin()) {\n'+
-  '     while(true);\n'+
-  '   }\n'
-  var code = '';
-  return [code, Blockly.Arduino.ORDER_ATOMIC];
+  Blockly.Arduino.setups_['setup_SD_Card'] = 'pinMode(10, OUTPUT); //Nécessaire pour utiliser la carte SD\n'+ 
+  '  //Serial.println("Initialisation du lecteur de la carte SD...");\n'+
+  '  if(!Drv.begin()) {\n'+
+  '    //Serial.println("Erreur lors de l\'initialisation de la carte SD!!.");\n'+
+  '    //Serial.println("Verifiez la presence de la carte dans le lecteur !!");\n'+
+  '    while(true);\n'+
+  '  }\n'+
+  '  //Serial.println("Lecteur de la carte SD initialisé");\n';
+  var code = '';;
+  return code;
 };
 
 
 //LinkIt One  Flash Mem initialisation OK
 Blockly.Arduino.driss_linkItOne_FalshMem_initialisation = function() {
-  Blockly.Arduino.definitions_['define_FlashMem'] = '#include <LFlash.h>'; 
+  Blockly.Arduino.includes_['define_FlashMem'] = '#include <LFlash.h>'; 
   Blockly.Arduino.definitions_['define_Drv'] = '#define Drv LFlash  ; // use Internal 10M Flash\n';
   Blockly.Arduino.setups_['setup_FlashMem'] = 'if(!Drv.begin()) {\n'+
   ' while(true);\n'+
@@ -311,8 +407,11 @@ Blockly.Arduino.driss_linkItOne_WriteData = function() {
   var value_file_name = Blockly.Arduino.valueToCode(this, 'FILE_NAME', Blockly.Arduino.ORDER_ATOMIC);
   var value_data_to_save = Blockly.Arduino.valueToCode(this, 'DATA_TO_SAVE', Blockly.Arduino.ORDER_ATOMIC);
 
-  Blockly.Arduino.definitions_['define_WriteGPSDatas'] = '\n/*Ecriture des données GPS dans le fichier */ \n' +
-  'void WriteGPSDatas(const char * filename, uint8_t mode, String data) {\n'+
+  Blockly.Arduino.codeFunctions_['define_WriteGPSDatas'] = '\n/*Ecriture des données GPS dans le fichier */ \n' +
+  'void WriteGPSDatas(uint8_t mode, String data) {\n'+
+  //'void WriteGPSDatas(uint8_t mode, String data) {\n'+
+  ' char* filename = new char['+value_file_name+'.length()+1];\n'+
+  ' strcpy(filename, '+value_file_name+'.c_str());\n'+
   ' LFile dataFile = Drv.open(filename, mode);\n'+ 
   ' if (dataFile) {\n'+ 
   '   dataFile.println(data);\n'+ 
@@ -320,8 +419,11 @@ Blockly.Arduino.driss_linkItOne_WriteData = function() {
   ' }\n'+
   '}\n';
   
-  var code = 'char* filename = new char['+value_file_name+'.length()+1];\n'+
-  'strcpy(filename, '+value_file_name+'.c_str());\n'+
-  'WriteGPSDatas(filename, FILE_WRITE, '+value_data_to_save+');\n' ;
+  //var code = 'char* filename = new char['+value_file_name+'.length()+1];\n'+
+  //'strcpy(filename, '+value_file_name+'.c_str());\n'+
+  //'WriteGPSDatas(filename, FILE_WRITE, '+value_data_to_save+');' ;
+
+  var code = 'WriteGPSDatas(FILE_WRITE, '+value_data_to_save+');' ;
+  //return [code, Blockly.Arduino.ORDER_ATOMIC];
   return code;
 };

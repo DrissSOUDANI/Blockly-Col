@@ -655,7 +655,8 @@ Blockly.Arduino.driss_grove_servo_setPosition = function() {
 
   Blockly.Arduino.codeFunctions_['define_writeServoTimer2'] = '//Envoi d"une largeur d"impulsion au servo\n'+
   'void writeServoTimer2(int angle) {\n'+
-  ' //remplacer : MIN_PULSE_WIDTH par 544 et MAX_PULSE_WIDTH par 2400\n'+
+  '  //pour utiliseer les valeurs de la librairie Servo : \n'+
+  '  //remplacer : MIN_PULSE_WIDTH par 544 et MAX_PULSE_WIDTH par 2400\n'+
   '  int puls_width= map(angle, 0, 180, MAX_PULSE_WIDTH, MIN_PULSE_WIDTH); \n' +
   '  servomoteur_2.write(puls_width);\n' +
   '}\n';

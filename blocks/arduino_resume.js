@@ -147,7 +147,12 @@ function() {
     console.log("Done loading driss Tinker kit Blocks");
 });
 
-
+head.load(
+    "blocks/drissAutres/drissAutres.js",
+    function() {
+        // Call a function when done
+        console.log("Done loading driss Autres Blocks");
+    });
 
 head.load(
 "blocks/blocks_typing.js",
@@ -156,6 +161,8 @@ function() {
     // Call a function when done
     console.log("Done loading Blocks Configuration");
 });
+
+
 
 
 /* Fin des ajouts de Driss */

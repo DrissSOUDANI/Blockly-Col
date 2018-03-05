@@ -1,4 +1,4 @@
-//www.technozone51fr
+//
 
 // define blocks
 'use strict';
@@ -162,15 +162,13 @@ Blockly.Blocks.driss_linkItOne_GPS_lireDonnees = {
   init: function() {
      this.setColour(352);
     this.appendDummyInput()
-        .appendField("Lire les données GPS");
+        .appendField("Lire les données en provenance des satellites");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-
-
-
     this.setTooltip("GPS");
   }
 };
+
 
 //LinkIt One  GPS : Nombre de satellites
 Blockly.Blocks.driss_linkItOne_GPS_NbreSatellites = {
@@ -180,6 +178,100 @@ Blockly.Blocks.driss_linkItOne_GPS_NbreSatellites = {
      this.setColour(352);
     this.appendDummyInput()
         .appendField("Nombre de Satellites captés");
+    this.setOutput(true, null);
+    this.setTooltip("GPS");
+  }
+};
+
+//LinkIt One  GPS : Date
+Blockly.Blocks.driss_linkItOne_GPS_getDate = {
+  category: 'driss_linkIt_One : gps',
+  helpUrl: '',
+  init: function() {
+     this.setColour(352);
+    this.appendDummyInput()
+        .appendField("la date (jj-mm-aaaa)");
+    this.setOutput(true, null);
+    this.setTooltip("GPS");
+  }
+};
+
+//LinkIt One  GPS : Time
+Blockly.Blocks.driss_linkItOne_GPS_getTime = {
+  category: 'driss_linkIt_One : gps',
+  helpUrl: '',
+  init: function() {
+     this.setColour(352);
+    this.appendDummyInput()
+        .appendField("heure (hh:mm:ss)");
+    this.setOutput(true, null);
+    this.setTooltip("GPS");
+  }
+};
+
+//LinkIt One  GPS : Latitude
+Blockly.Blocks.driss_linkItOne_GPS_getLatitude = {
+  category: 'driss_linkIt_One : gps',
+  helpUrl: '',
+  init: function() {
+     this.setColour(352);
+    this.appendDummyInput()
+        .appendField("Latitude");
+    this.setOutput(true, null);
+    this.setTooltip("GPS");
+  }
+};
+
+//LinkIt One  GPS : Longitude
+Blockly.Blocks.driss_linkItOne_GPS_getLongitude = {
+  category: 'driss_linkIt_One : gps',
+  helpUrl: '',
+  init: function() {
+     this.setColour(352);
+    this.appendDummyInput()
+        .appendField("Longitude");
+    this.setOutput(true, null);
+    this.setTooltip("GPS");
+  }
+};
+
+//LinkIt One  GPS : Altitude
+Blockly.Blocks.driss_linkItOne_GPS_getAltitude = {
+  category: 'driss_linkIt_One : gps',
+  helpUrl: '',
+  init: function() {
+     this.setColour(352);
+    this.appendDummyInput()
+        .appendField("Altitude");
+    this.setOutput(true, null);
+    this.setTooltip("GPS");
+  }
+};
+
+//LinkIt One  GPS : Vitesse
+Blockly.Blocks.driss_linkItOne_GPS_getVitesse = {
+  category: 'driss_linkIt_One : gps',
+  helpUrl: '',
+  init: function() {
+     this.setColour(352);
+    this.appendDummyInput()
+        .appendField("Vitesse");
+    this.setOutput(true, null);
+    this.setTooltip("GPS");
+  }
+};
+
+//LinkIt One  GPS : Vitesse
+Blockly.Blocks.driss_linkItOne_GPS_get_GGA_GPRMC_Trame = {
+  category: 'driss_linkIt_One : gps',
+  helpUrl: '',
+  init: function() {
+     this.setColour(352);
+    this.appendDummyInput()
+        .appendField("Trame de données : ");
+    this.appendDummyInput()
+        .appendField("date, heure, latitude, longitude,")
+        .appendField("altitude, vitesse, nombre de satellites");
     this.setOutput(true, null);
     this.setTooltip("GPS");
   }
@@ -213,7 +305,7 @@ Blockly.Blocks.driss_linkItOne_FalshMem_initialisation = {
   category: 'driss_linkIt_One : Stockage',
   helpUrl: '',
   init: function() {
-     this.setColour(352);
+     this.setColour(36);
     this.appendDummyInput()
         .appendField("Initialiser la mémoire Interne de LinkIt One");
     this.setPreviousStatement(true, null);
@@ -253,10 +345,12 @@ Blockly.Blocks.driss_linkItOne_WriteData = {
         .appendField("Nom du fichier");
     this.appendValueInput("DATA_TO_SAVE")
         .setCheck("String")
+        .setCheck("String")
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField("Données");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
+    
 
     this.setTooltip("Ecriture sur le support de stockage");
   }
