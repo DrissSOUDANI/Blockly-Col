@@ -29,21 +29,21 @@ Blockly.Arduino.drissLinkItOne_variables_get = function() {
 
 
 
-//---- GSm/GPRS -------------------------------------------------------------------------------------------------------------
+//---- GSM -------------------------------------------------------------------------------------------------------------
 
 //LinkIt One  GSM initialisation OK
 Blockly.Arduino.driss_linkItOne_GSM_initialisation = function() {
-  //Blockly.Arduino.definitions_['define_var_numero_sms'] = "char p_num[20];\n";  
-  Blockly.Arduino.definitions_['define_LinItOne_SMS'] = '#include <LTask.h>\n#include <LGSM.h>\n'; 
+  Blockly.Arduino.includes_['define_LTask'] = '#include <LTask.h>'; 
+  Blockly.Arduino.includes_['define_LGSM'] = '#include <LGSM.h>'; 
 
-  Blockly.Arduino.definitions_['define_getNumSMS'] = '\nString getNumSMS() {\n'+
+  Blockly.Arduino.codeFunctions_['define_getNumSMS'] = '\nString getNumSMS() {\n'+
    ' char num[20] ;\n'+       
    ' LSMS.remoteNumber(num, 20);\n'+
    ' String numero(num);\n'+
    ' return  numero;\n'+
-   '}\n';  
+   '}';  
 
-   Blockly.Arduino.definitions_['define_getMessageSMS'] = '\nString getMessageSMS() {\n'+
+   Blockly.Arduino.codeFunctions_['define_getMessageSMS'] = '\nString getMessageSMS() {\n'+
    ' char msg[100]="" ;\n'+ 
    ' int len=0 ;\n'+  
    ' while(true) {\n'+ 
@@ -53,39 +53,38 @@ Blockly.Arduino.driss_linkItOne_GSM_initialisation = function() {
    '  }\n'+
    ' String message(msg);\n'+
    ' return message;\n'+
-   '}\n';    
+   '}';    
 
-  Blockly.Arduino.definitions_['define_sendSMS'] = '\nvoid sendSMS(char num[], char msg[]) {\n'+
+  Blockly.Arduino.codeFunctions_['define_sendSMS'] = '\nvoid sendSMS(char num[], char msg[]) {\n'+
    ' LSMS.beginSMS(num);\n'+ 
    ' LSMS.print(msg);\n'+
    ' LSMS.endSMS();\n'+       
    ' delay(3000);\n'+ 
-   '}\n';  
+   '}';  
 
-   Blockly.Arduino.definitions_['define_deleteSMS'] = '\n/*Efface les SMS */\n'+
+   Blockly.Arduino.codeFunctions_['define_deleteSMS'] = '\n/*Efface les SMS */\n'+
   'void deleteSMS() { \n' +
   ' while (LSMS.available()) {\n' +
   '   LSMS.flush();\n'+
   ' }\n'+ 
-  '}\n';
+  '}';
    
 
-  //Blockly.Arduino.setups_['setup_GSM_disponible'] = 'while(!LSMS.ready()) {\n'+'    delay(1000);\n'+'  }\n'+
-  //'deleteSMS() ;\n';
-  Blockly.Arduino.setups_['setup_GSM_disponible'] = 'while(!LSMS.ready()) {\n'+'    delay(1000);\n'+'  }\nLSMS.flush();\n';
+  Blockly.Arduino.setups_['setup_LinkItOne_SMS'] = '//Serial.begin(9600);\n'+
+  '  //Serial.print("Test si le module SMS est pret....");\n'+
+  '  while(!LSMS.ready()) { delay(1000);}\n'+
+  '  //Serial.println("Oui, il est pret");\n'+
+  '  deleteSMS();';
 
-
-
-   
   var code = '';
-  return [code, Blockly.Arduino.ORDER_ATOMIC];
+  //return [code, Blockly.Arduino.ORDER_ATOMIC];
+  return code; 
+
 };
 
 //LinkIt One  SMS disponible OK
 Blockly.Arduino.driss_linkItOne_SMS_disponible = function() {
    
-  //Blockly.Arduino.definitions_['define_LinItOne_SMS'] = '#include <LTask.h>\n#include <LGSM.h>\n'; 
-  //Blockly.Arduino.setups_['setup_disponible'] = 'while(!LSMS.ready()) {\n'+'    delay(1000);\n'+'  }\n'; 
   var code = 'LSMS.available()';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
@@ -126,10 +125,136 @@ Blockly.Arduino.driss_linkItOne_SMS_envoyerMessage = function() {
 
 //LinkIt One  SMS effacer OK
 Blockly.Arduino.driss_linkItOne_SMS_effacer = function() {
-  var code = ' LSMS.flush();\n';
+  var code = 'LSMS.flush();\n';
   return code;
 };
 
+
+
+//---- GPRS -------------------------------------------------------------------------------------------------------------
+
+//LinkIt One  GSM initialisation OK
+Blockly.Arduino.driss_linkItOne_GPRS_initialisation = function() {
+  Blockly.Arduino.includes_['define_LGPRS'] = '#include <LGPRS.h>'; 
+  Blockly.Arduino.includes_['define_LGPRSClient'] = '#include <LGPRSClient.h>'; 
+  Blockly.Arduino.includes_['define_LGPRSServer'] = '#include <LGPRSServer.h>';
+
+  Blockly.Arduino.variables_['define_gsmclient'] = 'LGPRSClient gsmclient;';
+  Blockly.Arduino.variables_['define_gsmclientConnected'] = 'boolean gsmclientConnected  = false;';
+  //Blockly.Arduino.variables_['define_server'] = 'char server[] = "" ;';
+  //Blockly.Arduino.variables_['define_port'] = 'int port = 80 ;';
+  //Blockly.Arduino.variables_['define_path'] = 'char path[] = "";';
+
+  
+  Blockly.Arduino.setups_['setup_GPRS'] = '//Serial.print("Tentative de joindre le réseau GPRS ...");\n'+
+  '  while (!LGPRS.attachGPRS("wholesale", NULL, NULL)) delay(500);\n'+
+  '  //Serial.println("..OK.. réussi");\n';
+
+  var code = '';
+  //return [code, Blockly.Arduino.ORDER_ATOMIC];
+  return code; 
+
+};
+
+
+/*
+
+//LinkIt One  GPRS : driss_linkItOne_GPRS_connect_to_server
+Blockly.Arduino.driss_linkItOne_GPRS_connect_to_server = function() {
+  var server = Blockly.Arduino.valueToCode(this, 'SERVER', Blockly.Arduino.ORDER_ATOMIC);
+  var port = Blockly.Arduino.valueToCode(this, 'PORT', Blockly.Arduino.ORDER_ATOMIC);
+
+  Blockly.Arduino.variables_['define_server'] = 'char server[] = '+server+';';
+  Blockly.Arduino.variables_['define_port'] = 'int port = '+port+' ;';
+
+  Blockly.Arduino.codeFunctions_['define_ConnectLinkItOneToServerByGPRS'] = '\n//Se connecter au serveur par GPRS  \n' +
+   'void ConnectLinkItOneToServerByGPRS() {\n'+     
+   '  if( gsmclient.connect(server, port) )\n'+
+   '    gsmclientConnected = true;\n'+
+   '  else gsmclientConnected = false;\n'+
+   '}';  
+
+  
+  Blockly.Arduino.setups_['setup_GPRS'] = '//Serial.print("Tentative de joindre le réseau GPRS ...");\n'+
+  '  while (!LGPRS.attachGPRS("wholesale", NULL, NULL)) delay(500);\n'+
+  '  //Serial.println("..OK.. réussi");\n';
+
+  var code = 'ConnectLinkItOneToServerByGPRS();\n';
+  //return [code, Blockly.Arduino.ORDER_ATOMIC];
+  return code; 
+
+};
+
+//LinkIt One  GPRS : driss_linkItOne_GPRS_connect_to_server
+Blockly.Arduino.driss_linkItOne_GPRS_connected_to_server = function() {
+  
+  var code = 'gsmclientConnected == true';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+  //return code; 
+
+};
+
+//LinkIt One  GPRS : driss_linkItOne_GPRS_WriteData_On_Server
+Blockly.Arduino.driss_linkItOne_GPRS_writeData_on_server = function() {
+  var file_name = Blockly.Arduino.valueToCode(this, 'FILENAME', Blockly.Arduino.ORDER_ATOMIC);
+  var data_to_write = Blockly.Arduino.valueToCode(this, 'DATAS', Blockly.Arduino.ORDER_ATOMIC);
+  var path = Blockly.Arduino.valueToCode(this, 'PATH', Blockly.Arduino.ORDER_ATOMIC);
+
+  Blockly.Arduino.variables_['define_path'] = 'char path[] = '+path+';';
+
+  Blockly.Arduino.codeFunctions_['define_WiteDatasOnServerByGPRS'] = '\n//Ecriture des données sur le serveur  \n' +
+   'void WiteDatasOnServerByGPRS() {\n'+     
+   //'  String str = "GET /+'path'+/store_data.php?filename=file_name&datas='+data_to_write+'";\n'+
+   '  String str = "GET /";\n'+
+   '  str += path ;\n' +
+   '  str += "/store_data.php?filename=";\n' +
+   '  str += '+ file_name +';\n' +
+   '  str += "&datas=";\n' +
+   '  str += '+ data_to_write +';\n' +
+   '  gsmclient.print(str);\n'+
+   '  gsmclient.println(" HTTP/1.1");\n'+
+   '  gsmclient.print("Host: ");\n'+
+   '  gsmclient.println(server);\n'+
+   '  gsmclient.println("Connection: close");\n'+
+   '  gsmclient.println();\n'+
+   '}';  
+  var code = 'WiteDatasOnServerByGPRS();';
+  //return [code, Blockly.Arduino.ORDER_ATOMIC];
+  return code; 
+};
+*/
+//LinkIt One  GPRS : driss_linkItOne_GPRS_WriteData_On_Server
+Blockly.Arduino.driss_linkItOne_GPRS_writeData_on_server = function() {
+  var file_name = Blockly.Arduino.valueToCode(this, 'FILENAME', Blockly.Arduino.ORDER_ATOMIC);
+  var data_to_write = Blockly.Arduino.valueToCode(this, 'DATAS', Blockly.Arduino.ORDER_ATOMIC);
+  var path = Blockly.Arduino.valueToCode(this, 'PATH', Blockly.Arduino.ORDER_ATOMIC);
+  var server = Blockly.Arduino.valueToCode(this, 'SERVER', Blockly.Arduino.ORDER_ATOMIC);
+  var port = Blockly.Arduino.valueToCode(this, 'PORT', Blockly.Arduino.ORDER_ATOMIC);
+
+  Blockly.Arduino.variables_['define_path'] = 'char path[] = '+path+';';
+  Blockly.Arduino.variables_['define_server'] = 'char server[] = '+server+';';
+  Blockly.Arduino.variables_['define_port'] = 'int port = '+port+' ;';
+
+  Blockly.Arduino.codeFunctions_['define_WiteDatasOnServerByGPRS'] = '\n/*Ecriture des données sur le serveur */ \n' +
+   'void WiteDatasOnServerByGPRS() {\n'+ 
+   '  String str = "GET /";\n'+    
+   '  if( gsmclient.connect('+server+', '+port+') )\n'+
+   '    str += '+path+' ;\n' +
+   '    str += "/store_data.php?filename=";\n' +
+   '    str += '+ file_name +';\n' +
+   '    str += "&datas=";\n' +
+   '    str += '+ data_to_write +';\n' +
+   '    gsmclient.print(str);\n'+
+   '    gsmclient.println(" HTTP/1.1");\n'+
+   '    gsmclient.print("Host: ");\n'+
+   '    gsmclient.println('+server+');\n'+
+   '    gsmclient.println("Connection: close");\n'+
+   '    gsmclient.println();\n'+
+   '}';  
+  var code = 'WiteDatasOnServerByGPRS();';
+  //return [code, Blockly.Arduino.ORDER_ATOMIC];
+  return code; 
+};
 
 
 //---- GPS -------------------------------------------------------------------------------------------------------------
@@ -143,10 +268,10 @@ Blockly.Arduino.driss_linkItOne_GPS_initialisation = function() {
   'void setPauseGPS() {\n'+
   ' delay(3000);\n'+ 
   '}\n';
-  Blockly.Arduino.setups_['setup_GPS'] = 'LGPS.powerOn();\n'+ 
+  Blockly.Arduino.setups_['setup_GPS'] = 'LGPS.powerOn(GPS_GLONASS);\n'+ 
   '  //Serial.println("Activation du recepteur GPS ...OK.");\n'+
-  '  //Serial.print("Tentative de joindre GPRS...");\n'+
-  '  while (!LGPRS.attachGPRS())delay(500);\n'+
+  '  //Serial.print("Tentative de joindre le réseau GPRS ...");\n'+
+  '  //while (!LGPRS.attachGPRS("wholesale", NULL, NULL)) delay(500);\n'+
   '  //Serial.println("..OK.. réussi");\n';
   
   var code = 'setPauseGPS();\n';
@@ -402,16 +527,18 @@ Blockly.Arduino.driss_linkItOne_FalshMem_initialisation = function() {
 
 
 //LinkIt One  SD Card / Flash Mem Ecriture dans le fichier OK
-Blockly.Arduino.driss_linkItOne_WriteData = function() {
+Blockly.Arduino.driss_linkItOne_WriteDataOnSDCard = function() {
   //var dropdown_drive = this.getFieldValue('DRIVE');
   var value_file_name = Blockly.Arduino.valueToCode(this, 'FILE_NAME', Blockly.Arduino.ORDER_ATOMIC);
   var value_data_to_save = Blockly.Arduino.valueToCode(this, 'DATA_TO_SAVE', Blockly.Arduino.ORDER_ATOMIC);
 
-  Blockly.Arduino.codeFunctions_['define_WriteGPSDatas'] = '\n/*Ecriture des données GPS dans le fichier */ \n' +
-  'void WriteGPSDatas(uint8_t mode, String data) {\n'+
-  //'void WriteGPSDatas(uint8_t mode, String data) {\n'+
-  ' char* filename = new char['+value_file_name+'.length()+1];\n'+
-  ' strcpy(filename, '+value_file_name+'.c_str());\n'+
+  Blockly.Arduino.codeFunctions_['define_WriteGPSDatasOnSDCard'] = '\n/*Ecriture des données GPS sur la carte SD */ \n' +
+  'void WriteGPSDatasOnSDCard(uint8_t mode, String data) {\n'+
+  ' String strfilename = '+value_file_name+';\n'+
+  ' char* filename = new char[strfilename.length()+1];\n'+
+  //' char* filename = new char['+value_file_name+'.length()+1];\n'+
+  //' strcpy(filename, '+value_file_name+'.c_str());\n'+
+  ' strcpy(filename, strfilename.c_str());\n'+
   ' LFile dataFile = Drv.open(filename, mode);\n'+ 
   ' if (dataFile) {\n'+ 
   '   dataFile.println(data);\n'+ 
@@ -423,7 +550,7 @@ Blockly.Arduino.driss_linkItOne_WriteData = function() {
   //'strcpy(filename, '+value_file_name+'.c_str());\n'+
   //'WriteGPSDatas(filename, FILE_WRITE, '+value_data_to_save+');' ;
 
-  var code = 'WriteGPSDatas(FILE_WRITE, '+value_data_to_save+');' ;
+  var code = 'WriteGPSDatasOnSDCard(FILE_WRITE, '+value_data_to_save+');\n' ;
   //return [code, Blockly.Arduino.ORDER_ATOMIC];
   return code;
 };

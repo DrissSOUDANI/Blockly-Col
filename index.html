@@ -1475,13 +1475,28 @@
     <sep></sep>
     <category name="CAT_DRISS_LINKIT_ONE" colour="#cc283e">
        
-        <category name="CAT_DRISS_LINKIT_ONE_GSM_GPRS" colour="#cc283e">
+        <category name="CAT_DRISS_LINKIT_ONE_GSM" colour="#cc283e">
             <block type="driss_linkItOne_GSM_initialisation"></block>
             <block type="driss_linkItOne_SMS_disponible"></block>
             <block type="driss_linkItOne_SMS_lireNumero"></block>
             <block type="driss_linkItOne_SMS_lireMessage"></block>
             <block type="driss_linkItOne_SMS_envoyerMessage"></block>
             <block type="driss_linkItOne_SMS_effacer"></block>
+        </category>
+
+        <category name="CAT_DRISS_LINKIT_ONE_GPRS" colour="#cc283e">
+            <block type="driss_linkItOne_GPRS_initialisation"></block>
+            <!--
+            <block type="driss_linkItOne_GPRS_connect_to_server"></block>
+            <block type="driss_linkItOne_GPRS_connected_to_server"></block>
+            -->
+            <block type="driss_linkItOne_GPRS_writeData_on_server">
+            	<value name="PORT">
+					<shadow type="math_number">
+						<field name="NUM">80</field>
+					</shadow>
+				</value>
+            </block>
         </category>
 
         <category name="CAT_DRISS_LINKIT_ONE_GPS" colour="#cc283e">
@@ -1500,7 +1515,7 @@
         <category name="CAT_DRISS_LINKIT_ONE_STOCKAGE" colour="#cc283e">
             <block type="driss_linkItOne_SDCard_initialisation"></block>
             <block type="driss_linkItOne_FalshMem_initialisation"></block>
-            <block type="driss_linkItOne_WriteData"></block>
+            <block type="driss_linkItOne_WriteDataOnSDCard"></block>
         </category>
         
         

@@ -1863,7 +1863,8 @@ Blockly.Msg.DRISS_GROVE_TEXT40 = "Violette";
 
 
 Blockly.Msg.CAT_DRISS_LINKIT_ONE = "LinkItOne";
-Blockly.Msg.CAT_DRISS_LINKIT_ONE_GSM_GPRS = "- GSM/GPRS";
+Blockly.Msg.CAT_DRISS_LINKIT_ONE_GSM = "- GSM (SMS)";
+Blockly.Msg.CAT_DRISS_LINKIT_ONE_GPRS = "- GPRS (Internet par SIM)";
 Blockly.Msg.CAT_DRISS_LINKIT_ONE_GPS = "- GPS";
 Blockly.Msg.CAT_DRISS_LINKIT_ONE_STOCKAGE = "- Carte SD / Mem Flash";
 
