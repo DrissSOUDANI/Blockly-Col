@@ -176,12 +176,17 @@ Blockly.Blocks.driss_A4_ldr = {
   init: function() {
     this.setColour(Blockly.Blocks.drissA4.HUE);
     this.appendDummyInput("")
-        .appendTitle(Blockly.Msg.DRISS_A4_TEXT26)
-        .appendTitle(new Blockly.FieldImage("blocks/drissA4/ldr.png",  Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize/1.6))
+        .appendTitle(Blockly.Msg.DRISS_A4_TEXT26);
+    this.appendDummyInput("")
+        .appendTitle(Blockly.Msg.DRISS_A4_TEXT27)
         .appendTitle(Blockly.Msg.DRISS_A4_TEXT2)
-        .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownAnalogPins), "PIN")
+        .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownAnalogPins), "PIN");
+     this.appendDummyInput("")
+        .appendTitle(Blockly.Msg.DRISS_A4_TEXT28)
+        .appendTitle(new Blockly.FieldImage("blocks/drissA4/ldr.png",  Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize/1.6))
+        
     this.setOutput(true, 'Number');
-    this.setTooltip(Blockly.Msg.DRISS_A4_TEXT27);
+    this.setTooltip(Blockly.Msg.DRISS_A4_TEXT29);
   }
 };
 

@@ -658,7 +658,7 @@ Blockly.Arduino.driss_grove_servo_setPosition = function() {
   '  //pour utiliseer les valeurs de la librairie Servo : \n'+
   '  //remplacer : MIN_PULSE_WIDTH par 544 et MAX_PULSE_WIDTH par 2400\n'+
   '  int puls_width= map(angle, 0, 180, MAX_PULSE_WIDTH, MIN_PULSE_WIDTH); \n' +
-  '  servomoteur_2.write(puls_width);\n' +
+  '  '+servo+'.write(puls_width);\n' +
   '}\n';
 
 

@@ -1795,8 +1795,10 @@ Blockly.Msg.DRISS_A4_TEXT12 = "Entrée Fin de course";
 Blockly.Msg.DRISS_A4_TEXT20 = " détecte une présence ";
 Blockly.Msg.DRISS_A4_TEXT21 = "Entrée Détecteur de Présence ";
 
-Blockly.Msg.DRISS_A4_TEXT26 = "Valeur numérique correspondant à la luminosité (entre 0 et 1024) ";
-Blockly.Msg.DRISS_A4_TEXT27 = "Entrée Capteur de Luminosité ";
+Blockly.Msg.DRISS_A4_TEXT26 = "Valeur numérique correspondant à la luminosité ";
+Blockly.Msg.DRISS_A4_TEXT27 = "mesurée par le capteur de luminosité ";
+Blockly.Msg.DRISS_A4_TEXT28 = "(valeur comprise entre 0 et 1023)";
+Blockly.Msg.DRISS_A4_TEXT29 = "Entrée Capteur de Luminosité ";
 
 Blockly.Msg.DRISS_A4_TEXT31 = " la lampe ";
 Blockly.Msg.DRISS_A4_TEXT32 = " la LED ";

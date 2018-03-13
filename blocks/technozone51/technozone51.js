@@ -285,7 +285,7 @@ Blockly.Blocks.technozone_wf_init = {
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT189);
     this.appendDummyInput("")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT190)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/wifi1.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/wifi1.png", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT165);
     this.appendDummyInput("")
 	      .appendTitle("RX ")
