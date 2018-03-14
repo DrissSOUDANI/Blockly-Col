@@ -32,6 +32,7 @@ Blockly.Arduino.driss_A4_commande_moteur_CC = function() {
     ' else {\n'+
     '   digitalWrite(pin1,1);\n'+
     '   digitalWrite(pin2,0);\n'+
+    ' }\n'+
     ' }\n';
   code="cmd_mot_cc("+dropdown_pin1+","+dropdown_pin2+","+value_sens+");\n";
   return code;
