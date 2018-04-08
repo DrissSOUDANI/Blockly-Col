@@ -113,12 +113,12 @@ Blockly.Arduino.driss_linkItOne_SMS_envoyerMessage = function() {
   
    
 
-  var code = 'char* num = new char['+value_contact_num+'.length()+1];\n' +
-             'strcpy(num, '+value_contact_num+'.c_str());\n'+
+  var code = 'char* driss_num = new char['+value_contact_num+'.length()+1];\n' +
+             'strcpy(driss_num, '+value_contact_num+'.c_str());\n'+
              'String buf = '+value_message_to_send+';\n'+
              'char* msg = new char[buf.length()+1];\n'+
              'strcpy(msg, buf.c_str());\n'+
-             'sendSMS(num, msg);\n';
+             'sendSMS(driss_num, msg);\n';
   //return [code, Blockly.Arduino.ORDER_ATOMIC];
   return code;  
 };
