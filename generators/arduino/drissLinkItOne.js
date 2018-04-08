@@ -113,7 +113,7 @@ Blockly.Arduino.driss_linkItOne_SMS_envoyerMessage = function() {
   
    
 
-  var code = 'char* num = new char[Numero.length()+1];\n' +
+  var code = 'char* num = new char['+value_contact_num+'.length()+1];\n' +
              'strcpy(num, '+value_contact_num+'.c_str());\n'+
              'String buf = '+value_message_to_send+';\n'+
              'char* msg = new char[buf.length()+1];\n'+

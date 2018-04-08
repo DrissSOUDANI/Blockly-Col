@@ -353,3 +353,176 @@ Blockly.Blocks['driss_A4_Temp_DS18B20'] = {
   }
 };
 
+
+
+
+// Driss : Blocs ajouter pour Eval Brevet Blanc
+/*
+Blockly.Blocks['driss_EteindreGyrophare'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Éteindre le gyrophare");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(0);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+Blockly.Blocks['driss_EteindreVoyantRouge'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Éteindre le voyant rouge");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(0);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+Blockly.Blocks['driss_ArreterSirene'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Arrêter la sirène");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(0);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['driss_DeclencherSirene'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Déclencher la sirène");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(0);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+Blockly.Blocks['driss_AllumerGyrophare'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Allumer le gyrophare");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(0);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+Blockly.Blocks['driss_AllumerVoyantRouge'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Allumer le voyant rouge");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(0);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['driss_InterrupteurONOFF_v1'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("L'interrupteur ON - OFF");
+    this.setOutput(true, null);
+    this.setColour(0);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['driss_InterrupteurONOFF_v2'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("L'interrupteur ON - OFF est sur la position ON");
+    this.setOutput(true, null);
+    this.setColour(0);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['driss_InterrupteurONOFF_v3'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("L'interrupteur ON - OFF est sur la position OFF");
+    this.setOutput(true, null);
+    this.setColour(0);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['driss_ON'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("ON");
+    this.setOutput(true, null);
+    this.setColour(0);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['driss_OFF'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("OFF");
+    this.setOutput(true, null);
+    this.setColour(0);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['driss_PIR_DetecteMouvement_v1'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("PIR détecte un mouvement");
+    this.setOutput(true, null);
+    this.setColour(0);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+Blockly.Blocks['driss_PIR_DetecteMouvement_v2'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Détecteur PIR");
+    this.setOutput(true, null);
+    this.setColour(0);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['driss_ContactMagnetique_DetecteOuverture_v1'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Détecteur magnétique")
+        .appendField("détecte une ouverture de porte");
+    this.setOutput(true, null);
+    this.setColour(0);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+Blockly.Blocks['driss_ContactMagnetique_DetecteOuverture_v2'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Détecteur magnétique");
+    this.setOutput(true, null);
+    this.setColour(0);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+*/
