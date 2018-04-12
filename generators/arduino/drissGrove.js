@@ -423,6 +423,15 @@ Blockly.Arduino.driss_grove_purple_led = function() {
   return code;
 };
 
+
+//Grove driss_grove_variable_color OK
+Blockly.Arduino.driss_grove_variable_color = function() { 
+  var dropdown_pin = this.getTitleValue('PIN');
+  var value_fade = Blockly.Arduino.valueToCode(this, 'FADE', Blockly.Arduino.ORDER_UNARY_POSTFIXER_ATOMIC);
+  var code = 'digitalWrite('+dropdown_pin+','+value_fade+');\n'  //code à insérer dans la loop Arduino
+  return code;
+};
+
 //Grove driss_grove_piezo_buzzer ok
 Blockly.Arduino.driss_grove_piezo_buzzer = function() {
   var dropdown_pin = this.getTitleValue('PIN');

@@ -155,13 +155,20 @@ head.load(
     });
 
 head.load(
+    "blocks/drissVorpal/drissVorpal.js",
+    function() {
+        // Call a function when done
+        console.log("Done loading driss Vorpal Blocks");
+    });
+
+
+head.load(
 "blocks/blocks_typing.js",
 "blocks/blocks_colors.js",
 function() {
     // Call a function when done
     console.log("Done loading Blocks Configuration");
 });
-
 
 
 

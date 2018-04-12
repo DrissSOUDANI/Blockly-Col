@@ -127,4 +127,11 @@ function() {
 });
 
 
+head.load(
+"generators/arduino/drissVorpal.js",
+function() {
+    // Call a function when done
+    console.log("Done loading Driss Vorpal Generators");
+});
+
 /* Fin des ajouts de Driss */

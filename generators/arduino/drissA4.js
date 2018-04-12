@@ -1,6 +1,6 @@
 
 
-Blockly.Arduino.driss_A4_led_red = function() {
+Blockly.Arduino.driss_A4_led_red = function() { 
   var dropdown_pin = this.getTitleValue('PIN');
   var dropdown_stat = this.getTitleValue('STAT');
   Blockly.Arduino.setups_['setup_led_red_'+dropdown_pin] = 'pinMode('+dropdown_pin+', OUTPUT);'; //code à insérer dans le setup Arduino

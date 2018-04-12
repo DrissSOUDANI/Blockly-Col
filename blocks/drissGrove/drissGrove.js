@@ -510,6 +510,31 @@ Blockly.Blocks.driss_grove_purple_led = {
   }
 };
 
+//Grove driss_grove_variable_color  OK
+Blockly.Blocks.driss_grove_variable_color = {
+  category: 'driss_grove : actionneurs',
+  helpUrl: '',
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Mettre la nuance de la DEL  à couleur changeante");
+    this.appendValueInput("FADE")
+        .setCheck("Number")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("reliée à la sortie ")
+        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN")
+        .appendField("sur la valeur de fondu");
+    this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendTitle(new Blockly.FieldImage("blocks/drissGrove/Grove_variable_color_LED.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize))
+        .appendField("(valeur comprise entre 0 et 255)");
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(Blockly.Blocks.drissGrove.HUE);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
 
 
 //Grove driss_grove_piezo_buzzer ok
@@ -576,6 +601,13 @@ Blockly.Blocks['driss_grove_IR_emitter_Code'] = {
    this.setHelpUrl("");
     }
   };
+
+
+
+
+
+
+
 
 //Telecommandes -----------------------------------------------------------------
 //Grove driss_grove_Telecommande_GM_IR38_init

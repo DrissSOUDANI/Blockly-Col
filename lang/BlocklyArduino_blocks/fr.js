@@ -1878,7 +1878,9 @@ Blockly.Msg.CAT_DRISS_TINKERKIT_OUT = "- Actionneurs";
 Blockly.Msg.CAT_DRISS_TINKERKIT_DISPLAY = "- Afficheur";
 
 
-Blockly.Msg.CAT_DRISS_AUTRES = "Autres";
+Blockly.Msg.CAT_DRISS_VORPAL = "Vorpal";
+Blockly.Msg.CAT_DRISS_VORPAL_HEXAPOD = "- Hexapode";
+Blockly.Msg.CAT_DRISS_VORPAL_GAMEPAD = "- Manette";
 
 
 

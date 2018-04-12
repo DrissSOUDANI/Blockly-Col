@@ -1,5 +1,3 @@
-//www.technozone51fr
-
 // define blocks
 'use strict';
 goog.provide('Blockly.Blocks.drissA4');
