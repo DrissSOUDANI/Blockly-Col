@@ -995,7 +995,7 @@ Blockly.Blocks.driss_grove_bluetooth_v30_bt_send = {
     this.appendDummyInput()
         .appendField("par la liaison Bluetooth");
     this.appendValueInput("BT_MESSAGE_TO_SEND")
-        .setCheck("String")
+        //.setCheck("String")
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField("Message");
     this.setInputsInline(false);
@@ -1006,9 +1006,33 @@ Blockly.Blocks.driss_grove_bluetooth_v30_bt_send = {
     this.setTooltip('');
     this.setHelpUrl('');
   }
-
 };
 
+/*
+//Grove Serial Bluetooth Envoyer nombre OK
+Blockly.Blocks.driss_grove_bluetooth_v30_bt_send_number = {
+  category: 'driss_grove : communication',
+  helpUrl: '',
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Envoyer le nombre entier suivant");
+    this.appendDummyInput()
+        .appendField("par la liaison Bluetooth");
+    this.appendValueInput("BT_MESSAGE_TO_SEND")
+        .setCheck("Number")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("Nombre entier");
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(Blockly.Blocks.drissGrove.HUE);
+
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+
+};
+*/
 
 //Grove RFID driss_grove_rfid_init
 /*

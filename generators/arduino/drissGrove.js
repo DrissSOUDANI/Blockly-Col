@@ -823,6 +823,12 @@ Blockly.Arduino.driss_grove_bluetooth_v30_bt_init = function() {
 
   //dans include définition    
   Blockly.Arduino.includes_['define_SoftwareSerial'] = "#include <SoftwareSerial.h>\n"; 
+
+  Blockly.Arduino.variables_['define_Commentaire_01'] = "//PINs utilisables pour RX : \n"+
+  "//Mega et Mega 2560 : 10, 11, 12, 13, 50, 51, 52, 53, 62, 63, 64, 65, 66, 67, 68, 69\n"+
+  "//Leonardo et Micro : utiliser pour RX : 8, 9, 10, 11, 14 (MISO), 15 (SCK), 16 (MOSI)";
+
+ 
   Blockly.Arduino.variables_['define_var_bt'] = "SoftwareSerial bt("+dropdown_RX_pin+","+dropdown_TX_pin+"); // RX, TX\n"; 
   Blockly.Arduino.variables_['define_var_time_out'] = "boolean time_out;";
   Blockly.Arduino.variables_['define_var_stringOne'] = 'String stringOne = "";';
@@ -887,6 +893,7 @@ Blockly.Arduino.driss_grove_bluetooth_v30_bt_init = function() {
    " }\n"+
    " if (!time_out) { return bt.read(); } else { return -1; }\n"+
    "}\n";
+  
   Blockly.Arduino.codeFunctions_['define_bt_read'] = 'int bt_read() {\n'+
     ' stringOne = "";\n'+
     ' if (bt.available()>0) {\n'+  
@@ -948,8 +955,9 @@ Blockly.Arduino.driss_grove_bluetooth_v30_bt_send = function() {
   var message_to_sent = Blockly.Arduino.valueToCode(this, 'BT_MESSAGE_TO_SEND',
       Blockly.Arduino.ORDER_UNARY_POSTFIX) || '\'\''; 
   
-  message_to_sent = message_to_sent.substr(1);
-   message_to_sent = message_to_sent.substr(0,message_to_sent.length-1);
+  var msg = message_to_sent;
+  //message_to_sent = message_to_sent.substr(1);
+  //message_to_sent = message_to_sent.substr(0,message_to_sent.length-1);
   //alert(message_to_sent);
 
   //message_to_sent = '"\\r\\n'+message_to_sent+'\\r\\n"';
@@ -960,10 +968,21 @@ Blockly.Arduino.driss_grove_bluetooth_v30_bt_send = function() {
   //dans setup     
   //Rien déjà fait dans : driss_grove_bluetooth_v30_init
 
-  var code = 'bt.println('+message_to_sent+');\n';
+  //var code = 'bt.println('+message_to_sent+');\n';
+  var code = 'bt.println('+msg+');\n';
   return code;
 };
 
+/*
+Blockly.Arduino.driss_grove_bluetooth_v30_bt_send_number = function() {
+  var message_to_sent = Blockly.Arduino.valueToCode(this, 'BT_MESSAGE_TO_SEND',
+      Blockly.Arduino.ORDER_UNARY_POSTFIX) || '\'\''; 
+  
+  var msg = message_to_sent;
+  var code = 'bt.println('+msg+', DEC);\n';
+  return code;
+};
+*/
 
 //Grove RFID driss_grove_rfid_init
 /*
