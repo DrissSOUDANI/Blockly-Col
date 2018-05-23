@@ -1,7 +1,5 @@
 
 
-
-
 //driss_vorpal_init_hexapod -------------------------------------------------------------------------------------
 //Blockly.Arduino['driss_vorpal_init_hexapod'] = function(block) {
 Blockly.Arduino.driss_vorpal_init_hexapod = function() {
@@ -11,20 +9,32 @@ Blockly.Arduino.driss_vorpal_init_hexapod = function() {
   Blockly.Arduino.includes_['define_SPI'] = '#include <SPI.h>';
   Blockly.Arduino.includes_['define_Pixy'] = '#include <Pixy.h>';
 
-  
+  //mettre int FreqMult = 2; dans le tableau de defenition et non pas dans le tableau des variables 
+  //car FreqMult est utilisé dans les #define et doit donc être connu avant l'affichage des variables 
+  // Multiplicateur de fréquence PWM, utilisez 1 pour les servos analogiques et jusqu'à 3 pour les numériques.
+  //Le réglage recommandé pour le numérique est 2 (probablement sans danger pour tous les servos numériques)
+  // Un shunt entre Nano D5 et D6 mettra à "1" dans la configuration, cela vous permet
+  // pour sélectionner le mode servo numérique (2) ou le mode servo analogique (1) en utilisant un fil shunt ou un cavalier court.
+  Blockly.Arduino.definitions_['define_FreqMult']     = "int FreqMult = 2;";
+  Blockly.Arduino.definitions_['define_FreqMult_commentaires']     = "\n"+
+  "// NOTE: Pour les servos numériques tels que Genuine Tower Pro MG90S ou Turnigy MG90S, nous recommandons de mettre\n"+
+  "// un petit joint torique sur l'arbre de servo de la hanche avant de mettre le servo. \n"+
+  "//Cela réduira ou éliminera le comportement \"de chasse\" qui peut amener le servo à osciller rapidement autour de la position cible.\n"; 
+
+
   Blockly.Arduino.definitions_['define_NUM_LEGS']     = "#define NUM_LEGS 6";
 
 
   Blockly.Arduino.definitions_['define_COMENT_01']     = "\n//Masque pour différentes combinaisons de jambes LowBit = Jambe 0";
   Blockly.Arduino.definitions_['define_ALL_LEGS']     = "#define ALL_LEGS      0b111111";
-  //Blockly.Arduino.definitions_['define_LEFT_LEGS']    = "#define LEFT_LEGS     0b111000";
-  //Blockly.Arduino.definitions_['define_RIGHT_LEGS']   = "#define RIGHT_LEGS    0b000111";
-  //Blockly.Arduino.definitions_['define_TRIPOD1_LEGS'] = "#define TRIPOD1_LEGS  0b010101";
-  //Blockly.Arduino.definitions_['define_TRIPOD2_LEGS'] = "#define TRIPOD2_LEGS  0b101010";
-  //Blockly.Arduino.definitions_['define_FRONT_LEGS']   = "#define FRONT_LEGS    0b100001";
-  //Blockly.Arduino.definitions_['define_MIDDLE_LEGS']  = "#define MIDDLE_LEGS   0b010010";
-  //Blockly.Arduino.definitions_['define_BACK_LEGS']    = "#define BACK_LEGS     0b001100";
-  //Blockly.Arduino.definitions_['define_NO_LEGS']      = "#define NO_LEGS       0b0";
+  Blockly.Arduino.definitions_['define_LEFT_LEGS']    = "#define LEFT_LEGS     0b111000";
+  Blockly.Arduino.definitions_['define_RIGHT_LEGS']   = "#define RIGHT_LEGS    0b000111";
+  Blockly.Arduino.definitions_['define_TRIPOD1_LEGS'] = "#define TRIPOD1_LEGS  0b010101";
+  Blockly.Arduino.definitions_['define_TRIPOD2_LEGS'] = "#define TRIPOD2_LEGS  0b101010";
+  Blockly.Arduino.definitions_['define_FRONT_LEGS']   = "#define FRONT_LEGS    0b100001";
+  Blockly.Arduino.definitions_['define_MIDDLE_LEGS']  = "#define MIDDLE_LEGS   0b010010";
+  Blockly.Arduino.definitions_['define_BACK_LEGS']    = "#define BACK_LEGS     0b001100";
+  Blockly.Arduino.definitions_['define_NO_LEGS']      = "#define NO_LEGS       0b0";
 
   //Blockly.Arduino.definitions_['define_COMENT_02']     = "\n//Masques de bits individuels pour les jambes";
   //Blockly.Arduino.definitions_['define_LEG0'] = "#define LEG0 0b1";
@@ -42,12 +52,28 @@ Blockly.Arduino.driss_vorpal_init_hexapod = function() {
   //Blockly.Arduino.definitions_['define_LEG4BIT'] = "#define LEG4BIT 0b10000";
   //Blockly.Arduino.definitions_['define_LEG5BIT'] = "#define LEG5BIT 0b100000";
 
-  //Blockly.Arduino.definitions_['define_COMENT_04']     = "\n";
-  //Blockly.Arduino.definitions_['define_ISFRONTLEG'] = "#define ISFRONTLEG(LEG) (LEG==0||LEG==5)";
+  
+  Blockly.Arduino.definitions_['define_ISFRONTLEG'] = "#define ISFRONTLEG(LEG) (LEG==0||LEG==5)";
   //Blockly.Arduino.definitions_['define_ISMIDLEG']   = "#define ISMIDLEG(LEG)   (LEG==1||LEG==4)";
-  //Blockly.Arduino.definitions_['define_ISBACKLEG']  = "#define ISBACKLEG(LEG)  (LEG==2||LEG==3)";
+  Blockly.Arduino.definitions_['define_ISBACKLEG']  = "#define ISBACKLEG(LEG)  (LEG==2||LEG==3)";
   //Blockly.Arduino.definitions_['define_ISLEFTLEG']  = "#define ISLEFTLEG(LEG)  (LEG==0||LEG==1||LEG==2)";
   //Blockly.Arduino.definitions_['define_ISRIGHTLEG'] = "#define ISRIGHTLEG(LEG) (LEG==3||LEG==4||LEG==5)";
+
+  Blockly.Arduino.definitions_['define_COMENT_04']     = "\n//Positions par défaut pour le genou et la hanche (en degres)";
+  //Blockly.Arduino.definitions_['define_KNEE_UP_MAX']  = "#define KNEE_UP_MAX 180";
+  Blockly.Arduino.definitions_['define_KNEE_UP']  = "#define KNEE_UP 150";
+  //Blockly.Arduino.definitions_['define_KNEE_RELAX']  = "#define KNEE_RELAX 120";
+  //Blockly.Arduino.definitions_['define_KNEE_NEUTRAL']  = "#define KNEE_NEUTRAL 90";
+  //Blockly.Arduino.definitions_['define_KNEE_CROUCH']  = "#define KNEE_CROUCH 110";
+  //Blockly.Arduino.definitions_['define_KNEE_HALF_CROUCH']  = "#define KNEE_HALF_CROUCH 80";
+  Blockly.Arduino.definitions_['define_KNEE_STAND']  = "#define KNEE_STAND 30";
+  //Blockly.Arduino.definitions_['define_KNEE_DOWN']  = "#define KNEE_DOWN 30";
+  Blockly.Arduino.definitions_['define_KNEE_TIPTOES']  = "#define KNEE_TIPTOES 5";
+  //Blockly.Arduino.definitions_['define_KNEE_FOLD']  = "#define KNEE_FOLD 170";
+  //Blockly.Arduino.definitions_['define_KNEE_SCAMPER']  = "#define KNEE_SCAMPER (KNEE_NEUTRAL-20) ";
+  //Blockly.Arduino.definitions_['define_KNEE_TRIPOD_UP']  = "#define KNEE_TRIPOD_UP (KNEE_NEUTRAL-40)";
+  //Blockly.Arduino.definitions_['define_KNEE_TRIPOD_ADJ']  = "#define KNEE_TRIPOD_ADJ 30";
+
 
   Blockly.Arduino.definitions_['define_COMENT_05']     = "\n//jusqu'où balancer les hanches sur des positions comme le trépied ou le quadrupède";
   //Blockly.Arduino.definitions_['define_HIPSWING'] = "#define HIPSWING 25";
@@ -66,13 +92,13 @@ Blockly.Arduino.driss_vorpal_init_hexapod = function() {
   
 
   //Blockly.Arduino.definitions_['define_COMENT_06']     = "\n";
-  //Blockly.Arduino.definitions_['define_NOMOVE'] = "#define NOMOVE (-1)";
-  //Blockly.Arduino.definitions_['define_LEFT_START'] = "#define LEFT_START 3";
+  Blockly.Arduino.definitions_['define_NOMOVE'] = "#define NOMOVE (-1)";
+  Blockly.Arduino.definitions_['define_LEFT_START'] = "#define LEFT_START 3";
   //Blockly.Arduino.definitions_['define_RIGHT_START'] = "#define RIGHT_START 0";
-  //Blockly.Arduino.definitions_['define_KNEE_OFFSET'] = "#define KNEE_OFFSET 6";
+  Blockly.Arduino.definitions_['define_KNEE_OFFSET'] = "#define KNEE_OFFSET 6";
 
   //Blockly.Arduino.definitions_['define_COMENT_07']     = "\n";
-  //Blockly.Arduino.definitions_['define_SERVO_IIC_ADDR'] = "#define SERVO_IIC_ADDR  (0x40)";
+  Blockly.Arduino.definitions_['define_SERVO_IIC_ADDR'] = "#define SERVO_IIC_ADDR  (0x40)";
 
   //Blockly.Arduino.definitions_['define_COMENT_08'] = "\n//utilisés dans void turn(...)";
   //Blockly.Arduino.definitions_['define_NUM_TURN_PHASES'] = "#define NUM_TURN_PHASES 6";
@@ -100,8 +126,8 @@ Blockly.Arduino.driss_vorpal_init_hexapod = function() {
   //"// Les modifier au besoin pour correspondre aux servos ! Si vous entendez bourdonnement ou agitation, vous êtes allé trop loin\n"+
   //"// Ces valeurs sont bonnes pour les petits servos à engrenages en métal MG90S clone et Genuine Tower Pro MG90S.";
   Blockly.Arduino.definitions_['define_PWMFREQUENCY'] = "#define PWMFREQUENCY (60*FreqMult)";
-  //Blockly.Arduino.definitions_['define_SERVOMIN'] = "#define SERVOMIN  (190*FreqMult) // this is the 'minimum' pulse length count (out of 4096)";
-  //Blockly.Arduino.definitions_['define_SERVOMAX'] = "#define SERVOMAX  (540*FreqMult) // this is the 'maximum' pulse length count (out of 4096)";
+  Blockly.Arduino.definitions_['define_SERVOMIN'] = "#define SERVOMIN  (190*FreqMult) // this is the 'minimum' pulse length count (out of 4096)";
+  Blockly.Arduino.definitions_['define_SERVOMAX'] = "#define SERVOMAX  (540*FreqMult) // this is the 'maximum' pulse length count (out of 4096)";
 
 
   Blockly.Arduino.variables_['var_servoDriver'] = 'Adafruit_PWMServoDriver servoDriver = Adafruit_PWMServoDriver(SERVO_IIC_ADDR);';
@@ -111,6 +137,8 @@ Blockly.Arduino.driss_vorpal_init_hexapod = function() {
   //Blockly.Arduino.variables_['var_LastReceiveTime'] = 'long LastReceiveTime = 0;   // last time we got a bluetooth packet';
   //Blockly.Arduino.variables_['var_LastValidReceiveTime'] = 'long LastValidReceiveTime = 0;  // last time we got a completely valid packet including correct checksum';
 
+  Blockly.Arduino.variables_['var_BlueTooth'] = 'SoftwareSerial BlueTooth(3,2);  // Bluetooth pins: TX=3=Yellow wire,  RX=2=Green wire;';
+  
   
   Blockly.Arduino.codeFunctions_['define_beep2'] = '\n//Beep \n'+
   'void beep(int f) {\n' +
@@ -162,7 +190,7 @@ Blockly.Arduino.driss_vorpal_init_hexapod = function() {
   Blockly.Arduino.codeFunctions_['define_setHip'] = '\n//cette version de setHip s\'ajuste non seulement pour la gauche et la droite,\n'+
   '//mais aussi pour décaler les pattes avant un peu en arrière et les pattes arrières vers l\'avant\n' +
   '//pour faire un meilleur équilibre pour certaines allures comme le trépied ou le quadrupède \n' +
-  'void setHip(int leg, int pos, int adj) { \n' +
+  'void setHip(int leg, int pos, int adj=0) { \n' +
   ' if (ISFRONTLEG(leg)) {\n' +
   '   pos -= adj;\n' +
   ' } else if (ISBACKLEG(leg)) {\n' +
@@ -174,7 +202,18 @@ Blockly.Arduino.driss_vorpal_init_hexapod = function() {
   ' }\n' +
   ' setHipRaw(leg, pos);\n' +
   '}';
-/*
+
+  
+  Blockly.Arduino.codeFunctions_['define_setKnee'] = '\n'+
+  'void setKnee(int leg, int pos) {\n' +
+  ' //trouver le genou associé à la jambe si ce n\'est pas déjà un genou\n' +
+  ' if (leg < KNEE_OFFSET) {\n' +
+  '   leg += KNEE_OFFSET;\n' +
+  ' }\n' +
+  ' setServo(leg, pos);\n' +
+  '}';
+
+  /*
   Blockly.Arduino.codeFunctions_['define_setLeg2'] = '\n'+
   '//Cette fonction définit les positions du genou et de la hanche en une seule commande\n'+
   '//Pour la hanche, le côté gauche est inversé, donc la direction avant est cohérente\n'+
@@ -186,7 +225,7 @@ Blockly.Arduino.driss_vorpal_init_hexapod = function() {
   '}';
 */
   Blockly.Arduino.codeFunctions_['define_setLeg'] = '\n' +
-  'void setLeg(int legmask, int hip_pos, int knee_pos, int adj, int raw) {\n' +
+  'void setLeg(int legmask, int hip_pos, int knee_pos, int adj, int raw=0) {\n' +
   ' for (int i = 0; i < NUM_LEGS; i++) {\n' +
   '   if (legmask & 0b1) {  // if the lowest bit is ON\n' +
   '     if (hip_pos != NOMOVE) {\n' +
@@ -204,19 +243,7 @@ Blockly.Arduino.driss_vorpal_init_hexapod = function() {
   ' }\n' +
   '}';
 
-
-/*  
-  Blockly.Arduino.codeFunctions_['define_setKnee'] = '\n'+
-  'void setKnee(int leg, int pos) {\n' +
-  ' //trouver le genou associé à la jambe si ce n\'est pas déjà un genou\n' +
-  ' if (leg < KNEE_OFFSET) {\n' +
-  '   leg += KNEE_OFFSET;\n' +
-  ' }\n' +
-  ' setServo(leg, pos);\n' +
-  '}';
-
-
-  
+  /*
 
   Blockly.Arduino.codeFunctions_['define_turn'] = '\n'+
   'void turn(int ccw, int hipforward, int hipbackward, int kneeup, int kneedown, long timeperiod) {\n' +
@@ -265,26 +292,8 @@ Blockly.Arduino.driss_vorpal_init_hexapod = function() {
   ' }\n' +
   '}';
 */
-  Blockly.Arduino.codeFunctions_['define_stand'] = '\n'+
-  'void stand() {\n' +
-  ' setLeg(ALL_LEGS, HIP_NEUTRAL, KNEE_STAND, 0);\n' +
-  '}';
-
-  Blockly.Arduino.codeFunctions_['define_stand_90_degrees'] = '\n'+
-  'void stand_90_degrees() {\n' +
-  ' setLeg(ALL_LEGS, 90, 90, 0);\n' +
-  '}';
+  
 /*
-  Blockly.Arduino.codeFunctions_['define_laydown'] = '\n'+
-  'void laydown() {\n' +
-  ' setLeg(ALL_LEGS, HIP_NEUTRAL, KNEE_UP, 0);\n' +
-  '}';
-
-  Blockly.Arduino.codeFunctions_['define_tiptoes'] = '\n'+
-  'void tiptoes() {\n' +
-  ' setLeg(ALL_LEGS, HIP_NEUTRAL, KNEE_TIPTOES, 0);\n' +
-  '}';
-
   Blockly.Arduino.codeFunctions_['define_wave'] = '\n'+
   'void wave(int dpad) {\n' +
   ' long t = millis()%WAVE_CYCLE_TIME;\n' +
@@ -408,7 +417,7 @@ Blockly.Arduino.driss_vorpal_init_hexapod = function() {
   '}\n';
 */
   
-  Blockly.Arduino.setups_['setup_vorpal_init_hexapod'] = ''+
+  Blockly.Arduino.setups_['setup_vorpal_init_hexapod'] = '\n'+
   ' //Serial.begin(9600);\n'+
   ' pinMode(BeeperPin, OUTPUT);\n'+
   ' beep(200);\n'+
@@ -417,8 +426,15 @@ Blockly.Arduino.driss_vorpal_init_hexapod = function() {
   ' pinMode(ServoTypePin, INPUT_PULLUP);\n'+
   ' delay(300);\n'+
   ' \n'+
-  ' if (digitalRead(ServoTypePin) == LOW) { // Analog servo mode\n'+
-  '   FreqMult = 1;  // Analog servos should be run at a slower speed (60 hertz).\n'+
+  ' Serial.begin(9600);\n'+
+  ' BlueTooth.begin(38400);\n'+
+  ' BlueTooth.println("");\n'+
+  ' delay(250);\n'+
+  ' BlueTooth.println("Vorpal H12 : Bonjour ");\n'+
+  ' delay(250);\n'+
+  ' \n'+
+  ' if (digitalRead(ServoTypePin) == LOW) { // Mode servo analogique\n'+
+  '   FreqMult = 1;  // Les servos analogiques doivent fonctionner à une vitesse plus lente (60 hertz).\n'+
   ' }\n'+
   ' \n'+
   ' for (int i = 0; i < FreqMult; i++) {\n'+
@@ -432,10 +448,10 @@ Blockly.Arduino.driss_vorpal_init_hexapod = function() {
   ' stand();\n'+
   ' delay(300);\n'+
   ' \n'+
-  ' beep(400); // Signals end of startup sequence\n'+
+  ' beep(400); // Signale la fin de la séquence de démarrage\n'+
   ' \n'+
   ' yield();\n'+
-  '}\n';
+  '';
 
 
 
@@ -462,24 +478,111 @@ Blockly.Arduino['driss_vorpal_emettre_son_freq_duree'] = function(block) {
 
 //driss_vorpal_position_repos -------------------------------------------------------------------------------------
 Blockly.Arduino['driss_vorpal_position_repos'] = function(block) {
-  // TODO: Assemble JavaScript into code variable.
+  Blockly.Arduino.codeFunctions_['define_stand_90_degrees'] = '\n'+
+  'void stand_90_degrees() {\n' +
+  ' setLeg(ALL_LEGS, 90, 90, 0, 0);\n' +
+  '}';
+
   var code = 'stand_90_degrees();\n';
   return code;
 };
 
 //driss_vorpal_position_debout -------------------------------------------------------------------------------------
 Blockly.Arduino['driss_vorpal_position_debout'] = function(block) {
-  // TODO: Assemble JavaScript into code variable.
+  Blockly.Arduino.codeFunctions_['define_stand'] = '\n'+
+  'void stand() {\n' +
+  ' setLeg(ALL_LEGS, HIP_NEUTRAL, KNEE_STAND, 0, 0);\n' +
+  '}';
+
   var code = 'stand();\n';
   return code;
 };
 
+//driss_vorpal_poser_corps -------------------------------------------------------------------------------------
+Blockly.Arduino['driss_vorpal_poser_corps'] = function(block) {
+  Blockly.Arduino.codeFunctions_['define_laydown'] = '\n'+
+  'void laydown() {\n' +
+  ' setLeg(ALL_LEGS, HIP_NEUTRAL, KNEE_UP, 0, 0);\n' +
+  '}';
+
+  var code = 'laydown();\n';
+  return code;
+};
+
+
+//driss_vorpal_se_mettre_sur_pointes -------------------------------------------------------------------------------------
+Blockly.Arduino['driss_vorpal_se_mettre_sur_pointes'] = function(block) {
+  Blockly.Arduino.codeFunctions_['define_tiptoes'] = '\n'+
+  'void tiptoes() {\n' +
+  ' setLeg(ALL_LEGS, HIP_NEUTRAL, KNEE_TIPTOES, 0, 0);\n' +
+  '}';
+
+  var code = 'tiptoes();\n';
+  return code;
+};
+
+
+//driss_vorpal_lire_distance_avec_ultrasonic -------------------------------------------------------------------------------------
+Blockly.Arduino['driss_vorpal_lire_distance_avec_ultrasonic'] = function(block) {
+  
+  Blockly.Arduino.definitions_['define_ULTRAOUTPUTPIN'] = "#define ULTRAOUTPUTPIN 7      // TRIG";
+  Blockly.Arduino.definitions_['define_ULTRAINPUTPIN'] = "#define ULTRAINPUTPIN  8      // ECHO";
+
+  Blockly.Arduino.codeFunctions_['define_readUltrasonic'] = '//renvoie le nombre de centimètres du télémètre à ultrasons\n'+
+  'unsigned int readUltrasonic() {\n'+
+  ' pinMode(ULTRAOUTPUTPIN, OUTPUT);\n'+
+  ' digitalWrite(ULTRAOUTPUTPIN, LOW);\n'+
+  ' delayMicroseconds(5);\n'+
+  ' digitalWrite(ULTRAOUTPUTPIN, HIGH);\n'+
+  ' delayMicroseconds(10);\n'+
+  ' digitalWrite(ULTRAOUTPUTPIN, LOW);\n'+
+  ' \n'+
+  ' //maximum 18 millisecondes qui correspond à environ 3m de distance de l\'objet\n'+
+  ' unsigned int duration = pulseIn(ULTRAINPUTPIN, HIGH, 18000); \n'+
+  ' //Serial.print("ultra cm:"); Serial.println(duration/58);\n'+
+  ' \n'+
+  ' // Soit 0, soit moins de 2 cm ou encore hors de portée\n'+
+  ' if (duration <100) { \n'+
+  '   return 1000;   // cette grande valeur pour signifier hors de portée, puisque 400 cm est la portée max publiée par le fabricant\n'+
+  ' }\n'+
+  ' \n'+
+  ' //cela convertit des microsecondes de temps de propagation du son en centimètres.\n'+ 
+  ' //Rappelez-vous que le son doit aller et venir, donc il voyage deux fois plus loin que la distance de l\'objet\n'+
+  ' return (duration) / 58;\n'+
+  '}\n';
+
+  var code = 'readUltrasonic()';
+  //return code;
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+
+
+//driss_vorpal_set_leg_position -------------------------------------------------------------------------------------
+Blockly.Arduino.driss_vorpal_set_legs_position = function() {
+  var dropdown_legmask = this.getFieldValue('LEGMASK');
+  var hip_angle = Blockly.Arduino.valueToCode(this, 'HIP_ANGLE', Blockly.Arduino.ORDER_ATOMIC);
+  var knee_angle = Blockly.Arduino.valueToCode(this, 'KNEE_ANGLE', Blockly.Arduino.ORDER_ATOMIC);
+  var adj = Blockly.Arduino.valueToCode(this, 'ADJ', Blockly.Arduino.ORDER_ATOMIC);
+  
+  var code = 'setLeg('+dropdown_legmask+', '+hip_angle+', '+knee_angle+', '+adj+',0);\n';
+  return code;
+};
 
 //driss_vorpal_set_hip_angle -------------------------------------------------------------------------------------
 Blockly.Arduino.driss_vorpal_set_hip_angle = function() {
-  var dropdown_hips = this.getFieldValue('HIP');
-  var value_name = Blockly.Arduino.valueToCode(this, 'ANGLE', Blockly.Arduino.ORDER_ATOMIC);
-  // TODO: Assemble JavaScript into code variable.
-  var code = '...;\n';
+  var legnum = this.getFieldValue('LEGNUM');
+  var angle = Blockly.Arduino.valueToCode(this, 'ANGLE', Blockly.Arduino.ORDER_ATOMIC);
+  
+  var code = 'setHip('+legnum+', '+angle+', 0);\n';
+  return code;
+};
+
+//driss_vorpal_set_knee_angle -------------------------------------------------------------------------------------
+Blockly.Arduino.driss_vorpal_set_knee_angle = function() {
+  var legnum = this.getFieldValue('LEGNUM');
+  var angle = Blockly.Arduino.valueToCode(this, 'ANGLE', Blockly.Arduino.ORDER_ATOMIC);
+  
+  var code = 'setKnee('+legnum+', '+angle+');\n';
   return code;
 };

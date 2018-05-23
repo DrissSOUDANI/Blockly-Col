@@ -252,7 +252,7 @@ Blockly.Arduino.driss_linkItOne_GPRS_writeData_on_server = function() {
    '    gsmclient.println("Connection: close");\n'+
    '    gsmclient.println();\n'+
    '}';  
-  var code = 'WiteDatasOnServerByGPRS();';
+  var code = 'WiteDatasOnServerByGPRS();\n';
   //return [code, Blockly.Arduino.ORDER_ATOMIC];
   return code; 
 };
@@ -270,10 +270,8 @@ Blockly.Arduino.driss_linkItOne_GPS_initialisation = function() {
   ' delay(3000);\n'+ 
   '}\n';
   Blockly.Arduino.setups_['setup_GPS'] = 'LGPS.powerOn(GPS_GLONASS);\n'+ 
-  '  //Serial.println("Activation du recepteur GPS ...OK.");\n'+
-  '  //Serial.print("Tentative de joindre le réseau GPRS ...");\n'+
-  '  //while (!LGPRS.attachGPRS("wholesale", NULL, NULL)) delay(500);\n'+
-  '  //Serial.println("..OK.. réussi");\n';
+  '  //Serial.println("Activation du recepteur GPS ...OK.");\n';
+  
   
   var code = 'setPauseGPS();\n';
   return code;

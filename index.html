@@ -1586,11 +1586,8 @@
         <category name="CAT_DRISS_VORPAL_HEXAPOD" colour="#660033">
         	<block type="driss_vorpal_init_hexapod"></block>
         	<block type="driss_vorpal_faire_un_bip"></block>
-        	
-            <block type="driss_vorpal_position_repos"></block>
-            <block type="driss_vorpal_position_debout"></block>
 
-            <block type="driss_vorpal_emettre_son_freq_duree">
+        	<block type="driss_vorpal_emettre_son_freq_duree">
         		<value name="FREQUENCE">
 					<shadow type="math_number">
 						<field name="NUM">250</field>
@@ -1602,7 +1599,40 @@
 					</shadow>
 				</value>
 			</block>
+        	
+            <block type="driss_vorpal_position_repos"></block>
+            <block type="driss_vorpal_position_debout"></block>
+            <block type="driss_vorpal_poser_corps"></block>
+            <block type="driss_vorpal_se_mettre_sur_pointes"></block>
+
+            <block type="driss_vorpal_lire_distance_avec_ultrasonic"></block>
+
+            
+			<block type="driss_vorpal_set_legs_position">
+            	<value name="HIP_ANGLE">
+					<shadow type="math_number">
+						<field name="NUM">90</field>
+					</shadow>
+				</value>
+				<value name="KNEE_ANGLE">
+					<shadow type="math_number">
+						<field name="NUM">90</field>
+					</shadow>
+				</value>
+				<value name="ADJ">
+					<shadow type="math_number">
+						<field name="NUM">0</field>
+					</shadow>
+				</value>
+            </block>
             <block type="driss_vorpal_set_hip_angle">
+            	<value name="ANGLE">
+					<shadow type="math_number">
+						<field name="NUM">90</field>
+					</shadow>
+				</value>
+            </block>
+            <block type="driss_vorpal_set_knee_angle">
             	<value name="ANGLE">
 					<shadow type="math_number">
 						<field name="NUM">90</field>

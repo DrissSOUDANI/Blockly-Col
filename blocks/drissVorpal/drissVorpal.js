@@ -1,4 +1,4 @@
-// define blocks
+// define blocks 
 'use strict';
 goog.provide('Blockly.Blocks.drissVorpal');
 
@@ -91,14 +91,81 @@ Blockly.Blocks['driss_vorpal_position_debout'] = {
   }
 };
 
+//driss_vorpal_poser_corps -------------------------------------------------------------------------------------
+Blockly.Blocks['driss_vorpal_poser_corps'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Poser le corps par terre");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(Blockly.Blocks.drissVorpal.HUE);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+//driss_vorpal_se_mettre_sur_pointes -------------------------------------------------------------------------------------
+Blockly.Blocks['driss_vorpal_se_mettre_sur_pointes'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Se mettre debout sur les pointes");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(Blockly.Blocks.drissVorpal.HUE);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+//driss_vorpal_lire_distance_avec_ultrasonic -------------------------------------------------------------------------------------
+Blockly.Blocks['driss_vorpal_lire_distance_avec_ultrasonic'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Distance mesurée avec le capteur à ultrasons (cm)");
+    this.setOutput(true, "Number");
+    this.setColour(Blockly.Blocks.drissVorpal.HUE);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+
+//driss_vorpal_set_legs_position -------------------------------------------------------------------------------------
+Blockly.Blocks['driss_vorpal_set_legs_position'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Positionner les servomoteurs")
+        .appendField(new Blockly.FieldDropdown([["de toutes les pattes","ALL_LEGS"], ["des pattes avant (0,5)","FRONT_LEGS"], ["des pattes arrière (2,3)","BACK_LEGS"], ["des pattes gauche (3,4,5)","LEFT_LEGS"], ["des pattes droites (0,1,2)","RIGHT_LEGS"], ["des pattes du milieu (1,4)","MIDDLE_LEGS"], ["des pattes impaires (1,3,5)","TRIPOD1_LEGS"], ["des pattes paires (0,2,4)","TRIPOD2_LEGS"], ["d'aucune patte","NO_LEGS"]]), "LEGMASK");
+    this.appendValueInput("HIP_ANGLE")
+        .setCheck("Number")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("la hanche sur l'angle (en degrés)");
+    this.appendValueInput("KNEE_ANGLE")
+        .setCheck("Number")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("le genou sur l'angle (en degrés)");
+    this.appendValueInput("ADJ")
+        .setCheck("Number")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("Ajustement (pour plus de stabilité)");
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(Blockly.Blocks.drissVorpal.HUE);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
 
 //driss_vorpal_set_hip_angle -------------------------------------------------------------------------------------
 Blockly.Blocks['driss_vorpal_set_hip_angle'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Positionner le servomoteur de")
-        .appendField(new Blockly.FieldDropdown([["la hanche 0","HIP_0"], ["la hanche 1","HIP_1"], ["la hanche 2","HIP_2"], ["la hanche 3","HIP_3"], ["la hanche 4","HIP_4"], ["la hanche 5","HIP_5"]]), "HIP")
-        .appendField("");
+        .appendField("Positionner le servomoteur 'hanche' de la patte")
+        .appendField(new Blockly.FieldDropdown([["0","0"], ["1","1"], ["2","2"], ["3","3"], ["4","4"], ["5","5"]]), "LEGNUM");
     this.appendValueInput("ANGLE")
         .setCheck("Number")
         .setAlign(Blockly.ALIGN_RIGHT)
@@ -109,5 +176,55 @@ Blockly.Blocks['driss_vorpal_set_hip_angle'] = {
     this.setColour(Blockly.Blocks.drissVorpal.HUE);
  this.setTooltip("");
  this.setHelpUrl("");
-  }
+  },
+
+      onchange: function(ev) {
+        var angle = Blockly.Arduino.valueToCode(this, 'ANGLE', Blockly.Arduino.ORDER_ATOMIC);
+        var val = 0;
+        /*
+        if((angle < 0) || (angle >180)){
+            this.setWarningText("la valeur de l'angle doit être comprise entre 0 et 180");
+        }
+        else this.setWarningText(null);
+        */
+        if((angle < 0) || (angle >180)){
+            this.getChildren()[0].dispose();
+            alert("la valeur de l'angle doit être comprise entre 0 et 180");
+        }
+       }
+};
+
+//driss_vorpal_set_knee_angle -------------------------------------------------------------------------------------
+Blockly.Blocks['driss_vorpal_set_knee_angle'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Positionner le servomoteur 'genou' de la patte")
+        .appendField(new Blockly.FieldDropdown([["0","0"], ["1","1"], ["2","2"], ["3","3"], ["4","4"], ["5","5"]]), "LEGNUM");
+    this.appendValueInput("ANGLE")
+        .setCheck("Number")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("sur l'angle (en degrés)");
+    
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(Blockly.Blocks.drissVorpal.HUE);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  },
+
+      onchange: function(ev) {
+        var angle = Blockly.Arduino.valueToCode(this, 'ANGLE', Blockly.Arduino.ORDER_ATOMIC);
+        var val = 0;
+        /*
+        if((angle < 0) || (angle >180)){
+            this.setWarningText("la valeur de l'angle doit être comprise entre 0 et 180");
+        }
+        else this.setWarningText(null);
+        */
+        if((angle < 0) || (angle >180)){
+            this.getChildren()[0].dispose();
+            alert("la valeur de l'angle doit être comprise entre 0 et 180");
+        }
+       }
 };
