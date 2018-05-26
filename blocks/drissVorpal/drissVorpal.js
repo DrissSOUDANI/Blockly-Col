@@ -91,6 +91,8 @@ Blockly.Blocks['driss_vorpal_position_debout'] = {
   }
 };
 
+
+
 //driss_vorpal_poser_corps -------------------------------------------------------------------------------------
 Blockly.Blocks['driss_vorpal_poser_corps'] = {
   init: function() {
@@ -118,6 +120,47 @@ Blockly.Blocks['driss_vorpal_se_mettre_sur_pointes'] = {
  this.setHelpUrl("");
   }
 };
+
+
+//driss_vorpal_tourner_sur_place ------------------------------------------------------------
+Blockly.Blocks['driss_vorpal_tourner_sur_place'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Tourner sur place de")
+        .appendField(new Blockly.FieldDropdown([["45","45"], ["90","90"], ["135","135"], ["180","180"], ["225","225"], ["270","270"], ["315","315"], ["360","360"]]), "ANGLE")
+        .appendField("degrés");
+    this.appendDummyInput()
+        .appendField("das le sens")
+        .appendField(new Blockly.FieldDropdown([["horraire","0"], ["anti-horraire","1"]]), "SENS");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(Blockly.Blocks.drissVorpal.HUE);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+
+//driss_vorpal_marcher -------------------------------------------------------------------------------------
+Blockly.Blocks['driss_vorpal_marcher'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown([["Avancer","0"], ["Reculer","1"]]), "SENS")
+        .appendField("de ");
+    this.appendValueInput("STEP")
+        .setCheck("Number");
+    this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("Pas");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(Blockly.Blocks.drissVorpal.HUE);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+
 
 //driss_vorpal_lire_distance_avec_ultrasonic -------------------------------------------------------------------------------------
 Blockly.Blocks['driss_vorpal_lire_distance_avec_ultrasonic'] = {

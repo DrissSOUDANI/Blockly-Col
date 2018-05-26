@@ -62,28 +62,27 @@ Blockly.Arduino.driss_vorpal_init_hexapod = function() {
   Blockly.Arduino.definitions_['define_COMENT_04']     = "\n//Positions par défaut pour le genou et la hanche (en degres)";
   //Blockly.Arduino.definitions_['define_KNEE_UP_MAX']  = "#define KNEE_UP_MAX 180";
   Blockly.Arduino.definitions_['define_KNEE_UP']  = "#define KNEE_UP 150";
-  //Blockly.Arduino.definitions_['define_KNEE_RELAX']  = "#define KNEE_RELAX 120";
-  //Blockly.Arduino.definitions_['define_KNEE_NEUTRAL']  = "#define KNEE_NEUTRAL 90";
+  Blockly.Arduino.definitions_['define_KNEE_RELAX']  = "#define KNEE_RELAX 120";
+  Blockly.Arduino.definitions_['define_KNEE_NEUTRAL']  = "#define KNEE_NEUTRAL 90";
   //Blockly.Arduino.definitions_['define_KNEE_CROUCH']  = "#define KNEE_CROUCH 110";
   //Blockly.Arduino.definitions_['define_KNEE_HALF_CROUCH']  = "#define KNEE_HALF_CROUCH 80";
   Blockly.Arduino.definitions_['define_KNEE_STAND']  = "#define KNEE_STAND 30";
-  //Blockly.Arduino.definitions_['define_KNEE_DOWN']  = "#define KNEE_DOWN 30";
+  Blockly.Arduino.definitions_['define_KNEE_DOWN']  = "#define KNEE_DOWN 30";
   Blockly.Arduino.definitions_['define_KNEE_TIPTOES']  = "#define KNEE_TIPTOES 5";
   //Blockly.Arduino.definitions_['define_KNEE_FOLD']  = "#define KNEE_FOLD 170";
   //Blockly.Arduino.definitions_['define_KNEE_SCAMPER']  = "#define KNEE_SCAMPER (KNEE_NEUTRAL-20) ";
   //Blockly.Arduino.definitions_['define_KNEE_TRIPOD_UP']  = "#define KNEE_TRIPOD_UP (KNEE_NEUTRAL-40)";
   //Blockly.Arduino.definitions_['define_KNEE_TRIPOD_ADJ']  = "#define KNEE_TRIPOD_ADJ 30";
 
-
-  Blockly.Arduino.definitions_['define_COMENT_05']     = "\n//jusqu'où balancer les hanches sur des positions comme le trépied ou le quadrupède";
-  //Blockly.Arduino.definitions_['define_HIPSWING'] = "#define HIPSWING 25";
-  //Blockly.Arduino.definitions_['define_HIPSMALLSWING'] = "#define HIPSMALLSWING 10";
+  Blockly.Arduino.definitions_['define_COMENT_05']     = "\n";
+  Blockly.Arduino.definitions_['define_HIPSWING'] = "#define HIPSWING 24 //jusqu'où balancer les hanches sur des positions comme le trépied ou le quadrupède";
+  //Blockly.Arduino.definitions_['define_HIPSMALLSWING'] = "#define HIPSMALLSWING 10  //dans quelle mesure déplacer les hanches en mode précis";
   //Blockly.Arduino.definitions_['define_HIPSWING_RIPPLE'] = "#define HIPSWING_RIPPLE 20";
   //Blockly.Arduino.definitions_['define_HIP_FORWARD_MAX'] = "#define HIP_FORWARD_MAX 175";
-  //Blockly.Arduino.definitions_['define_HIP_FORWARD'] = "#define HIP_FORWARD (HIP_NEUTRAL+HIPSWING)";
+  Blockly.Arduino.definitions_['define_HIP_FORWARD'] = "#define HIP_FORWARD (HIP_NEUTRAL+HIPSWING)";
   //Blockly.Arduino.definitions_['define_HIP_FORWARD_SMALL'] = "#define HIP_FORWARD_SMALL (HIP_NEUTRAL+HIPSMALLSWING)";
   Blockly.Arduino.definitions_['define_HIP_NEUTRAL'] = "#define HIP_NEUTRAL 90";
-  //Blockly.Arduino.definitions_['define_HIP_BACKWARD'] = "#define HIP_BACKWARD (HIP_NEUTRAL-HIPSWING)";
+  Blockly.Arduino.definitions_['define_HIP_BACKWARD'] = "#define HIP_BACKWARD (HIP_NEUTRAL-HIPSWING)";
   //Blockly.Arduino.definitions_['define_HIP_BACKWARD_SMALL'] = "#define HIP_BACKWARD_SMALL (HIP_NEUTRAL-HIPSMALLSWING)";
   //Blockly.Arduino.definitions_['define_HIP_BACKWARD_MAX'] = "#define HIP_BACKWARD_MAX 0";
   //Blockly.Arduino.definitions_['define_HIP_FORWARD_RIPPLE'] = "#define HIP_FORWARD_RIPPLE (HIP_NEUTRAL+HIPSWING_RIPPLE)";
@@ -100,10 +99,7 @@ Blockly.Arduino.driss_vorpal_init_hexapod = function() {
   //Blockly.Arduino.definitions_['define_COMENT_07']     = "\n";
   Blockly.Arduino.definitions_['define_SERVO_IIC_ADDR'] = "#define SERVO_IIC_ADDR  (0x40)";
 
-  //Blockly.Arduino.definitions_['define_COMENT_08'] = "\n//utilisés dans void turn(...)";
-  //Blockly.Arduino.definitions_['define_NUM_TURN_PHASES'] = "#define NUM_TURN_PHASES 6";
-  //Blockly.Arduino.definitions_['define_FBSHIFT_TURN'] = "#define FBSHIFT_TURN    40  //remonter les pattes avant, les pattes arrière vers l'avant";
-  
+
   //Blockly.Arduino.definitions_['define_COMENT_09'] = "\n//utilisés dans void wave(...)";
   //Blockly.Arduino.definitions_['define_NUM_WAVE_PHASES'] = "#define NUM_WAVE_PHASES 12";
   //Blockly.Arduino.definitions_['define_WAVE_CYCLE_TIME'] = "#define WAVE_CYCLE_TIME 900";
@@ -128,6 +124,8 @@ Blockly.Arduino.driss_vorpal_init_hexapod = function() {
   Blockly.Arduino.definitions_['define_PWMFREQUENCY'] = "#define PWMFREQUENCY (60*FreqMult)";
   Blockly.Arduino.definitions_['define_SERVOMIN'] = "#define SERVOMIN  (190*FreqMult) // this is the 'minimum' pulse length count (out of 4096)";
   Blockly.Arduino.definitions_['define_SERVOMAX'] = "#define SERVOMAX  (540*FreqMult) // this is the 'maximum' pulse length count (out of 4096)";
+
+  Blockly.Arduino.definitions_['define_TRIPOD_CYCLE_TIME'] = "#define TRIPOD_CYCLE_TIME 750";
 
 
   Blockly.Arduino.variables_['var_servoDriver'] = 'Adafruit_PWMServoDriver servoDriver = Adafruit_PWMServoDriver(SERVO_IIC_ADDR);';
@@ -243,55 +241,7 @@ Blockly.Arduino.driss_vorpal_init_hexapod = function() {
   ' }\n' +
   '}';
 
-  /*
-
-  Blockly.Arduino.codeFunctions_['define_turn'] = '\n'+
-  'void turn(int ccw, int hipforward, int hipbackward, int kneeup, int kneedown, long timeperiod) {\n' +
-  ' //utiliser des groupes de trépied pour tourner en place\n' +
-  ' if (ccw) {\n' +
-  '   int tmp = hipforward;\n' +
-  '   hipforward = hipbackward;\n' +
-  '   hipbackward = tmp;\n' +
-  ' }\n' +
-  ' \n' +
-  ' long t = millis()%timeperiod;\n' +
-  ' long phase = (NUM_TURN_PHASES*t)/timeperiod;\n' +
-  ' \n' +
-  ' //Serial.print("PHASE: ");\n' +
-  ' //Serial.println(phase);\n' +
-  ' \n' +
-  ' switch (phase) {\n' +
-  '   case 0://les jambes du centre-gauche et du non-centre-droit se soulèvent au genou\n' +
-  '         setLeg(TRIPOD1_LEGS, NOMOVE, kneeup, 0);\n' +
-  '         break;\n' +
-  ' \n' +
-  '   case 1://les jambes du centre-gauche et du non-centre-droit se déplacent dans le sens des aiguilles d\'une montre au niveau des hanches, \n'+
-  '          //tandis que le reste des jambes bouge dans le sens inverse des aiguilles d\'une montre au niveau de la hanche.\n' +
-  '         setLeg(TRIPOD1_LEGS, hipforward, NOMOVE, FBSHIFT_TURN, 1);\n' +
-  '         setLeg(TRIPOD2_LEGS, hipbackward, NOMOVE, FBSHIFT_TURN, 1);\n' +
-  '         break;\n' +
-  ' \n' +
-  '   case 2://remettre les premières jambes sur le sol\n' +
-  '         setLeg(TRIPOD1_LEGS, NOMOVE, kneedown, 0);\n' +
-  '         break;\n' +
-  ' \n' +
-  '   case 3://soulevez l\'autre ensemble de jambes au genou\n' +
-  '         setLeg(TRIPOD2_LEGS, NOMOVE, kneeup, 0);\n' +
-  '         break;\n' +
-  ' \n' +
-  ' \n' +
-  '   case 4://similaire à la phase 1, déplacer les jambes levées AIg.Montre et les jambes abaissées Inv. Aig. Montre \n'+
-  '         setLeg(TRIPOD1_LEGS, hipbackward, NOMOVE, FBSHIFT_TURN, 1);\n' +
-  '         setLeg(TRIPOD2_LEGS, hipforward, NOMOVE, FBSHIFT_TURN, 1);\n' +
-  '         break;\n' +
-  ' \n' +
-  '   case 5://mettre le deuxième ensemble de jambes vers le bas, et le cycle se répète\n' +
-  '         setLeg(TRIPOD2_LEGS, NOMOVE, kneedown, 0);\n' +
-  '         break;\n' +
-
-  ' }\n' +
-  '}';
-*/
+ 
   
 /*
   Blockly.Arduino.codeFunctions_['define_wave'] = '\n'+
@@ -375,13 +325,13 @@ Blockly.Arduino.driss_vorpal_init_hexapod = function() {
   'void gait_sidestep(int left, long timeperiod) {\n' +
   ' // Ce mode se compose de 6 phases et utilise des définitions de trépied;\n' +
   ' long t = millis()%timeperiod;\n' +
-  ' long phase = (NUM_SIDESTEP_PHASES*t)/timeperiod;\n' +
+  ' long phase = (6*t)/timeperiod;\n' +
   ' int side1 = LEFT_LEGS;\n' +
   ' int side2 = RIGHT_LEGS;\n' +
   ' \n' +
   ' if (left == 0) {\n' +
   '   side1 = RIGHT_LEGS;\n' +
-  '   side2 = LEFT_LEGS\n' +
+  '   side2 = LEFT_LEGS;\n' +
   ' }\n' +
   ' \n' +
   ' //Serial.print("PHASE: ");\n' +
@@ -418,7 +368,7 @@ Blockly.Arduino.driss_vorpal_init_hexapod = function() {
 */
   
   Blockly.Arduino.setups_['setup_vorpal_init_hexapod'] = '\n'+
-  ' //Serial.begin(9600);\n'+
+  ' Serial.begin(9600);\n'+
   ' pinMode(BeeperPin, OUTPUT);\n'+
   ' beep(200);\n'+
   ' pinMode(ServoTypeGroundPin, OUTPUT);\n'+
@@ -445,7 +395,7 @@ Blockly.Arduino.driss_vorpal_init_hexapod = function() {
   ' resetServoDriver();\n'+
   ' delay(250);\n'+
   ' \n'+
-  ' stand();\n'+
+  ' setLeg(ALL_LEGS, HIP_NEUTRAL, KNEE_STAND, 0, 0);\n'+
   ' delay(300);\n'+
   ' \n'+
   ' beep(400); // Signale la fin de la séquence de démarrage\n'+
@@ -520,6 +470,129 @@ Blockly.Arduino['driss_vorpal_se_mettre_sur_pointes'] = function(block) {
   var code = 'tiptoes();\n';
   return code;
 };
+
+
+//driss_vorpal_se_mettre_sur_pointes -------------------------------------------------------------------------------------
+Blockly.Arduino['driss_vorpal_tourner_sur_place'] = function(block) {
+  var sens = this.getFieldValue('SENS');
+  var angle = this.getFieldValue('ANGLE');
+  
+  Blockly.Arduino.definitions_['define_NUM_TURN_PHASES'] = "#define NUM_TURN_PHASES 6 ";
+  Blockly.Arduino.definitions_['define_NUM_TURN_PHASES'] = "#define NUM_TURN_PHASES 6 ";
+  Blockly.Arduino.definitions_['define_FBSHIFT_TURN'] = "#define FBSHIFT_TURN    40  //remonter les pattes avant, les pattes arrière vers l'avant";
+
+
+  Blockly.Arduino.codeFunctions_['define_turn'] = '\n'+
+  'void turn(int ccw, int hipforward, int hipbackward, int kneeup, int kneedown, long timeperiod) {\n' +
+  ' //utiliser les groupes de trépied pour tourner sur place\n' +
+  ' if (ccw) {\n' +
+  '   int tmp = hipforward;\n' +
+  '   hipforward = hipbackward;\n' +
+  '   hipbackward = tmp;\n' +
+  ' }\n' +
+  ' int time_delay = timeperiod/NUM_TURN_PHASES;\n' +
+  ' Serial.println(time_delay);\n' +
+  ' //les jambes du centre-gauche et du non-centre-droit se soulèvent au genou\n' +
+  ' setLeg(TRIPOD1_LEGS, NOMOVE, kneeup, 0);\n' +
+  ' delay(time_delay);\n' +
+  ' //les jambes du centre-gauche et du non-centre-droit se déplacent dans le sens des aiguilles d\'une montre au niveau des hanches, \n' +
+  ' //tandis que le reste des jambes bouge dans le sens inverse des aiguilles d\'une montre au niveau de la hanche.\n'+
+  ' setLeg(TRIPOD1_LEGS, hipforward, NOMOVE, FBSHIFT_TURN, 1);\n' +
+  ' setLeg(TRIPOD2_LEGS, hipbackward, NOMOVE, FBSHIFT_TURN, 1);\n' +
+  ' delay(time_delay);\n' +
+  ' //remettre les premières jambes sur le sol\n' +
+  ' setLeg(TRIPOD1_LEGS, NOMOVE, kneedown, 0);\n' +
+  ' delay(time_delay);\n' +
+  ' //soulevez l\'autre ensemble de jambes au genou\n' +
+  ' setLeg(TRIPOD2_LEGS, NOMOVE, kneeup, 0);\n' +
+  ' delay(time_delay);\n' +
+  ' //déplacer les jambes levées sens aig.Montre et les jambes abaissées sens Inv. Aig. Montre \n' +
+  ' setLeg(TRIPOD1_LEGS, hipbackward, NOMOVE, FBSHIFT_TURN, 1);\n' +
+  ' setLeg(TRIPOD2_LEGS, hipforward, NOMOVE, FBSHIFT_TURN, 1);\n' +
+  ' delay(time_delay);\n' +
+  ' //mettre le deuxième ensemble de jambes vers le bas, et le cycle se répète\n' +
+  ' setLeg(TRIPOD2_LEGS, NOMOVE, kneedown, 0);\n' +
+  ' Serial.println(millis());\n' +
+  ' delay(time_delay);\n' +
+  '}';
+
+  Blockly.Arduino.codeFunctions_['define_tourner_sur_place'] = '\n'+
+  'void tourner_sur_place(int sens, int nbreDePhases) {\n' +
+  ' for (int i=0; i<nbreDePhases; i++){\n'+
+  '   turn(sens, HIP_FORWARD, HIP_BACKWARD, KNEE_NEUTRAL, KNEE_DOWN, TRIPOD_CYCLE_TIME); // 700;\n' +
+  ' }\n'+
+  '}';
+
+  var code = 'tourner_sur_place('+sens+','+angle/45+');\n';
+  return code;
+};
+
+
+//driss_vorpal_marcher -------------------------------------------------------------------------------------
+Blockly.Arduino['driss_vorpal_marcher'] = function(block) {
+  var sens = this.getFieldValue('SENS');
+  var step = Blockly.Arduino.valueToCode(this, 'STEP', Blockly.Arduino.ORDER_ATOMIC);
+  
+  Blockly.Arduino.definitions_['define_NUM_TRIPOD_PHASES'] = "#define NUM_TRIPOD_PHASES 6 ";
+  Blockly.Arduino.definitions_['define_FBSHIFT'] = "#define FBSHIFT  15  //remonter les pattes avant, les pattes arrière vers l'avant";
+
+  Blockly.Arduino.codeFunctions_['define_gait_tripod'] = '\n'+
+  'void gait_tripod(int reverse, int hipforward, int hipbackward, int kneeup, int kneedown, long timeperiod) {\n' +
+  ' // Ce mode se compose de 6 phases et utilise des définitions de trépied;\n' +
+  ' if (reverse) {\n' +
+  '   int tmp = hipforward;\n' +
+  '   hipforward = hipbackward;\n' +
+  '   hipbackward = tmp;\n' +
+  ' }\n' +
+  
+  ' int time_delay = timeperiod/NUM_TRIPOD_PHASES;\n' +
+  
+  ' \n' +
+  ' //Serial.print("PHASE: ");\n' +
+  ' //Serial.println(phase);\n' +
+  ' \n' +
+  ' //0-les jambes du centre-gauche et du non-centre-droit se soulèvent au genou\n' +
+  ' setLeg(TRIPOD1_LEGS, NOMOVE, kneeup, 0);\n' +
+  ' delay(time_delay);\n' +
+  ' \n' +
+  ' //1-les jambes du centre-gauche et du non-centre-droit avancent vers les hanches, \n' +
+  ' //tandis que le reste des jambes recule à la hanch\n' +
+  ' setLeg(TRIPOD1_LEGS, hipforward, NOMOVE, FBSHIFT);\n' +
+  ' setLeg(TRIPOD2_LEGS, hipbackward, NOMOVE, FBSHIFT);\n' +
+  ' delay(time_delay);\n' +
+  ' \n' +
+  ' //2-remettre les premières jambes sur le sol\n' +
+  ' setLeg(TRIPOD1_LEGS, NOMOVE, kneedown, 0);\n' +
+  ' delay(time_delay);\n' +
+  ' \n' +
+  ' //3-soulevez l\'autre ensemble de jambes au genou\n' +
+  ' setLeg(TRIPOD2_LEGS, NOMOVE, kneeup, 0);\n' +
+  ' delay(time_delay);\n' +
+  ' \n' +
+  ' //4-similaire à la phase 1, déplacez les jambes levées vers l\avant et abaissez les jambes vers l\'arrière\n' +
+  ' setLeg(TRIPOD1_LEGS, hipbackward, NOMOVE, FBSHIFT);\n' +
+  ' setLeg(TRIPOD2_LEGS, hipforward, NOMOVE, FBSHIFT);\n' +
+  ' delay(time_delay);\n' +
+  ' \n' +
+  ' //5-mettre le deuxième ensemble de jambes vers le bas, et le cycle se répète\n' +
+  ' setLeg(TRIPOD2_LEGS, NOMOVE, kneedown, 0);\n' +
+   ' delay(time_delay);\n' +
+  ' \n' +
+
+  '}\n';
+
+  Blockly.Arduino.codeFunctions_['define_marcher'] = '\n'+
+  'void marcher(int sens, int nbreDePas) {\n' +
+  ' for (int i=0; i<nbreDePas; i++){\n'+
+  '   gait_tripod(sens, HIP_FORWARD, HIP_BACKWARD, KNEE_NEUTRAL, KNEE_DOWN, TRIPOD_CYCLE_TIME); // 900\n' +
+  ' }\n'+
+  '}';
+
+  var code = 'marcher('+sens+','+step+');\n';
+  return code;
+};
+
+
 
 
 //driss_vorpal_lire_distance_avec_ultrasonic -------------------------------------------------------------------------------------
