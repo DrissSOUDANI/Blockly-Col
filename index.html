@@ -1615,9 +1615,41 @@
 				</value>
             </block>
 
-            <block type="driss_vorpal_lire_distance_avec_ultrasonic"></block>
+            <block type="driss_vorpal_faire_battement_sur_pointe">
+            	<value name="TIME">
+					<shadow type="math_number">
+						<field name="NUM">3</field>
+					</shadow>
+				</value>
+            </block>
 
-            
+             <block type="driss_vorpal_lever_poser_patte">
+             	<value name="LEGNUM">
+					<shadow type="math_number">
+						<field name="NUM">0</field>
+					</shadow>
+				</value>
+             </block>
+
+             <block type="driss_vorpal_avancer_reculer_patte">
+             	<value name="LEGNUM">
+					<shadow type="math_number">
+						<field name="NUM">0</field>
+					</shadow>
+				</value>
+             </block>
+
+            <block type="driss_vorpal_lire_distance_avec_ultrasonic"></block>
+<!--
+            <block type="driss_vorpal_set_legs_position">
+				<value name="ADJ">
+					<shadow type="math_number">
+						<field name="NUM">0</field>
+					</shadow>
+				</value>
+            </block>
+-->
+        
 			<block type="driss_vorpal_set_legs_position">
             	<value name="HIP_ANGLE">
 					<shadow type="math_number">
@@ -1635,15 +1667,26 @@
 					</shadow>
 				</value>
             </block>
+        
             <block type="driss_vorpal_set_hip_angle">
-            	<value name="ANGLE">
+            	<value name="LEGNUM">
+					<shadow type="math_number">
+						<field name="NUM">0</field>
+					</shadow>
+				</value>
+            	<value name="HIP_ANGLE">
 					<shadow type="math_number">
 						<field name="NUM">90</field>
 					</shadow>
 				</value>
             </block>
             <block type="driss_vorpal_set_knee_angle">
-            	<value name="ANGLE">
+            	<value name="LEGNUM">
+					<shadow type="math_number">
+						<field name="NUM">0</field>
+					</shadow>
+				</value>
+            	<value name="KNEE_ANGLE">
 					<shadow type="math_number">
 						<field name="NUM">90</field>
 					</shadow>

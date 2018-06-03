@@ -36,13 +36,13 @@ Blockly.Arduino.driss_vorpal_init_hexapod = function() {
   Blockly.Arduino.definitions_['define_BACK_LEGS']    = "#define BACK_LEGS     0b001100";
   Blockly.Arduino.definitions_['define_NO_LEGS']      = "#define NO_LEGS       0b0";
 
-  //Blockly.Arduino.definitions_['define_COMENT_02']     = "\n//Masques de bits individuels pour les jambes";
-  //Blockly.Arduino.definitions_['define_LEG0'] = "#define LEG0 0b1";
-  //Blockly.Arduino.definitions_['define_LEG1'] = "#define LEG1 0b10";
-  //Blockly.Arduino.definitions_['define_LEG2'] = "#define LEG2 0b100";
-  //Blockly.Arduino.definitions_['define_LEG3'] = "#define LEG3 0b1000";
-  //Blockly.Arduino.definitions_['define_LEG4'] = "#define LEG4 0b10000";
-  //Blockly.Arduino.definitions_['define_LEG5'] = "#define LEG5 0b100000";
+  Blockly.Arduino.definitions_['define_COMENT_02']     = "\n//Masques de bits individuels pour les jambes";
+  Blockly.Arduino.definitions_['define_LEG0'] = "#define LEG0 0b1";
+  Blockly.Arduino.definitions_['define_LEG1'] = "#define LEG1 0b10";
+  Blockly.Arduino.definitions_['define_LEG2'] = "#define LEG2 0b100";
+  Blockly.Arduino.definitions_['define_LEG3'] = "#define LEG3 0b1000";
+  Blockly.Arduino.definitions_['define_LEG4'] = "#define LEG4 0b10000";
+  Blockly.Arduino.definitions_['define_LEG5'] = "#define LEG5 0b100000";
 
   //Blockly.Arduino.definitions_['define_COMENT_03']     = "\n";
   //Blockly.Arduino.definitions_['define_LEG0BIT'] = "#define LEG0BIT 0b1";
@@ -478,7 +478,6 @@ Blockly.Arduino['driss_vorpal_tourner_sur_place'] = function(block) {
   var angle = this.getFieldValue('ANGLE');
   
   Blockly.Arduino.definitions_['define_NUM_TURN_PHASES'] = "#define NUM_TURN_PHASES 6 ";
-  Blockly.Arduino.definitions_['define_NUM_TURN_PHASES'] = "#define NUM_TURN_PHASES 6 ";
   Blockly.Arduino.definitions_['define_FBSHIFT_TURN'] = "#define FBSHIFT_TURN    40  //remonter les pattes avant, les pattes arrière vers l'avant";
 
 
@@ -594,6 +593,81 @@ Blockly.Arduino['driss_vorpal_marcher'] = function(block) {
 
 
 
+//driss_vorpal_faire_battement_sur_pointe -------------------------------------------------------------------------------------
+Blockly.Arduino['driss_vorpal_faire_battement_sur_pointe'] = function(block) {
+  var time = Blockly.Arduino.valueToCode(this, 'TIME', Blockly.Arduino.ORDER_ATOMIC);
+
+  Blockly.Arduino.definitions_['define_NUM_FLUTTER_PHASES'] = "#define NUM_FLUTTER_PHASES 4 ";
+  Blockly.Arduino.definitions_['define_FLUTTER_TIME'] = "#define FLUTTER_TIME  200";
+  Blockly.Arduino.definitions_['define_KNEE_FLUTTER'] = "#define KNEE_FLUTTER  (KNEE_TIPTOES+20)";
+
+  Blockly.Arduino.codeFunctions_['define_flutter'] = '\n'+
+  'void flutter() {\n' +
+  
+  ' int time_delay = FLUTTER_TIME/NUM_FLUTTER_PHASES;\n' +
+  ' setLeg(ALL_LEGS, HIP_NEUTRAL, NOMOVE, 0, 0);\n' +
+  ' \n' +
+  ' //Serial.print("PHASE: ");\n' +
+  ' //Serial.println(phase);\n' +
+  ' \n' +
+  ' //0-\n' +
+  ' setLeg(TRIPOD1_LEGS, NOMOVE, KNEE_FLUTTER, 0, 0);\n' +
+  ' setLeg(TRIPOD2_LEGS, NOMOVE, KNEE_TIPTOES, 0, 0);\n' +
+  ' delay(time_delay);\n' +
+  ' \n' +
+  ' //1- \n' +
+  ' setLeg(TRIPOD1_LEGS, NOMOVE, KNEE_TIPTOES, 0, 0);\n' +
+  ' setLeg(TRIPOD2_LEGS, NOMOVE, KNEE_TIPTOES, 0, 0);\n' +
+  ' delay(time_delay);\n' +
+  ' \n' +
+  ' //2-\n' +
+  ' setLeg(TRIPOD2_LEGS, NOMOVE, KNEE_FLUTTER, 0, 0);\n' +
+  ' setLeg(TRIPOD1_LEGS, NOMOVE, KNEE_TIPTOES, 0, 0);\n' +
+  ' delay(time_delay);\n' +
+  ' \n' +
+  ' //3-\n' +
+  ' setLeg(TRIPOD2_LEGS, NOMOVE, KNEE_TIPTOES, 0, 0);\n' +
+  ' setLeg(TRIPOD1_LEGS, NOMOVE, KNEE_TIPTOES, 0, 0);\n'+
+  ' delay(time_delay);\n' +
+  ' \n' +
+  '}\n';
+
+  Blockly.Arduino.codeFunctions_['define_faire_battement_sur_pointe'] = '\n'+
+  'void faire_battement_sur_pointe() {\n' +
+  ' long t = millis();\n' +
+  ' while((millis()-t) < '+time*1000+') {\n'+
+  '   flutter(); \n' +
+  ' }\n'+
+  '}';
+
+  var code = 'faire_battement_sur_pointe();\n';
+  return code;
+};
+
+
+//driss_vorpal_lever_poser_patte -------------------------------------------------------------------------------------
+Blockly.Arduino['driss_vorpal_lever_poser_patte'] = function(block) {
+  var movement = this.getFieldValue('MOUVEMENT');
+  var legnum = Blockly.Arduino.valueToCode(this, 'LEGNUM', Blockly.Arduino.ORDER_ATOMIC);
+  
+  Blockly.Arduino.variables_['var_tabLegs'] = 'int tabLegs[] = {LEG0, LEG1, LEG2, LEG3, LEG4, LEG5};';
+  
+  var code = 'setLeg(tabLegs['+legnum+'], NOMOVE, '+movement+', 0, 0);\n';
+  return code;
+};
+
+//driss_vorpal_avancer_reculer_patte -------------------------------------------------------------------------------------
+Blockly.Arduino['driss_vorpal_avancer_reculer_patte'] = function(block) {
+  var movement = this.getFieldValue('MOUVEMENT');
+  var legnum = Blockly.Arduino.valueToCode(this, 'LEGNUM', Blockly.Arduino.ORDER_ATOMIC);
+  
+  Blockly.Arduino.variables_['var_tabLegs'] = 'int tabLegs[] = {LEG0, LEG1, LEG2, LEG3, LEG4, LEG5};';
+  
+  var code = 'setLeg(tabLegs['+legnum+'], '+movement+', NOMOVE, 0, 0);\n';
+  return code;
+};
+
+
 
 //driss_vorpal_lire_distance_avec_ultrasonic -------------------------------------------------------------------------------------
 Blockly.Arduino['driss_vorpal_lire_distance_avec_ultrasonic'] = function(block) {
@@ -622,7 +696,7 @@ Blockly.Arduino['driss_vorpal_lire_distance_avec_ultrasonic'] = function(block) 
   ' //cela convertit des microsecondes de temps de propagation du son en centimètres.\n'+ 
   ' //Rappelez-vous que le son doit aller et venir, donc il voyage deux fois plus loin que la distance de l\'objet\n'+
   ' return (duration) / 58;\n'+
-  '}\n';
+  '}\n'; 
 
   var code = 'readUltrasonic()';
   //return code;
@@ -634,18 +708,27 @@ Blockly.Arduino['driss_vorpal_lire_distance_avec_ultrasonic'] = function(block) 
 //driss_vorpal_set_leg_position -------------------------------------------------------------------------------------
 Blockly.Arduino.driss_vorpal_set_legs_position = function() {
   var dropdown_legmask = this.getFieldValue('LEGMASK');
+  var hip_angle = this.getFieldValue('HIP_ANGLE');
+  var knee_angle = this.getFieldValue('KNEE_ANGLE');
+  var adj = Blockly.Arduino.valueToCode(this, 'ADJ', Blockly.Arduino.ORDER_ATOMIC);
+
+  var code = 'setLeg('+dropdown_legmask+', '+hip_angle+', '+knee_angle+', '+adj+',0);\n';
+  return code;
+  /*
+  var dropdown_legmask = this.getFieldValue('LEGMASK');
   var hip_angle = Blockly.Arduino.valueToCode(this, 'HIP_ANGLE', Blockly.Arduino.ORDER_ATOMIC);
   var knee_angle = Blockly.Arduino.valueToCode(this, 'KNEE_ANGLE', Blockly.Arduino.ORDER_ATOMIC);
   var adj = Blockly.Arduino.valueToCode(this, 'ADJ', Blockly.Arduino.ORDER_ATOMIC);
   
   var code = 'setLeg('+dropdown_legmask+', '+hip_angle+', '+knee_angle+', '+adj+',0);\n';
   return code;
+  */
 };
 
 //driss_vorpal_set_hip_angle -------------------------------------------------------------------------------------
 Blockly.Arduino.driss_vorpal_set_hip_angle = function() {
-  var legnum = this.getFieldValue('LEGNUM');
-  var angle = Blockly.Arduino.valueToCode(this, 'ANGLE', Blockly.Arduino.ORDER_ATOMIC);
+  var legnum = Blockly.Arduino.valueToCode(this, 'LEGNUM', Blockly.Arduino.ORDER_ATOMIC);
+  var angle = this.getFieldValue('ANGLE');
   
   var code = 'setHip('+legnum+', '+angle+', 0);\n';
   return code;
@@ -653,8 +736,8 @@ Blockly.Arduino.driss_vorpal_set_hip_angle = function() {
 
 //driss_vorpal_set_knee_angle -------------------------------------------------------------------------------------
 Blockly.Arduino.driss_vorpal_set_knee_angle = function() {
-  var legnum = this.getFieldValue('LEGNUM');
-  var angle = Blockly.Arduino.valueToCode(this, 'ANGLE', Blockly.Arduino.ORDER_ATOMIC);
+  var legnum = Blockly.Arduino.valueToCode(this, 'LEGNUM', Blockly.Arduino.ORDER_ATOMIC);
+  var angle = this.getFieldValue('ANGLE');
   
   var code = 'setKnee('+legnum+', '+angle+');\n';
   return code;
