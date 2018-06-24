@@ -258,7 +258,7 @@ Blockly.Blocks.driss_grove_moisture_sensor = {
   helpUrl: '',
   init: function() {
     this.appendDummyInput()
-        .appendField("La valeur de l'hmidité du sol mesurée par le capteur");
+        .appendField("La valeur de l'humidité du sol mesurée par le capteur");
     this.appendDummyInput()
         .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_moisture_sensor.png", Blockly.Arduino.imageSize*1.1,  Blockly.Arduino.imageSize/1.1, "*"))
         .appendField("relié à l'entrée ")

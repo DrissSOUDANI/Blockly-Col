@@ -5,7 +5,7 @@ Blockly.Arduino.drissLinkItOne_declare_var = function() {
   var varName = Blockly.Arduino.variableDB_.getName(this.getFieldValue('VAR'),
       Blockly.Variables.NAME_TYPE);
   //Blockly.Arduino.setups_['setup_var' + varName] = varName + ' = ' + argument0 + ';\n';
-  tableau_type[varName]=argument1;
+  tableau_type[varName]=argument1; 
   return '';
 };
 

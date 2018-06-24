@@ -52,14 +52,17 @@ Blockly.Arduino.procedures_defreturn = function() {
 	  } else {
 		  argType = Blockly.Arduino.getArduinoType_(Blockly.Types.UNDEF);
 	  }
-    arg = Blockly.Arduino.variableDB_.getName(this.arguments_[x], Blockly.Variables.NAME_TYPE);
+    arg = Blockly.Arduino.variableDB_.getName(this.arguments_[x], Blockly.Variables.NAME_TYPE); 
     args += argType + ' ' + arg + ', ';
   }
   
   var code = returnType + ' ' + funcName + '(' + args.slice(0, -2) + ') {\n' +
       branch + returnValue + '}\n';
   code = Blockly.Arduino.scrub_(this, code);
-  Blockly.Arduino.definitions_[funcName] = code;
+  /*modifié par driss pour que les variables déclarées dans un bloc "procedure" soient affichée avant la fonctions voir generator_arduino.js ligne 286*/
+  /*l'assemblage se fait dans cet ordre : includes-definitions-variables-functions*/
+  //Blockly.Arduino.definitions_[funcName] = code;
+  Blockly.Arduino.userFunctions_[funcName] = code;
   return null;
 };
 

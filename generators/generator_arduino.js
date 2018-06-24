@@ -269,7 +269,7 @@ Blockly.Arduino.finish = function(code) {
     setups.push(userSetupCode);
   }
 
-  // Clean up temporary data
+  // Clean up temporary data 
   delete Blockly.Arduino.includes_;
   delete Blockly.Arduino.definitions_;
   delete Blockly.Arduino.codeFunctions_;
