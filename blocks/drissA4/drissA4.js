@@ -5,7 +5,7 @@ goog.provide('Blockly.Blocks.drissA4');
 goog.require('Blockly.Blocks');
 goog.require('Blockly.Types');
 
-
+//pour test
 //led_red OK
 Blockly.Blocks.driss_A4_led_red = {
   category: 'diss_A4 : actionneurs',
@@ -355,7 +355,7 @@ Blockly.Blocks['driss_A4_Temp_DS18B20'] = {
 
 
 // Driss : Blocs ajouter pour Eval Brevet Blanc
-/*
+
 Blockly.Blocks['driss_EteindreGyrophare'] = {
   init: function() {
     this.appendDummyInput()
@@ -523,4 +523,3 @@ Blockly.Blocks['driss_ContactMagnetique_DetecteOuverture_v2'] = {
   }
 };
 
-*/
