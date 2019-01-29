@@ -448,7 +448,8 @@ Blockly.Arduino.technozone_wf_setup = function() {
   '  delay(1500);\n'+
   '}\n';
   var code = 'WF_setup();\n';
-  return [code, Blockly.Arduino.ORDER_ATOMIC];
+  //return [code, Blockly.Arduino.ORDER_ATOMIC];
+  return code;
 };
 
 Blockly.Arduino.technozone_wf_led = function() {
