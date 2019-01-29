@@ -1857,3 +1857,24 @@ Blockly.Blocks['driss_grove_gsr_read'] = {
   }
 };
 
+
+
+
+//Grove Anémomètre
+Blockly.Blocks['driss_grove_anemometre'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("La vitesse du vent en")
+        .appendField(new Blockly.FieldDropdown([["mètre par seconde","M_S"], ["kilomètre par heure","KM_H"]]), "UNITE");
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage("", 15, 15, "*"))
+        .appendField("mesurée par l'anémomètre relié à l'entrée")
+        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN");
+    this.setOutput(true, null);
+    this.setColour(Blockly.Blocks.drissGrove.HUE);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+

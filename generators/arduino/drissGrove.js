@@ -1680,3 +1680,112 @@ Blockly.Arduino.driss_grove_gsr_read = function() {
   var code = 'analogRead('+pin+')';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
+
+//Grove : driss_grove_gsr_read
+Blockly.Arduino.driss_grove_anemometre = function() {
+  var pin = this.getTitleValue('PIN');
+  
+  Blockly.Arduino.includes_['define_Wire'] = "#include <Wire.h>"; 
+  //Blockly.Arduino.setups_['setup_I2C_ADRESS_'+adresse_I2C] = "Wire.begin();" ;
+  
+  var code = 'analogRead('+pin+')';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+
+//Grove Button OK
+Blockly.Arduino.driss_grove_anemometre = function() {
+  var dropdown_pin = this.getTitleValue('PIN');
+  var dropdown_unite = this.getTitleValue('UNITE');
+  
+
+
+  Blockly.Arduino.includes_['define_PinChangeInt'] = "#include <PinChangeInt.h>"; 
+
+
+ Blockly.Arduino.variables_['var_datedernierPassage'] = 'unsigned long datedernierPassage;';
+ Blockly.Arduino.variables_['var_long derniereSeconde'] = 'long derniereSeconde;';
+ Blockly.Arduino.variables_['var_secondes'] = 'byte secondes;';
+ Blockly.Arduino.variables_['var_force'] = 'int force;';
+ Blockly.Arduino.variables_['var_nombreTourSec'] = 'float nombreTourSec (0);';
+ Blockly.Arduino.variables_['var_nombreTourMin'] = 'float nombreTourMin (0);';
+ Blockly.Arduino.variables_['var_vitesseVentms'] = 'float vitesseVentms(0);';
+ Blockly.Arduino.variables_['var_vitesseVentkmh'] = 'float vitesseVentkmh(0);';
+ Blockly.Arduino.variables_['var_comptageILS'] = 'volatile unsigned int comptageILS = 0;';
+ Blockly.Arduino.variables_['var_dureeAntiRebond'] = 'const unsigned long dureeAntiRebond = 1;';
+
+
+ Blockly.Arduino.codeFunctions_['define_interruptionILS'] = '//comptage de l ILS \n'+
+  'void interruptionILS() {\n'+
+  ' static unsigned long dateDernierChangement = 0;\n'+
+  ' unsigned long date = millis();\n'+
+  ' if ((date - dateDernierChangement) > dureeAntiRebond) {\n'+
+  '   comptageILS++;\n'+
+  '   dateDernierChangement = date;\n'+
+  ' }\n'+
+  '}\n';   
+
+  Blockly.Arduino.codeFunctions_['define_mesureventms'] = '// mesure de la vitesse du vent instantanée (m/s) \n'+
+  'float mesureventms() {\n'+
+  ' float deltaTime = millis() - datedernierPassage;\n'+
+  ' deltaTime = deltaTime/1000.0; //Converti en secondes\n'+
+  ' nombreTourSec = (float)comptageILS / deltaTime;\n'+
+  ' nombreTourMin = nombreTourSec * 60;\n'+
+  ' vitesseVentms = 3.1416 * 7 * nombreTourMin * 1 / 3000; // formule pour le calcul de la vitesse du vent\n'+
+  ' comptageILS = 0; // Réinitialise et commence à incrémenter pour le nouveau comptage\n'+
+  ' datedernierPassage = millis();\n'+
+  ' return (vitesseVentms);\n'+
+  '}\n';  
+
+  Blockly.Arduino.codeFunctions_['define_incrementation_metre_par_seconde'] = ' \n'+
+  'float incrementation_metre_par_seconde() {\n'+
+  ' if(millis() - derniereSeconde >= 1000)\n'+
+  '   {\n'+
+  '     derniereSeconde += 1000;\n'+
+  '     mesureventms();\n'+
+  '   }\n'+
+  '  delay(100);\n'+
+  '  return(vitesseVentms);\n'+
+  '}\n';  
+
+
+  Blockly.Arduino.codeFunctions_['define_mesureventkmh'] = '// mesure de la vitesse du vent instantanée (km/h) \n'+
+  'float mesureventkmh() {\n'+
+  ' float deltaTime = millis() - datedernierPassage;\n'+
+  ' deltaTime = deltaTime/1000.0; //Converti en secondes\n'+
+  ' nombreTourSec = (float)comptageILS / deltaTime;\n'+
+  ' nombreTourMin = nombreTourSec * 60;\n'+
+  ' vitesseVentkmh = 3.1416 * 7 * nombreTourMin * 1 * 0.036 / 30; // formule pour le calcul de la vitesse du vent\n'+
+  ' comptageILS = 0; // Réinitialise et commence à incrémenter pour le nouveau comptage\n'+
+  ' datedernierPassage = millis();\n'+
+  ' return (vitesseVentkmh);\n'+
+  '}\n';  
+
+  Blockly.Arduino.codeFunctions_['define_incrementation_kilometre_par_heure'] = ' \n'+
+  'float incrementation_kilometre_par_heure() {\n'+
+  ' if(millis() - derniereSeconde >= 1000)\n'+
+  '   {\n'+
+  '     derniereSeconde += 1000;\n'+
+  '     mesureventkmh();\n'+
+  '   }\n'+
+  '  delay(100);\n'+
+  '  return(vitesseVentkmh);\n'+
+  '}\n';  
+
+
+  Blockly.Arduino.setups_['setup_anemometre_'+dropdown_pin] = 'pinMode('+dropdown_pin+', INPUT);\n'+
+  'secondes = 0;\n'+
+  'derniereSeconde = millis();\n'+
+  'PCintPort::attachInterrupt(2, interruptionILS, FALLING);\n';
+
+  var code = '';
+  switch (dropdown_unite) {
+    case "M_S" : code = 'incrementation_metre_par_seconde()'; break;
+    case "KM_H" : code = 'incrementation_kilometre_par_heure()'; break;
+  }
+
+
+  
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
