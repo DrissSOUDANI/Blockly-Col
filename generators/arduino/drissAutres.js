@@ -38,22 +38,22 @@ Blockly.Arduino.driss_afficheur_LED_Matrix_8x8_MAX7219 = function() {
 
   Blockly.Arduino.variables_['define_MD_Parola'] = 'MD_Parola P = MD_Parola(CS_PIN, MAX_DEVICES); \n ';
   Blockly.Arduino.variables_['define_MD_Parola_scrollSpeed'] = 'uint8_t scrollSpeed = 40;    // default frame delay value \n ';
-  Blockly.Arduino.variables_['define_MD_Parola_scrollEffect'] = 'textPosition_t scrollEffect ='+dropdown_effect+'; \n ';
+  Blockly.Arduino.variables_['define_MD_Parola_scrollEffect'] = 'textEffect_t scrollEffect ='+dropdown_effect+'; \n ';
   Blockly.Arduino.variables_['define_MD_Parola_scrollAlign'] = 'textPosition_t scrollAlign = '+dropdown_align+'; \n ';
   Blockly.Arduino.variables_['define_MD_Parola_scrollPause'] = 'uint16_t scrollPause = '+value_delay+'; // in milliseconds\n ';
 
 
   Blockly.Arduino.definitions_['define_MD_Parola_BUF_SIZE'] = '#define BUF_SIZE  200 \n ';
   Blockly.Arduino.variables_['define_MD_Parola_curMessage'] = 'char curMessage[BUF_SIZE] = { "" };\n ';
-  Blockly.Arduino.variables_['define_MD_Parola_newMessage'] = 'char newMessage[BUF_SIZE] = '+value_msg+' \n ';
+  Blockly.Arduino.variables_['define_MD_Parola_newMessage'] = 'char newMessage[BUF_SIZE] = '+value_msg+'; \n ';
   Blockly.Arduino.variables_['define_MD_Parola_newMessageAvailable'] = 'bool newMessageAvailable = true;\n ';
 
   //dans setup    
   Blockly.Arduino.setups_['setup_MD_Parola'] = ''+
-  '//Serial.begin(57600);\n'+
-  '//Serial.print("\n[Parola Scrolling Display]\nType a message for the scrolling display\nEnd message line with a newline");\n'+
-  'P.begin();\n'+  
-  'P.displayText(curMessage, scrollAlign, scrollSpeed, scrollPause, scrollEffect, scrollEffect);\n';  
+  ' Serial.begin(57600);\n'+
+  ' Serial.print("\\n[Parola Scrolling Display]\\nType a message for the scrolling display\\nEnd message line with a newline");\n'+
+  ' P.begin();\n'+  
+  ' P.displayText(curMessage, scrollAlign, scrollSpeed, scrollPause, scrollEffect, scrollEffect);\n';  
   
   var code = 'if (P.displayAnimate())\n'+
   '{\n'+
