@@ -533,7 +533,7 @@ BlocklyDuino.buildToolbox = function() {
 			
 		}
 		if(xmlids[i]=="CAT_ARDUINO" || xmlids[i]=="CAT_TECHNOZONE" || xmlids[i]=="CAT_TECHNOZONE_ROBOT" || xmlids[i]=="CAT_DRISS_A4"  || xmlids[i]=="CAT_DRISS_LINKIT_ONE" 
-						 || xmlids[i]=="CAT_DRISS_GROVE"  || xmlids[i]=="CAT_DRISS_TINKERKIT") {xmlValue += '<sep gap="30" colour="transparent"></sep>\n'; }
+						 || xmlids[i]=="CAT_DRISS_GROVE"  || xmlids[i]=="CAT_DRISS_TINKERKIT" ) {xmlValue += '<sep gap="30" colour="transparent"></sep>\n'; }
 
 	}
 

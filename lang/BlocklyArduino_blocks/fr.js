@@ -1882,6 +1882,6 @@ Blockly.Msg.CAT_DRISS_VORPAL = "Vorpal";
 Blockly.Msg.CAT_DRISS_VORPAL_HEXAPOD = "- Hexapode";
 Blockly.Msg.CAT_DRISS_VORPAL_GAMEPAD = "- Manette";
 
-
+Blockly.Msg.CAT_DRISS_AUTRES = "Autres";
 
 // Fin des ajouts de Driss
