@@ -67,3 +67,92 @@ Blockly.Arduino.driss_afficheur_LED_Matrix_8x8_MAX7219 = function() {
 
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
+
+
+
+Blockly.Arduino.driss_motor_L298P_turn = function() {
+  var sens = this.getFieldValue('SENS');
+  var vitesse = Blockly.Arduino.valueToCode(this, 'VITESSE', Blockly.Arduino.ORDER_ATOMIC);
+  var moteur = this.getFieldValue('MOTEUR');
+
+  
+
+  switch(moteur){
+    case "MOTOR1" : if(sens == "SENS_HORAIRE") {var etat_MOTA = 'HIGH'; }else{var etat_MOTA = 'LOW';} var vitesse_MOTA = vitesse; break;
+    case "MOTOR2" : if(sens == "SENS_HORAIRE") {var etat_MOTB = 'HIGH'; }else{var etat_MOTB = 'LOW';} var vitesse_MOTB = vitesse; break;
+    case "MOTOR12" : if(sens == "SENS_HORAIRE") {var etat_MOT = 'HIGH'; }else{var etat_MOT = 'LOW';} var vitesse_MOT = vitesse; break;
+   
+  }
+
+
+  //dans setup    
+  Blockly.Arduino.setups_['setup_motor_L298P'] = ''+
+  'pinMode(10, OUTPUT);\n'+
+  ' pinMode(11, OUTPUT);\n'+
+  ' pinMode(12, OUTPUT);\n'+  
+  ' pinMode(13, OUTPUT);';  
+
+
+
+  var code = '';
+  
+  switch(moteur){
+    case "MOTOR1" : code =  ''+
+                            'analogWrite(10, '+vitesse_MOTA+');\n'+
+                            'digitalWrite(12, '+etat_MOTA+');'; 
+                            break;
+    case "MOTOR2" : code = code =  ''+
+                            'analogWrite(11, '+vitesse_MOTB+');\n'+
+                            'digitalWrite(13, '+etat_MOTB+');'; 
+                            break;
+    case "MOTOR12" : code = code =  ''+
+                            'analogWrite(10, '+vitesse_MOT+');\n'+
+                            'digitalWrite(12, '+etat_MOT+');\n'+ 
+                            'analogWrite(11, '+vitesse_MOT+');\n'+
+                            'digitalWrite(13, '+etat_MOT+');'; 
+                            break;
+
+  }
+  
+  
+   return code;//[code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.driss_motor_L298P_stop = function() {
+  var moteur = this.getFieldValue('MOTEUR');
+
+   switch(moteur){
+    case "MOTOR1" : var vitesse_MOTA = 0; break;
+    case "MOTOR2" : var vitesse_MOTB = 0; break;
+    case "MOTOR12" : var vitesse_MOT = 0; break;
+   
+  }
+
+  //dans setup    
+  Blockly.Arduino.setups_['setup_motor_L298P'] = ''+
+  'pinMode(10, OUTPUT);\n'+
+  ' pinMode(11, OUTPUT);\n'+
+  ' pinMode(12, OUTPUT);\n'+  
+  ' pinMode(13, OUTPUT);';  
+
+ var code = '';
+  switch(moteur){
+    case "MOTOR1" : code =  ''+
+                            'analogWrite(10, '+vitesse_MOTA+');\n'+
+                            'digitalWrite(12, HIGH);\n'; 
+                            break;
+    case "MOTOR2" : code = ''+
+                            'analogWrite(11, '+vitesse_MOTB+');\n'+
+                            'digitalWrite(13, HIGH);\n'; 
+                            break;
+    case "MOTOR12" : code = ''+
+                            'analogWrite(10, '+vitesse_MOT+');\n'+
+                            'digitalWrite(12, HIGH);\n'+ 
+                            'analogWrite(11, '+vitesse_MOT+');\n'+
+                            'digitalWrite(13, HIGH);\n'; 
+                            break;
+
+  }
+   
+  return code;
+};
