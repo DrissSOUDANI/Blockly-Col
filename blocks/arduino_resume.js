@@ -12,7 +12,7 @@ head.load(
 "blocks/BlocklyArduino/array.js",
 "blocks/BlocklyArduino/logic.js",
 "blocks/BlocklyArduino/loops.js",
-"blocks/BlocklyArduino/math.js",
+"blocks/BlocklyArduino/math.js", 
 "blocks/BlocklyArduino/procedures.js",
 "blocks/BlocklyArduino/text.js",
 "blocks/BlocklyArduino/variables.js",
@@ -83,7 +83,7 @@ Fin Driss -   */
 "blocks/stepper_motor/stepper_motor.js",
 "blocks/storage/storage.js",
 Fin Driss -  */
-"blocks/technozone51/technozone51.js",
+"blocks/technozone51/technozone.js",
 
 /* Driss -
 "blocks/zumobot/zumo_auto.js",

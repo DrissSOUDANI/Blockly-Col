@@ -51,7 +51,9 @@ Blockly.Blocks.Sharp_IR.HUE = "#000000";
 Blockly.Blocks.stepper_motor.HUE = "#8CA55B";
 Blockly.Blocks.storage.HUE = "#00979D";
 Fin Driss  -   */
-Blockly.Blocks.technozone51.HUE = "#646464";
+
+
+//Blockly.Blocks.technozone51.HUE = "#646464"; 
 
 /* Driss -
 Blockly.Blocks.Zumo_auto.HUE = "#00138B";

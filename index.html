@@ -736,7 +736,7 @@
 <!--TECHNOZONE 51  -->
     <sep></sep>
     <category name="CAT_TECHNOZONE" colour="#646464" >
-        <category name="CAT_TECHNOZONE_IN" colour="#646464">
+        <category name="CAT_TECHNOZONE_IN">
             <block type="technozone_btn1white"></block>
             <block type="technozone_btn1black"></block>
             <block type="technozone_btn1green"></block>
@@ -753,30 +753,132 @@
             <block type="technozone_sonar1"></block>
             <block type="technozone_ds18b20"></block>
             <block type="technozone_ds18b20_gettemp"></block>
+            <block type="technozone_dhtxx"></block>
+            <block type="technozone_dhtxx_gettemp"></block>
+            <block type="technozone_dhtxx_gethumid"></block>
+			<block type="technozone_bme_init"></block>
+			<block type="technozone_bme_read"></block>
+			<block type="technozone_bme_gettemp"></block>
+			<block type="technozone_bme_gethum"></block>
+			<block type="technozone_bme_getpres"></block>
+			
         </category>
-        <category name="CAT_TECHNOZONE_OUT" colour="#646464">
+        <category name="CAT_TECHNOZONE_OUT">
             <block type="technozone_led1red"></block>
             <block type="technozone_led1green"></block>
             <block type="technozone_led1yellow"></block>
+			<block type="technozone_led1white"></block>
             <block type="technozone_relay1"></block>
-            <block type="technozone_buzzer1"></block>            
+            <block type="technozone_buzzer1">
+				<value name="NUM">
+					<block type="math_number">
+					<field name="NUM">200</field>
+					</block>
+				</value>
+				<value name="TPS">
+					<block type="math_number">
+					<field name="NUM">500</field>
+					</block>
+				</value>
+				
+			</block>    
+			<block type="technozone_mosfet1">
+				<value name="NUM">
+					<block type="math_number">
+					<field name="NUM">0</field>
+					</block>
+				</value>
+			</block>
         </category>
-        <category name="CAT_TECHNOZONE_MOTORS_CC" colour="#646464">
-            <block type="technozone_mot1easycon1"></block>
-            <block type="technozone_mot1easybot1"></block>
-            <block type="technozone_mot2"></block>
+        <category name="CAT_TECHNOZONE_MOTORS_CC">
+            <block type="technozone_mot1easycon1">
+				<value name="SENS">
+					<block type="logic_boolean">
+					<field name="BOOL">TRUE</field>
+					</block>
+				</value>
+				<value name="VITESSE">
+					<block type="math_number">
+					<field name="NUM">100</field>
+					</block>
+				</value>				
+			</block>
+            <block type="technozone_mot1easybot1">
+				<value name="SENS">
+					<block type="logic_boolean">
+					<field name="BOOL">TRUE</field>
+					</block>
+				</value>
+				<value name="VITESSE">
+					<block type="math_number">
+					<field name="NUM">100</field>
+					</block>
+				</value>
+			</block>
+            <block type="technozone_mot2">
+				<value name="SENS">
+					<block type="logic_boolean">
+					<field name="BOOL">TRUE</field>
+					</block>
+				</value>
+				<value name="VITESSE">
+					<block type="math_number">
+					<field name="NUM">100</field>
+					</block>
+				</value>
+			</block>
         </category>
-        <category name="CAT_TECHNOZONE_MOTORS_PAP" colour="#646464">
+        <category name="CAT_TECHNOZONE_MOTORS_PAP">
             <block type="technozone_pap1init"></block>
-            <block type="technozone_pap1cc"></block>
-            <block type="technozone_pap1relatif"></block>
+            <block type="technozone_pap1cc">
+				<value name="SENS">
+					<block type="logic_boolean">
+					<field name="BOOL">TRUE</field>
+					</block>
+				</value>
+				<value name="VITESSE">
+					<block type="math_number">
+					<field name="NUM">100</field>
+					</block>
+				</value>
+			</block>
+            <block type="technozone_pap1relatif">
+				<value name="SENS">
+					<block type="logic_boolean">
+					<field name="BOOL">TRUE</field>
+					</block>
+				</value>
+				<value name="VITESSE">
+					<block type="math_number">
+					<field name="NUM">100</field>
+					</block>
+				</value>
+				<value name="PAS">
+					<block type="math_number">
+					<field name="NUM">1</field>
+					</block>
+				</value>
+			</block>
             <block type="technozone_pap1busy"></block>
         </category>
-        <category name="CAT_TECHNOZONE_SERVO" colour="#646464">
-            <block type="technozone_servo1"></block>
+        <category name="CAT_TECHNOZONE_SERVO">
+            <block type="technozone_servo1">
+				<value name="DEGREE">
+					<block type="math_number">
+					<field name="NUM">90</field>
+					</block>
+				</value>
+			</block>
+			<block type="technozone_servo2">
+				<value name="DEGREE">
+					<block type="math_number">
+					<field name="NUM">90</field>
+					</block>
+				</value>
+			</block>
             <block type="technozone_read_servo1"></block>
         </category>
-        <category name="CAT_TECHNOZONE_LCD" colour="#646464">
+        <category name="CAT_TECHNOZONE_LCD">
             <block type="technozone_lcdinit"></block>
             <block type="technozone_lcdspecial"></block>
             <block type="technozone_lcdclear"></block>
@@ -788,14 +890,13 @@
 				</value>
             </block>
         </category>
-        <category name="CAT_TECHNOZONE_TELEC" colour="#646464">
+        <category name="CAT_TECHNOZONE_TELEC">
             <block type="technozone_telecsetup"></block>
             <block type="technozone_telecflush"></block>
             <block type="technozone_telecinit"></block>
-            <block type="technozone_telec2"></block>
-            <block type="technozone_telec1"></block>
+            <block type="technozone_presstelec"></block>
         </category>
-        <category name="CAT_TECHNOZONE_SPEECH" colour="#646464">
+        <category name="CAT_TECHNOZONE_SPEECH">
             <block type="technozone_speech_init">
                 <value name="SPEED">
 					<block type="math_number">
@@ -821,12 +922,48 @@
 				</value>
             </block>
         </category>
-        <category name="CAT_TECHNOZONE_SERIAL" colour="#646464">
-            <block type="technozone_serial_init"></block>
-            <block type="technozone_serial_print"></block>
-            <block type="technozone_serial_println"></block>
+		<category name="CAT_TECHNOZONE_RFID">
+            <block type="technozone_rfid_init"></block>
+			<block type="technozone_rfid_card"></block>
+			<block type="technozone_rfid_read">
+				<value name="NUM">
+					<block type="math_number">
+					<field name="NUM">0</field>
+					</block>
+				</value>
+			</block>
+			<block type="technozone_rfid_text"></block>
+			<block type="technozone_rfid_write">
+				<value name="NUM">
+					<block type="math_number">
+					<field name="NUM">1</field>
+					</block>
+				</value>
+				<value name="TEXT">
+					<block type="text">
+					<field name="TEXT"></field>
+					</block>
+				</value>
+			</block>
         </category>
-        <category name="CAT_TECHNOZONE_WF" colour="#646464">
+        <category name="CAT_TECHNOZONE_SERIAL">
+            <block type="technozone_serial_init"></block>
+            <block type="technozone_serial_print">
+				<value name="TEXT">
+					<block type="text">
+					<field name="TEXT"></field>
+					</block>
+				</value>
+			</block>
+            <block type="technozone_serial_println">
+				<value name="TEXT">
+					<block type="text">
+					<field name="TEXT"></field>
+					</block>
+				</value>
+			</block>
+        </category>
+        <category name="CAT_TECHNOZONE_WF">
             <block type="technozone_wf_init"></block>
             <block type="technozone_wf_setup">
               <value name="SSID">
@@ -855,9 +992,10 @@
                 </block>
               </value>
             </block>
+			<block type="technozone_wf_treatment"></block>
+			<block type="technozone_wf_available"></block>
             <block type="technozone_wf_reset"></block>
-            <block type="technozone_wf_available"></block>
-            <block type="technozone_wf_led">
+		    <block type="technozone_wf_led">
               <value name="FIELD">
                 <block type="math_number">
                 <field name="NUM">1</field>
@@ -865,6 +1003,13 @@
               </value>
             </block>
             <block type="technozone_wf_switch">
+              <value name="FIELD">
+                <block type="math_number">
+                <field name="NUM">1</field>
+                </block>
+              </value>
+            </block>
+			<block type="technozone_wf_bascule">
               <value name="FIELD">
                 <block type="math_number">
                 <field name="NUM">1</field>
@@ -936,11 +1081,61 @@
                 </block>
               </value>
             </block>
-            <block type="technozone_wf_edit_read"></block>
-            
+            <block type="technozone_wf_edit_read_text"></block>
+			<block type="technozone_wf_edit_read_number"></block>
+			<block type="technozone_wf_file">
+			 <value name="FIELD">
+                <block type="math_number">
+                <field name="NUM">1</field>
+                </block>
+              </value>
+              <value name="TEXTE">
+                <block type="text">
+                <field name="TEXT">donnees</field>
+                </block>
+              </value>
+            </block>
+			<block type="technozone_wf_clean">
+			  <value name="FIELD">
+                <block type="math_number">
+                <field name="NUM">1</field>
+                </block>
+              </value>
+			 </block>
+			  <block type="technozone_wf_resol_cam"></block>
+			  <block type="technozone_wf_cam_shoot">
+			 <value name="FIELD">
+                <block type="math_number">
+                <field name="NUM">1</field>
+                </block>
+              </value>
+			  </block>
+			
+			<block type="technozone_wf_cam_disp">
+			<value name="PICTURE">
+                <block type="math_number">
+                <field name="NUM">1</field>
+                </block>
+              </value>
+			  <value name="FIELD">
+                <block type="math_number">
+                <field name="NUM">1</field>
+                </block>
+              </value>
+			  </block>
+			  
+			  <block type="technozone_wf_clean_picture">
+			  <value name="FIELD">
+                <block type="math_number">
+                <field name="NUM">1</field>
+                </block>
+              </value>
+			 </block>
+			
         </category>   
         
-        <category name="CAT_TECHNOZONE_DS1307" colour="#646464">
+        <category name="CAT_TECHNOZONE_DS1307">
+			<block type="technozone_DS1307_rtcinit"></block>
             <block type="technozone_DS1307_initDate">
               <value name="JOUR">
                 <block type="math_number">
@@ -954,7 +1149,7 @@
               </value>  
               <value name="ANNEE">
                 <block type="math_number">
-                <field name="NUM">2017</field>
+                <field name="NUM">2018</field>
                 </block>
               </value>  
             </block>
@@ -981,13 +1176,19 @@
             <block type="technozone_millis_micro"></block>
         </category>
         
-        <category name="CAT_TECHNOZONE_BT" colour="#646464">
+        <category name="CAT_TECHNOZONE_BT">
             <block type="technozone_bt_init"></block>
             <block type="technozone_robot_bt_available"></block>
             <block type="technozone_robot_bt_read"></block>
-            <block type="technozone_robot_bt_write"></block>
+            <block type="technozone_robot_bt_write">
+				<value name="TEXT">
+					<block type="text">
+					<field name="TEXT"></field>
+					</block>
+				</value>
+			</block>
         </category>
-        <category name="CAT_TECHNOZONE_IHM" colour="#646464">
+        <category name="CAT_TECHNOZONE_IHM">
             <block type="technozone_ihm_init"></block>
             <block type="technozone_robot_ihm_available"></block>
             <block type="technozone_robot_ihm_change"></block>
@@ -1056,21 +1257,73 @@
 					</block>
 				</value>
             </block>
-            <block type="technozone_robot_ihm_gauge_write"></block>
+            <block type="technozone_robot_ihm_gauge_write">
+				<value name="VALEUR">
+                    <block type="math_number">
+                        <field name="NUM">0</field>
+                    </block>
+                </value>
+			</block>
         </category>
-        <category name="CAT_TECHNOZONE_RAM" colour="#646464">
-            <block type="technozone_ram_declare"></block>
+        <category name="CAT_TECHNOZONE_RAM">
+            <block type="technozone_ram_declare">
+				<value name="NOMBRE">
+                    <block type="math_number">
+                        <field name="NUM">100</field>
+                    </block>
+                </value>
+			</block>
             <block type="technozone_ram_reset"></block>
-            <block type="technozone_ram_get"></block>
-            <block type="technozone_ram_set"></block>
+            <block type="technozone_ram_get">
+				<value name="INDEX">
+                    <block type="math_number">
+                        <field name="NUM">1</field>
+                    </block>
+                </value>
+			</block>
+			<block type="technozone_ram_flash">
+				<value name="TEXT">
+					<block type="text">
+					<field name="TEXT"></field>
+					</block>
+				</value>	
+			</block>
+            <block type="technozone_ram_set">
+				<value name="NOMBRE">
+                    <block type="math_number">
+                        <field name="NUM">0</field>
+                    </block>
+                </value>
+				<value name="INDEX">
+                    <block type="math_number">
+                        <field name="NUM">1</field>
+                    </block>
+                </value>
+			</block>
+			<block type="technozone_init_eeprom"></block>
+			<block type="technozone_store_eeprom"></block>
+			<block type="technozone_restore_eeprom"></block>
         </category>
     </category>
 <!-- Robot Barbot  de Technozone 51  -->
     <sep></sep>
     <category name="CAT_TECHNOZONE_ROBOT" colour="#646464">
-        <category name="CAT_TECHNOZONE_ROBOT_MOT" colour="#646464">
-            <block type="technozone_robot_move"></block>
-            <block type="technozone_robot_turn"></block>
+        <category name="CAT_TECHNOZONE_ROBOT_MOT">
+			<block type="technozone_robot_init"></block>
+            <block type="technozone_robot_move">
+				<value name="DISTANCE">
+                    <block type="math_number">
+                        <field name="NUM">10</field>
+                    </block>
+                </value>
+			</block>
+            <block type="technozone_robot_turn">
+				<value name="ANGLE">
+                    <block type="math_number">
+                        <field name="NUM">90</field>
+                    </block>
+                </value>
+			</block>
             <block type="technozone_robot_stop"></block>
             <block type="technozone_robot_speed">
                 <value name="VITESSEMAX">
@@ -1080,45 +1333,125 @@
                 </value>
             </block>
         </category>
-        <category name="CAT_TECHNOZONE_ROBOT_IN" colour="#646464">
+        <category name="CAT_TECHNOZONE_ROBOT_IN">
             <block type="technozone_robot_btn"></block>
             <block type="technozone_robot_irsend"></block>
             <block type="technozone_robot_irleft"></block>
             <block type="technozone_robot_ircenter"></block>
             <block type="technozone_robot_irright"></block>
-            <block type="technozone_robot_ligleft"></block>
-            <block type="technozone_robot_ligright"></block>
+            <block type="technozone_robot_ligleft">
+				<value name="SEUILLEFT">
+                    <block type="math_number">
+                        <field name="NUM">800</field>
+                    </block>
+                </value>
+			</block>
+            <block type="technozone_robot_ligright">
+				<value name="SEUILRIGHT">
+                    <block type="math_number">
+                        <field name="NUM">800</field>
+                    </block>
+                </value>
+			</block>
             <block type="technozone_robot_ds18b20"></block>
             <block type="technozone_robot_ds18b20_gettemp"></block>
             <block type="technozone_robot_ldr1"></block>
         </category>
-        <category name="CAT_TECHNOZONE_ROBOT_OUT" colour="#646464">
-            <block type="technozone_robot_buzzer_tone"></block>
-            <block type="technozone_robot_servo1"></block>
+        <category name="CAT_TECHNOZONE_ROBOT_OUT">
+            <block type="technozone_robot_buzzer_tone">
+				 <value name="FREQUENCE">
+                    <block type="math_number">
+                        <field name="NUM">262</field>
+                    </block>
+                </value>
+				<value name="DURATION">
+                    <block type="math_number">
+                        <field name="NUM">500</field>
+                    </block>
+                </value>
+			</block>
+            <block type="technozone_robot_servo1">
+				<value name="DEGREE">
+                    <block type="math_number">
+                        <field name="NUM">0</field>
+                    </block>
+                </value>
+			</block>
         </category>
-        <category name="CAT_TECHNOZONE_ROBOT_LCD" colour="#646464">
+        <category name="CAT_TECHNOZONE_ROBOT_LCD">
             <block type="technozone_robot_lcdclear"></block>
-            <block type="technozone_robot_lcdwrite"></block>
+            <block type="technozone_robot_lcdwrite">
+			<value name="TEXT">
+					<block type="text">
+					<field name="TEXT"></field>
+					</block>
+				</value>
+			</block>
             <block type="technozone_robot_lcdspecial"></block>
         </category>
-        <category name="CAT_TECHNOZONE_ROBOT_BT" colour="#646464">
+        <category name="CAT_TECHNOZONE_ROBOT_BT">
             <block type="technozone_robot_bt_init"></block>
             <block type="technozone_robot_bt_available"></block>
             <block type="technozone_robot_bt_read"></block>
-            <block type="technozone_robot_bt_write"></block>
+            <block type="technozone_robot_bt_write">
+				<value name="TEXT">
+					<block type="text">
+					<field name="TEXT"></field>
+					</block>
+				</value>
+			</block>
         </category>
-        <category name="CAT_TECHNOZONE_ROBOT_IHM" colour="#646464">
+        <category name="CAT_TECHNOZONE_ROBOT_IHM">
             <block type="technozone_robot_ihm_init"></block>
             <block type="technozone_robot_ihm_available"></block>
             <block type="technozone_robot_ihm_change"></block>
-            <block type="technozone_robot_ihm_led_def"></block>
+            <block type="technozone_robot_ihm_led_def">
+				<value name="TEXT">
+					<block type="text">
+					<field name="TEXT"></field>
+					</block>
+				</value>
+			</block>
             <block type="technozone_robot_ihm_led_on"></block>
-            <block type="technozone_robot_ihm_btn_def"></block>
+            <block type="technozone_robot_ihm_btn_def">
+				<value name="TEXT">
+					<block type="text">
+					<field name="TEXT"></field>
+					</block>
+				</value>
+			</block>		
             <block type="technozone_robot_ihm_btn_read"></block>
-            <block type="technozone_robot_ihm_inter_def"></block>
+            <block type="technozone_robot_ihm_inter_def">
+				<value name="TEXT">
+					<block type="text">
+					<field name="TEXT"></field>
+					</block>
+				</value>
+			</block>
             <block type="technozone_robot_ihm_inter_on"></block>
             <block type="technozone_robot_ihm_inter_read"></block>
-            <block type="technozone_robot_ihm_potar_def"></block>
+            <block type="technozone_robot_ihm_potar_def">
+				<value name="POTARI">
+                    <block type="math_number">
+                        <field name="NUM">0</field>
+                    </block>
+                </value>
+                <value name="POTARA">
+                    <block type="math_number">
+                        <field name="NUM">255</field>
+                    </block>
+                </value>
+                <value name="POTARP">
+                    <block type="math_number">
+                        <field name="NUM">0</field>
+                    </block>
+                </value>
+                <value name="TEXT">
+					<block type="text">
+					<field name="TEXT"></field>
+					</block>
+				</value>
+			</block>
             <block type="technozone_robot_ihm_potar_read"></block>
             <block type="technozone_robot_ihm_gauge_def">
                 <value name="GRADUATION">
@@ -1137,15 +1470,56 @@
 					</block>
 				</value>
             </block>
-            <block type="technozone_robot_ihm_gauge_write"></block>
+            <block type="technozone_robot_ihm_gauge_write">
+				<value name="VALEUR">
+                    <block type="math_number">
+                        <field name="NUM">0</field>
+                    </block>
+                </value>
+			</block>
         </category>
-        <category name="CAT_TECHNOZONE_ROBOT_RAM" colour="#646464">
-            <block type="technozone_ram_declare"></block>
-            <block type="technozone_ram_reset"></block>
-            <block type="technozone_ram_get"></block>
-            <block type="technozone_ram_set"></block>
-            <block type="technozone_eeprom_write"></block>
-            <block type="technozone_eeprom_read"></block> 
+        <category name="CAT_TECHNOZONE_ROBOT_RAM">
+            <block type="technozone_robot_ram_declare">
+				<value name="NOMBRE">
+                    <block type="math_number">
+                        <field name="NUM">0</field>
+                    </block>
+                </value>
+			</block>
+            <block type="technozone_robot_ram_reset"></block>
+            <block type="technozone_robot_ram_get">
+				<value name="INDEX">
+                    <block type="math_number">
+                        <field name="NUM">0</field>
+                    </block>
+                </value>
+			</block>
+            <block type="technozone_robot_ram_set">
+				<value name="NOMBRE">
+                    <block type="math_number">
+                        <field name="NUM">0</field>
+                    </block>
+                </value>
+				<value name="INDEX">
+                    <block type="math_number">
+                        <field name="NUM">0</field>
+                    </block>
+                </value>
+			</block>
+            <block type="technozone_robot_eeprom_write">
+				<value name="NOMBRE">
+                    <block type="math_number">
+                        <field name="NUM">0</field>
+                    </block>
+                </value>
+			</block>
+            <block type="technozone_robot_eeprom_read">
+				<value name="NOMBRE">
+                    <block type="math_number">
+                        <field name="NUM">0</field>
+                    </block>
+                </value>
+			</block>
         </category>
     </category>
     

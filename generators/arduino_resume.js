@@ -62,7 +62,7 @@ head.load(
 "generators/arduino/stepper_motor.js",
 "generators/arduino/storage.js",
 Fin Driss -   */
-"generators/arduino/technozone51.js",
+"generators/arduino/technozone.js",
 
 /* Driss -
 "generators/arduino/zumo_auto.js",

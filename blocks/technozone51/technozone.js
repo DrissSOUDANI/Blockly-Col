@@ -1,17 +1,128 @@
 //www.technozone51fr
 
-// define blocks
+// define blocks 
 'use strict';
-goog.provide('Blockly.Blocks.technozone51');
-
-goog.require('Blockly.Blocks');
-goog.require('Blockly.Types');
 
 
+Blockly.Blocks.technozone_init_eeprom = {
+  init: function() {
+    this.setColour(230);
+    this.setHelpUrl(Blockly.Msg.TECHNOZONE_MAIN_HELPURL);
+    this.appendDummyInput("")
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT312);
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT312);
+  }
+};
+
+Blockly.Blocks.technozone_store_eeprom = {
+ 
+  init: function() {
+    this.setHelpUrl(Blockly.Msg.TECHNOZONE_MAIN_HELPURL);
+    this.setColour(230);
+    
+  //modifié par driss par le bloc en dessous à cause de interpolateMsg qui n'est pas dans blockly_compressed.js
+    /*
+    this.interpolateMsg(
+        // TODO: Combine these messages instead of using concatenation.
+        Blockly.Msg.TECHNOZONE51_TEXT313 + ' %1 ' +
+        Blockly.Msg.TECHNOZONE51_TEXT314,
+        ['VAR', new Blockly.FieldVariable(Blockly.Msg.VARIABLES_SET_ITEM)],
+         Blockly.ALIGN_RIGHT);
+   */
+    /* remplacer par*/
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.TECHNOZONE51_TEXT313)
+        .appendField(new Blockly.FieldVariable(Blockly.Msg.VARIABLES_SET_ITEM), "VAR")
+        .appendField(Blockly.Msg.TECHNOZONE51_TEXT314);
+    /* fin du remplacer par driss*/
 
 
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT313+Blockly.Msg.TECHNOZONE51_TEXT314);
+    this.contextMenuMsg_ = Blockly.Msg.VARIABLES_SET_CREATE_GET;
+    this.contextMenuType_ = 'variables_get';
+  },
+  /**
+   * Return all variables referenced by this block.
+   * @return {!Array.<string>} List of variable names.
+   * @this Blockly.Block
+   */
+  getVars: function() {
+    return [this.getFieldValue('VAR')];
+  },
+  /**
+   * Notification that a variable is renaming.
+   * If the name matches one of this block's variables, rename it.
+   * @param {string} oldName Previous name of variable.
+   * @param {string} newName Renamed variable.
+   * @this Blockly.Block
+   */
+  renameVar: function(oldName, newName) {
+    if (Blockly.Names.equals(oldName, this.getFieldValue('VAR'))) {
+      this.setFieldValue(newName, 'VAR');
+    }
+  },
+  customContextMenu: Blockly.Blocks['variables_get'].customContextMenu
+};
 
-Blockly.Blocks.technozone_declare_var = { 
+Blockly.Blocks.technozone_restore_eeprom = {
+ 
+  init: function() {
+    this.setHelpUrl(Blockly.Msg.TECHNOZONE_MAIN_HELPURL);
+    this.setColour(230);
+    
+    //modifié par driss par le bloc en dessous à cause de interpolateMsg qui n'est pas dans blockly_compressed.js
+    /*
+    this.interpolateMsg(
+        // TODO: Combine these messages instead of using concatenation.
+        Blockly.Msg.TECHNOZONE51_TEXT315 + ' %1 ' +
+        Blockly.Msg.TECHNOZONE51_TEXT316,
+        ['VAR', new Blockly.FieldVariable(Blockly.Msg.VARIABLES_SET_ITEM)],
+         Blockly.ALIGN_RIGHT);
+
+    */
+    /* remplacer par*/
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.TECHNOZONE51_TEXT315)
+        .appendField(new Blockly.FieldVariable(Blockly.Msg.VARIABLES_SET_ITEM), "VAR")
+        .appendField(Blockly.Msg.TECHNOZONE51_TEXT316);
+    /* fin du remplacer par driss*/
+
+
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT315+Blockly.Msg.TECHNOZONE51_TEXT316);
+    this.contextMenuMsg_ = Blockly.Msg.VARIABLES_SET_CREATE_GET;
+    this.contextMenuType_ = 'variables_get';
+  },
+  /**
+   * Return all variables referenced by this block.
+   * @return {!Array.<string>} List of variable names.
+   * @this Blockly.Block
+   */
+  getVars: function() {
+    return [this.getFieldValue('VAR')];
+  },
+  /**
+   * Notification that a variable is renaming.
+   * If the name matches one of this block's variables, rename it.
+   * @param {string} oldName Previous name of variable.
+   * @param {string} newName Renamed variable.
+   * @this Blockly.Block
+   */
+  renameVar: function(oldName, newName) {
+    if (Blockly.Names.equals(oldName, this.getFieldValue('VAR'))) {
+      this.setFieldValue(newName, 'VAR');
+    }
+  },
+  customContextMenu: Blockly.Blocks['variables_get'].customContextMenu
+};
+
+Blockly.Blocks.technozone_declare_var = {
   /**
    * Block for variable setter.
    * @this Blockly.Block
@@ -166,7 +277,7 @@ Blockly.Blocks.technozone_pap1cc = {
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT69)
         .appendTitle(new Blockly.FieldDropdown([["A", "HIGH"], ["B", "LOW"]]), "MOT")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT70)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/pap1.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/pap1.jpg", 64, 64))
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT64);
     this.appendDummyInput("")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT65)
@@ -193,7 +304,7 @@ Blockly.Blocks.technozone_pap1relatif = {
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT71)
         .appendTitle(new Blockly.FieldDropdown([["A", "HIGH"], ["B", "LOW"]]), "MOT")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT70)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/pap1.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/pap1.jpg", 64, 64))
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT64);
     this.appendDummyInput("")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT65)
@@ -227,7 +338,7 @@ Blockly.Blocks.technozone_robot_btn = {
 
 //wf_available OK
 Blockly.Blocks.technozone_wf_available = {
-  category: 'TechnoZone51 : capteurs',
+  category: 'TechnoZone51 : Wifi',
   helpUrl: 'http://www.technozone51.fr/dokuwiki2/doku.php?id=documentation:wifi1',
   init: function() {
     this.setColour(120);
@@ -253,7 +364,7 @@ Blockly.Blocks.technozone_robot_bt_available = {
 
 //bt_init OK
 Blockly.Blocks.technozone_bt_init = {
-  category: 'TechnoZone51 : capteurs', 
+  category: 'TechnoZone51 : capteurs',
   helpUrl: 'http://www.techno-zone-51.fr/dokuwiki2/doku.php?id=documentation:btihm1',
   init: function() {
     this.setColour(62);
@@ -261,7 +372,7 @@ Blockly.Blocks.technozone_bt_init = {
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT157);
     this.appendDummyInput("")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT112)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/bt1.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/bt1.jpg", 64, 64))
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT165);
     this.appendDummyInput("")
 	      .appendTitle("RX ")
@@ -277,7 +388,7 @@ Blockly.Blocks.technozone_bt_init = {
 
 //wf_init OK
 Blockly.Blocks.technozone_wf_init = {
-  category: 'TechnoZone51 : capteurs',
+  category: 'TechnoZone51 : Wifi',
   helpUrl: 'http://www.technozone51.fr/dokuwiki2/doku.php?id=documentation:wifi1',
   init: function() {
     this.setColour(62);
@@ -285,7 +396,7 @@ Blockly.Blocks.technozone_wf_init = {
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT189);
     this.appendDummyInput("")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT190)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/wifi1.png", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/wifi1.jpg", 64, 64))
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT165);
     this.appendDummyInput("")
 	      .appendTitle("RX ")
@@ -338,7 +449,7 @@ Blockly.Blocks.technozone_ihm_init = {
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT111);
     this.appendDummyInput("")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT112)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/bt1.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/bt1.jpg", 64, 64))
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT165);
     this.appendDummyInput("")
 	      .appendTitle("RX ")
@@ -419,6 +530,97 @@ Blockly.Blocks.technozone_robot_ihm_inter_read = {
     this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT141);
   }
 };
+
+Blockly.Blocks.technozone_rfid_init = {
+  category: 'TechnoZone51 : RFID',
+  helpUrl: 'http://www.techno-zone-51.fr/dokuwiki2/doku.php',
+  init: function() {
+    this.setColour(62);
+    this.appendDummyInput("")
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT263)
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/rfid.jpg", 64, 64))
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT2)
+        .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT264);
+  }
+};
+
+
+Blockly.Blocks.technozone_rfid_write = {
+  category: 'TechnoZone51 : RFID',
+  helpUrl: 'http://www.techno-zone-51.fr/dokuwiki2/doku.php?id=documentation:lcd1',
+  init: function() {
+	this.setColour(190);	
+	this.appendValueInput("NUM",'Number')
+		.appendTitle(Blockly.Msg.TECHNOZONE51_TEXT265)
+		.setCheck('Number')
+	this.appendDummyInput("")
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT268)	
+		.appendTitle(new Blockly.FieldImage("blocks/technozone51/rfid.jpg", 64, 64))
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT2)
+        .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN");		
+	this.appendValueInput("TEXT", String)
+		.appendTitle(Blockly.Msg.TECHNOZONE51_TEXT280) 
+	this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT269);  
+  }
+};
+
+Blockly.Blocks.technozone_rfid_read = {
+  category: 'TechnoZone51 : RFID',
+  helpUrl: 'http://www.techno-zone-51.fr/dokuwiki2/doku.php',
+  init: function() {
+    this.setColour(190);
+	this.appendValueInput("NUM",'Number')
+		.appendTitle(Blockly.Msg.TECHNOZONE51_TEXT267)
+		.setCheck('Number')
+	this.appendDummyInput("")
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT268)	
+		.appendTitle(new Blockly.FieldImage("blocks/technozone51/rfid.jpg", 64, 64))
+		.appendTitle(Blockly.Msg.TECHNOZONE51_TEXT2)
+        .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN");
+	this.setInputsInline(true);	
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT269);
+  }
+};
+
+Blockly.Blocks.technozone_rfid_text = {
+  category: 'TechnoZone51 : RFID',
+  helpUrl: 'http://www.techno-zone-51.fr/dokuwiki2/doku.php',
+  init: function() {
+    this.setColour(10);
+    this.appendDummyInput("")
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT270)
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/rfid.jpg", 64, 64))
+		.appendTitle(Blockly.Msg.TECHNOZONE51_TEXT2)
+        .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN");
+    this.setOutput(true, 'Number');
+    this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT270);
+  }
+};
+
+
+Blockly.Blocks.technozone_rfid_card = {
+  category: 'TechnoZone51 : RFID',
+  helpUrl: 'http://www.techno-zone-51.fr/dokuwiki2/doku.php?id=documentation:btn1',
+  init: function() {
+    this.setColour(120);
+    this.appendDummyInput("")
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT271)
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/rfid.jpg", 64, 64))
+		.appendTitle(Blockly.Msg.TECHNOZONE51_TEXT2)
+        .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN");
+    this.setOutput(true, 'Boolean');
+    this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT271);
+  }
+};
+
 
 //serial_init
 Blockly.Blocks.technozone_serial_init = {
@@ -522,7 +724,7 @@ Blockly.Blocks.technozone_robot_ihm_led_def = {
 
 //wf_reset
 Blockly.Blocks.technozone_wf_reset = {
-  category: 'TechnoZone51 : moteur pas-à-pas',
+  category: 'TechnoZone51 : Wifi',
   helpUrl: 'http://www.technozone51.fr/dokuwiki2/doku.php?id=documentation:wifi1',
   init: function() {
     this.setColour(190);
@@ -531,6 +733,19 @@ Blockly.Blocks.technozone_wf_reset = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT201);
+  }
+};
+
+Blockly.Blocks.technozone_wf_treatment = {
+  category: 'TechnoZone51 : Wifi',
+  helpUrl: 'http://www.technozone51.fr/dokuwiki2/doku.php?id=documentation:wifi1',
+  init: function() {
+    this.setColour(190);
+    this.appendDummyInput("")
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT279); 
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT279);
   }
 };
 
@@ -652,12 +867,13 @@ Blockly.Blocks.technozone_robot_ihm_gauge_def = {
 
 //wf_setup
 Blockly.Blocks.technozone_wf_setup = {
-  category: 'TechnoZone51 : moteur pas-à-pas',
+  category: 'TechnoZone51 : Wifi',
   helpUrl: 'http://www.technozone51.fr/dokuwiki2/doku.php?id=documentation:wifi1',
   init: function() {
     this.setColour(62);
-    this.appendDummyInput("")
-        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT197);
+    this.appendDummyInput("")	
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT197)
+		.appendTitle(new Blockly.FieldDropdown([[Blockly.Msg.TECHNOZONE51_TEXT274, "AP"], [Blockly.Msg.TECHNOZONE51_TEXT275, "STA"]]), "STA");
     this.appendValueInput("SSID", String)
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT194); 
@@ -672,7 +888,11 @@ Blockly.Blocks.technozone_wf_setup = {
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT198); 
     this.appendValueInput("SUBNETIP", String)
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT199);         
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT199);
+	this.appendDummyInput("")	
+		.setAlign(Blockly.ALIGN_RIGHT)
+		.appendTitle(Blockly.Msg.TECHNOZONE51_TEXT278)
+		.appendTitle(new Blockly.FieldDropdown([[Blockly.Msg.TECHNOZONE51_TEXT276, "activé"], [Blockly.Msg.TECHNOZONE51_TEXT277, "désactivé"]]), "VERBOSE");	
     this.setInputsInline(false);  
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -810,7 +1030,9 @@ Blockly.Blocks.technozone_robot_ligleft = {
   init: function() {
     this.setColour(120);
     this.appendDummyInput("")
-        .appendTitle("Une ligne a été détecté à gauche");
+        .appendTitle("Une ligne a été détecté à gauche avec comme seuil:");
+	this.appendValueInput("SEUILLEFT",'Number')
+		.setCheck('Number');
     this.setOutput(true, 'Boolean');
     this.setTooltip('Entrée bouton blanc (réf : BTN1-WHITE)');
   }
@@ -822,9 +1044,24 @@ Blockly.Blocks.technozone_robot_ligright = {
   init: function() {
     this.setColour(120);
     this.appendDummyInput("")
-        .appendTitle("Une ligne a été détecté à droite");
+        .appendTitle("Une ligne a été détecté à droite avec comme seuil:");
+	this.appendValueInput("SEUILRIGHT",'Number')
+		.setCheck('Number');
     this.setOutput(true, 'Boolean');
     this.setTooltip('Entrée bouton blanc (réf : BTN1-WHITE)');
+  }
+};
+
+Blockly.Blocks.technozone_robot_init = {
+  category: 'TechnoZone51 : moteur pas-à-pas',
+  helpUrl: 'http://www.techno-zone-51.fr/dokuwiki2/doku.php',
+  init: function() {
+    this.setColour(62);
+    this.appendDummyInput("")
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT308);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT308);
   }
 };
 
@@ -904,7 +1141,136 @@ Blockly.Blocks.technozone_robot_speed = {
   }
 };
 
+Blockly.Blocks.technozone_robot_ram_declare = {
+  category: 'TechnoZone51 : Mémoire',
+  helpUrl: 'http://www.techno-zone-51.fr/dokuwiki2/doku.php',
+  init: function() {
+    this.setColour(62);
+    this.appendDummyInput("")
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT175)
+    this.appendValueInput("NOMBRE",'Number')
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT176);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT175);
+  }
+};
+
+//eeprom write
+Blockly.Blocks.technozone_robot_eeprom_write = {
+  category: 'TechnoZone51 : Mémoire',
+  helpUrl: 'http://www.techno-zone-51.fr/dokuwiki2/doku.php',
+  init: function() {
+    this.setColour(190);
+    this.appendDummyInput("")
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT185)
+    this.appendValueInput("NOMBRE",'Number')
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT187);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT185);
+  }
+};
+
+//eeprom read
+Blockly.Blocks.technozone_robot_eeprom_read = {
+  category: 'TechnoZone51 : Mémoire',
+  helpUrl: 'http://www.techno-zone-51.fr/dokuwiki2/doku.php',
+  init: function() {
+    this.setColour(190);
+    this.appendDummyInput("")
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT186)
+    this.appendValueInput("NOMBRE",'Number')
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT187);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT186);
+  }
+};
+
+//ram reset
+Blockly.Blocks.technozone_robot_ram_reset = {
+  category: 'TechnoZone51 : Mémoire',
+  helpUrl: 'http://www.techno-zone-51.fr/dokuwiki2/doku.php',
+  init: function() {
+    this.setColour(190);
+    this.appendDummyInput("")
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT177);
+
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT177);
+  }
+};
+
+//ram_get
+Blockly.Blocks.technozone_robot_ram_get = {
+  category: 'TechnoZone51 : Mémoire',
+  helpUrl: 'http://www.techno-zone-51.fr/dokuwiki2/doku.php',
+  init: function() {
+    this.setColour(10);
+    this.appendValueInput("INDEX",'Number')
+		.setCheck('Number')
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT178);    
+    this.setOutput(true, 'Number');
+    this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT178);
+  }
+};
+
+Blockly.Blocks.technozone_robot_ram_flash = {
+  category: 'TechnoZone51 : Mémoire',
+  helpUrl: 'http://www.techno-zone-51.fr/dokuwiki2/doku.php',
+  init: function() {
+    this.setColour(160);
+    this.appendValueInput("TEXT",'String')
+		.setCheck('String')
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT307);    
+    this.setOutput(true, 'String');
+    this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT307);
+  }
+};
+
+//ram set
+Blockly.Blocks.technozone_robot_ram_set = {
+  category: 'TechnoZone51 : Mémoire',
+  helpUrl: 'http://www.techno-zone-51.fr/dokuwiki2/doku.php',
+  init: function() {
+    this.setColour(190);
+
+    this.appendValueInput("NOMBRE",'Number')
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT179);
+    this.appendValueInput("INDEX",'Number')
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT180);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT175);
+  }
+};
+
 //DS1307_initDate OK
+
+Blockly.Blocks.technozone_DS1307_rtcinit = {
+  category: 'TechnoZone51 : Horloge temps réel',
+  helpUrl: 'http://www.techno-zone-51.fr/dokuwiki2/doku.php',
+  init: function() {
+    this.setColour(62);
+    this.appendDummyInput("")
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT306)
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/ds1307.jpg", 64, 64));   
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT306);
+  }
+};
+
+
 Blockly.Blocks.technozone_DS1307_initDate = {
   category: 'TechnoZone51 : Horloge temps réel',
   helpUrl: 'http://www.techno-zone-51.fr/dokuwiki2/doku.php',
@@ -912,7 +1278,7 @@ Blockly.Blocks.technozone_DS1307_initDate = {
     this.setColour(62);
     this.appendDummyInput("")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT231)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/ds1307.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/ds1307.jpg", 64, 64))
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT64);
     this.appendValueInput("JOUR",'Number')
         .setAlign(Blockly.ALIGN_RIGHT)
@@ -940,7 +1306,7 @@ Blockly.Blocks.technozone_DS1307_initTime = {
     this.setColour(62);
     this.appendDummyInput("")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT235)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/ds1307.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/ds1307.jpg", 64, 64))
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT64);
     this.appendValueInput("HEURE",'Number')
         .setAlign(Blockly.ALIGN_RIGHT)
@@ -1024,7 +1390,7 @@ Blockly.Blocks.technozone_pap1init = {
     this.setColour(62);
     this.appendDummyInput("")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT63)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/pap1.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/pap1.jpg", 64, 64))
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT64);
     this.appendDummyInput("")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT65)
@@ -1049,7 +1415,7 @@ Blockly.Blocks.technozone_pap1busy = {
     this.setColour(120);
     this.appendDummyInput("")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT73)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/pap1.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize));
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/pap1.jpg", 64, 64));
     this.appendDummyInput("")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT65)
         .appendTitle(new Blockly.FieldDropdown([["16", "16"], ["17", "17"], ["18", "18"], ["19", "19"], ["20", "20"], ["21", "21"], ["22", "22"], ["23", "23"]]), "I2CADD")
@@ -1069,7 +1435,7 @@ Blockly.Blocks.technozone_mot2 = {
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT51)
         .appendTitle(new Blockly.FieldDropdown([["A", "HIGH"], ["B", "LOW"]]), "MOT")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT58)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/mot2.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/mot2.jpg", 64, 64))
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT59);
     this.appendDummyInput("")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT60)
@@ -1090,50 +1456,23 @@ Blockly.Blocks.technozone_mot2 = {
 };
 
 //telec2 OK
-Blockly.Blocks.technozone_telec2 = {
+Blockly.Blocks.technozone_presstelec = {
   category: 'TechnoZone51 : télécommande',
-  helpUrl: 'http://www.techno-zone-51.fr/dokuwiki2/doku.php?id=documentation:telec2',
+  helpUrl: 'http://www.techno-zone-51.fr/dokuwiki2/doku.php?id=documentation:servo1',
   init: function() {
-    this.setColour(120);
+    this.setColour(10);
     this.appendDummyInput("")
-        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT106)
-        .appendTitle(new Blockly.FieldDropdown([["ON/OFF", "FFA25D"], ["MODE", "FF629D"], ["MUTE", "FFE21D"], ["PLAY/PAUSE", "FF22DD"], ["PREVIOUS", "FF02FD"], ["NEXT", "FFC23D"],
-         ["EQ", "FFE1F"], ["VOL-", "FFA857"], ["VOL+", "FF906F"], ["0", "FF6897"], ["RPT", "FF9867"], ["U/SD", "FFB04F"], ["1", "FF30CF"], ["2", "FF18E7"],
-          ["3", "FF7A85"], ["4", "FF10EF"], ["5", "FF38C7"], ["6", "FF5AA5"], ["7", "FF42BD"], ["8", "FF4AB5"], ["9", "FF52AD"]]), "TOUCHE")
-        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT107)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/irf1.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/plus.jpg", 20, 64))
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/telec2.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
-        //.appendTitle(" sur la broche ")
-        //.appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN")
-        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT108);        
-    this.setOutput(true, 'Boolean');
-    this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT109);
+        .appendField(Blockly.Msg.TECHNOZONE51_TEXT305)
+        .appendField(new Blockly.FieldImage("blocks/technozone51/irf1.jpg", 64, 64))
+	this.appendDummyInput("")	
+        .setAlign(Blockly.ALIGN_RIGHT)
+	this.setOutput(true, 'String');
+	this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT49);
   }
 };
 
-//telec1 OK
-Blockly.Blocks.technozone_telec1 = {
-  category: 'TechnoZone51 : télécommande',
-  helpUrl: 'http://www.techno-zone-51.fr/dokuwiki2/doku.php?id=documentation:telec1',
-  init: function() {
-    this.setColour(120);
-    this.appendDummyInput("")
-        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT106)
-        .appendTitle(new Blockly.FieldDropdown([["ON/OFF", "FFA25D"], ["MODE", "FF629D"], ["MUTE", "FFE21D"], ["PREVIOUS", "FF22DD"], ["NEXT", "FF02FD"], ["PLAY/PAUSE", "FFC23D"],
-         ["MINUS", "FFE1F"], ["PLUS", "FFA857"], ["EQ", "FF906F"], ["0", "FF6897"], ["100+", "FF9867"], ["RETURN", "FFB04F"], ["1", "FF30CF"], ["2", "FF18E7"],
-          ["3", "FF7A85"], ["4", "FF10EF"], ["5", "FF38C7"], ["6", "FF5AA5"], ["7", "FF42BD"], ["8", "FF4AB5"], ["9", "FF52AD"]]), "TOUCHE")
-        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT107)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/irf1.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/plus.jpg", 20, 64))
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/telec1.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
-        //.appendTitle(" sur la broche ")
-        //.appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN")
-        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT108);        
-    this.setOutput(true, 'Boolean');
-    this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT110);
-  }
-};
+
+
 
 //telecsetup OK
 Blockly.Blocks.technozone_telecsetup = {
@@ -1143,7 +1482,7 @@ Blockly.Blocks.technozone_telecsetup = {
     this.setColour(62);
     this.appendDummyInput("")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT100)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/irf1.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/irf1.jpg", 64, 64))
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT2)
         .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN");
     this.setPreviousStatement(true, null);
@@ -1160,7 +1499,7 @@ Blockly.Blocks.technozone_telecinit = {
     this.setColour(120);
     this.appendDummyInput("")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT104)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/irf1.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize));
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/irf1.jpg", 64, 64));
     this.setOutput(true, 'Boolean');
     this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT105);
   }
@@ -1174,7 +1513,7 @@ Blockly.Blocks.technozone_telecflush = {
     this.setColour(190);
     this.appendDummyInput("")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT102)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/irf1.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize));   
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/irf1.jpg", 64, 64));   
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT103);
@@ -1191,9 +1530,9 @@ Blockly.Blocks.technozone_mot1easybot1 = {
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT51)
         .appendTitle(new Blockly.FieldDropdown([["A", "HIGH"], ["B", "LOW"]]), "MOT")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT56)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/easybot.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/easybot.jpg", 64, 64))
         .appendTitle(new Blockly.FieldImage("blocks/technozone51/plus.jpg", 20, 64))
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/kitmot1.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize));
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/kitmot1.jpg", 64, 64));
     this.appendValueInput("SENS", 'Boolean')
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT53);
@@ -1216,9 +1555,9 @@ Blockly.Blocks.technozone_mot1easycon1 = {
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT51)
         .appendTitle(new Blockly.FieldDropdown([["A", "HIGH"], ["B", "LOW"]]), "MOT")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT52)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/easycon1.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/easycon1.jpg", 64, 64))
         .appendTitle(new Blockly.FieldImage("blocks/technozone51/plus.jpg", 20, 64))
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/kitmot1.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize));
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/kitmot1.jpg", 64, 64));
     this.appendValueInput("SENS", 'Boolean')
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT53);
@@ -1239,7 +1578,7 @@ Blockly.Blocks.technozone_lcdinit = {
     this.setColour(62);
     this.appendDummyInput("")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT74)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/lcd1.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/lcd1.jpg", 64, 64))
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT75)
         .appendTitle(new Blockly.FieldDropdown([["39", "39"], ["63", "63"]]),"I2C_adress");
     this.appendDummyInput("")    
@@ -1271,8 +1610,8 @@ Blockly.Blocks.technozone_lcdspecial = {
     this.setColour(190);
     this.appendDummyInput("")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT82)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/lcd1.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
-        .appendTitle(new Blockly.FieldDropdown([[Blockly.Msg.TECHNOZONE51_TEXT83, "backlight"], [Blockly.Msg.TECHNOZONE51_TEXT84, "noBacklight"],[Blockly.Msg.TECHNOZONE51_TEXT85, "cursor"],[Blockly.Msg.TECHNOZONE51_TEXT86, "noCursor"],[Blockly.Msg.TECHNOZONE51_TEXT87, "blink"],[Blockly.Msg.TECHNOZONE51_TEXT88, "noBlink"],[Blockly.Msg.TECHNOZONE51_TEXT89, "display"],[Blockly.Msg.TECHNOZONE51_TEXT90, "noDisplay"]]),"special");
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/lcd1.jpg", 64, 64))
+        .appendTitle(new Blockly.FieldDropdown([[Blockly.Msg.TECHNOZONE51_TEXT83, "1"], [Blockly.Msg.TECHNOZONE51_TEXT84, "2"],[Blockly.Msg.TECHNOZONE51_TEXT85, "3"],[Blockly.Msg.TECHNOZONE51_TEXT86, "4"],[Blockly.Msg.TECHNOZONE51_TEXT87, "5"],[Blockly.Msg.TECHNOZONE51_TEXT88, "6"],[Blockly.Msg.TECHNOZONE51_TEXT89, "7"],[Blockly.Msg.TECHNOZONE51_TEXT90, "8"]]),"special");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT91);
@@ -1287,7 +1626,7 @@ Blockly.Blocks.technozone_lcdclear = {
     this.setColour(190);
     this.appendDummyInput("")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT92)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/lcd1.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize));   
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/lcd1.jpg", 64, 64));   
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT93);
@@ -1302,7 +1641,7 @@ Blockly.Blocks.technozone_lcdwrite = {
     this.setColour(190);
     this.appendDummyInput("")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT94)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/lcd1.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/lcd1.jpg", 64, 64))
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT95);
     this.appendDummyInput("")    
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT96)
@@ -1326,12 +1665,13 @@ Blockly.Blocks.technozone_robot_lcdclear = {
     this.setColour(190);
     this.appendDummyInput("")
         .appendTitle("efface l'écran LCD")
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/lcd1.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize));   
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/lcd1.jpg", 64, 64));   
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip("Efface l'écran LCD sur le bus I2C (réf : LCD1)");
   }
 };
+
 
 Blockly.Blocks.technozone_robot_lcdwrite = {
   category: 'TechnoZone51 : écran LCD',
@@ -1340,7 +1680,7 @@ Blockly.Blocks.technozone_robot_lcdwrite = {
     this.setColour(190);
     this.appendDummyInput("")
         .appendTitle("écrire sur l'écran LCD")
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/lcd1.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/lcd1.jpg", 64, 64))
         .appendTitle("à partir de la position");
     this.appendDummyInput("")    
         .appendTitle("colonne [0..MAXCOL-1]")
@@ -1364,7 +1704,7 @@ Blockly.Blocks.technozone_robot_lcdspecial = {
     this.setColour(190);
     this.appendDummyInput("")
         .appendTitle("fonctions spéciales de l'écran LCD")
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/lcd1.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/lcd1.jpg", 64, 64))
         .appendTitle(new Blockly.FieldDropdown([["active le curseur", "cursor"],["désactive le curseur", "noCursor"],["faire clignoter le curseur", "blink"],["arrête le clignotement du curseur", "noBlink"],["active l'affichage", "display"],["désactive l'affichage", "noDisplay"]]),"special");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -1381,7 +1721,7 @@ Blockly.Blocks.technozone_led1red = {
     this.appendDummyInput("")
         .appendTitle(new Blockly.FieldDropdown([[Blockly.Msg.TECHNOZONE51_TEXT33, "HIGH"], [Blockly.Msg.TECHNOZONE51_TEXT34, "LOW"]]), "STAT")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT32)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/led1red.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/led1red.jpg", 64, 64))
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT2)
         .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN");        
     this.setPreviousStatement(true, null);
@@ -1399,7 +1739,7 @@ Blockly.Blocks.technozone_led1green = {
     this.appendDummyInput("")
         .appendTitle(new Blockly.FieldDropdown([[Blockly.Msg.TECHNOZONE51_TEXT33, "HIGH"], [Blockly.Msg.TECHNOZONE51_TEXT34, "LOW"]]), "STAT")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT32)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/led1green.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/led1green.jpg", 64, 64))
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT2)
         .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN");
     this.setPreviousStatement(true, null);
@@ -1417,12 +1757,29 @@ Blockly.Blocks.technozone_led1yellow = {
     this.appendDummyInput("")
         .appendTitle(new Blockly.FieldDropdown([[Blockly.Msg.TECHNOZONE51_TEXT33, "HIGH"], [Blockly.Msg.TECHNOZONE51_TEXT34, "LOW"]]), "STAT")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT32)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/led1yellow.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/led1yellow.jpg", 64, 64))
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT2)
         .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT37);
+  }
+};
+//led1white OK
+Blockly.Blocks.technozone_led1white = {
+  category: 'TechnoZone51 : actionneurs',
+  helpUrl: 'http://www.techno-zone-51.fr/dokuwiki2/doku.php?id=documentation:led1',
+  init: function() {
+    this.setColour(190);
+    this.appendDummyInput("")
+        .appendTitle(new Blockly.FieldDropdown([[Blockly.Msg.TECHNOZONE51_TEXT33, "HIGH"], [Blockly.Msg.TECHNOZONE51_TEXT34, "LOW"]]), "STAT")
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT32)
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/led1white.jpg", 64, 64))
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT2)
+        .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT037);
   }
 };
 
@@ -1434,7 +1791,7 @@ Blockly.Blocks.technozone_relay1 = {
     this.setColour(190);
     this.appendDummyInput("")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT38)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/relay1.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/relay1.jpg", 64, 64))
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT2)
         .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT39)
@@ -1453,7 +1810,7 @@ Blockly.Blocks.technozone_buzzer1 = {
     this.setColour(190);
     this.appendDummyInput("")
 		.appendTitle(Blockly.Msg.TECHNOZONE51_TEXT43)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/buzzer1.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/buzzer1.jpg", 64, 64))
 		.appendTitle(Blockly.Msg.TECHNOZONE51_TEXT2)
         .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN")
     this.appendValueInput("NUM",'Number')
@@ -1467,9 +1824,28 @@ Blockly.Blocks.technozone_buzzer1 = {
   }
 };
 
+Blockly.Blocks.technozone_mosfet1 = {
+  category: 'TechnoZone51 : actionneurs',
+  helpUrl: 'http://www.techno-zone-51.fr/dokuwiki2/doku.php?id=documentation:relay1',
+  init: function() {
+    this.setColour(190);
+    this.appendDummyInput("")
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT260)
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/mosfet1.jpg", 64, 64))  
+		.appendTitle(Blockly.Msg.TECHNOZONE51_TEXT261)		
+        .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN")
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT262)
+		this.appendValueInput("NUM",'Number')
+		this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT272);
+  }
+};
+
 //wf_led OK
 Blockly.Blocks.technozone_wf_led = {
-  category: 'TechnoZone51 : actionneurs',
+  category: 'TechnoZone51 : Wifi',
   helpUrl: 'http://www.technozone51.fr/dokuwiki2/doku.php?id=documentation:wifi1',
   init: function() {
     this.setColour(190);
@@ -1490,7 +1866,7 @@ Blockly.Blocks.technozone_wf_led = {
 
 //wf_potar OK
 Blockly.Blocks.technozone_wf_potar = {
-  category: 'TechnoZone51 : actionneurs',
+  category: 'TechnoZone51 : Wifi',
   helpUrl: 'http://www.technozone51.fr/dokuwiki2/doku.php?id=documentation:wifi1',
   init: function() {
     this.setColour(190);
@@ -1510,7 +1886,7 @@ Blockly.Blocks.technozone_wf_potar = {
 
 //wf_gauge OK
 Blockly.Blocks.technozone_wf_gauge = {
-  category: 'TechnoZone51 : actionneurs',
+  category: 'TechnoZone51 : Wifi',
   helpUrl: 'http://www.technozone51.fr/dokuwiki2/doku.php?id=documentation:wifi1',
   init: function() {
     this.setColour(190);
@@ -1530,7 +1906,7 @@ Blockly.Blocks.technozone_wf_gauge = {
 
 //wf_label OK
 Blockly.Blocks.technozone_wf_label = {
-  category: 'TechnoZone51 : actionneurs',
+  category: 'TechnoZone51 : Wifi',
   helpUrl: 'http://www.technozone51.fr/dokuwiki2/doku.php?id=documentation:wifi1',
   init: function() {
     this.setColour(190);
@@ -1551,7 +1927,7 @@ Blockly.Blocks.technozone_wf_label = {
 
 //wf_potar_read OK
 Blockly.Blocks.technozone_wf_potar_read = {
-  category: 'TechnoZone51 : capteurs',
+  category: 'TechnoZone51 : Wifi',
   helpUrl: 'http://www.technozone51.fr/dokuwiki2/doku.php?id=documentation:wifi1',
   init: function() {
     this.setColour(10);
@@ -1564,16 +1940,136 @@ Blockly.Blocks.technozone_wf_potar_read = {
 };
 
 //wf_edit_read OK
-Blockly.Blocks.technozone_wf_edit_read = {
-  category: 'TechnoZone51 : capteurs',
+Blockly.Blocks.technozone_wf_edit_read_text = {
+  category: 'TechnoZone51 : Wifi',
   helpUrl: 'http://www.technozone51.fr/dokuwiki2/doku.php?id=documentation:wifi1',
   init: function() {
     this.setColour(10);
     this.appendDummyInput("")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT228)
         .appendTitle(new Blockly.FieldImage("blocks/technozone51/wfedit.jpg", 160, 40))    
-    this.setOutput(true, String);
+    this.setOutput(true, 'String');
     this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT229);
+  }
+};
+
+Blockly.Blocks.technozone_wf_edit_read_number = {
+  category: 'TechnoZone51 : capteurs',
+  helpUrl: 'http://www.technozone51.fr/dokuwiki2/doku.php?id=documentation:wifi1',
+  init: function() {
+    this.setColour(10);
+    this.appendDummyInput("")
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT284)
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/wfedit.jpg", 160, 40))    
+    this.setOutput(true, 'Number');
+    this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT229);
+  }
+};
+
+Blockly.Blocks.technozone_wf_file = {
+  category: 'TechnoZone51 : Wifi',
+  helpUrl: 'http://www.techno-zone-51.fr/dokuwiki2/doku.php?id=documentation:lcd1',
+  init: function() {
+	this.setColour(190);	
+	this.appendValueInput("FIELD",'Number')
+		.appendTitle(Blockly.Msg.TECHNOZONE51_TEXT286)
+		.setCheck('Number')
+	this.appendDummyInput("")
+	.appendTitle(new Blockly.FieldImage("blocks/technozone51/wifi2.jpg", 64, 64))
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT287);
+	this.appendValueInput("TEXTE", String)
+        .setAlign(Blockly.ALIGN_RIGHT);
+	this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT288);  
+  }
+};
+
+Blockly.Blocks.technozone_wf_clean = {
+  category: 'TechnoZone51 : Wifi',
+  helpUrl: 'http://www.techno-zone-51.fr/dokuwiki2/doku.php?id=documentation:lcd1',
+  init: function() {
+	this.setColour(190);	
+	this.appendValueInput("FIELD",'Number')
+		.appendTitle(Blockly.Msg.TECHNOZONE51_TEXT289)
+		.setCheck('Number')
+	this.appendDummyInput("")
+	.appendTitle(new Blockly.FieldImage("blocks/technozone51/wifi2.jpg", 64, 64))
+	this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT288);  
+  }
+};
+
+Blockly.Blocks.technozone_wf_clean_picture = {
+  category: 'TechnoZone51 : Wifi',
+  helpUrl: 'http://www.techno-zone-51.fr/dokuwiki2/doku.php?id=documentation:lcd1',
+  init: function() {
+	this.setColour(190);	
+	this.appendValueInput("FIELD",'Number')
+		.appendTitle(Blockly.Msg.TECHNOZONE51_TEXT310)
+		.setCheck('Number')
+	this.appendDummyInput("")
+	.appendTitle(new Blockly.FieldImage("blocks/technozone51/wifi2.jpg", 64, 64))
+	this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT288);  
+  }
+};
+
+Blockly.Blocks.technozone_wf_resol_cam = {
+	category: 'TechnoZone51 : Wifi',
+  helpUrl: 'http://www.techno-zone-51.fr/dokuwiki2/doku.php',
+  init: function() {
+    this.setColour(190);
+    this.appendDummyInput("")
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT290)
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/camera.jpg", 64, 64))
+		.appendTitle(Blockly.Msg.TECHNOZONE51_TEXT282)
+        .appendTitle(new Blockly.FieldDropdown([[Blockly.Msg.TECHNOZONE51_TEXT291, "160x120"], [Blockly.Msg.TECHNOZONE51_TEXT292, "176x144"], [Blockly.Msg.TECHNOZONE51_TEXT293, "320x240"], [Blockly.Msg.TECHNOZONE51_TEXT294, "352x288"], [Blockly.Msg.TECHNOZONE51_TEXT295, "640x480"], [Blockly.Msg.TECHNOZONE51_TEXT296, "800x600"], [Blockly.Msg.TECHNOZONE51_TEXT297, "1024x768"], [Blockly.Msg.TECHNOZONE51_TEXT298, "1280x1024"], [Blockly.Msg.TECHNOZONE51_TEXT299, "1600x1200"]]), "RESOL");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT249);
+  }
+};
+
+Blockly.Blocks.technozone_wf_cam_shoot = {
+  category: 'TechnoZone51 : Wifi',
+  helpUrl: 'http://www.techno-zone-51.fr/dokuwiki2/doku.php?id=documentation:lcd1',
+  init: function() {
+	this.setColour(190);	
+		this.appendDummyInput("")
+		.appendTitle(Blockly.Msg.TECHNOZONE51_TEXT300)
+		.appendTitle(new Blockly.FieldImage("blocks/technozone51/camera.jpg", 64, 64))
+		.appendTitle(Blockly.Msg.TECHNOZONE51_TEXT301);
+	this.appendValueInput("FIELD",'Number');
+	this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT288);  
+  }
+};
+	
+Blockly.Blocks.technozone_wf_cam_disp = {
+  category: 'TechnoZone51 : Wifi',
+  helpUrl: 'http://www.techno-zone-51.fr/dokuwiki2/doku.php?id=documentation:lcd1',
+  init: function() {
+	this.setColour(190);	
+	this.appendValueInput("PICTURE",'Number')
+		.appendTitle(Blockly.Msg.TECHNOZONE51_TEXT302)
+		.setCheck('Number')
+	this.appendDummyInput("")
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT303)	
+		.appendTitle(new Blockly.FieldImage("blocks/technozone51/camera.jpg", 64, 64));	
+	this.appendValueInput("FIELD", 'Number')
+		.appendTitle(Blockly.Msg.TECHNOZONE51_TEXT304);
+	this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT269);  
   }
 };
 
@@ -1619,7 +2115,7 @@ Blockly.Blocks.technozone_sonar1 = {
     this.setColour(10);
     this.appendDummyInput("")
 	      .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT28)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/sonar1.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/sonar1.jpg", 64, 64))
     this.appendDummyInput("")
 	      .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT29)
         .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "TRIGER")
@@ -1639,9 +2135,30 @@ Blockly.Blocks.technozone_servo1 = {
     this.setColour(190);
     this.appendDummyInput("")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT47)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/servo1.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/servo1.jpg", 64, 64))
         .appendTitle(new Blockly.FieldImage("blocks/technozone51/plus.jpg", 20, 64))
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/servomoteur1.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/servomoteur1.jpg", 64, 64))
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT2)
+        .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN")
+    this.appendValueInput("DEGREE",'Number')
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT48);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT49);
+  }
+};
+
+Blockly.Blocks.technozone_servo2 = {
+  category: 'TechnoZone51 : actionneurs',
+  helpUrl: 'http://www.techno-zone-51.fr/dokuwiki2/doku.php?id=documentation:servo1',
+  init: function() {
+    this.setColour(190);
+    this.appendDummyInput("")
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT309)
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/servo1.jpg", 64, 64))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/plus.jpg", 20, 64))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/servomoteur1.jpg", 64, 64))
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT2)
         .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN")
     this.appendValueInput("DEGREE",'Number')
@@ -1661,7 +2178,7 @@ Blockly.Blocks.technozone_robot_servo1 = {
     this.setColour(190);
     this.appendDummyInput("")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT47)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/servomoteur1.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/servomoteur1.jpg", 64, 64))
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT2)
         .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN")
     this.appendValueInput("DEGREE",'Number')
@@ -1746,10 +2263,25 @@ Blockly.Blocks.technozone_ram_get = {
   init: function() {
     this.setColour(10);
     this.appendValueInput("INDEX",'Number')
+		.setCheck('Number')
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT178);    
     this.setOutput(true, 'Number');
-    this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT49);
+    this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT178);
+  }
+};
+
+Blockly.Blocks.technozone_ram_flash = {
+  category: 'TechnoZone51 : Mémoire',
+  helpUrl: 'http://www.techno-zone-51.fr/dokuwiki2/doku.php',
+  init: function() {
+    this.setColour(160);
+    this.appendValueInput("TEXT",'String')
+		.setCheck('String')
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT307);    
+    this.setOutput(true, 'String');
+    this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT307);
   }
 };
 
@@ -1781,7 +2313,7 @@ Blockly.Blocks.technozone_read_servo1 = {
     this.setColour(10);
     this.appendDummyInput("")
         .appendField(Blockly.Msg.TECHNOZONE51_TEXT50)
-        .appendField(new Blockly.FieldImage("blocks/technozone51/servomoteur1.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+        .appendField(new Blockly.FieldImage("blocks/technozone51/servomoteur1.jpg", 64, 64))
 	this.appendDummyInput("")	
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField(Blockly.Msg.TECHNOZONE51_TEXT2)
@@ -1799,9 +2331,9 @@ Blockly.Blocks.technozone_btn1white = {
     this.setColour(120);
     this.appendDummyInput("")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT5)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/btn1white.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/btn1white.jpg", 64, 64))
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT2)
-        .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins)  , "PIN")
+        .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT6);
     this.setOutput(true, 'Boolean');
     this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT7);
@@ -1810,7 +2342,7 @@ Blockly.Blocks.technozone_btn1white = {
 
 //wf_switch
 Blockly.Blocks.technozone_wf_switch = {
-category: 'TechnoZone51 : actionneurs',
+category: 'TechnoZone51 : Wifi',
   helpUrl: 'http://www.technozone51.fr/dokuwiki2/doku.php?id=documentation:wifi1',
   init: function() {
     this.setColour(120);
@@ -1828,9 +2360,30 @@ category: 'TechnoZone51 : actionneurs',
   }
 };
 
+Blockly.Blocks.technozone_wf_bascule = {
+category: 'TechnoZone51 : Wifi',
+  helpUrl: 'http://www.technozone51.fr/dokuwiki2/doku.php?id=documentation:wifi1',
+  init: function() {
+    this.setColour(190);
+    this.appendDummyInput("")
+		.appendTitle(Blockly.Msg.TECHNOZONE51_TEXT281)
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/wfswitch.jpg", 80, 40))
+    this.appendValueInput("FIELD",'Number')
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT208) 
+    this.appendDummyInput("")
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT282)
+        .appendTitle(new Blockly.FieldDropdown([[Blockly.Msg.LOGIC_BOOLEAN_TRUE, "true"], [Blockly.Msg.LOGIC_BOOLEAN_FALSE, "false"]]), "LOGIQUE");       
+  this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT283);
+  }
+};
+
+
 //wf_btn
 Blockly.Blocks.technozone_wf_btn = {
-category: 'TechnoZone51 : actionneurs',
+category: 'TechnoZone51 : Wifi',
   helpUrl: 'http://www.technozone51.fr/dokuwiki2/doku.php?id=documentation:wifi1',
   init: function() {
     this.setColour(120);
@@ -1849,7 +2402,7 @@ category: 'TechnoZone51 : actionneurs',
 
 //wf_potar_test
 Blockly.Blocks.technozone_wf_potar_test = {
-category: 'TechnoZone51 : actionneurs',
+category: 'TechnoZone51 : Wifi',
   helpUrl: 'http://www.technozone51.fr/dokuwiki2/doku.php?id=documentation:wifi1',
   init: function() {
     this.setColour(120);
@@ -1868,7 +2421,7 @@ category: 'TechnoZone51 : actionneurs',
 
 //wf_edit_test
 Blockly.Blocks.technozone_wf_edit_test = {
-category: 'TechnoZone51 : actionneurs',
+category: 'TechnoZone51 : Wifi',
   helpUrl: 'http://www.technozone51.fr/dokuwiki2/doku.php?id=documentation:wifi1',
   init: function() {
     this.setColour(120);
@@ -1887,7 +2440,7 @@ category: 'TechnoZone51 : actionneurs',
 
 //wf_btn_reset
 Blockly.Blocks.technozone_wf_btn_reset = {
-  category: 'TechnoZone51 : moteur pas-à-pas',
+  category: 'TechnoZone51 : Wifi',
   helpUrl: 'http://www.technozone51.fr/dokuwiki2/doku.php?id=documentation:wifi1',
   init: function() {
     this.setColour(190);
@@ -1911,7 +2464,7 @@ Blockly.Blocks.technozone_btn1black = {
     this.setColour(120);
     this.appendDummyInput("")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT5)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/btn1black.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/btn1black.jpg", 64, 64))
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT2)
         .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT6);
@@ -1928,7 +2481,7 @@ Blockly.Blocks.technozone_btn1green = {
     this.setColour(120);
     this.appendDummyInput("")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT5)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/btn1green.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/btn1green.jpg", 64, 64))
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT2)
         .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT6);
@@ -1945,7 +2498,7 @@ Blockly.Blocks.technozone_btn1red = {
     this.setColour(120);
     this.appendDummyInput("")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT5)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/btn1red.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/btn1red.jpg", 64, 64))
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT2)
         .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT6);
@@ -1962,7 +2515,7 @@ Blockly.Blocks.technozone_switch1 = {
     this.setColour(120);
     this.appendDummyInput("")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT11)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/switch1.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/switch1.jpg", 64, 64))
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT2)
         .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT6);
@@ -1979,7 +2532,7 @@ Blockly.Blocks.technozone_ils1 = {
     this.setColour(120);
     this.appendDummyInput("")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT1)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/ils1.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/ils1.jpg", 64, 64))
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT2)
         .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT13);
@@ -1996,7 +2549,7 @@ Blockly.Blocks.technozone_proxi1 = {
     this.setColour(120);
     this.appendDummyInput("")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT15)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/proxi1.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/proxi1.jpg", 64, 64))
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT2)
         .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT16);
@@ -2013,7 +2566,7 @@ Blockly.Blocks.technozone_bari1 = {
     this.setColour(120);
     this.appendDummyInput("")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT18)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/bari1.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/bari1.jpg", 64, 64))
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT2)
         .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT16);
@@ -2030,7 +2583,7 @@ Blockly.Blocks.technozone_lig1 = {
     this.setColour(120);
     this.appendDummyInput("")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT1)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/lig1.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/lig1.jpg", 64, 64))
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT2)
         .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT3);
@@ -2047,9 +2600,9 @@ Blockly.Blocks.technozone_cmouv1 = {
     this.setColour(120);
     this.appendDummyInput("")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT1)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/servo1.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/servo1.jpg", 64, 64))
         .appendTitle(new Blockly.FieldImage("blocks/technozone51/plus.jpg", 20, 64))
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/cmouv1.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/cmouv1.jpg", 64, 64))
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT2)
         .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT20);
@@ -2066,7 +2619,7 @@ Blockly.Blocks.technozone_potar1 = {
     this.setColour(10);
     this.appendDummyInput("")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT22)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/potar1.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/potar1.jpg", 64, 64))
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT2)
         .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownAnalogPins), "PIN");
     this.setOutput(true, 'Number');
@@ -2082,7 +2635,7 @@ Blockly.Blocks.technozone_ctn1 = {
     this.setColour(10);
     this.appendDummyInput("")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT24)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/ctn1.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/ctn1.jpg", 64, 64))
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT2)
         .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownAnalogPins), "PIN")
     this.setOutput(true, 'Number');
@@ -2098,7 +2651,7 @@ Blockly.Blocks.technozone_robot_ds18b20 = {
     this.setColour(190);
     this.appendDummyInput("")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT188)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/barbotds18.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/barbotds18.jpg", 64, 64))
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT2)
         .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN");
     this.setPreviousStatement(true, null);
@@ -2115,7 +2668,7 @@ Blockly.Blocks.technozone_robot_ds18b20_gettemp = {
     this.setColour(10);
     this.appendDummyInput("")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT181)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/barbotds18.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/barbotds18.jpg", 64, 64))
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT2)
         .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN")
     this.setOutput(true, 'Number');
@@ -2132,12 +2685,30 @@ Blockly.Blocks.technozone_ds18b20 = {
     this.setColour(190);
     this.appendDummyInput("")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT188)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/ds18B20.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/ds18B20.jpg", 64, 64))
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT2)
         .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT230);
+  }
+};
+
+//dhtxx
+Blockly.Blocks.technozone_dhtxx = {
+  category: 'TechnoZone51 : capteurs',
+  helpUrl: 'http://www.techno-zone-51.fr/dokuwiki2/doku.php',
+  init: function() {
+    this.setColour(62);
+    this.appendDummyInput("")
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT245)
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/dht22.jpg", 64, 64))
+        .appendTitle(new Blockly.FieldDropdown([[Blockly.Msg.TECHNOZONE51_TEXT246, "DHT22"], [Blockly.Msg.TECHNOZONE51_TEXT247, "DHT11"], [Blockly.Msg.TECHNOZONE51_TEXT248, "DHT21"]]), "STAT")
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT2)
+        .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT249);
   }
 };
 
@@ -2149,12 +2720,44 @@ Blockly.Blocks.technozone_ds18b20_gettemp = {
     this.setColour(10);
     this.appendDummyInput("")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT181)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/ds18B20.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/ds18B20.jpg", 64, 64))
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT2)
         .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN")
     this.setOutput(true, 'Number');
 
     this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT230);
+  }
+};
+
+//dhtxx gettemp
+Blockly.Blocks.technozone_dhtxx_gettemp = {
+  category: 'TechnoZone51 : capteurs',
+  helpUrl: 'http://www.techno-zone-51.fr/dokuwiki2/doku.php',
+  init: function() {
+    this.setColour(10);
+    this.appendDummyInput("")
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT250)
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/dht22.jpg", 64, 64))
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT2)
+        .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN")
+    this.setOutput(true, 'Number');
+    this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT249);
+  }
+};
+
+//dhtxx gethumid
+Blockly.Blocks.technozone_dhtxx_gethumid = {
+  category: 'TechnoZone51 : capteurs',
+  helpUrl: 'http://www.techno-zone-51.fr/dokuwiki2/doku.php',
+  init: function() {
+    this.setColour(10);
+    this.appendDummyInput("")
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT251)
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/dht22.jpg", 64, 64))
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT2)
+        .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN")
+    this.setOutput(true, 'Number');
+    this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT249);
   }
 };
 
@@ -2166,7 +2769,7 @@ Blockly.Blocks.technozone_ldr1 = {
     this.setColour(10);
     this.appendDummyInput("")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT26)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/ldr1.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/ldr1.jpg", 64, 64))
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT2)
         .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownAnalogPins), "PIN")
     this.setOutput(true, 'Number');
@@ -2182,10 +2785,80 @@ Blockly.Blocks.technozone_robot_ldr1 = {
     this.setColour(10);
     this.appendDummyInput("")
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT26)
-        .appendTitle(new Blockly.FieldImage("blocks/technozone51/barbotldr1.jpg", Blockly.Arduino.imageSize, Blockly.Arduino.imageSize))
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/barbotldr1.jpg", 64, 64))
         .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT2)
         .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownAnalogPins), "PIN")
     this.setOutput(true, 'Number');
     this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT183);
+  }
+};
+
+Blockly.Blocks.technozone_bme_init = {
+  category: 'TechnoZone51 : capteurs',
+  helpUrl: 'http://www.techno-zone-51.fr/dokuwiki2/doku.php?id=documentation:lcd1',
+  init: function() {
+    this.setColour(62);
+    this.appendDummyInput("")
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT255)
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/bme.jpg", 64, 64));   
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT255);
+  }
+};
+
+Blockly.Blocks.technozone_bme_read = {
+  category: 'TechnoZone51 : capteurs',
+  helpUrl: 'http://www.techno-zone-51.fr/dokuwiki2/doku.php?id=documentation:lcd1',
+  init: function() {
+    this.setColour(190);
+    this.appendDummyInput("")
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT256)
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/bme.jpg", 64, 64));   
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT256);
+  }
+};
+
+Blockly.Blocks.technozone_bme_gettemp = {
+  category: 'TechnoZone51 : capteurs',
+  helpUrl: 'http://www.techno-zone-51.fr/dokuwiki2/doku.php',
+  init: function() {
+    this.setColour(10);
+    this.appendDummyInput("")
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT257)
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/bme.jpg", 64, 64))
+    this.setOutput(true, 'Number');
+
+    this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT257);
+  }
+};
+
+Blockly.Blocks.technozone_bme_gethum = {
+  category: 'TechnoZone51 : capteurs',
+  helpUrl: 'http://www.techno-zone-51.fr/dokuwiki2/doku.php',
+  init: function() {
+    this.setColour(10);
+    this.appendDummyInput("")
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT258)
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/bme.jpg", 64, 64))
+    this.setOutput(true, 'Number');
+
+    this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT258);
+  }
+};
+
+Blockly.Blocks.technozone_bme_getpres = {
+  category: 'TechnoZone51 : capteurs',
+  helpUrl: 'http://www.techno-zone-51.fr/dokuwiki2/doku.php',
+  init: function() {
+    this.setColour(10);
+    this.appendDummyInput("")
+        .appendTitle(Blockly.Msg.TECHNOZONE51_TEXT259)
+        .appendTitle(new Blockly.FieldImage("blocks/technozone51/bme.jpg", 64, 64))
+    this.setOutput(true, 'Number');
+
+    this.setTooltip(Blockly.Msg.TECHNOZONE51_TEXT259);
   }
 };

@@ -43,7 +43,8 @@ Fin Driss -   */
 "blocks/stepper_motor/blocks_typing.js",
 "blocks/storage/blocks_typing.js",
 Fin Driss -   */
-"blocks/technozone51/blocks_typing.js",
+
+//"blocks/technozone51/blocks_typing.js",
 
 /* Driss -
 "blocks/wiimote/blocks_typing.js",
