@@ -31,6 +31,22 @@ Blockly.Blocks.driss_grove_button = {
   }
 };
 
+Blockly.Blocks.driss_grove_btn_relache = {
+  category: 'diss_A4 : capteurs',
+  helpUrl: '',
+  init: function() {
+    this.appendDummyInput("")
+        .appendField("Attendre que le bouton sur la broche")
+        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN")
+        .appendField(" soit relâché");
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(Blockly.Blocks.drissGrove.HUE);
+    
+  }
+};
+
 //Grove Switch ON OK
 Blockly.Blocks.driss_grove_switch_p_on = {
   category: 'driss_grove : capteurs',

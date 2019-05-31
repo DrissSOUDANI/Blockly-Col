@@ -7,6 +7,13 @@ Blockly.Arduino.driss_grove_button = function() {
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
+//Grove Button relâché OK
+Blockly.Arduino.driss_grove_btn_relache = function() {
+  var dropdown_pin = this.getFieldValue('PIN');
+  var code = 'delay (100);\n'+'while (digitalRead('+dropdown_pin+')==1) {\n'+'}\n'+'delay (100);\n' ;
+  return code;
+};
+
 //Grove Switch ON OK
 Blockly.Arduino.driss_grove_switch_p_on = function() {
   var dropdown_pin = this.getTitleValue('PIN');
