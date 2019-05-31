@@ -537,6 +537,25 @@ Blockly.Blocks.driss_grove_variable_color = {
 };
 
 
+//Grove Mini ventilateur OK
+Blockly.Blocks.driss_grove_mini_ventilateur = {
+  category: 'driss_grove : actionneurs',
+  helpUrl: '',
+  init: function() {
+    this.setColour(Blockly.Blocks.drissGrove.HUE);
+    this.appendDummyInput("")
+        .appendTitle(new Blockly.FieldDropdown([["Mettre en marche", "HIGH"], ["Arrêter", "LOW"]]), "STAT")
+        .appendTitle("le mini-ventilateur")
+        .appendTitle(new Blockly.FieldImage("blocks/drissGrove/Grove_mini_ventilateur.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize))
+        .appendTitle("relié à la sortie")
+        .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.DRISS_GROVE_SORTIE);
+  }
+};
+
+
 //Grove driss_grove_piezo_buzzer ok
 Blockly.Blocks['driss_grove_piezo_buzzer'] = {
     init: function() {
@@ -818,8 +837,7 @@ Blockly.Blocks['driss_grove_dc_motor_turn'] = {
   }
 };
 
-
-
+ 
 // Grove : driss_grove_dc_motor_stop 
 Blockly.Blocks['driss_grove_dc_motor_stop'] = {
   init: function() {

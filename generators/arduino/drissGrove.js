@@ -432,6 +432,17 @@ Blockly.Arduino.driss_grove_variable_color = function() {
   return code;
 };
 
+
+//Grove Mini ventilateur OK
+Blockly.Arduino.driss_grove_mini_ventilateur = function() {
+  var dropdown_pin = this.getTitleValue('PIN');
+  var dropdown_stat = this.getTitleValue('STAT');
+  Blockly.Arduino.setups_['setup_mini_ventilateur'+dropdown_pin] = 'pinMode('+dropdown_pin+', OUTPUT);'; //code à insérer dans le setup Arduino
+  var code = 'digitalWrite('+dropdown_pin+','+dropdown_stat+');\n'  //code à insérer dans la loop Arduino
+  return code;
+};
+
+
 //Grove driss_grove_piezo_buzzer ok
 Blockly.Arduino.driss_grove_piezo_buzzer = function() {
   var dropdown_pin = this.getTitleValue('PIN');
