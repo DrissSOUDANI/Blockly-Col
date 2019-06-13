@@ -130,12 +130,25 @@ Blockly.Blocks.technozone_declare_var = {
   init: function() {
     this.setHelpUrl(Blockly.Msg.VARIABLES_SET_HELPURL);
     this.setColour(Blockly.Blocks.variables.HUE);
+
+     //modifié par driss par le bloc en dessous à cause de interpolateMsg qui n'est pas dans blockly_compressed.js
+    /*
     this.interpolateMsg(
         // TODO: Combine these messages instead of using concatenation.
         "Déclare la variable " + ' %1 ' + Blockly.Msg.VARIABLES_SET_TYPE + ' %2 ',
         ['VAR', new Blockly.FieldVariable(Blockly.Msg.VARIABLES_SET_ITEM)],
         ['TYPE',new Blockly.FieldDropdown([["Entier", "int"], ["Entier long", "long"],["Octet", "byte"],["Nombre decimal", "float"],["Texte", "String"],["Booleen", "boolean"]])],
         Blockly.ALIGN_RIGHT);
+
+    */
+    /* remplacer par*/
+    this.appendDummyInput()
+        .appendField("Déclare la variable ")
+        .appendField(new Blockly.FieldVariable(Blockly.Msg.VARIABLES_SET_ITEM), "VAR")
+        .appendField(Blockly.Msg.VARIABLES_SET_TYPE)
+        .appendField(new Blockly.FieldDropdown([["Entier", "int"], ["Entier long", "long"],["Octet", "byte"],["Nombre decimal", "float"],["Texte", "String"],["Booleen", "boolean"]]), "TYPE");
+    /* fin du remplacer par driss*/
+
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip(Blockly.Msg.VARIABLES_SET_TOOLTIP);
@@ -173,6 +186,9 @@ Blockly.Blocks.technozone_variables_set = {
   init: function() {
     this.setHelpUrl(Blockly.Msg.VARIABLES_SET_HELPURL);
     this.setColour(Blockly.Blocks.variables.HUE);
+
+    //modifié par driss par le bloc en dessous à cause de interpolateMsg qui n'est pas dans blockly_compressed.js
+    /*
     this.interpolateMsg(
         // TODO: Combine these messages instead of using concatenation.
         Blockly.Msg.VARIABLES_SET_TITLE + ' %1 ' +
@@ -180,6 +196,18 @@ Blockly.Blocks.technozone_variables_set = {
         ['VAR', new Blockly.FieldVariable(Blockly.Msg.VARIABLES_SET_ITEM)],
         ['VALUE', null, Blockly.ALIGN_RIGHT],
         Blockly.ALIGN_RIGHT);
+   */
+    /* remplacer par*/
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.VARIABLES_SET_TITLE)
+        .appendField(new Blockly.FieldVariable(Blockly.Msg.VARIABLES_SET_ITEM), "VAR")
+        .appendField(Blockly.Msg.VARIABLES_SET_TAIL)
+        .appendField(null, Blockly.ALIGN_RIGHT, "VALUE");
+    /* fin du remplacer par driss*/
+
+
+
+    
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip(Blockly.Msg.VARIABLES_SET_TOOLTIP);

@@ -1944,7 +1944,7 @@ Blockly.Msg.DRISS_GROVE_TEXT34 = "Eteindre";
 Blockly.Msg.DRISS_GROVE_TEXT35 = "Rouge";
 Blockly.Msg.DRISS_GROVE_TEXT36 = "Blanche";
 Blockly.Msg.DRISS_GROVE_TEXT37 = "Verte";
-Blockly.Msg.DRISS_GROVE_TEXT38 = "Blue";
+Blockly.Msg.DRISS_GROVE_TEXT38 = "Bleue";
 Blockly.Msg.DRISS_GROVE_TEXT39 = "Violette";
 
 Blockly.Msg.DRISS_GROVE_TEXT40 = "Violette";
