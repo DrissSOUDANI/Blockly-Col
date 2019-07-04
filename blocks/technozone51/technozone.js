@@ -198,11 +198,11 @@ Blockly.Blocks.technozone_variables_set = {
         Blockly.ALIGN_RIGHT);
    */
     /* remplacer par*/
-    this.appendDummyInput()
+    this.appendValueInput("VALUE")
+        .setCheck(null)
         .appendField(Blockly.Msg.VARIABLES_SET_TITLE)
         .appendField(new Blockly.FieldVariable(Blockly.Msg.VARIABLES_SET_ITEM), "VAR")
-        .appendField(Blockly.Msg.VARIABLES_SET_TAIL)
-        .appendField(null, Blockly.ALIGN_RIGHT, "VALUE");
+        .appendField("à");
     /* fin du remplacer par driss*/
 
 

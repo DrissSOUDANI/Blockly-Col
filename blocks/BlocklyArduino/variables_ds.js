@@ -91,7 +91,7 @@ Blockly.Blocks.variables_get_ds = {
   }
 };
 
-Blockly.Blocks.variables_set_ds = {
+Blockly.Blocks.variables_set_ds = { 
   /**
    * Block for variable setter.
    * @this Blockly.Block
