@@ -110,6 +110,20 @@ Blockly.Arduino.init = function(workspace) {
   // Create a dictionary of pins to check if their use conflicts
   Blockly.Arduino.pins_ = Object.create(null);
 
+  // ajouté par driss
+  Blockly.Arduino.xmltab_ = Object.create(null);
+  Blockly.Arduino.javatab_ = Object.create(null);
+  Blockly.Arduino.pagetab_ = Object.create(null);
+  Blockly.Arduino.styletab_ = Object.create(null);
+
+  
+  Blockly.Arduino.idstab_ = Object.create(null);
+  Blockly.Arduino.idstab_['id']=0;
+
+  //Blockly.Arduino.headtab_ = Object.create(null);
+  //Blockly.Arduino.bodytab_ = Object.create(null);
+  // fin ajout driss
+
   if (!Blockly.Arduino.variableDB_) {
     Blockly.Arduino.variableDB_ =
         new Blockly.Names(Blockly.Arduino.RESERVED_WORDS_);
@@ -223,6 +237,12 @@ Blockly.Arduino.insertParentArraySize = function(varType, parentArraySize) {
 Blockly.Arduino.finish = function(code) {
   // Convert the includes, definitions, and functions dictionaries into lists
   var includes = [], definitions = [], variables = [], functions = [];
+  
+  //ajouté par driss
+  var xmltab =[], javatab =[], pagetab =[], styletab =[];
+  //fin ajourt driss
+
+
   for (var name in Blockly.Arduino.includes_) {
     includes.push(Blockly.Arduino.includes_[name]);
   }
@@ -237,14 +257,53 @@ Blockly.Arduino.finish = function(code) {
     definitions.push('\n');
   }
 
-  /* retiré par Driss*/
+  
   for (var name in Blockly.Arduino.variables_) {
     variables.push(Blockly.Arduino.variables_[name]);
   }
   if (variables.length) {
     variables.push('\n');
   }
-  /**/
+  
+
+  /* Ajouté par Driss */
+  xmltab.push(Blockly.Arduino.xmltab_["debut"]);
+  for (var name in Blockly.Arduino.xmltab_) 
+    { 
+      if(name != "debut" && name != "fin")
+        xmltab.push(Blockly.Arduino.xmltab_[name]); 
+    }
+  xmltab.push(Blockly.Arduino.xmltab_["fin"]);
+  if (xmltab.length) { xmltab.push('\n'); }
+
+  
+  javatab.push(Blockly.Arduino.javatab_["debut"]);
+  for (var name in Blockly.Arduino.javatab_) { 
+    if(name != "debut" && name != "fin")
+      javatab.push(Blockly.Arduino.javatab_[name]); 
+  }
+  javatab.push(Blockly.Arduino.javatab_["fin"]);
+  if (javatab.length) { javatab.push('\n'); }
+
+  
+  pagetab.push(Blockly.Arduino.pagetab_["part1"]);
+  pagetab.push(Blockly.Arduino.pagetab_["title"]);
+  pagetab.push(Blockly.Arduino.styletab_["debut"]);
+  for (var name in Blockly.Arduino.styletab_) { 
+    if(name != "debut" && name != "fin")
+      pagetab.push(Blockly.Arduino.styletab_[name]); 
+  }
+  pagetab.push(Blockly.Arduino.styletab_["fin"]);
+  pagetab.push(Blockly.Arduino.pagetab_["part2"]);
+  for (var name in Blockly.Arduino.pagetab_) { 
+    if(name != "part1" && name != "part2" && name != "part3" && name != "part4" && name != "title")
+      pagetab.push(Blockly.Arduino.pagetab_[name]); 
+  }
+  pagetab.push(Blockly.Arduino.pagetab_["part3"]);
+  pagetab.push(Blockly.Arduino.pagetab_["part4"]);
+  if (pagetab.length) { pagetab.push('\n'); }
+  
+  /*fin ajout de driss */
 
   for (var name in Blockly.Arduino.codeFunctions_) {
     functions.push(Blockly.Arduino.codeFunctions_[name]);
@@ -283,10 +342,15 @@ Blockly.Arduino.finish = function(code) {
   var allDefs = includes.join('\n') + variables.join('\n') +
       definitions.join('\n') + functions.join('\n\n');
   */
-  var allDefs = includes.join('\n') + definitions.join('\n') + variables.join('\n') + functions.join('\n\n');
+  var allDefs = includes.join('\n') + definitions.join('\n') + variables.join('\n') + functions.join('\n\n') + xmltab.join('\n') + javatab.join('\n') + pagetab.join('\n') ;
 
-  var setup = 'void setup() {' + setups.join('\n  ') + '\n}\n\n';
-  var loop = 'void loop() {\n  ' + code.replace(/\n/g, '\n  ') + '\n}';
+  //modifié par driss
+  //var setup = 'void setup() {' + setups.join('\n  ') + '\n}\n\n';
+  var setup = 'void setup() {\n' + setups.join('\n  ') + '\n}\n\n';
+    
+  //fin de modif driss
+
+  var loop = 'void loop() {\n  '  + code.replace(/\n/g, '\n  ') + '\n}';
   return allDefs + setup + loop;
 };
 
@@ -351,6 +415,37 @@ Blockly.Arduino.addSetup = function(setupTag, code, overwrite) {
   return overwritten;
 };
 
+
+/**
+ * ajouté par Driss
+ */
+Blockly.Arduino.addXml = function(setupTag, code, overwrite) {
+  var overwritten = false;
+  if (overwrite || (Blockly.Arduino.xml_[setupTag] === undefined)) {
+    Blockly.Arduino.xml_[setupTag] = code;
+    overwritten = true;
+  }
+  return overwritten;
+};
+Blockly.Arduino.addJavascript = function(setupTag, code, overwrite) {
+  var overwritten = false;
+  if (overwrite || (Blockly.Arduino.xml_[setupTag] === undefined)) {
+    Blockly.Arduino.javascript_[setupTag] = code;
+    overwritten = true;
+  }
+  return overwritten;
+};
+Blockly.Arduino.addpage = function(setupTag, code, overwrite) {
+  var overwritten = false;
+  if (overwrite || (Blockly.Arduino.xml_[setupTag] === undefined)) {
+    Blockly.Arduino.page_[setupTag] = code;
+    overwritten = true;
+  }
+  return overwritten;
+};
+
+// fin ajout Driss
+
 /**
  * Adds a string of code as a function. It takes an identifier (meant to be the
  * function name) to only keep a single copy even if multiple blocks might
@@ -400,6 +495,7 @@ Blockly.Arduino.reservePin = function(block, pin, pinType, warningTag) {
  * @return {string} Legal line of code.
  */
 Blockly.Arduino.scrubNakedValue = function(line) {
+
   return line + ';\n';
 };
 

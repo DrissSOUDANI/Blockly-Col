@@ -297,6 +297,27 @@ var profile = {
 	    serial : 9600,
 	},
 	
+	R1D32_Grove: {
+	    description: "R1D32 + Shield Grove",
+	    digital: ["D0", "D1",  "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9", "D10", "D11", "D12", "D13"],
+		dropdownDigital: [["D0", "D0"], ["D1", "D1"], ["D2", "D2"], ["D3", "D3"], ["D4", "D4"], ["D5", "D5"], ["D6", "D6"], ["D7", "D7"], ["D8", "D8"], ["D9", "D9"], ["D10", "D10"], ["D11", "D11"], ["D12", "D12"], ["D13", "D13"]],
+		
+		
+		analog : ["A0"],
+		dropdownAnalog: [["D2", "D2"], ["D3", "D3"], ["D4", "D4"], ["D5", "D5"], ["D6", "D6"], ["D7", "D7"], ["A0", "A0"]],
+		
+		I2C: ["D3", "D4"],
+		SPI: [["D10 (SS)", "D10"], ["D11 (MOSI)", "D11"], ["D12 (MISO)", "D12"], ["D13 (SCK)", "D13"]],
+		interrupt: ["2", "3"],
+		picture : "media/Arduino-Uno-Pinout.jpg",
+		miniPicture : "media/Arduino-Uno-Pinout-mini.jpg",
+		serial: [['300', '300'], ['600', '600'], ['1200', '1200'],
+                ['2400', '2400'], ['4800', '4800'], ['9600', '9600'],
+                ['14400', '14400'], ['19200', '19200'], ['28800', '28800'],
+                ['31250', '31250'], ['38400', '38400'], ['57600', '57600'],
+                ['115200', '115200']],
+		serialPin: [["D0 (Rx) ; D1 (Tx)", "D0"]],
+	}
 };
 
 //set default profile to arduino standard-compatible board

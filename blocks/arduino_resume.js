@@ -161,6 +161,13 @@ head.load(
         console.log("Done loading driss Vorpal Blocks");
     });
 
+head.load(
+    "blocks/drissD1R32/drissD1R32.js",
+    function() {
+        // Call a function when done
+        console.log("Done loading driss D1R32 Blocks");
+    });
+
 
 head.load(
 "blocks/blocks_typing.js",

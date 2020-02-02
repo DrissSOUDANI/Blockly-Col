@@ -40,7 +40,7 @@ Blockly.Arduino.controls_repeat_indefinitely = function() {
   // Repeat infinite times.
   var branch = Blockly.Arduino.statementToCode(this, 'DO');
 
-  var code = 'while (true) {\n' + branch + '}\n';
+  var code = 'while (true) {\n' + branch + '}\n'; 
   return code;
 };
 

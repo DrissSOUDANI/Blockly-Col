@@ -179,6 +179,7 @@
 							                <option value="arduino_mega">Arduino Mega</option>
 							                <option value="arduino_nano">Arduino Nano</option>
 							                <option value="arduino_barbot">Arduino Barbot</option>
+							                <option value="R1D32_Grove">R1D32 + Shield Grove</option>
 										</select>
 								        
 									</li>
@@ -1626,6 +1627,7 @@
 				</value>
 			</block>
             <block type="driss_temperature_and_humidity_sensor"></block>
+            <block type="driss_Barometre_BMP180"></block>
             <block type="driss_grove_gaz_sensor_mq5_ratio"></block>
             <block type="driss_grove_gaz_sensor_mq5_rs"></block>
             <block type="driss_grove_gaz_sensor_mq5_r0"></block>
@@ -2111,14 +2113,141 @@
 		</block>
     </category>
 
-    <category name="CAT_DRISS_GRAOBOT" colour="#FA8258">
-		<block type="driss_graobot_AllumerChalumeau"></block>
+ 
+
+    <category name="CAT_DRISS_D1R32_GROVE" colour="#FA8258">
+    
+    	<category name="CAT_DRISS_D1R32_GROVE_ESP" colour="#FA8258">
+	    	<block type="driss_D1R32_initialisation"></block>
+	    	<block type="driss_D1R32_config2">
+				<value name="SSID">
+					<shadow type="text">
+						<field name="TEXT">Driss Tel</field>
+					</shadow>
+				</value>
+				<value name="KEY">
+					<shadow type="text">
+						<field name="TEXT">driss57000</field>
+					</shadow>
+				</value>
+				
+			</block>
+			<block type="driss_D1R32_config">
+				<value name="SSID">
+					<shadow type="text">
+						<field name="TEXT">TechnoWifi</field>
+					</shadow>
+				</value>
+				<value name="KEY">
+					<shadow type="text">
+						<field name="TEXT">123456789</field>
+					</shadow>
+				</value>
+				<value name="IP">
+					<shadow type="text">
+						<field name="TEXT">172.17.32.10</field>
+					</shadow>
+				</value>
+				<value name="MASQUE">
+					<shadow type="text">
+						<field name="TEXT">255.255.255.0</field>
+					</shadow>
+				</value>
+				<value name="GATEWAY">
+					<shadow type="text">
+						<field name="TEXT">172.17.32.254</field>
+					</shadow>
+				</value>
+			</block>
+		</category>
+		
+		<category name="CAT_DRISS_D1R32_GROVE_ESP32" colour="#FA8258">
+		</category>
+		
+		<category name="CAT_DRISS_D1R32_GROVE_WEBPAGE" colour="#FA8258">
+		 
+		  
+		  
+		  
+		  
+		  
+
+
+		  <block type="driss_Creer_page_web"></block>
+		  <block type="driss_D1R32_cadre"></block>
+		  <block type="driss_page_web_title"></block>
+		  <block type="driss_page_web_definir_style">
+		  	<value name="CLASS_NAME">
+			  <shadow type="text">
+				<field name="TEXT">nom du style</field>
+			  </shadow>
+			</value>
+		  </block>
+		  <block type="driss_D1R32_page_web_write_texte">
+		  	<value name="WEB_PAGE_TEXT">
+			  <shadow type="text">
+				<field name="TEXT">texte à écrire</field>
+			  </shadow>
+			</value>
+			<value name="WEB_PAGE_STYLE">
+			  <shadow type="text">
+				<field name="TEXT">nom du style</field>
+			  </shadow>
+			</value>
+		  </block>
+		  
+		  <block type="driss_D1R32_web_write_data">
+		  	<value name="WEB_PAGE_DATA_LABEL">
+			  <shadow type="text">
+				<field name="TEXT">nom de la donnée</field>
+			  </shadow>
+			</value>
+		  	<value name="WEB_PAGE_DATA_UNITE">
+			  <shadow type="text">
+				<field name="TEXT"></field>
+			  </shadow>
+			</value>
+		  </block>
+
+		  <block type="driss_D1R32_afficher_jauge_dans_page_web">
+		  	<value name="WEB_PAGE_JAUGE_LABEL">
+			  <shadow type="text">
+				<field name="TEXT">nom de la donnée</field>
+			  </shadow>
+			</value>
+		  	<value name="WEB_PAGE_JAUGE_MIN">
+			  <shadow type="math_number">
+				<field name="NUM">0</field>
+			  </shadow>
+			</value>
+		  	<value name="WEB_PAGE_JAUGE_MAX">
+			  <shadow type="math_number">
+				<field name="NUM">1023</field>
+			  </shadow>
+			</value>
+			<value name="WEB_PAGE_JAUGE_UNITE">
+			  <shadow type="text">
+				<field name="TEXT"></field>
+			  </shadow>
+			</value>
+		  </block>
+
+		  <block type="driss_D1R32_balise_HR"></block>
+		  <block type="driss_D1R32_InsertHTMLCodeInBody"></block>
+
+		  
+		</category>
+		
+		<category name="CAT_DRISS_D1R32_GROVE_OPENDATA" colour="#FA8258">
+		</category>
+		
+		
     </category>
         
 </xml>
 
 <script>
-//$('.dropdown-menu select').click(function (e) { e.stopPropagation();});
+$('.dropdown-menu select').click(function (e) { e.stopPropagation();});
 /*
 
 $( window ).resize(function() {

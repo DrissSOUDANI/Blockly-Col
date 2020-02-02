@@ -142,4 +142,11 @@ function() {
     console.log("Done loading Driss Autres Generators");
 });
 
+head.load(
+"generators/arduino/drissD1R32.js",
+function() {
+    // Call a function when done
+    console.log("Done loading Driss D1R32 Generators");
+});
+
 /* Fin des ajouts de Driss */
