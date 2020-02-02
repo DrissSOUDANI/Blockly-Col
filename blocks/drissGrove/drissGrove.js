@@ -202,6 +202,26 @@ Blockly.Blocks.driss_temperature_and_humidity_sensor = {
          }
 };
 
+/*//Grove driss_Barometre_BMP180 OK
+Blockly.Blocks.driss_Barometre_BMP180 = {
+  category: 'driss_grove : capteurs',
+  helpUrl: '',
+  init: function() {
+    this.appendDummyInput()
+        .appendField("la valeur")
+        .appendField(new Blockly.FieldDropdown([["de température","TEMPERATURE"], ["de pression","PRESSURE"], ["d'altitude","ALTITUDE"], ["d'atmosphère","ATM"]]), "GRANDEUR")
+        .appendField("mesurée par le capteur : Barometre BMP180");
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_barometre_BMP180.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize/1.1, "*"), "IMG_CAPTEUR")
+        .appendTitle("relié à l'entrée I2C");
+    this.setOutput(true, null);
+    this.setColour(Blockly.Blocks.drissGrove.HUE);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+  };
+
+  */
 
 //Grove Gaz sensor MQ5 RATIO OK
 Blockly.Blocks.driss_grove_gaz_sensor_mq5_ratio = {
