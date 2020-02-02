@@ -151,7 +151,7 @@ Blockly.Arduino.driss_temperature_and_humidity_sensor = function() {
 };
 
 
-
+/*
 //Grove driss_Barometre_BMP180 OK
 Blockly.Arduino.driss_Barometre_BMP180 = function() {
   var dropdown_grandeur = this.getFieldValue('GRANDEUR');
@@ -168,26 +168,26 @@ Blockly.Arduino.driss_Barometre_BMP180 = function() {
   Blockly.Arduino.setups_['setup_barometre_bmp1280_'] = var_barometre+'.init();';
   
    switch(dropdown_grandeur) {
-   case  "TEMPERATURE" : Blockly.Arduino.codeFunctions_['define_get_bmp180_temperature'] = '\n/*lecture de la température */ \n' + 
+   case  "TEMPERATURE" : Blockly.Arduino.codeFunctions_['define_get_bmp180_temperature'] = '\n//lecture de la température  \n' + 
                           'float get_bmp180_temperature(BMP085 myBarometer) {\n'+
                           'float t = myBarometer.bmp085GetTemperature(myBarometer.bmp085ReadUT());\n'+       
                           'return t;\n'+
                           '}\n';
                           break;
-   case  "PRESSURE" : Blockly.Arduino.codeFunctions_['define_get_bmp180_pressure'] = '\n/*lecture de la pression*/ \n' + 
+   case  "PRESSURE" : Blockly.Arduino.codeFunctions_['define_get_bmp180_pressure'] = '\n//lecture de la pression \n' + 
                           'float get_bmp180_pressure(BMP085 myBarometer) {\n'+
                           'float p = myBarometer.bmp085GetPressure(myBarometer.bmp085ReadUP());\n'+       
                           'return p;\n'+
                           '}\n';
                           break;
-  case  "ALTITUDE" : Blockly.Arduino.codeFunctions_['define_get_bmp180_altitude'] = '\n/*lecture de l"altitude*/ \n' + 
+  case  "ALTITUDE" : Blockly.Arduino.codeFunctions_['define_get_bmp180_altitude'] = '\n//lecture de l"altitude \n' + 
                           'float get_bmp180_altitude(BMP085 myBarometer) {\n'+
                           '//float pressure = myBarometer.bmp085GetPressure(myBarometer.bmp085ReadUP());\n'+  
                           'float a = myBarometer.calcAltitude(101900);\n'+      
                           'return a;\n'+
                           '}\n';
                           break;
-  case  "ATM" : Blockly.Arduino.codeFunctions_['define_get_bmp180_atm'] = '\n/*lecture de l"atm*/ \n' + 
+  case  "ATM" : Blockly.Arduino.codeFunctions_['define_get_bmp180_atm'] = '\n//lecture de l"atm \n' + 
                           'float get_bmp180_atm(BMP085 myBarometer) {\n'+
                           'float pressure = myBarometer.bmp085GetPressure(myBarometer.bmp085ReadUP());\n'+  
                           'float atm = pressure / 101325;\n'+      
@@ -203,7 +203,7 @@ Blockly.Arduino.driss_Barometre_BMP180 = function() {
   if (dropdown_grandeur == "ATM") { code = 'get_bmp180_atm('+var_barometre+')' ; }
  return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
-
+*/
 
 //Grove Gaz sensor MQ5 RATIO OK
 Blockly.Arduino.driss_grove_gaz_sensor_mq5_ratio = function() {
