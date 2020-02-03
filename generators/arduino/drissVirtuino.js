@@ -18,7 +18,7 @@ Blockly.Arduino.driss_Virtuino_initialiser_bluetooth = function() {
   Blockly.Arduino.variables_['define_Commentaire_01'] = "//Si vous utilisez un module Grove : c'est RX=D8 / TX=D9";
  
   Blockly.Arduino.variables_['define_var_bt'] = "SoftwareSerial mySerialVirtuino("+rx+","+tx+"); // RX, TX"; 
-  Blockly.Arduino.variables_['define_var_VirtuinoBluetooth'] = "virtuino(mySerialVirtuino,"+vitesse+");";
+  Blockly.Arduino.variables_['define_var_VirtuinoBluetooth'] = "VirtuinoBluetooth virtuino(mySerialVirtuino,"+vitesse+");";
   
   //dans setup  
   Blockly.Arduino.setups_['setup_mySerialVirtuino'] ='';
