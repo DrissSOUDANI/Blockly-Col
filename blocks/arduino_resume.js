@@ -168,6 +168,13 @@ head.load(
         console.log("Done loading driss D1R32 Blocks");
     });
 
+head.load(
+    "blocks/drissVirtuino/drissVirtuino.js",
+    function() {
+        // Call a function when done
+        console.log("Done loading driss Virtuino Blocks");
+    });
+
 
 head.load(
 "blocks/blocks_typing.js",

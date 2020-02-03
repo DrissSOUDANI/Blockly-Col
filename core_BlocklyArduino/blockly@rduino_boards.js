@@ -454,5 +454,9 @@ Blockly.Arduino.getDropDownIRQPins = function(){
 	return profile.defaultBoard.irqonchange;
 }
 
+Blockly.Arduino.getDropDownSerial = function(){
+	return profile.defaultBoard.serial;
+}
+
 
 //Fin des ajouts de Driss

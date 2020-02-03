@@ -149,4 +149,11 @@ function() {
     console.log("Done loading Driss D1R32 Generators");
 });
 
+head.load(
+"generators/arduino/drissVirtuino.js",
+function() {
+    // Call a function when done
+    console.log("Done loading Driss Virtuino Generators");
+});
+
 /* Fin des ajouts de Driss */
