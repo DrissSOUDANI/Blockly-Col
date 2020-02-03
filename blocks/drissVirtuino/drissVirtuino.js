@@ -40,8 +40,8 @@ Blockly.Blocks.driss_Virtuino_initialiser_bluetooth = {
   },
         onchange: function(ev) {
          this.getField("VITESSE").setValue("9600");
-         this.getField("RX").setValue("D8");
-         this.getField("TX").setValue("D9");
+         this.getField("RX").setValue("8");
+         this.getField("TX").setValue("9");
          }
 };
 
