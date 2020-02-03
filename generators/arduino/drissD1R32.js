@@ -59,6 +59,15 @@ function getEmplacement(theBloc)  {
         }
       }
 
+
+      if(a=theBloc.getSurroundParent().getInputTargetBlock("LEDGROVE") ){
+        while(a){ 
+          //alert(a.name+'\n'+theBloc.name); 
+          if(a.id==theBloc.id) {zone='LEDGROVE'; break;};
+          a=a.getNextBlock();
+        }
+      }
+
     }
     return(zone);
   }
@@ -642,4 +651,57 @@ Blockly.Arduino.driss_D1R32_InsertHTMLCodeInBody = function() {
       }  
   return code; 
 
+};
+
+
+//------------------------------------------------------------------------------------------------------------------------------
+//driss_D1R32_dessiner_interrupteur
+//------------------------------------------------------------------------------------------------------------------------------
+Blockly.Arduino.driss_D1R32_dessiner_interrupteur = function() { 
+  var switch_name = this.getFieldValue('SWITCH_NAME');
+  //switch_name = switch_name.substr(1, switch_name.length-2);
+  switch_name = switch_name.replace(/ /g, "_");
+  //switch_name = "_"+switch_name+"_";
+
+  var switch_name_sa = replaceSpec(switch_name);
+  //alert('5'+switch_name_sa);
+  /*
+  
+  var classCode = '';
+  classCode +=  '.'+class_name_sa+' {font-size:'+font_size+'; font-style:'+font_style+'; color:'+txtcolor+'; background-color:'+bgcolor+'; text-decoration:'+txtdecoration+'; text-align:'+txtalign+';'
+  if(gras) classCode += 'font-weight:bold; ' ;
+  if(border) classCode += 'border:1px solid #000000;' ;
+  classCode += 'padding:5px;}'+'';
+ */
+ //alert(this.getInputTargetBlock('aze'));
+  var zone = getEmplacement(this);
+
+  code = switch_name_sa;
+  /*
+  switch(zone){
+    case "LEDGROVE" : //code +=  '~' ;
+                  //code +=  'page +=     MonEsp.javaslider();\n';
+                  //code +=  'page +=     MonEsp.slider(0,1,"'+switch_name_sa+'");';
+                  //code +=  '~ ';
+                  code +=  switch_name_sa ;
+                  break;
+    case "HEAD" : code +=  '~';
+                  break;
+    case "BODY" : code +=  '~' ;
+                  code +=  'page +=     MonEsp.javaslider();\n';
+                  code +=  'page +=     MonEsp.slider(0,1,"'+switch_name_sa+'");';
+                  code +=  '~ ';
+                  code +=  switch_name_sa ;
+                  break;
+    case "CADRE" : code +=  '~' ;
+                  code +=  'page +=     MonEsp.javaslider();\n';
+                  code +=  'page +=     MonEsp.slider(0,1,'+switch_name_sa+');';
+                  code +=  '~';
+                  code +=  switch_name_sa ;
+                  break;
+      }  
+    //alert(code);
+  */
+  //alert(code);
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
 };

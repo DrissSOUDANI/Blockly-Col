@@ -1979,4 +1979,8 @@ Blockly.Msg.CAT_DRISS_D1R32_GROVE_ESP32 = "- ESP 32";
 Blockly.Msg.CAT_DRISS_D1R32_GROVE_WEBPAGE = "- Editeur de page Web";
 Blockly.Msg.CAT_DRISS_D1R32_GROVE_OPENDATA = "- Open Data";
 
+
+Blockly.Msg.CAT_DRISS_VIRTUINO = "Virtuino";
+
+
 // Fin des ajouts de Driss

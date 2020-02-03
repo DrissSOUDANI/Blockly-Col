@@ -350,7 +350,6 @@ Blockly.Blocks.driss_D1R32_afficher_jauge_dans_page_web = {
   }
 };
 
-
 //driss_D1R32_balise_HR
 Blockly.Blocks.driss_D1R32_balise_HR = {
   category: 'diss_D1R32',
@@ -386,3 +385,24 @@ Blockly.Blocks.driss_D1R32_InsertHTMLCodeInBody = {
 };
 
 
+//*******************************************************************************************************
+//driss_D1R32_dessiner_interrupteur
+Blockly.Blocks.driss_D1R32_dessiner_interrupteur = {
+  category: 'diss_D1R32',
+  helpUrl: '',
+
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Etat de l'interrupteur ")
+        .appendField(new Blockly.FieldTextInput("Inter 1"), "SWITCH_NAME");
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage("https://www.gstatic.com/codesite/ph/images/star_on.gif", 15, 15, { alt: "*", flipRtl: "FALSE" }))
+        .appendField("Dessiné dans la page Web");
+    this.setInputsInline(false);
+    this.setOutput(true, null);
+    this.setColour(11);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+ 

@@ -449,6 +449,28 @@ Blockly.Blocks['driss_grove_joystick_direction'] = {
 
 
 //-Actionneurs ----------------------------------------------------------------------------------------------------------------------------------------
+//Grove red LED OK
+Blockly.Blocks.driss_grove_led = {
+   category: 'driss_grove : actionneurs',
+  helpUrl: '',
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Mettre la DEL reliée à la broche")
+        .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN");
+    this.appendValueInput("INPUT")
+        .setCheck(null)
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendTitle(new Blockly.FieldImage("blocks/drissGrove/Grove_red_LED.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize))
+        .appendField("à l'état logique envoyé par");
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(Blockly.Blocks.drissGrove.HUE);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
 
 //Grove red LED OK
 Blockly.Blocks.driss_grove_red_led = {

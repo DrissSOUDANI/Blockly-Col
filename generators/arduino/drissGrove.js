@@ -437,6 +437,18 @@ var code ="getJoystickDirection()";
 //-Actionneurs ----------------------------------------------------------------------------------------------------------------------------------------
 
 //Grove red LED OK
+Blockly.Arduino.driss_grove_led = function() {
+  var dropdown_pin = this.getTitleValue('PIN');
+  var stat = Blockly.Arduino.valueToCode(this, 'INPUT', Blockly.Arduino.ORDER_ATOMIC);
+  //alert(stat);
+  Blockly.Arduino.setups_['setup_led'+dropdown_pin] = 'pinMode('+dropdown_pin+', OUTPUT);'; //code à insérer dans le setup Arduino
+  var code = 'digitalWrite('+dropdown_pin+','+stat+');\n'  //code à insérer dans la loop Arduino
+
+
+  return code;
+};
+
+//Grove red LED OK
 Blockly.Arduino.driss_grove_red_led = function() {
   var dropdown_pin = this.getTitleValue('PIN');
   var dropdown_stat = this.getTitleValue('STAT');
