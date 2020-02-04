@@ -7,34 +7,31 @@ goog.provide('Blockly.Blocks.drissVirtuino');
 goog.require('Blockly.Blocks');
 goog.require('Blockly.Types');
 
- 
-
-//-Communication ----------------------------------------------------------------------------------------------------------------------------------------
 
 
-//driss_Virtuino_initialiser_bluetooth
-Blockly.Blocks.driss_Virtuino_initialiser_bluetooth = {
+Blockly.Blocks.driss_Virtuino_bloc_principal = {
   category: 'Virtuino',
   helpUrl: '',
-  init: function() {
+   init: function() {
     this.appendDummyInput()
-        .appendField("Virtuino : Initialiser le bluetooth");
-    this.appendDummyInput()
-        .appendField(new Blockly.FieldImage("blocks/drissVirtuino/Virtuino.png", Blockly.Arduino.imageSize*1.1,  Blockly.Arduino.imageSize, "*"))
+        .appendField("Virtuino : Initialiser le module bluetooth ")
         .appendField("RX")
-        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "RX")
-        .appendField("    TX")
-        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "TX");
+        .appendField(new Blockly.FieldTextInput("default"), "RX")
+        .appendField("TX")
+        .appendField(new Blockly.FieldTextInput("default"), "TX");
     this.appendDummyInput()
-        .appendField("  ")
-        .appendField(new Blockly.FieldCheckbox("FALSE"), "INFOS")
-        .appendField(" Afficher les informations sur le port série")
+        .appendField(" ")
+        .appendField(new Blockly.FieldCheckbox("TRUE"), "DEBUG")
+        .appendField("Afficher les informations sur le port série")
         .appendField("Vitesse")
-        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownSerial), "VITESSE");
-    this.setInputsInline(false);
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(Blockly.Blocks.drissVirtuino.HUE);
+        .appendField(new Blockly.FieldTextInput("default"), "VITESSE");
+    this.appendDummyInput()
+        .appendField("  ");
+    this.appendDummyInput()
+        .appendField("Capteurs et actionneurs à piloter par Virtuino");
+    this.appendStatementInput("ELEMENTS_VIRTUINO")
+        .setCheck(null);
+    this.setColour(270);
  this.setTooltip("");
  this.setHelpUrl("");
   },
@@ -45,6 +42,22 @@ Blockly.Blocks.driss_Virtuino_initialiser_bluetooth = {
          }
 };
 
+
+//driss_Virtuino_read_capteur
+Blockly.Blocks.driss_Virtuino_read_capteur = {
+  category: 'Virtuino',
+  helpUrl: '',
+  init: function() {
+    this.appendValueInput("INPUT_IN")
+        .setCheck(null)
+        .appendField(" ");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(270);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
 
 //driss_Virtuino_recevoir_etat
 Blockly.Blocks.driss_Virtuino_recevoir_etat = {
