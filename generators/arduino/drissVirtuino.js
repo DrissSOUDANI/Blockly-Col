@@ -74,7 +74,7 @@ Blockly.Arduino.driss_Virtuino_bloc_principal = function() {
 };
 
 //------------------------------------------------------------------------------
-
+/*
 //driss_Virtuino_read_capteur
 Blockly.Arduino.driss_Virtuino_read_capteur = function() {
 
@@ -83,17 +83,30 @@ Blockly.Arduino.driss_Virtuino_read_capteur = function() {
   var code = '';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
+*/
+//-----------------------------------------------------
+
+
+//driss_Virtuino_led
+Blockly.Arduino.driss_Virtuino_led = function() {
+  var color = this.getFieldValue('COLOR');
+  var pin = this.getFieldValue('PIN');
+  Blockly.Arduino.setups_['setup_white_led'+pin] = 'pinMode('+pin+', OUTPUT);';
+  var code = '';
+  return code;
+  //return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
 
 //-----------------------------------------------------
 
-//driss_Virtuino_recevoir_etath
-Blockly.Arduino.driss_Virtuino_recevoir_etat = function() {
-
-  var cv = Blockly.Arduino.valueToCode(this, 'CV', Blockly.Arduino.ORDER_ATOMIC);
-  
-
-  var code = 'virtuino.vDigitalMemoryRead('+cv+')';
-  return [code, Blockly.Arduino.ORDER_ATOMIC];
+//driss_Virtuino_input
+Blockly.Arduino.driss_Virtuino_input = function() {
+  var color = this.getFieldValue('COLOR');
+  var pin = this.getFieldValue('PIN');
+  Blockly.Arduino.setups_['setup_button_'+pin] = 'pinMode('+pin+', INPUT);';
+  var code = '';
+  return code;
+  //return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-
+//-----------------------------------------------------

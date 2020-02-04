@@ -194,7 +194,7 @@ Blockly.Blocks.driss_temperature_and_humidity_sensor = {
   },
   
         onchange: function(ev) {
-          var ref_capteur = this.getTitleValue('REF');
+          var ref_capteur = this.getFieldValue('REF');
           var image = "";
           if(ref_capteur == "DHT11") image = "blocks/drissGrove/Grove_temperature_and_humidity_sensor.png";
           if(ref_capteur == "DHT22") image = "blocks/drissGrove/Grove_temperature_and_humidity_sensor_pro.png";
@@ -711,7 +711,7 @@ Blockly.Blocks['driss_grove_Telecommande_GM_IR38_init'] = {
       },
 
       onchange: function(ev) {
-        var telecommande = this.getTitleValue('TELECOMMANDE');
+        var telecommande = this.getFieldValue('TELECOMMANDE');
         var image = "";
         if(telecommande == "GM_IR38") image = "blocks/drissGrove/Telecommande_GM_IR38.png";
         if(telecommande == "YK_001") image = "blocks/drissGrove/Telecommande_YK-001.png";
@@ -1128,7 +1128,7 @@ Blockly.Blocks['driss_grove_rfid_init'] = {
    this.setHelpUrl("");
     },
      onchange: function(ev) {
-        var pin_Rx = this.getTitleValue('PIN_RX');
+        var pin_Rx = this.getFieldValue('PIN_RX');
         var pin_Tx = Number(pin_Rx) + 1;
         this.getField("PIN_TX").setValue("(Rx) et  "+pin_Tx+" (Tx)", "PIN_TX");
         }
@@ -1157,7 +1157,7 @@ Blockly.Blocks['driss_grove_rfid_write_code'] = {
    this.setHelpUrl("");
     },
     onchange: function(ev) {
-       var pin_Rx = this.getTitleValue('PIN_RX');
+       var pin_Rx = this.getFieldValue('PIN_RX');
        var pin_Tx = Number(pin_Rx) + 1;
        this.getField("PIN_TX").setValue("(Rx) et  "+pin_Tx+" (Tx)", "PIN_TX");
        }
@@ -1187,7 +1187,7 @@ Blockly.Blocks['driss_grove_rfid_write_code'] = {
    this.setHelpUrl("");
     },
     onchange: function(ev) {
-       var pin_Rx = this.getTitleValue('PIN_RX');
+       var pin_Rx = this.getFieldValue('PIN_RX');
        var pin_Tx = Number(pin_Rx) + 1;
        this.getField("PIN_TX").setValue("(Rx) et  "+pin_Tx+" (Tx)", "PIN_TX");
        }
@@ -1209,7 +1209,7 @@ Blockly.Blocks['driss_grove_rfid_write_code'] = {
    this.setHelpUrl("");
     },
     onchange: function(ev) {
-       var pin_Rx = this.getTitleValue('PIN_RX');
+       var pin_Rx = this.getFieldValue('PIN_RX');
        var pin_Tx = Number(pin_Rx) + 1;
        this.getField("PIN_TX").setValue("(Rx) et  "+pin_Tx+" (Tx)", "PIN_TX");
        }
@@ -1235,7 +1235,7 @@ Blockly.Blocks['driss_grove_rfid_write_code'] = {
    this.setHelpUrl("");
     },
     onchange: function(ev) {
-       var pin_Rx = this.getTitleValue('PIN_RX');
+       var pin_Rx = this.getFieldValue('PIN_RX');
        var pin_Tx = Number(pin_Rx) + 1;
        this.getField("PIN_TX").setValue("(Rx) et  "+pin_Tx+" (Tx)", "PIN_TX");
        }
