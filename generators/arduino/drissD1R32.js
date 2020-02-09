@@ -342,6 +342,114 @@ Blockly.Arduino.driss_D1R32_transmettre_au_serveur_Web = function() {
 
 
 
+//--------------------------------------------------------------------------------------------------------------------
+//driss_ESP_SPIFFS_Initialiser_memoire
+Blockly.Arduino.driss_ESP_SPIFFS_Initialiser_memoire = function() { 
+
+  Blockly.Arduino.includes_['define_Duinoedu_Spiffs'] = "#include <Duinoedu_Spiffs.h>";
+  Blockly.Arduino.variables_['var_MonEsp'] = "Duinoedu_Esp8266 MonEsp;";
+
+   Blockly.Arduino.variables_['var_server'] = "ESP8266WebServer server ( 80 );";
+
+   Blockly.Arduino.setups_['setup_D1R32_init_spiffs'] = '#ifdef ESP32 \n'+
+                                                        '  if (SPIFFS.begin(true)) {\n'+
+                                                        '    listDir(SPIFFS, "/", 0,server);\n'+
+                                                        '#elif defined ESP8266\n'+
+                                                        '  if (SPIFFS.begin()) {\n'+
+                                                        '    listESP8266(server);\n'+
+                                                        '#endif\n'+
+                                                        '    Serial.println("SPIFFS opened!");\n'+
+                                                        '  }\n'+
+                                                        '    server.begin();\n'+
+                                                        '    Serial.println ("HTTP server started");\n'+
+                                                        '  \n'+
+                                                        '  String getPage(){\n'+
+                                                        '#define PAGE_EXIST \n'+
+                                                        '    String  page = "<!DOCTYPE html><html><head><meta charset=\'ISO-8859-15\'>";\n'+
+                                                        '    page += "<title>Blockly@Col - ac-nancy-metz.fr</title></head>";\n'+
+                                                        '    page += MonEsp.addPhoneStyle();\n'+
+                                                        '    page += "<BODY onload=\'process()\'>";\n'+
+                                                        '    page += "</body>";\n'+
+                                                        '    page += "</html>";\n'+
+                                                        '    return page;\n'+
+                                                        '  }'; 
+  
+  var code =  '#ifdef PAGE_EXIST\n'+
+              '  server.handleClient();\n'+
+              '  delay(10);\n'+
+              '#endif\n';
+              
+  return code;
+}
+
+
+
+
+
+//-------------------------------------------------------------------
+//driss_ESP_SPIFFS_Initialiser_memoire_et_ftp
+Blockly.Arduino.driss_ESP_SPIFFS_Initialiser_memoire_et_ftp = function() { 
+  var username = Blockly.Arduino.valueToCode(this, 'USERNAME', Blockly.Arduino.ORDER_ATOMIC);
+  var password = Blockly.Arduino.valueToCode(this, 'PASSWORD', Blockly.Arduino.ORDER_ATOMIC);
+
+  Blockly.Arduino.includes_['define_Duinoedu_Spiffs'] = "#include <Duinoedu_Spiffs.h>";
+  Blockly.Arduino.includes_['define_ESP8266FtpServer'] = "#include <ESP8266FtpServer.h>";
+
+  Blockly.Arduino.variables_['var_MonEsp'] = "Duinoedu_Esp8266 MonEsp;";
+  Blockly.Arduino.variables_['var_ftpSrv'] = "FtpServer ftpSrv;";
+  Blockly.Arduino.variables_['var_server'] = "ESP8266WebServer server ( 80 );";
+
+  Blockly.Arduino.setups_['setup_D1R32_init_spiffs'] =  '#ifdef ESP32 \n'+
+                                                        '  if (SPIFFS.begin(true)) {\n'+
+                                                        '    listDir(SPIFFS, "/", 0,server);\n'+
+                                                        '#elif defined ESP8266\n'+
+                                                        '  if (SPIFFS.begin()) {\n'+
+                                                        '    listESP8266(server);\n'+
+                                                        '#endif\n'+
+                                                        '    ftpSrv.begin('+username+','+password+');\n'+
+                                                        '    Serial.println("SPIFFS opened!");\n'+
+                                                        '  }\n'+
+                                                        '    server.begin();\n'+
+                                                        '    Serial.println ("HTTP server started");\n'+
+                                                        '  \n'+
+                                                        '  String getPage(){\n'+
+                                                        '#define PAGE_EXIST \n'+
+                                                        '    String  page = "<!DOCTYPE html><html><head><meta charset=\'ISO-8859-15\'>";\n'+
+                                                        '    page += "<title>Blockly@Col - ac-nancy-metz.fr</title></head>";\n'+
+                                                        '    page += MonEsp.addPhoneStyle();\n'+
+                                                        '    page += "<BODY onload=\'process()\'>";\n'+
+                                                        '    page += "</body>";\n'+
+                                                        '    page += "</html>";\n'+
+                                                        '    return page;\n'+
+                                                        '  }'; 
+  
+  var code =  '#ifdef PAGE_EXIST\n'+
+              '  server.handleClient();\n'+
+              '  delay(10);\n'+
+              '#endif\n';
+              '  ftpSrv.handleFTP();\n';
+              
+  return code;
+}
+
+
+//-------------------------------------------------------------------
+//driss_ESP_SPIFFS_creer_ajouter_au_fichier
+Blockly.Arduino.driss_ESP_SPIFFS_creer_ajouter_au_fichier = function() { 
+  var filename = Blockly.Arduino.valueToCode(this, 'FILENAME', Blockly.Arduino.ORDER_ATOMIC);
+  var data = Blockly.Arduino.valueToCode(this, 'DATA', Blockly.Arduino.ORDER_ATOMIC);
+  var space = this.getFieldValue('SPACE') == 'TRUE';
+  var new_ligne = this.getFieldValue('NEW_LIGNE') == 'TRUE';
+
+  Blockly.Arduino.includes_['define_Duinoedu_Utility.conv'] = "#include <Duinoedu_Utility.conv.h>";
+  
+  var code =  'appendFile(SPIFFS, '+filename+', PCHAR2('+data+'));\n';
+  if(space)  code += 'appendFile(SPIFFS, '+filename+', " ");\n';
+  if(new_ligne)  code += 'appendFile(SPIFFS, '+filename+', "\\n");\n';
+              
+  return code;
+}
+
 
 
 

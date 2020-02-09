@@ -193,6 +193,97 @@ Blockly.Blocks.driss_D1R32_transmettre_au_serveur_Web = {
 
 
 
+//---------------------------------------
+//driss_ESP_SPIFFS_Initialiser_memoire
+Blockly.Blocks.driss_ESP_SPIFFS_Initialiser_memoire = {
+  category: 'diss_D1R32',
+  helpUrl: '',
+  init: function() {
+    this.appendDummyInput()
+        .appendField("SPIFFS");
+    this.appendDummyInput()
+        .appendField(" Initialiser la mémoire Spiffs");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(36);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+
+
+//---------------------------------------
+//driss_ESP_SPIFFS_Initialiser_memoire_et_ftp
+Blockly.Blocks.driss_ESP_SPIFFS_Initialiser_memoire_et_ftp = {
+  category: 'diss_D1R32',
+  helpUrl: '',
+  init: function() {
+    this.appendDummyInput()
+        .appendField("SPIFFS");
+    this.appendValueInput("USERNAME")
+        .setCheck(null)
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("  Initialiser la mémoire Spiffs         ")
+        .appendField("Nom d'utilisateur");
+    this.appendValueInput("PASSWORD")
+        .setCheck(null)
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("et activer le FTP                               ")
+        .appendField("Mot de passe");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(36);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+
+
+//---------------------------------------
+//driss_ESP_SPIFFS_creer_ajouter_au_fichier
+Blockly.Blocks.driss_ESP_SPIFFS_creer_ajouter_au_fichier = {
+  category: 'diss_D1R32',
+  helpUrl: '',
+  init: function() {
+    this.appendDummyInput()
+        .appendField("SPIFFS");
+    this.appendValueInput("FILENAME")
+        .setCheck(null)
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("Ajouter la donnée au fichier                      ")
+        .appendField("Nom du fichier");
+    this.appendValueInput("DATA")
+        .setCheck(null)
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("(le fichier sera crée s'il n'existe pas)      ")
+        .appendField("Donnée à ajouter");
+    this.appendDummyInput()
+        .appendField(" ")
+        .appendField(new Blockly.FieldCheckbox("TRUE"), "SPACE")
+        .appendField("Ajouter un espace")
+        .appendField("     ")
+        .appendField(new Blockly.FieldCheckbox("TRUE"), "NEW_LIGNE")
+        .appendField("ajouter sur une nouvelle ligne");
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(11);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+
+
+
+
+
+
+
+
+
 
 
 
