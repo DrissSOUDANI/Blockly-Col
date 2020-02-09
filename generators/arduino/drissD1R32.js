@@ -67,20 +67,94 @@ function getEmplacement(theBloc)  {
           a=a.getNextBlock();
         }
       }
-
+/*
+      if(a=theBloc.getSurroundParent().getInputTargetBlock("SENDTOWEB") ){
+        while(a){ 
+          //alert(a.name+'\n'+theBloc.name); 
+          if(a.id==theBloc.id) {zone='TASK'; break;};
+          a=a.getNextBlock();
+        }
+      }
+*/
     }
     return(zone);
   }
 
 
+//***************************************************************************************************************************************
+//------------------------------------------------------------------------------------------------------------------------------
+//driss_D1R32_executer_taches_paralleles
+//------------------------------------------------------------------------------------------------------------------------------
+Blockly.Arduino.driss_D1R32_executer_taches_paralleles = function() {
+  var statements_task_1 = Blockly.Arduino.statementToCode(this, 'TASK_1');
+  var statements_task_2 = Blockly.Arduino.statementToCode(this, 'TASK_2');
+  //alert(statements_tasks);
+  var code =  "vTaskDelay(portMAX_DELAY);\n";
+  return code;
 
+};
 
+//------------------------------------------------------------------------------------------------------------------------------
+//driss_D1R32_definir_tache
+//------------------------------------------------------------------------------------------------------------------------------
+Blockly.Arduino.driss_D1R32_definir_tache = function() {
+  
+  var name_task = Blockly.Arduino.valueToCode(this, 'TASK_NAME', Blockly.Arduino.ORDER_ATOMIC);
+  var num_task = Blockly.Arduino.valueToCode(this, 'NUM_TASK', Blockly.Arduino.ORDER_ATOMIC);
+  var taille_pile = Blockly.Arduino.valueToCode(this, 'TAILLE_PILE', Blockly.Arduino.ORDER_ATOMIC);
+  var coeur = Blockly.Arduino.valueToCode(this, 'COEUR', Blockly.Arduino.ORDER_ATOMIC);
+  var priorite = Blockly.Arduino.valueToCode(this, 'PRIORITE', Blockly.Arduino.ORDER_ATOMIC);
+
+  Blockly.Arduino.definitions_['define_PAGE_EXIST'] = '#define PAGE_EXIST';
+
+  Blockly.Arduino.variables_['var_task_'+num_task] = 'TaskHandle_t task_'+num_task+';';
+  
+  Blockly.Arduino.tasks_['setup_task_'+num_task] =  'xTaskCreatePinnedToCore(Esp32_Multitask_task_'+num_task+',"task_'+num_task+'",'+taille_pile+',NULL,'+priorite+',&task_'+num_task+','+coeur+');\n'+
+                                            '  delay(500);';
+   
+  var code =  "";
+  return code;
+
+};
+
+//------------------------------------------------------------------------------------------------------------------------------
+//driss_D1R32_définir_les_actions_de_la_tache
+//------------------------------------------------------------------------------------------------------------------------------
+Blockly.Arduino.driss_D1R32_définir_les_actions_de_la_tache = function() {
+  var num_task = this.getFieldValue('NUN_TASK');
+  var statements_task_actions = Blockly.Arduino.statementToCode(this, 'TASK_ACTIONS');
+  
+  var tache = 'task_'+num_task;
+   
+  if(!Blockly.Arduino.tasktab_[num_task]){
+    Blockly.Arduino.tasktab_[num_task] = Object.create(null);
+    //Blockly.Arduino.tasktab_[num_task][0] = 2
+
+  }
+
+  //var task_id = Blockly.Arduino.tasktab_[num_task][0];
+  
+  Blockly.Arduino.tasktab_[num_task]["debut"] = 'void Esp32_Multitask_'+tache+'(void *arg) {\n'+
+                                                '  while(true) {\n';
+  //Blockly.Arduino.tasktab_[num_task][task_id] = ''+statements_task_actions+'';
+  Blockly.Arduino.tasktab_[num_task]["actions"] = ''+statements_task_actions+'';
+  Blockly.Arduino.tasktab_[num_task]["fin"] = '  }\n'+
+                                              ' }';
+  //task_id++;
+  //Blockly.Arduino.tasktab_[num_task][0] = task_id;;
+  
+   
+  //alert(num_task+'\n'+statements_task_actions);
+  var code =  '';//statements_task_actions;
+  return code;
+
+};
 
 
 Blockly.Arduino.driss_D1R32_initialisation = function() { 
   Blockly.Arduino.includes_['define_Duinoedu_Esp8266'] = "#include <Duinoedu_Esp8266.h>";
 
-  Blockly.Arduino.variables_['var_MonEsp'] = "Duinoedu_Esp8266 MonEsp;\n";
+  Blockly.Arduino.variables_['var_MonEsp'] = "Duinoedu_Esp8266 MonEsp;";
   
 
   Blockly.Arduino.codeFunctions_['define_handleRoot'] = '\nvoid handleRoot(){\n'+
@@ -105,16 +179,16 @@ Blockly.Arduino.driss_D1R32_initialisation = function() {
                                                 '  server.on ( "/xml", handleXML );\n'+
                                                 '  server.begin();\n'+
                                                 '  Serial.println ( "HTTP server started" );\n'+
-                                                '}\n'; 
+                                                '}'; 
 
   Blockly.Arduino.codeFunctions_['define_handleRoot'] = '\nvoid handleRoot(){\n'+
    '  server.send ( 200, "text/html", getPage() );\n'+ 
    '  delay(10);\n'+
-   '}\n'; 
+   '}'; 
 
   Blockly.Arduino.codeFunctions_['define_handleXML'] = '\nvoid handleXML(){\n'+
    '  server.send(200,"text/xml",buildXML());\n'+ 
-   '}\n'; 
+   '}'; 
 
 
 
@@ -125,8 +199,8 @@ Blockly.Arduino.driss_D1R32_initialisation = function() {
 
   //---------------------------------------------------------------------
 
-
-Blockly.Arduino.driss_D1R32_config = function() { 
+/*
+Blockly.Arduino.driss_D1R32_config2 = function() { 
   var dropdown_type = this.getTitleValue('TYPE');
   var value_ssid = Blockly.Arduino.valueToCode(this, 'SSID', Blockly.Arduino.ORDER_ATOMIC);
   //var value_fade = Blockly.Arduino.valueToCode(this, 'FADE', Blockly.Arduino.ORDER_UNARY_POSTFIXER_ATOMIC);
@@ -159,19 +233,21 @@ Blockly.Arduino.driss_D1R32_config = function() {
   Blockly.Arduino.setups_['setup_D1R32_config'] = code_Setup;
 
   // TODO: Assemble JavaScript into code variable.
-  var code =  '#ifdef PAGE_EXIST\n'+
+  var code =  '//#ifdef PAGE_EXIST\n'+
               '  server.handleClient();\n'+
               '  delay(10);\n'+
-              '#endif\n';
+              '//#endif\n';
               
 
   return code;
 };
+*/
+
 
 
 //-----------------------------------------------------------------
-
-Blockly.Arduino.driss_D1R32_config2 = function() { 
+//driss_D1R32_config
+Blockly.Arduino.driss_D1R32_config = function() { 
   var dropdown_type = this.getTitleValue('TYPE');
   var value_ssid = Blockly.Arduino.valueToCode(this, 'SSID', Blockly.Arduino.ORDER_ATOMIC);
   //var value_fade = Blockly.Arduino.valueToCode(this, 'FADE', Blockly.Arduino.ORDER_UNARY_POSTFIXER_ATOMIC);
@@ -180,8 +256,45 @@ Blockly.Arduino.driss_D1R32_config2 = function() {
 
 
   Blockly.Arduino.includes_['define_Duinoedu_Esp8266'] = "#include <Duinoedu_Esp8266.h>";
-
   Blockly.Arduino.variables_['var_MonEsp'] = "Duinoedu_Esp8266 MonEsp;";
+
+//****************************************************
+Blockly.Arduino.codeFunctions_['define_handleRoot'] = '\nvoid handleRoot(){\n'+
+   '  server.send ( 200, "text/html", getPage() );\n'+ 
+   '  delay(10);\n'+
+   '}\n'; 
+
+  Blockly.Arduino.xmltab_['debut'] =  'String buildXML(){\n'+
+                                      '  String XML="<?xml version=\'1.0\'?><inputs>";';
+  Blockly.Arduino.xmltab_['fin']   =  '  XML+="</inputs>";\n'+
+                                      '  return XML;\n'+
+                                      ' }';
+
+  Blockly.Arduino.javatab_['debut'] =  'String buildJavascript(){\n'+
+                                       '  String javaScript=MonEsp.javaScript_start();';
+  Blockly.Arduino.javatab_['fin']   =  '  javaScript+=MonEsp.javaScript_end();\n'+
+                                       '  return javaScript;\n'+
+                                       ' }';
+
+  Blockly.Arduino.codeFunctions_['define_startServer'] =  '\nvoid startServer(){\n'+
+                                                '  server.on ( "/", handleRoot );\n'+
+                                                '  server.on ( "/xml", handleXML );\n'+
+                                                '  server.begin();\n'+
+                                                '  Serial.println ( "HTTP server started" );\n'+
+                                                '}'; 
+
+  Blockly.Arduino.codeFunctions_['define_handleRoot'] = '\nvoid handleRoot(){\n'+
+   '  server.send ( 200, "text/html", getPage() );\n'+ 
+   '  delay(10);\n'+
+   '}'; 
+
+  Blockly.Arduino.codeFunctions_['define_handleXML'] = '\nvoid handleXML(){\n'+
+   '  server.send(200,"text/xml",buildXML());\n'+ 
+   '}'; 
+
+
+   //*************************************************************************
+
 
   var code_Setup ='';
   switch (dropdown_type){
@@ -198,18 +311,33 @@ Blockly.Arduino.driss_D1R32_config2 = function() {
 
 
   // TODO: Assemble JavaScript into code variable.
-  var code =  '#ifdef PAGE_EXIST\n'+
+ /*
+  var code =  '//#ifdef PAGE_EXIST\n'+
               '  server.handleClient();\n'+
               '  delay(10);\n'+
-              '#endif\n';
-              
+              '//#endif\n';
+     */
+     
+  code='';         
 
   return code;
 };
 
 
+//--------------------------------------------------------------------------------------------------------------------
+//driss_D1R32_transmettre_au_serveur_Web
+Blockly.Arduino.driss_D1R32_transmettre_au_serveur_Web = function() { 
 
-
+  //var zone = getEmplacement(this).type;
+   //  alert(zone);
+  
+  var code =  '#ifdef PAGE_EXIST\n'+
+              '  server.handleClient();\n'+
+              '  delay(10);\n'+
+              '#endif\n';
+              
+  return code;
+}
 
 
 
@@ -289,6 +417,7 @@ Blockly.Arduino.driss_Creer_page_web = function() {
 
   if( (head_code !='') || (body_code !='')) id++;
   Blockly.Arduino.idstab_['id']=id;
+  //alert(code);
   return code;
 
 };
@@ -493,7 +622,7 @@ Blockly.Arduino.driss_D1R32_web_write_data = function() {
   
   Blockly.Arduino.includes_['define_Duinoedu_Esp8266'] = "#include <Duinoedu_Esp8266.h>";
 
-  Blockly.Arduino.variables_['var_server'] = "ESP8266WebServer server ( 80 );\n";
+  Blockly.Arduino.variables_['var_server'] = "ESP8266WebServer server ( 80 );";
   Blockly.Arduino.variables_['var_'+value_name_sa] = "String "+value_name_sa+"=\"\";";
 
   if((zone == "BODY") || (zone == "CADRE")){
@@ -511,13 +640,13 @@ Blockly.Arduino.driss_D1R32_web_write_data = function() {
     case "BODY" : code +=  '~' ;
                   code +=  'page +=      buildJavascript();\n';
                   code +=  'page += "   '+value_name.replace(/_/g, " ")+' = <a class=value id=\'v_'+value_name_sa+'\'></a> '+unite+'";\n';
-                  code +=  '~'+value_name_sa+'=String('+value+');\n';
+                  code +=  '~'+value_name_sa+'=String('+value+');';
                   break;
    
     case "CADRE" : code +=  '~' ;
                    code +=  'page +=          buildJavascript();\n';
                    code +=  'page += "       '+value_name.replace(/_/g, " ")+' = <a class=value id=\'v_'+value_name_sa+'\'></a> '+unite+'";';
-                   code +=  '~'+value_name_sa+'=String('+value+');\n';
+                   code +=  '~'+value_name_sa+'=String('+value+');';
                    break;
       
       }  

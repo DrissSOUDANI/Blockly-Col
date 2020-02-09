@@ -38,9 +38,9 @@ Blockly.Arduino.variables_declare_ds = function() {
   
   var varType = Blockly.Arduino.getArduinoType_(Blockly.Types[this.getFieldValue('TYPE')]);
 
-
+  //alert(varName);
   Blockly.Arduino.addVariable(varName, varType+" "+varName+";", true)
-  //Blockly.Arduino.definitions_['var_'+varName] = varType+" "+varName+";\n"
+  //Blockly.Arduino.variables_['var_'+varName] = varType+" "+varName+";\n"
 
   return '';
 };

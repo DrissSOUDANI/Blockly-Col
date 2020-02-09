@@ -132,14 +132,16 @@ Blockly.Arduino.driss_temperature_and_humidity_sensor = function() {
    switch(dropdown_grandeur) {
    case  "TEMPERATURE" : Blockly.Arduino.codeFunctions_['define_get_temperature'] = '\n/*lecture de la température */ \n' + 
                           'float get_temperature(DHT dht) {\n'+
-                          'float t = dht.readTemperature();\n'+       
-                          'return t;\n'+
+                          '  float t = dht.readTemperature();\n'+ 
+                          '  //Serial.println(t);\n'+       
+                          '  return t;\n'+
                           '}\n';
                           break;
    case  "HUMIDITE" : Blockly.Arduino.codeFunctions_['define_get_humidity'] = '\n/*lecture de l"humidité*/ \n' + 
                           'float get_humidity(DHT dht) {\n'+
-                          'float h = dht.readHumidity();\n'+       
-                          'return h;\n'+
+                          '  float h = dht.readHumidity();\n'+   
+                          '  //Serial.println(h);\n'+      
+                          '  return h;\n'+
                           '}\n';
                           break;
   }

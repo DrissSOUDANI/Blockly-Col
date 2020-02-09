@@ -9,8 +9,75 @@ goog.require('Blockly.Types');
 //-Capteurs ----------------------------------------------------------------------------------------------------------------------------------------
 
 
+//driss_D1R32_executer_taches_paralleles
+Blockly.Blocks.driss_D1R32_executer_taches_paralleles = {
+  category: 'diss_D1R32',
+  helpUrl: '',
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Exécuter ces tâches en même temps");
+    this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_CENTRE)
+        .appendField(new Blockly.FieldImage("blocks/drissD1R32/processeur.png", Blockly.Arduino.imageSize*2,  Blockly.Arduino.imageSize));
+    this.appendStatementInput("TASK_1")
+        .setCheck(null);
+    this.appendStatementInput("TASK_2")
+        .setCheck(null);
+    this.setColour(Blockly.Blocks.drissD1R32.HUE);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
 
 
+//driss_D1R32_definir_tache
+Blockly.Blocks.driss_D1R32_definir_tache = {
+  category: 'diss_D1R32',
+  helpUrl: '',
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Déclarer une tâche : ")
+        .appendField(new Blockly.FieldTextInput("nom de la tâche"), "TASK_NAME");
+    this.appendValueInput("NUM_TASK")
+        .setCheck("Number")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("Tache n° ");
+    this.appendValueInput("TAILLE_PILE")
+        .setCheck("Number")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("Taille de la pile ");
+    this.appendValueInput("COEUR")
+        .setCheck("Number")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("Cœur à utiliser ");
+    this.appendValueInput("PRIORITE")
+        .setCheck("Number")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("   Priorité");
+    this.setPreviousStatement(true, null);
+    this.setColour(Blockly.Blocks.drissD1R32.HUE);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+
+//driss_D1R32_définir_les_actions_de_la_tache
+Blockly.Blocks.driss_D1R32_définir_les_actions_de_la_tache = {
+  category: 'diss_D1R32',
+  helpUrl: '',
+   init: function() {
+    this.appendDummyInput()
+        .appendField("Définir les actions de la tâche n°")
+        .appendField(new Blockly.FieldNumber(0, 1, 3), "NUN_TASK");
+    this.appendStatementInput("TASK_ACTIONS")
+        .setCheck(null);
+    this.setInputsInline(false);
+    this.setColour(Blockly.Blocks.drissD1R32.HUE);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
 
 //-ESP ----------------------------------------------------------------------------------------------------------------------------------------
 
@@ -32,8 +99,10 @@ Blockly.Blocks.driss_D1R32_initialisation = {
   }
 };
 
+
+/*
 //driss_D1R32_config
-Blockly.Blocks.driss_D1R32_config = {
+Blockly.Blocks.driss_D1R32_config2 = {
   category: 'diss_D1R32',
   helpUrl: '',
   init: function() {
@@ -70,16 +139,22 @@ Blockly.Blocks.driss_D1R32_config = {
  this.setHelpUrl("");
   }
 };
+*/
 
-Blockly.Blocks.driss_D1R32_config2 = {
+
+//-----------------------------------------------------------------
+//driss_D1R32_config
+Blockly.Blocks.driss_D1R32_config = {
   category: 'diss_D1R32',
   helpUrl: '',
   init: function() {
     this.appendDummyInput()
-        .appendField("Configurer la carte D1R32 en")
-        .appendField(new Blockly.FieldDropdown([["Station","STATION"], ["Point  d'accès","ACCESSPOINT"]]), "TYPE");
+        .appendField("Configurer la carte D1R32 en ")
+        .appendField(new Blockly.FieldDropdown([["Station","STATION"], ["Point  d'accès","ACCESSPOINT"]]), "TYPE")
+        .appendField("Wifi");
     this.appendDummyInput()
-        .appendField(new Blockly.FieldImage("blocks/drissD1R32/D1R32.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize));
+        .appendField(new Blockly.FieldImage("blocks/drissD1R32/D1R32.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize))
+        .appendField("et définir le SSID et la clé d'authentification");
     this.appendValueInput("SSID")
         .setCheck("String")
         .setAlign(Blockly.ALIGN_RIGHT)
@@ -91,7 +166,7 @@ Blockly.Blocks.driss_D1R32_config2 = {
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(16);
+    this.setColour(36);
  this.setTooltip("");
  this.setHelpUrl("");
   }
@@ -99,9 +174,22 @@ Blockly.Blocks.driss_D1R32_config2 = {
 
 
 
-
-
-
+//---------------------------------------
+//driss_D1R32_transmettre_au_serveur_Web
+Blockly.Blocks.driss_D1R32_transmettre_au_serveur_Web = {
+  category: 'diss_D1R32',
+  helpUrl: '',
+  init: function() {
+    this.appendDummyInput("SENDTOWEB")
+        .appendField("Transmettre les données au serveur Web");
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(11);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
 
 
 

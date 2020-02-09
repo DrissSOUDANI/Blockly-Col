@@ -16,9 +16,11 @@ Blockly.Blocks.driss_Virtuino_bloc_principal = {
     this.appendDummyInput()
         .appendField("Virtuino : Initialiser le module bluetooth ")
         .appendField("RX")
-        .appendField(new Blockly.FieldTextInput("default"), "RX")
+        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "RX")
+        //.appendField(new Blockly.FieldTextInput("default"), "RX")
         .appendField("TX")
-        .appendField(new Blockly.FieldTextInput("default"), "TX");
+        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "TX")
+        //.appendField(new Blockly.FieldTextInput("default"), "TX");
     this.appendDummyInput()
         .appendField(" ")
         .appendField(new Blockly.FieldCheckbox("TRUE"), "DEBUG")
@@ -39,12 +41,13 @@ Blockly.Blocks.driss_Virtuino_bloc_principal = {
     this.setColour(35);
  this.setTooltip("");
  this.setHelpUrl("");
-  },
+  }/*,
         onchange: function(ev) {
          this.getField("VITESSE").setValue("9600");
          this.getField("RX").setValue("8");
          this.getField("TX").setValue("9");
          }
+         */
 };
 
 /*
@@ -67,7 +70,7 @@ Blockly.Blocks.driss_Virtuino_read_capteur = {
 
 //driss_Virtuino_led
 Blockly.Blocks.driss_Virtuino_led = {
-  category: 'Virtuino',
+  category: 'Virtuino', 
   helpUrl: '',
   init: function() {
     this.appendDummyInput()
@@ -102,6 +105,43 @@ Blockly.Blocks.driss_Virtuino_led = {
 };
 
 
+//driss_Virtuino_actuator
+Blockly.Blocks.driss_Virtuino_actuator = {
+  category: 'Virtuino', 
+  helpUrl: '',
+  init: function() {
+    this.appendDummyInput()
+        .appendField(" ")
+        .appendField(new Blockly.FieldDropdown([    ["L'actionneur","ANY_ACTUATOR"], 
+                                                    ["Le mini ventilateur","MINIVENTILATEUR"]]), 
+                                                "ACTUATOR")
+        .appendTitle(new Blockly.FieldImage("blocks/drissVirtuino/output.png", Blockly.Arduino.imageSize*2,  Blockly.Arduino.imageSize), "IMA")
+        .appendField("sur la broche")
+        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN");
+    //this.appendDummyInput()
+       // .setAlign(Blockly.ALIGN_CENTRE)
+        //.appendTitle(new Blockly.FieldImage("blocks/drissVirtuino/Grove_LED_white.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize), "IMA");
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(Blockly.Blocks.drissVirtuino.HUE);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  },
+    onchange: function(ev) {
+      var actuator = this.getFieldValue('ACTUATOR');
+      var image = "";
+      switch(actuator) {
+        case "ANY_ACTUATOR"  : image = "blocks/drissVirtuino/output.png"; break;
+        case "MINIVENTILATEUR"    : image = "blocks/drissVirtuino/Grove_mini_ventilateur.png"; break;
+        
+      }
+      
+      this.getField("IMA").setValue(image);
+    }
+};
+
+
 //driss_Virtuino_input
 Blockly.Blocks.driss_Virtuino_input = {
   category: 'Virtuino',
@@ -120,7 +160,7 @@ Blockly.Blocks.driss_Virtuino_input = {
                                                   ["Le recepteur IR","IRRECEIVER"],
                                                   ["Le contact tactile","TOUCH"]
                                                 ]), "SENSOR_1")
-        .appendField(new Blockly.FieldImage("blocks/drissVirtuino/input.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize), "IMA")
+        .appendField(new Blockly.FieldImage("blocks/drissVirtuino/input.png", Blockly.Arduino.imageSize*2,  Blockly.Arduino.imageSize), "IMA")
         .appendField("sur la broche")
         .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN");
     //this.appendDummyInput()

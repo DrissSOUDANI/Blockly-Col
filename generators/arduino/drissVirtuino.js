@@ -110,3 +110,24 @@ Blockly.Arduino.driss_Virtuino_input = function() {
 };
 
 //-----------------------------------------------------
+
+
+//driss_Virtuino_led
+Blockly.Arduino.driss_Virtuino_led = function() {
+  var color = this.getFieldValue('COLOR');
+  var pin = this.getFieldValue('PIN');
+  Blockly.Arduino.setups_['setup_white_led'+pin] = 'pinMode('+pin+', OUTPUT);';
+  var code = '';
+  return code;
+  //return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+//driss_Virtuino_actuator
+Blockly.Arduino.driss_Virtuino_actuator = function() {
+  var actuator = this.getFieldValue('ACTUATOR');
+  var pin = this.getFieldValue('PIN');
+  Blockly.Arduino.setups_['setup_actuator'+pin] = 'pinMode('+pin+', OUTPUT);';
+  var code = '';
+  return code;
+  //return [code, Blockly.Arduino.ORDER_ATOMIC];
+};

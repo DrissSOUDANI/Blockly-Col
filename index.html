@@ -2120,124 +2120,68 @@
     
     	<category name="CAT_DRISS_D1R32_GROVE_ESP" colour="#FA8258">
 	    	<block type="driss_D1R32_initialisation"></block>
-	    	<block type="driss_D1R32_config2">
-				<value name="SSID">
-					<shadow type="text">
-						<field name="TEXT">Driss Tel</field>
-					</shadow>
-				</value>
-				<value name="KEY">
-					<shadow type="text">
-						<field name="TEXT">driss57000</field>
-					</shadow>
-				</value>
-				
+	    	<block type="driss_D1R32_config">
+				<value name="SSID">	<shadow type="text"><field name="TEXT">Driss Tel</field></shadow></value>
+				<value name="KEY">	<shadow type="text"><field name="TEXT">driss57000</field></shadow></value>		
 			</block>
-			<block type="driss_D1R32_config">
-				<value name="SSID">
-					<shadow type="text">
-						<field name="TEXT">TechnoWifi</field>
-					</shadow>
-				</value>
-				<value name="KEY">
-					<shadow type="text">
-						<field name="TEXT">123456789</field>
-					</shadow>
-				</value>
-				<value name="IP">
-					<shadow type="text">
-						<field name="TEXT">172.17.32.10</field>
-					</shadow>
-				</value>
-				<value name="MASQUE">
-					<shadow type="text">
-						<field name="TEXT">255.255.255.0</field>
-					</shadow>
-				</value>
-				<value name="GATEWAY">
-					<shadow type="text">
-						<field name="TEXT">172.17.32.254</field>
-					</shadow>
-				</value>
+			<block type="driss_D1R32_transmettre_au_serveur_Web"></block>
+			<!--
+			<block type="driss_D1R32_config2">
+				<value name="SSID"><shadow type="text"><field name="TEXT">TechnoWifi</field></shadow></value>
+				<value name="KEY"><shadow type="text"><field name="TEXT">123456789</field></shadow></value>
+				<value name="IP"><shadow type="text"><field name="TEXT">172.17.32.10</field></shadow></value>
+				<value name="MASQUE"><shadow type="text"><field name="TEXT">255.255.255.0</field></shadow></value>
+				<value name="GATEWAY"><shadow type="text"><field name="TEXT">172.17.32.254</field></shadow></value>	
 			</block>
+		-->
 		</category>
+
+		
 		
 		<category name="CAT_DRISS_D1R32_GROVE_ESP32" colour="#FA8258">
+			<block type="driss_D1R32_executer_taches_paralleles"></block>
+			<block type="driss_D1R32_definir_tache">
+				<value name="NUM_TASK">	<shadow type="math_number">	<field name="NUM">1</field>	</shadow></value>
+				<value name="TAILLE_PILE">	<shadow type="math_number">	<field name="NUM">10000</field>	</shadow></value>
+				<value name="COEUR">	<shadow type="math_number">	<field name="NUM">1</field>	</shadow></value>
+				<value name="PRIORITE">	<shadow type="math_number">	<field name="NUM">1</field>	</shadow></value>
+			</block>
+			<block type="driss_D1R32_définir_les_actions_de_la_tache"></block>
 		</category>
 		
 		<category name="CAT_DRISS_D1R32_GROVE_WEBPAGE" colour="#FA8258">
-
-		  <block type="driss_Creer_page_web"></block>
-		  <block type="driss_D1R32_cadre"></block>
-		  <block type="driss_page_web_title"></block>
-		  <block type="driss_page_web_definir_style">
-		  	<value name="CLASS_NAME">
-			  <shadow type="text">
-				<field name="TEXT">nom du style</field>
-			  </shadow>
-			</value>
-		  </block>
-		  <block type="driss_D1R32_page_web_write_texte">
-		  	<value name="WEB_PAGE_TEXT">
-			  <shadow type="text">
-				<field name="TEXT">texte à écrire</field>
-			  </shadow>
-			</value>
-			<value name="WEB_PAGE_STYLE">
-			  <shadow type="text">
-				<field name="TEXT">nom du style</field>
-			  </shadow>
-			</value>
-		  </block>
+		  	<block type="driss_Creer_page_web"></block>
+		  	<block type="driss_D1R32_cadre"></block>
+		  	<block type="driss_page_web_title"></block>
+		  	<block type="driss_page_web_definir_style">
+		  		<value name="CLASS_NAME"> <shadow type="text"><field name="TEXT">nom du style</field></shadow></value>
+		  	</block>
+		 	<block type="driss_D1R32_page_web_write_texte">
+		 	 	<value name="WEB_PAGE_TEXT"><shadow type="text"><field name="TEXT">texte à écrire</field></shadow></value>
+		 	 	<value name="WEB_PAGE_STYLE"><shadow type="text"><field name="TEXT">nom du style</field></shadow></value>
+		  	</block>
 		  
-		  <block type="driss_D1R32_web_write_data">
-		  	<value name="WEB_PAGE_DATA_LABEL">
-			  <shadow type="text">
-				<field name="TEXT">nom de la donnée</field>
-			  </shadow>
-			</value>
-		  	<value name="WEB_PAGE_DATA_UNITE">
-			  <shadow type="text">
-				<field name="TEXT"></field>
-			  </shadow>
-			</value>
-		  </block>
+			<block type="driss_D1R32_web_write_data">
+				<value name="WEB_PAGE_DATA_LABEL"><shadow type="text"><field name="TEXT">nom de la donnée</field></shadow></value>
+				<value name="WEB_PAGE_DATA_UNITE"><shadow type="text"><field name="TEXT"></field></shadow></value>
+			</block>
 
-		  <block type="driss_D1R32_afficher_jauge_dans_page_web">
-		  	<value name="WEB_PAGE_JAUGE_LABEL">
-			  <shadow type="text">
-				<field name="TEXT">nom de la donnée</field>
-			  </shadow>
-			</value>
-		  	<value name="WEB_PAGE_JAUGE_MIN">
-			  <shadow type="math_number">
-				<field name="NUM">0</field>
-			  </shadow>
-			</value>
-		  	<value name="WEB_PAGE_JAUGE_MAX">
-			  <shadow type="math_number">
-				<field name="NUM">1023</field>
-			  </shadow>
-			</value>
-			<value name="WEB_PAGE_JAUGE_UNITE">
-			  <shadow type="text">
-				<field name="TEXT"></field>
-			  </shadow>
-			</value>
-		  </block>
+			<block type="driss_D1R32_afficher_jauge_dans_page_web">
+			  	<value name="WEB_PAGE_JAUGE_LABEL"><shadow type="text"><field name="TEXT">nom de la donnée</field></shadow></value>
+			  	<value name="WEB_PAGE_JAUGE_MIN"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
+			  	<value name="WEB_PAGE_JAUGE_MAX"><shadow type="math_number"><field name="NUM">1023</field></shadow></value>
+				<value name="WEB_PAGE_JAUGE_UNITE"><shadow type="text"><field name="TEXT"></field></shadow></value>
+		  	</block>
 
-		  <block type="driss_D1R32_balise_HR"></block>
-		  <block type="driss_D1R32_InsertHTMLCodeInBody"></block>
-
-		  <block type="driss_D1R32_dessiner_interrupteur"></block>
-
-		  
+			<block type="driss_D1R32_balise_HR"></block>
+			<block type="driss_D1R32_InsertHTMLCodeInBody"></block>
+			<block type="driss_D1R32_dessiner_interrupteur"></block>	  
 		</category>
 
-		
+		<!--
 		<category name="CAT_DRISS_D1R32_GROVE_OPENDATA" colour="#FA8258">
 		</category>
-		
+		-->
 		
     </category>
 
@@ -2245,6 +2189,7 @@
 		<block type="driss_Virtuino_bloc_principal"></block>
 		<!-- <block type="driss_Virtuino_read_capteur"></block> -->
 		<block type="driss_Virtuino_led"></block>
+		<block type="driss_Virtuino_actuator"></block>
 		<block type="driss_Virtuino_input"></block>
 		
 	</category>

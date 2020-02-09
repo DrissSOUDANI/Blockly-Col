@@ -190,6 +190,9 @@ Blockly.Blocks.variables_declare_ds = {
    * @this Blockly.Block
    */
   renameVar: function(oldName, newName) {
+    //ajouté par driss
+    newName = replaceSpec(newName);
+    //fin ajout driss
     if (Blockly.Names.equals(oldName, this.getFieldValue('VAR'))) {
       this.setFieldValue(newName, 'VAR');
     }

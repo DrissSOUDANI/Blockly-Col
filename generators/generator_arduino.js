@@ -120,6 +120,11 @@ Blockly.Arduino.init = function(workspace) {
   Blockly.Arduino.idstab_ = Object.create(null);
   Blockly.Arduino.idstab_['id']=0;
 
+  Blockly.Arduino.tasktab_ = Object.create(null);
+  //Blockly.Arduino.tasktab_[0]=0;
+
+  Blockly.Arduino.tasks_ = Object.create(null);
+
   //Blockly.Arduino.headtab_ = Object.create(null);
   //Blockly.Arduino.bodytab_ = Object.create(null);
   // fin ajout driss
@@ -239,7 +244,7 @@ Blockly.Arduino.finish = function(code) {
   var includes = [], definitions = [], variables = [], functions = [];
   
   //ajouté par driss
-  var xmltab =[], javatab =[], pagetab =[], styletab =[];
+  var xmltab = [], javatab = [], pagetab = [], styletab = [], tasktab = [], tasks = [];
   //fin ajourt driss
 
 
@@ -274,7 +279,8 @@ Blockly.Arduino.finish = function(code) {
         xmltab.push(Blockly.Arduino.xmltab_[name]); 
     }
   xmltab.push(Blockly.Arduino.xmltab_["fin"]);
-  if (xmltab.length) { xmltab.push('\n'); }
+  //if (xmltab.length) { xmltab.push('\n'); }
+  if (xmltab[0] != undefined) { xmltab.push('\n'); }
 
   
   javatab.push(Blockly.Arduino.javatab_["debut"]);
@@ -283,7 +289,15 @@ Blockly.Arduino.finish = function(code) {
       javatab.push(Blockly.Arduino.javatab_[name]); 
   }
   javatab.push(Blockly.Arduino.javatab_["fin"]);
-  if (javatab.length) { javatab.push('\n'); }
+  //if (javatab.length) { javatab.push('\n'); }
+  if (javatab[0] != undefined) { javatab.push('\n'); }
+
+  // le tableaux des taches à inserer dans le setup apres toutes les autres insertions du setup
+  tasks.push(Blockly.Arduino.tasks_["debut"]);
+  for (var name in Blockly.Arduino.tasks_) { 
+      tasks.push(Blockly.Arduino.tasks_[name]); 
+  }
+  if (tasks[0] != undefined) { tasks.push('\n'); }
 
   
   pagetab.push(Blockly.Arduino.pagetab_["part1"]);
@@ -301,8 +315,25 @@ Blockly.Arduino.finish = function(code) {
   }
   pagetab.push(Blockly.Arduino.pagetab_["part3"]);
   pagetab.push(Blockly.Arduino.pagetab_["part4"]);
-  if (pagetab.length) { pagetab.push('\n'); }
+  if (pagetab[0] != undefined) { pagetab.push('\n'); }
   
+
+  var j=1;
+  while(Blockly.Arduino.tasktab_[j]){
+    tasktab.push(Blockly.Arduino.tasktab_[j]["debut"]);
+    for (var name in Blockly.Arduino.tasktab_[j]){
+        if(name != "debut" && name != "fin")
+            tasktab.push(Blockly.Arduino.tasktab_[j][name]); //alert(j+'-'+Blockly.Arduino.tasktab_[j][name]+'-\n');
+        //k++;
+    }
+    tasktab.push(Blockly.Arduino.tasktab_[j]["fin"]);
+    //if (tasktab.length) { tasktab.push('\n'); }
+    j++;
+  }
+  //if (tasktab.length) { tasktab.push('\n'); }
+  if (tasktab[1] != undefined) { tasktab.push('\n'); }
+
+
   /*fin ajout de driss */
 
   for (var name in Blockly.Arduino.codeFunctions_) {
@@ -338,15 +369,38 @@ Blockly.Arduino.finish = function(code) {
   delete Blockly.Arduino.pins_;
   Blockly.Arduino.variableDB_.reset();
 
+  //ajouté par driss
+  delete Blockly.Arduino.tasktab_;
+  delete Blockly.Arduino.xmltab_;
+  delete Blockly.Arduino.javatab_;
+  delete Blockly.Arduino.pagetab_;
+  delete Blockly.Arduino.styletab_ ;
+  delete Blockly.Arduino.idstab_;
+  delete Blockly.Arduino.tasks_;
+  
+  //fin ajout driss
+
   /* modifié par Driss 
   var allDefs = includes.join('\n') + variables.join('\n') +
       definitions.join('\n') + functions.join('\n\n');
   */
-  var allDefs = includes.join('\n') + definitions.join('\n') + variables.join('\n') + functions.join('\n\n') + xmltab.join('\n') + javatab.join('\n') + pagetab.join('\n') ;
+  var separateur ='\n//---------------------------------------------------------------------------------------------------\n';
+  var allDefs = includes.join('\n') + 
+                definitions.join('\n') + 
+                variables.join('\n') +
+                separateur+ 
+                functions.join('\n')+
+                separateur+ 
+                tasktab.join('\n')+ 
+                separateur + 
+                xmltab.join('\n') + 
+                javatab.join('\n') + 
+                pagetab.join('\n')+
+                separateur;
 
   //modifié par driss
   //var setup = 'void setup() {' + setups.join('\n  ') + '\n}\n\n';
-  var setup = 'void setup() {\n' + setups.join('\n  ') + '\n}\n\n';
+  var setup = 'void setup() {\n' + setups.join('\n  ')+ tasks.join('\n\n  ') + '\n}\n\n';
     
   //fin de modif driss
 
@@ -388,7 +442,8 @@ Blockly.Arduino.addDeclaration = function(declarationTag, code) {
  * @return {!boolean} Indicates if the declaration overwrote a previous one.
  */
 Blockly.Arduino.addVariable = function(varName, code, overwrite) {
-  var overwritten = false;
+  
+  var overwritten = false;//alert(varName);
   if (overwrite || (Blockly.Arduino.variables_[varName] === undefined)) {
     Blockly.Arduino.variables_[varName] = code;
     overwritten = true;
