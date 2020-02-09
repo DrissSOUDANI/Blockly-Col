@@ -1853,14 +1853,33 @@
 				<block type="driss_grove_RF_433MHz_send_number"></block>
 				<block type="driss_grove_RF_433MHz_receive_text"></block>
 				<block type="driss_grove_RF_433MHz_receive_number"></block>
-
-				
-
 			</category>
+			<!--<category name="CAT_DRISS_GROVE_NFC" colour="#8181F7">-->		
+		</category>
 
-			<!--<category name="CAT_DRISS_GROVE_NFC" colour="#8181F7">-->
-				
-			</category>
+
+		<category name="CAT_DRISS_GROVE_RTC" colour="#8181F7">
+			<block type="driss_grove_RTC_initialiser_et_memoriser_date">
+				<value name="DAY"><shadow type="math_number"><field name="NUM">20</field></shadow></value>
+				<value name="MONT"><shadow type="math_number"><field name="NUM">02</field></shadow></value>
+				<value name="YEAR"><shadow type="math_number"><field name="NUM">2020</field></shadow></value>
+				<value name="HOUR"><shadow type="math_number"><field name="NUM">19</field></shadow></value>
+				<value name="MINUTE"><shadow type="math_number"><field name="NUM">30</field></shadow></value>
+				<value name="SECONDE"><shadow type="math_number"><field name="NUM">00</field></shadow></value>
+			</block>	
+			<block type="driss_grove_RTC_Definir_une_date">
+				<value name="DAY"><shadow type="math_number"><field name="NUM">20</field></shadow></value>
+				<value name="MONT"><shadow type="math_number"><field name="NUM">02</field></shadow></value>
+				<value name="YEAR"><shadow type="math_number"><field name="NUM">2020</field></shadow></value>
+			</block>
+			<block type="driss_grove_RTC_Definir_une_heure">
+				<value name="HOUR"><shadow type="math_number"><field name="NUM">19</field></shadow></value>
+				<value name="MINUTE"><shadow type="math_number"><field name="NUM">30</field></shadow></value>
+				<value name="SECONDE"><shadow type="math_number"><field name="NUM">00</field></shadow></value>
+			</block>
+			<block type="driss_grove_RTC_Lire_donnee"></block>
+		</category>
+
         </category>
 
         <category name="CAT_DRISS_GROVE_BIOMETRIE" colour="#8181F7">

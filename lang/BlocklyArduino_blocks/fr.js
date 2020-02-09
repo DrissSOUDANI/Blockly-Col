@@ -1911,6 +1911,7 @@ Blockly.Msg.CAT_DRISS_GROVE_COMMUNICATION =" Communication";
 Blockly.Msg.CAT_DRISS_GROVE_BLUETOOTH =" - Bluetooth";
 Blockly.Msg.CAT_DRISS_GROVE_RFID =" - RFID";
 Blockly.Msg.CAT_DRISS_GROVE_NFC =" - NFC";
+Blockly.Msg.CAT_DRISS_GROVE_RTC="- Horloge temps réel (RTC)";
 Blockly.Msg.CAT_DRISS_GROVE_BIOMETRIE="- Biométrie";
 
 Blockly.Msg.DRISS_GROVE_ENTREE = "Entrée";

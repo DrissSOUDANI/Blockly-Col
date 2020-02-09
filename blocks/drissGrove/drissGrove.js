@@ -1954,3 +1954,113 @@ Blockly.Blocks['driss_grove_anemometre'] = {
 };
 
 
+
+
+//Grove driss_grove_RTC_initialiser_et_memoriser_date
+Blockly.Blocks['driss_grove_RTC_initialiser_et_memoriser_date'] = {
+ init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_RTC.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize, "*"))
+        .appendField("Initialiser le module RTC avec la date et l'heure");
+    this.appendValueInput("DAY")
+        .setCheck("Number")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("Jour");
+    this.appendValueInput("MONT")
+        .setCheck("Number")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("Mois");
+    this.appendValueInput("YEAR")
+        .setCheck("Number")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("Année");
+    this.appendValueInput("HOUR")
+        .setCheck("Number")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("Heure");
+    this.appendValueInput("MINUTE")
+        .setCheck("Number")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("minute");
+    this.appendValueInput("SECONDE")
+        .setCheck("Number")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("Seconde");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(36);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+//Grove driss_grove_RTC_Definir_une_date
+Blockly.Blocks['driss_grove_RTC_Definir_une_date'] = {
+ init: function() {
+    this.appendValueInput("DAY")
+        .setCheck("Number")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("Définir la date : ")
+        .appendField("Jour");
+    this.appendValueInput("MONT")
+        .setCheck("Number")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("Mois");
+    this.appendValueInput("YEAR")
+        .setCheck("Number")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("Année");
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(Blockly.Blocks.drissGrove.HUE);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+
+//Grove driss_grove_RTC_Definir_une_heure
+Blockly.Blocks['driss_grove_RTC_Definir_une_heure'] = {
+ init: function() {
+    this.appendValueInput("HOUR")
+        .setCheck("Number")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("Définir l'heure : ")
+        .appendField("Heure");
+    this.appendValueInput("MINUTE")
+        .setCheck("Number")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("minute");
+    this.appendValueInput("SECONDE")
+        .setCheck("Number")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("Seconde");
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(Blockly.Blocks.drissGrove.HUE);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+//Grove driss_grove_RTC_Lire_donnee
+Blockly.Blocks['driss_grove_RTC_Lire_donnee'] = {
+ init: function() {
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown([["Jour","DAY"], ["Mois","MONT"], ["Année","YEAR"], ["Heure","HOUR"], ["Minute","MINUTE"], ["Seconde","SECONDE"]]), "ELEMENT")
+        .appendField(" de l'horloge temps réel (RTC)");
+    this.setOutput(true, null);
+    this.setColour(Blockly.Blocks.drissGrove.HUE);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+
+
+
+
+
+

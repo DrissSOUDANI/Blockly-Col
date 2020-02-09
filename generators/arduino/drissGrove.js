@@ -1874,3 +1874,65 @@ Blockly.Arduino.driss_grove_anemometre = function() {
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
+
+// Grove : driss_grove_RTC_initialiser_et_memoriser_date
+Blockly.Arduino.driss_grove_RTC_initialiser_et_memoriser_date = function() {
+  var day = Blockly.Arduino.valueToCode(this, 'DAY', Blockly.Arduino.ORDER_ATOMIC);
+  var mont = Blockly.Arduino.valueToCode(this, 'MONT', Blockly.Arduino.ORDER_ATOMIC);
+  var year = Blockly.Arduino.valueToCode(this, 'YEAR', Blockly.Arduino.ORDER_ATOMIC);
+  var hour = Blockly.Arduino.valueToCode(this, 'HOUR', Blockly.Arduino.ORDER_ATOMIC);
+  var minute = Blockly.Arduino.valueToCode(this, 'MINUTE', Blockly.Arduino.ORDER_ATOMIC);
+  var seconde = Blockly.Arduino.valueToCode(this, 'SECONDE', Blockly.Arduino.ORDER_ATOMIC);
+
+  Blockly.Arduino.includes_['define_Wire'] = "#include <Wire.h>"; 
+  Blockly.Arduino.includes_['define_DS1307'] = "#include <DS1307.h>"; 
+  Blockly.Arduino.variables_['var_DS1307_clock'] = 'DS1307 clock;';
+
+   Blockly.Arduino.setups_['setup_RTC'] = 'clock.brancher();\n'+
+                                          '  clock.ecrireHeure('+hour+','+minute+','+seconde+');\n'+
+                                          '  clock.ecrireDate('+day+','+mont+','+year+');\n';
+
+  var code = "";
+  return code;
+};
+
+
+// Grove : driss_grove_RTC_Definir_une_date
+Blockly.Arduino.driss_grove_RTC_Definir_une_date = function() {
+  var day = Blockly.Arduino.valueToCode(this, 'DAY', Blockly.Arduino.ORDER_ATOMIC);
+  var mont = Blockly.Arduino.valueToCode(this, 'MONT', Blockly.Arduino.ORDER_ATOMIC);
+  var year = Blockly.Arduino.valueToCode(this, 'YEAR', Blockly.Arduino.ORDER_ATOMIC);
+
+  var code = 'clock.ecrireDate('+day+','+mont+','+year+');\n';
+   return code;
+};
+
+// Grove : driss_grove_RTC_Definir_une_heure
+Blockly.Arduino.driss_grove_RTC_Definir_une_heure = function() {
+  var hour = Blockly.Arduino.valueToCode(this, 'HOUR', Blockly.Arduino.ORDER_ATOMIC);
+  var minute = Blockly.Arduino.valueToCode(this, 'MINUTE', Blockly.Arduino.ORDER_ATOMIC);
+  var seconde = Blockly.Arduino.valueToCode(this, 'SECONDE', Blockly.Arduino.ORDER_ATOMIC);
+ 
+
+  var code = 'clock.ecrireHeure('+hour+','+minute+','+seconde+');\n';
+  return code;
+};
+
+
+// Grove : driss_grove_RTC_Lire_donnee
+Blockly.Arduino.driss_grove_RTC_Lire_donnee = function() {
+  var element = this.getFieldValue('ELEMENT');
+ 
+  var code ='';
+  switch (element){
+    case 'DAY' : code = 'clock.lireJour()'; break;
+    case 'MONT' : code = 'clock.lireMois()'; break;
+    case 'YEAR' : code = 'clock.lireAnnee()'; break;
+    case 'HOUR' : code = 'clock.lireHeures()'; break;
+    case 'MINUTE' : code = 'clock.lireMinutes()'; break;
+    case 'SECONDE' : code = 'clock.lireSecondes()'; break;
+  }
+
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
