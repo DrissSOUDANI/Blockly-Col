@@ -257,7 +257,7 @@ Blockly.Blocks.driss_ESP_SPIFFS_creer_ajouter_au_fichier = {
     this.appendValueInput("DATA")
         .setCheck(null)
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("(le fichier sera crée s'il n'existe pas)      ")
+        .appendField("(le fichier sera créé s'il n'existe pas)      ")
         .appendField("Donnée à ajouter");
     this.appendDummyInput()
         .appendField(" ")
