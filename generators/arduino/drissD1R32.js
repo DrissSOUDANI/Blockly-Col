@@ -150,7 +150,7 @@ Blockly.Arduino.driss_D1R32_définir_les_actions_de_la_tache = function() {
 
 };
 
-
+/*
 Blockly.Arduino.driss_D1R32_initialisation = function() { 
   Blockly.Arduino.includes_['define_Duinoedu_Esp8266'] = "#include <Duinoedu_Esp8266.h>";
 
@@ -195,7 +195,7 @@ Blockly.Arduino.driss_D1R32_initialisation = function() {
    var code =  '';
    return code;
   }
-
+*/
 
   //---------------------------------------------------------------------
 

@@ -81,8 +81,7 @@ Blockly.Blocks.driss_D1R32_définir_les_actions_de_la_tache = {
 
 //-ESP ----------------------------------------------------------------------------------------------------------------------------------------
 
-
-
+/*
 //driss_D1R32_initialisation
 Blockly.Blocks.driss_D1R32_initialisation = {
   category: 'diss_D1R32',
@@ -98,7 +97,7 @@ Blockly.Blocks.driss_D1R32_initialisation = {
  this.setHelpUrl("");
   }
 };
-
+*/
 
 /*
 //driss_D1R32_config
