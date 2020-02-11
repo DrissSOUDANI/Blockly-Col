@@ -58,3 +58,23 @@ Blockly.Blocks.controls_base_delay = {
     this.setTooltip(Blockly.Msg.ARDUINO_BASE_DELAY_TOOLTIP);
   }
 };
+
+//-----------------------------------------------------------------------------------
+//driss_controls_do_only_every_x_time
+
+Blockly.Blocks.driss_controls_do_only_every_x_time = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Faire ces actions toutes les ")
+        .appendField(new Blockly.FieldNumber(5, 0, 3600), "TIME")
+        .appendField("seconde(s)");
+    this.appendStatementInput("ONLY_EVERY")
+        .setCheck(null);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(Blockly.Blocks.loops.HUE);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+

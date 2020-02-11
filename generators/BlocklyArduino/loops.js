@@ -44,6 +44,21 @@ Blockly.Arduino.controls_repeat_indefinitely = function() {
   return code;
 };
 
+//driss_controls_do_only_every_x_time
+Blockly.Arduino.driss_controls_do_only_every_x_time = function() {
+  var time = this.getFieldValue('TIME');
+  var statements_only_every = Blockly.Arduino.statementToCode(this, 'ONLY_EVERY');
+
+
+  Blockly.Arduino.includes_['define_Duinoedu_Utility'] = "#include <Duinoedu_Utility.h>";
+  
+
+  var code =  'ONLY_EVERY('+time*1000+',Repeat1)\n';
+      code += '  '+statements_only_every + '\n'; 
+      code += 'END_ONLY_EVERY\n'; 
+  return code;
+};
+
 /*Fins ajouts de Driss */
 
 

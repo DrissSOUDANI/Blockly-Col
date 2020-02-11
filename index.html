@@ -1,6 +1,7 @@
 <html>
 <head>
-<link rel="icon" type="image/png" href="favicon.png" />
+<!--<link rel="icon" type="image/png" href="favicon.png" />-->
+<link rel="shortcut icon" href="/logo_64x64.png" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Blockly@Col by Driss SOUDANI</title>
@@ -124,17 +125,19 @@
 		
 									<li>
 										<a href="https://github.com/DrissSOUDANI/Blockly-Col" target="_blanck" title="télécharger Blockly@Col sur GitHub">
-										<span class="glyphicon glyphicon glyphicon-paperclip"></span> Blockly@Col v2 (09/02/2020)</a>
+										<span class="glyphicon glyphicon glyphicon-paperclip"></span> Blockly@Col v2 (10/02/2020)</a>
 									</li>
 									<li role="separator" class="divider"></li>
 									<li>
-										<a href="./librairies-Arduino/libraries-09-02-2020.zip" target="_blanck" title="télécharger Les librairies Arduino à utiliser avec Blockly@Col">
-										<span class="glyphicon glyphicon glyphicon-link"></span>Librairies pour Arduino.1.8.5 (09/02/2020)</a>
+										<a href="./librairies-Arduino/libraries-10-02-2020.zip" target="_blanck" title="télécharger Les librairies Arduino à utiliser avec Blockly@Col">
+										<span class="glyphicon glyphicon glyphicon-link"></span>Librairies pour Arduino.1.8.5 (10/02/2020)</a>
 									</li>
+									
 									<li>
 										<a href="./librairies-Arduino/Arduino.1.8.5_for_Blockly@Col.zip" target="_blanck" title="télécharger Arduino 1.8.5 avec les librairies à utiliser avec Blockly@Col - inclut les cartes LinkItOne et D1R32 ">
-										<span class="glyphicon glyphicon glyphicon-link"></span>Arduino.1.8.5 (standard+LinkItOne+D1R32) (09/02/2020)</a>
+										<span class="glyphicon glyphicon glyphicon-link"></span>Arduino.1.8.5 (standard+LinkItOne+D1R32) (10/02/2020)</a>
 									</li>
+
 								</ul>
 							</li>
 							<!--
@@ -473,6 +476,11 @@
 				</shadow>
 			</value>
 		</block>
+       <!--Driss -->
+		<block type="driss_controls_do_only_every_x_time">
+			<value name="TIME"><shadow type="math_number"><field name="NUM">5</field></shadow></value>
+		</block>
+		<!--fin Driss -->
 		<block type="controls_whileUntil"></block>
 		<block type="controls_for">
 			<field name="VAR">i</field>
