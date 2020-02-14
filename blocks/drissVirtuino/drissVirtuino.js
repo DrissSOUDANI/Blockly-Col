@@ -16,10 +16,10 @@ Blockly.Blocks.driss_Virtuino_bloc_principal = {
     this.appendDummyInput()
         .appendField("Virtuino : Initialiser le module bluetooth ")
         .appendField("RX")
-        .appendField(new Blockly.FieldDropdown([["D8", "D8"], ["D0", "D0"], ["D1", "D1"], ["D2", "D2"], ["D3", "D3"], ["D4", "D4"], ["D5", "D5"], ["D6", "D6"], ["D7", "D7"], ["D9", "D9"], ["D10", "D10"], ["D11", "D11"], ["D12", "D12"], ["D13", "D13"]]), "RX")
+        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "RX")
         //.appendField(new Blockly.FieldTextInput("default"), "RX")
         .appendField("TX")
-        .appendField(new Blockly.FieldDropdown([["D9", "D9"], ["D0", "D0"], ["D1", "D1"], ["D2", "D2"], ["D3", "D3"], ["D4", "D4"], ["D5", "D5"], ["D6", "D6"], ["D7", "D7"], ["D8", "D8"], ["D10", "D10"], ["D11", "D11"], ["D12", "D12"], ["D13", "D13"]]), "TX")
+        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "TX")
         //.appendField(new Blockly.FieldTextInput("default"), "TX");
     this.appendDummyInput()
         .appendField(" ")
