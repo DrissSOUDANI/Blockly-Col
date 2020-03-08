@@ -156,4 +156,11 @@ function() {
     console.log("Done loading Driss Virtuino Generators");
 });
 
+head.load(
+"generators/arduino/drissAdafruit.js",
+function() {
+    // Call a function when done
+    console.log("Done loading Driss Adafruit Generators");
+});
+
 /* Fin des ajouts de Driss */

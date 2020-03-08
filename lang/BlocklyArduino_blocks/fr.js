@@ -1983,5 +1983,7 @@ Blockly.Msg.CAT_DRISS_D1R32_GROVE_OPENDATA = "- Open Data";
 
 Blockly.Msg.CAT_DRISS_VIRTUINO = "Virtuino";
 
+Blockly.Msg.CAT_DRISS_ADAFRUIT = "Adafruit";
+
 
 // Fin des ajouts de Driss

@@ -80,6 +80,7 @@ Blockly.Blocks.drissConsole.HUE = "#FE2E64";
 Blockly.Blocks.drissVorpal.HUE = "#660033";
 Blockly.Blocks.drissVirtuino.HUE = "#996699";//"#d469de";
 Blockly.Blocks.drissD1R32.HUE = "#993333";
+Blockly.Blocks.drissAdafruit.HUE = "#CC0066";
 
 
 // Fin Driss +
