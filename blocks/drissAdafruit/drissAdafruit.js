@@ -2,7 +2,7 @@
 
 // define blocks
 'use strict';
-goog.provide('Blockly.Blocks.drissAdafruit');
+goog.provide('Blockly.Blocks.drissAdafruit'); 
 
 goog.require('Blockly.Blocks');
 goog.require('Blockly.Types');

@@ -20,7 +20,8 @@ Blockly.Arduino.driss_adafruit_motor_control = function() {
    
   }
 
-  return [code, Blockly.Arduino.ORDER_ATOMIC];
+  //return [code, Blockly.Arduino.ORDER_ATOMIC];
+  return code;
 };
 
 
