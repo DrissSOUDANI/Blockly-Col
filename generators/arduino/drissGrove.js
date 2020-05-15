@@ -748,17 +748,17 @@ Blockly.Arduino.driss_grove_servo_setPosition = function() {
   Blockly.Arduino.variables_['var_ServoTimer2_'+dropdown_pin] = "ServoTimer2 "+servo+";";
 
   Blockly.Arduino.codeFunctions_['define_writeServoTimer2'] = '//Envoi d"une largeur d"impulsion au servo\n'+
-  'void writeServoTimer2(int angle) {\n'+
+  'void writeServoTimer2(ServoTimer2 servo, int angle) {\n'+
   '  //pour utiliseer les valeurs de la librairie Servo : \n'+
   '  //remplacer : MIN_PULSE_WIDTH par 544 et MAX_PULSE_WIDTH par 2400\n'+
   '  int puls_width= map(angle, 0, 180, MAX_PULSE_WIDTH, MIN_PULSE_WIDTH); \n' +
-  '  '+servo+'.write(puls_width);\n' +
+  '  servo.write(puls_width);\n' +
   '}\n';
 
 
   Blockly.Arduino.setups_['setup_'+servo] = servo+'.attach('+dropdown_pin+');'; //code à insérer dans le setup Arduino
   //var code = servo+'.write('+value_angle+');\n'  //code à insérer dans la loop Arduino
-  var code = 'writeServoTimer2('+value_angle+');\n'  //code à insérer dans la loop Arduino
+  var code = 'writeServoTimer2('+servo+','+value_angle+');\n'  //code à insérer dans la loop Arduino
   return code;
 };
 
