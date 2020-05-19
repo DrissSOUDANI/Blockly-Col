@@ -199,7 +199,7 @@ Blockly.Arduino.driss_D1R32_initialisation = function() {
 
   //---------------------------------------------------------------------
 
-/*
+
 Blockly.Arduino.driss_D1R32_config2 = function() { 
   var dropdown_type = this.getTitleValue('TYPE');
   var value_ssid = Blockly.Arduino.valueToCode(this, 'SSID', Blockly.Arduino.ORDER_ATOMIC);
@@ -214,6 +214,12 @@ Blockly.Arduino.driss_D1R32_config2 = function() {
   value_ip = value_ip.substr(1, value_ip.length-2);
   value_masque = value_masque.substr(1, value_masque.length-2);
   value_gateway = value_gateway.substr(1, value_gateway.length-2);
+
+  for(var k=0;k<4;k++){
+   value_ip = value_ip.replace('.', ',');
+   value_masque = value_masque.replace('.', ',');
+   value_gateway = value_gateway.replace('.', ',');
+ }
 
   Blockly.Arduino.includes_['define_Duinoedu_Esp8266'] = "#include <Duinoedu_Esp8266.h>";
 
@@ -241,7 +247,7 @@ Blockly.Arduino.driss_D1R32_config2 = function() {
 
   return code;
 };
-*/
+
 
 
 

@@ -10,7 +10,7 @@ Blockly.Arduino.driss_adafruit_motor_control = function() {
  
 
 
-  Blockly.Arduino.variables_['define_motor'] = 'AF_DCMotor motor_dc_'+motor+'('+motor+'); \n ';
+  Blockly.Arduino.variables_['define_motor_dc_'+motor] = 'AF_DCMotor motor_dc_'+motor+'('+motor+'); ';
   
   var code ='motor_dc_'+motor+'.setSpeed('+vitesse+');\n';
   switch(sens){
@@ -33,7 +33,7 @@ Blockly.Arduino.driss_adafruit_motor_stop = function() {
  
 
 
-  Blockly.Arduino.variables_['define_motor'] = 'AF_DCMotor motor_dc_'+motor+'('+motor+'); \n ';
+  Blockly.Arduino.variables_['define_motor_dc_'+motor] = 'AF_DCMotor motor_dc_'+motor+'('+motor+'); \n ';
   
   var code ='motor_dc_'+motor+'.run(RELEASE);\n';
   

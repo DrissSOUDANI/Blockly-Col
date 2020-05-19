@@ -99,7 +99,7 @@ Blockly.Blocks.driss_D1R32_initialisation = {
 };
 */
 
-/*
+
 //driss_D1R32_config
 Blockly.Blocks.driss_D1R32_config2 = {
   category: 'diss_D1R32',
@@ -133,12 +133,12 @@ Blockly.Blocks.driss_D1R32_config2 = {
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(16);
+    this.setColour(36);
  this.setTooltip("");
  this.setHelpUrl("");
   }
 };
-*/
+
 
 
 //-----------------------------------------------------------------
