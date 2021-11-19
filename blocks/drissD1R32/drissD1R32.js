@@ -35,7 +35,7 @@ Blockly.Blocks.driss_D1R32_definir_tache = {
   category: 'diss_D1R32',
   helpUrl: '',
   init: function() {
-    this.appendDummyInput()
+    this.appendDummyInput() 
         .appendField("Déclarer une tâche : ")
         .appendField(new Blockly.FieldTextInput("nom de la tâche"), "TASK_NAME");
     this.appendValueInput("NUM_TASK")
@@ -202,6 +202,28 @@ Blockly.Blocks.driss_ESP_SPIFFS_Initialiser_memoire = {
         .appendField("SPIFFS");
     this.appendDummyInput()
         .appendField(" Initialiser la mémoire Spiffs");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(36);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+//---------------------------------------
+//driss_ESP_SPIFFS_Effacer_fichier
+Blockly.Blocks.driss_ESP_SPIFFS_Effacer_fichier = {
+  category: 'diss_D1R32',
+  helpUrl: '',
+  init: function() {
+    this.appendDummyInput()
+        .appendField("SPIFFS");
+    this.appendValueInput("FILENAME")
+        .setCheck(null)
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("  Effacerle fichier de la mémoire Spiffs         ")
+        .appendField("Nom du fichier");
+    
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(36);
@@ -583,4 +605,179 @@ Blockly.Blocks.driss_D1R32_dessiner_interrupteur = {
  this.setHelpUrl("");
   }
 };
- 
+
+
+
+
+
+//------------------------------------------------------------------------------------------------------------------------------
+//ESP Basic
+//------------------------------------------------------------------------------------------------------------------------------
+
+//driss_D1R32_config_basic
+Blockly.Blocks.driss_D1R32_config_basic = {
+  category: 'diss_D1R32',
+  helpUrl: '',
+  init: function() {
+    this.appendDummyInput()
+        .appendField("MODE BASIC - Point d'accès et IP")
+        
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage("blocks/drissD1R32/D1R32.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize));
+    this.appendValueInput("SSID")
+        .setCheck("String")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("Nom du réseau WiFi(SSID)");
+    this.appendValueInput("KEY")
+        .setCheck("String")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("Clé d'authentification (mot de passe)");
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(36);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+
+
+
+  //*******************************************************************************************************
+
+
+Blockly.Blocks.driss_page_web = {
+  category: 'diss_D1R32',
+  helpUrl: '',
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Dans une page Web");
+    this.appendStatementInput("BODY")
+        .setCheck(null);
+    this.setPreviousStatement(true, null);
+    this.setColour(20);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+//driss_body_text
+Blockly.Blocks.driss_body_text = {
+  category: 'diss_D1R32',
+  helpUrl: '',
+  init: function() {
+    this.appendValueInput("TEXT")
+        .setCheck("String")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("Ecrire dans la page Web le texte");
+    
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(330);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+//driss_web_switch
+Blockly.Blocks.driss_web_switch = {
+  category: 'diss_D1R32',
+  helpUrl: '',
+
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Etat de l'interrupteur ")
+        .appendField(new Blockly.FieldTextInput("Inter1"), "SWITCH_NAME");
+    this.appendDummyInput()
+    .appendField(new Blockly.FieldImage("blocks/drissD1R32/switch_web.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize))
+        .appendField("Dessiné dans la page Web");
+    this.setInputsInline(false);
+    this.setOutput(true, null);
+    this.setColour(330);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+//driss_web_potentiometre
+Blockly.Blocks.driss_web_potentiometre = {
+  category: 'diss_D1R32',
+  helpUrl: '',
+
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Valeur du potentiomètre")
+        .appendField(new Blockly.FieldTextInput("potar 1"), "ROTARY_NAME");
+    this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("Min")
+        .appendField(new Blockly.FieldNumber(0, -32768, 32768), "ROTARY_MIN");
+    this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("Max")
+        .appendField(new Blockly.FieldNumber(0, -32768, 32768), "ROTARY_MAX");
+    this.setOutput(true, null);
+    this.setColour(330);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+
+//driss_web_write_val
+Blockly.Blocks.driss_web_write_val = {
+  category: 'diss_D1R32',
+  helpUrl: '',
+
+  init: function() {
+    this.appendValueInput("VAL_LABEL")
+        .setCheck("String")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("Ecrire dans la page Web la donnée ")
+        .appendField("nom");
+    this.appendValueInput("VALUE")
+        .setCheck(null)
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("Valeur");
+    this.appendValueInput("VAL_UNITE")
+        .setCheck("String")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("Unité");
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(330);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+
+//driss_servo_standard
+Blockly.Blocks.driss_servo_standard = {
+  category: 'driss_grove : actionneurs',
+  helpUrl: '',
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Positionner le servomoteur");
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_servo.png", Blockly.Arduino.imageSize*1.1,  Blockly.Arduino.imageSize, "*"))
+        .appendField("relié à la sortie ")
+        .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN");
+    this.appendValueInput("ANGLE")
+        .setCheck("Number")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("sur l'angle ");
+    this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("(l'angle doit être compris entre 0° et 180°)");
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(Blockly.Blocks.drissGrove.HUE);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};

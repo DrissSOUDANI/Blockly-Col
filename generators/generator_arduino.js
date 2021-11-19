@@ -115,6 +115,7 @@ Blockly.Arduino.init = function(workspace) {
   Blockly.Arduino.javatab_ = Object.create(null);
   Blockly.Arduino.pagetab_ = Object.create(null);
   Blockly.Arduino.styletab_ = Object.create(null);
+  Blockly.Arduino.handleRoot_ = Object.create(null);
 
   
   Blockly.Arduino.idstab_ = Object.create(null);
@@ -244,7 +245,7 @@ Blockly.Arduino.finish = function(code) {
   var includes = [], definitions = [], variables = [], functions = [];
   
   //ajouté par driss
-  var xmltab = [], javatab = [], pagetab = [], styletab = [], tasktab = [], tasks = [];
+  var xmltab = [], javatab = [], pagetab = [], styletab = [], tasktab = [], tasks = [], handleRoot=[];
   //fin ajourt driss
 
 
@@ -272,6 +273,16 @@ Blockly.Arduino.finish = function(code) {
   
 
   /* Ajouté par Driss */
+  handleRoot.push('\nvoid handleRoot(){');
+  for (var name in Blockly.Arduino.handleRoot_) {
+    handleRoot.push(Blockly.Arduino.handleRoot_[name]);
+  }
+  if (handleRoot.length) {
+    handleRoot.push('\n');
+  }
+  handleRoot.push('}');
+
+
   xmltab.push(Blockly.Arduino.xmltab_["debut"]);
   for (var name in Blockly.Arduino.xmltab_) 
     { 
@@ -377,7 +388,7 @@ Blockly.Arduino.finish = function(code) {
   delete Blockly.Arduino.styletab_ ;
   delete Blockly.Arduino.idstab_;
   delete Blockly.Arduino.tasks_;
-  
+  delete Blockly.handleRoot_;
   //fin ajout driss
 
   /* modifié par Driss 
@@ -391,16 +402,20 @@ Blockly.Arduino.finish = function(code) {
                 separateur+ 
                 functions.join('\n')+
                 separateur+ 
+                handleRoot.join('\n')+
+                separateur+ 
                 tasktab.join('\n')+ 
                 separateur + 
                 xmltab.join('\n') + 
+                separateur +
                 javatab.join('\n') + 
+                separateur +
                 pagetab.join('\n')+
                 separateur;
 
   //modifié par driss
   //var setup = 'void setup() {' + setups.join('\n  ') + '\n}\n\n';
-  var setup = 'void setup() {\n' + setups.join('\n  ')+ tasks.join('\n\n  ') + '\n}\n\n';
+  var setup = 'void setup() {\n' + setups.join('\n  ')+ tasks.join('\n\n  ') + '\n}\n\n'+ separateur;
     
   //fin de modif driss
 
