@@ -6,7 +6,107 @@ goog.require('Blockly.Blocks');
 goog.require('Blockly.Types');
 
 
-//-Capteurs ----------------------------------------------------------------------------------------------------------------------------------------
+//- ----------------------------------------------------------------------------------------------------------------------------------------
+
+//-----------------------------------------------------------------
+//driss_D1R32_ESP32_config_simple
+Blockly.Blocks.driss_D1R32_ESP32_config_simple = {
+  category: 'diss_D1R32',
+  helpUrl: '',
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Configurer la carte D1R32 en ")
+        .appendField(new Blockly.FieldDropdown([["Station Wifi","STATION"], ["Point  d'accès Wifi","ACCESSPOINT"]]), "TYPE");
+    this.appendDummyInput()   
+        .appendField("Elle sera reliée au réseau Wifi ci-dessous et aura", "MSG1");
+    this.appendDummyInput()
+        .appendField("l'adresse IP 192.168.1.41", "MSG2"); 
+    this.appendValueInput("SSID")  
+        .setCheck("String")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("Nom du réseau WiFi(SSID)");
+    this.appendValueInput("KEY")
+        .appendField(new Blockly.FieldImage("blocks/drissD1R32/D1R32.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize))
+        .setCheck("String")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("Clé d'authentification (mot de passe)");
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(36);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  },
+
+      onchange: function(ev) {
+        var type_conn = this.getFieldValue('TYPE');
+        switch(type_conn){
+          case "STATION" :  this.getField("MSG1").setValue("Elle SERA RELIEE au réseau Wifi ci-dessous et aura");
+                            this.getField("MSG2").setValue("l'adresse IP 192.168.1.41");
+                            break;
+          case "ACCESSPOINT" :  this.getField("MSG1").setValue("Elle DIFFUSERA le réseau wifi indiqué");
+                            this.getField("MSG2").setValue("et aura l'adresse IP : 192.168.4.1");
+                            break;
+        }
+       }
+};
+
+
+//driss_D1R32_ESP32_config_complet
+Blockly.Blocks.driss_D1R32_ESP32_config_complet = {
+  category: 'diss_D1R32',
+  helpUrl: '',
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Configurer la carte D1R32 en")
+        .appendField(new Blockly.FieldDropdown([["Station Wifi","STATION_IP"], ["Point  d'accès Wifi","ACCESSPOINT_IP"]]), "TYPE");
+    this.appendDummyInput()   
+        .appendField("Elle sera reliée au réseau Wifi indiqué ", "MSG1");
+    this.appendDummyInput()
+        .appendField("et aura l'adresse IP indiquée", "MSG2"); 
+    //this.appendDummyInput()
+        //.appendField(new Blockly.FieldImage("blocks/drissD1R32/D1R32.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize));
+    this.appendValueInput("SSID")
+        .setCheck("String")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("Nom du réseau WiFi(SSID)");
+    this.appendValueInput("KEY")
+        .setCheck("String")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("Clé d'authentification (mot de passe)");
+    this.appendValueInput("IP")
+        .setCheck("String")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("Adresse IP  (V4)");
+    this.appendValueInput("MASQUE")
+        .setCheck("String")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("Masque de sous réseau");
+    this.appendValueInput("GATEWAY")
+    .appendField(new Blockly.FieldImage("blocks/drissD1R32/D1R32.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize))
+        .setCheck("String")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("Passerelle");
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(36);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  } ,
+
+      onchange: function(ev) {
+        var type_conn = this.getFieldValue('TYPE');
+        switch(type_conn){
+          case "STATION_IP" :  this.getField("MSG1").setValue("Elle SERA RELIEE au réseau Wifi indiqué");
+                            this.getField("MSG2").setValue("et aura l'adresse IP indiquée");
+                            break;
+          case "ACCESSPOINT_IP" :  this.getField("MSG1").setValue("Elle DIFFUSERA le réseau Wifi indiqué");
+                            this.getField("MSG2").setValue("et aura l'adresse IP indiquée");
+                            break;
+        }
+       }
+};
 
 
 //driss_D1R32_executer_taches_paralleles
@@ -21,6 +121,33 @@ Blockly.Blocks.driss_D1R32_executer_taches_paralleles = {
         .appendField(new Blockly.FieldImage("blocks/drissD1R32/processeur.png", Blockly.Arduino.imageSize*2,  Blockly.Arduino.imageSize));
     this.appendStatementInput("TASK_1")
         .setCheck(null);
+    this.appendStatementInput("TASK_2")
+        .setCheck(null);
+    this.setColour(Blockly.Blocks.drissD1R32.HUE);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+
+//driss_D1R32_executer_taches_paralleles
+Blockly.Blocks.driss_D1R32_2_taches = {
+init: function() {
+    this.appendDummyInput()
+        .appendField("Exécuter ces 2 tâches en même temps");
+    this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_CENTRE)
+        .appendField(new Blockly.FieldImage("blocks/drissD1R32/processeur.png", Blockly.Arduino.imageSize*2,  Blockly.Arduino.imageSize));
+    this.appendDummyInput()
+        .appendField("Déclaration et initialisations communes ");
+    this.appendStatementInput("INITIALISATIONS")
+        .setCheck(null);
+    this.appendDummyInput()
+        .appendField("Tâche 1");
+    this.appendStatementInput("TASK_1")
+        .setCheck(null);
+    this.appendDummyInput()
+        .appendField("Tâche 2");
     this.appendStatementInput("TASK_2")
         .setCheck(null);
     this.setColour(Blockly.Blocks.drissD1R32.HUE);
@@ -66,6 +193,7 @@ Blockly.Blocks.driss_D1R32_definir_tache = {
 Blockly.Blocks.driss_D1R32_définir_les_actions_de_la_tache = {
   category: 'diss_D1R32',
   helpUrl: '',
+  name:"TASK",
    init: function() {
     this.appendDummyInput()
         .appendField("Définir les actions de la tâche n°")
@@ -79,97 +207,11 @@ Blockly.Blocks.driss_D1R32_définir_les_actions_de_la_tache = {
   }
 };
 
-//-ESP ----------------------------------------------------------------------------------------------------------------------------------------
-
-/*
-//driss_D1R32_initialisation
-Blockly.Blocks.driss_D1R32_initialisation = {
-  category: 'diss_D1R32',
-  helpUrl: '',
-  init: function() {
-    this.appendDummyInput()
-        .appendField("Initialier la carte D1R32");
-    this.setInputsInline(false);
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(36);
- this.setTooltip("");
- this.setHelpUrl("");
-  }
-};
-*/
-
-
-//driss_D1R32_config
-Blockly.Blocks.driss_D1R32_config2 = {
-  category: 'diss_D1R32',
-  helpUrl: '',
-  init: function() {
-    this.appendDummyInput()
-        .appendField("Configurer la carte D1R32 en")
-        .appendField(new Blockly.FieldDropdown([["Station et choix de l'adresse IP","STATION_IP"], ["Point  d'accès et choix de l'adresse IP","ACCESSPOINT_IP"]]), "TYPE");
-    this.appendDummyInput()
-        .appendField(new Blockly.FieldImage("blocks/drissD1R32/D1R32.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize));
-    this.appendValueInput("SSID")
-        .setCheck("String")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("Nom du réseau WiFi(SSID)");
-    this.appendValueInput("KEY")
-        .setCheck("String")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("Clé d'authentification (mot de passe)");
-    this.appendValueInput("IP")
-        .setCheck("String")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("Adresse IP  (V4)");
-    this.appendValueInput("MASQUE")
-        .setCheck("String")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("Masque de sous réseau");
-    this.appendValueInput("GATEWAY")
-        .setCheck("String")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("Passerelle");
-    this.setInputsInline(false);
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(36);
- this.setTooltip("");
- this.setHelpUrl("");
-  }
-};
 
 
 
-//-----------------------------------------------------------------
-//driss_D1R32_config
-Blockly.Blocks.driss_D1R32_config = {
-  category: 'diss_D1R32',
-  helpUrl: '',
-  init: function() {
-    this.appendDummyInput()
-        .appendField("Configurer la carte D1R32 en ")
-        .appendField(new Blockly.FieldDropdown([["Station","STATION"], ["Point  d'accès","ACCESSPOINT"]]), "TYPE")
-        .appendField("Wifi");
-    this.appendDummyInput()
-        .appendField(new Blockly.FieldImage("blocks/drissD1R32/D1R32.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize))
-        .appendField("et définir le SSID et la clé d'authentification");
-    this.appendValueInput("SSID")
-        .setCheck("String")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("Nom du réseau WiFi(SSID)");
-    this.appendValueInput("KEY")
-        .setCheck("String")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("Clé d'authentification (mot de passe)");
-    this.setInputsInline(false);
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(36);
- this.setTooltip("");
- this.setHelpUrl("");
-  }
-};
+
+
 
 
 
@@ -221,7 +263,7 @@ Blockly.Blocks.driss_ESP_SPIFFS_Effacer_fichier = {
     this.appendValueInput("FILENAME")
         .setCheck(null)
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("  Effacerle fichier de la mémoire Spiffs         ")
+        .appendField("  Effacer le fichier de la mémoire Spiffs         ")
         .appendField("Nom du fichier");
     
     this.setPreviousStatement(true, null);
@@ -346,6 +388,7 @@ Blockly.Blocks.driss_Creer_page_web = {
 Blockly.Blocks.driss_D1R32_cadre = {
   category: 'diss_D1R32',
   helpUrl: '',
+  name:"CADRE",
   init: function() {
     this.appendDummyInput()
         .appendField("Dessiner un cadre");
@@ -556,7 +599,7 @@ Blockly.Blocks.driss_D1R32_balise_HR = {
   helpUrl: '',
   init: function() {
     this.appendDummyInput()
-        .appendField("Dessiner une ligne sur la page : <HR>");
+        .appendField("Dessiner une ligne (séparateur) : <HR>");
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -586,27 +629,6 @@ Blockly.Blocks.driss_D1R32_InsertHTMLCodeInBody = {
 
 
 //*******************************************************************************************************
-//driss_D1R32_dessiner_interrupteur
-Blockly.Blocks.driss_D1R32_dessiner_interrupteur = {
-  category: 'diss_D1R32',
-  helpUrl: '',
-
-  init: function() {
-    this.appendDummyInput()
-        .appendField("Etat de l'interrupteur ")
-        .appendField(new Blockly.FieldTextInput("Inter 1"), "SWITCH_NAME");
-    this.appendDummyInput()
-        .appendField(new Blockly.FieldImage("https://www.gstatic.com/codesite/ph/images/star_on.gif", 15, 15, { alt: "*", flipRtl: "FALSE" }))
-        .appendField("Dessiné dans la page Web");
-    this.setInputsInline(false);
-    this.setOutput(true, null);
-    this.setColour(11);
- this.setTooltip("");
- this.setHelpUrl("");
-  }
-};
-
-
 
 
 
@@ -623,7 +645,8 @@ Blockly.Blocks.driss_D1R32_config_basic = {
         .appendField("MODE BASIC - Point d'accès et IP")
         
     this.appendDummyInput()
-        .appendField(new Blockly.FieldImage("blocks/drissD1R32/D1R32.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize));
+        .appendField(new Blockly.FieldImage("blocks/drissD1R32/D1R32.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize))
+        .appendField("Adresse IP : 192.168.4.1");
     this.appendValueInput("SSID")
         .setCheck("String")
         .setAlign(Blockly.ALIGN_RIGHT)
@@ -689,10 +712,34 @@ Blockly.Blocks.driss_web_switch = {
   init: function() {
     this.appendDummyInput()
         .appendField("Etat de l'interrupteur ")
-        .appendField(new Blockly.FieldTextInput("Inter1"), "SWITCH_NAME");
+        .appendField(new Blockly.FieldTextInput("Inter1"), "SWITCH_NAME")
+        .appendField("dessiné dans la page Web");
     this.appendDummyInput()
-    .appendField(new Blockly.FieldImage("blocks/drissD1R32/switch_web.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize))
-        .appendField("Dessiné dans la page Web");
+        .setAlign(Blockly.ALIGN_CENTRE)
+        .appendField(new Blockly.FieldImage("blocks/drissD1R32/switch_web.png", Blockly.Arduino.imageSize*2,  Blockly.Arduino.imageSize/2));
+        //.appendField("Dessiné dans la page Web");
+    this.setInputsInline(false);
+    this.setOutput(true, null);
+    this.setColour(330);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+//driss_web_button
+Blockly.Blocks.driss_web_button = {
+  category: 'diss_D1R32',
+  helpUrl: '',
+
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Etat du bouton poussoir ")
+        .appendField(new Blockly.FieldTextInput("bouton 1"), "BUTTON_NAME")
+        .appendField("dessiné dans la page Web");
+    this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_CENTRE)
+        .appendField(new Blockly.FieldImage("blocks/drissD1R32/pushBtn_web.png", Blockly.Arduino.imageSize*2,  Blockly.Arduino.imageSize/2));
+        //.appendField("Dessiné dans la page Web");
     this.setInputsInline(false);
     this.setOutput(true, null);
     this.setColour(330);
@@ -708,22 +755,28 @@ Blockly.Blocks.driss_web_potentiometre = {
 
   init: function() {
     this.appendDummyInput()
-        .appendField("Valeur du potentiomètre")
-        .appendField(new Blockly.FieldTextInput("potar 1"), "ROTARY_NAME");
+        .setAlign(Blockly.ALIGN_CENTRE)
+        .appendField("Valeur lue sur le potentiomètre")
+        .appendField(new Blockly.FieldTextInput("potar1"), "ROTARY_NAME")
+        .appendField("dessiné sur la page Web");
     this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_CENTRE)
+        .appendField(new Blockly.FieldImage("blocks/drissD1R32/rotary_web.png", Blockly.Arduino.imageSize*2,  Blockly.Arduino.imageSize/2));
+    this.appendValueInput("ROTARY_MIN")
+        .setCheck("Number")
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("Min")
-        .appendField(new Blockly.FieldNumber(0, -32768, 32768), "ROTARY_MIN");
-    this.appendDummyInput()
+        .appendField("valeur minimale du potentiomètre");
+    this.appendValueInput("ROTARY_MAX")
+        .setCheck("Number")
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("Max")
-        .appendField(new Blockly.FieldNumber(0, -32768, 32768), "ROTARY_MAX");
+        .appendField("valeur maximale du potentiomètre");
     this.setOutput(true, null);
     this.setColour(330);
  this.setTooltip("");
  this.setHelpUrl("");
   }
 };
+
 
 
 //driss_web_write_val
@@ -754,6 +807,28 @@ Blockly.Blocks.driss_web_write_val = {
   }
 };
 
+//driss_grove_led
+Blockly.Blocks.driss_grove_led = { 
+  category: 'driss_grove : actionneurs',
+ helpUrl: '',
+ name:"DRISS_GROVE_LED",
+ init: function() {
+   this.appendDummyInput()
+       .appendField("Mettre la DEL reliée à l'entrée")
+       .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN");
+   this.appendValueInput("INPUT")
+       .setCheck(null)
+       .setAlign(Blockly.ALIGN_RIGHT)
+       .appendTitle(new Blockly.FieldImage("blocks/drissGrove/Grove_red_LED.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize))
+       .appendField("à l'état logique envoyé par");
+   this.setInputsInline(false);
+   this.setPreviousStatement(true, null);
+   this.setNextStatement(true, null);
+   this.setColour(Blockly.Blocks.drissGrove.HUE);
+this.setTooltip("");
+this.setHelpUrl("");
+ }
+};
 
 //driss_servo_standard
 Blockly.Blocks.driss_servo_standard = {

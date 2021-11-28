@@ -147,8 +147,10 @@ Blockly.Arduino.driss_temperature_and_humidity_sensor = function() {
   }
   
  
-  if (dropdown_grandeur == "TEMPERATURE") { code = 'get_temperature('+var_dht+')' ; }
-  if (dropdown_grandeur == "HUMIDITE") { code = 'get_humidity('+var_dht+')' ; }
+  if (dropdown_grandeur == "TEMPERATURE") { code = 'get_temperature('+var_dht+');\n  delay(10)' ; }
+  if (dropdown_grandeur == "HUMIDITE") { code = 'get_humidity('+var_dht+');\n  delay(10)' ; }
+  //var zone = getEmplacement(this);
+  //console.log("DTH zone : "+zone);
  return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
@@ -439,6 +441,7 @@ var code ="getJoystickDirection()";
 //-Actionneurs ----------------------------------------------------------------------------------------------------------------------------------------
 
 //Grove red LED OK
+/*
 Blockly.Arduino.driss_grove_led = function() { 
   var dropdown_pin = this.getTitleValue('PIN');
   var stat = Blockly.Arduino.valueToCode(this, 'INPUT', Blockly.Arduino.ORDER_ATOMIC);
@@ -449,6 +452,7 @@ Blockly.Arduino.driss_grove_led = function() {
 
   return code;
 };
+*/
 
 //Grove red LED OK
 Blockly.Arduino.driss_grove_red_led = function() {
@@ -458,6 +462,7 @@ Blockly.Arduino.driss_grove_red_led = function() {
   var code = 'digitalWrite('+dropdown_pin+','+dropdown_stat+');\n'  //code à insérer dans la loop Arduino
   return code;
 };
+
 
 //Grove white LED OK
 Blockly.Arduino.driss_grove_white_led = function() {

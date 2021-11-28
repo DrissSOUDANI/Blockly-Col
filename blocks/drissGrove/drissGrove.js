@@ -450,6 +450,7 @@ Blockly.Blocks['driss_grove_joystick_direction'] = {
 
 //-Actionneurs ----------------------------------------------------------------------------------------------------------------------------------------
 //Grove red LED OK
+/*
 Blockly.Blocks.driss_grove_led = { 
    category: 'driss_grove : actionneurs',
   helpUrl: '',
@@ -470,7 +471,7 @@ Blockly.Blocks.driss_grove_led = {
  this.setHelpUrl("");
   }
 };
-
+*/
 
 //Grove red LED OK
 Blockly.Blocks.driss_grove_red_led = {

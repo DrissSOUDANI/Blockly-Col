@@ -269,7 +269,7 @@ BlocklyDuino.validateConfigGlobal = function () {
 				} else {
 					search = search.replace(/\?/, '?card=' + $("#pinout").val() + '&');
 				}
-			//recherche d'une maquette (toolbox) dans l'URL pour une maquette câblée complète, qui bloquera ensuite dans loadToolboxDefinition le bouton des configuration des catégories
+			//recherche d'une maquette (toolbox) dans l'URL pour une maquette cï¿½blï¿½e complï¿½te, qui bloquera ensuite dans loadToolboxDefinition le bouton des configuration des catï¿½gories
 
 			if (kitornot) {
 				if (search.length <= 1) {
@@ -308,7 +308,7 @@ BlocklyDuino.validateConfigGlobal = function () {
 };
 
 BlocklyDuino.validateConfigOffline = function () {
-
+	
 	// Store the blocks for the duration of the reload.
 	BlocklyDuino.backupBlocks();
 	

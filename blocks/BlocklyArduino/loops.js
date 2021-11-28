@@ -63,6 +63,7 @@ Blockly.Blocks.controls_base_delay = {
 //driss_controls_do_only_every_x_time
 
 Blockly.Blocks.driss_controls_do_only_every_x_time = {
+  name:"REPEAT_EVERY_X_TIMES",
   init: function() {
     this.appendDummyInput()
         .appendField("Faire ces actions toutes les ")

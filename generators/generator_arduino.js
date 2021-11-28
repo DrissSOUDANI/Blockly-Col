@@ -116,6 +116,7 @@ Blockly.Arduino.init = function(workspace) {
   Blockly.Arduino.pagetab_ = Object.create(null);
   Blockly.Arduino.styletab_ = Object.create(null);
   Blockly.Arduino.handleRoot_ = Object.create(null);
+  Blockly.Arduino.handleXML_ = Object.create(null);
 
   
   Blockly.Arduino.idstab_ = Object.create(null);
@@ -245,7 +246,7 @@ Blockly.Arduino.finish = function(code) {
   var includes = [], definitions = [], variables = [], functions = [];
   
   //ajouté par driss
-  var xmltab = [], javatab = [], pagetab = [], styletab = [], tasktab = [], tasks = [], handleRoot=[];
+  var xmltab = [], javatab = [], pagetab = [], styletab = [], tasktab = [], tasks = [], handleRoot=[], handleXML=[];
   //fin ajourt driss
 
 
@@ -273,36 +274,46 @@ Blockly.Arduino.finish = function(code) {
   
 
   /* Ajouté par Driss */
-  handleRoot.push('\nvoid handleRoot(){');
-  for (var name in Blockly.Arduino.handleRoot_) {
-    handleRoot.push(Blockly.Arduino.handleRoot_[name]);
-  }
-  if (handleRoot.length) {
-    handleRoot.push('\n');
-  }
-  handleRoot.push('}');
-
-
-  xmltab.push(Blockly.Arduino.xmltab_["debut"]);
-  for (var name in Blockly.Arduino.xmltab_) 
-    { 
-      if(name != "debut" && name != "fin")
-        xmltab.push(Blockly.Arduino.xmltab_[name]); 
+ 
+  if(Blockly.Arduino.xmltab_['existe'] == true){
+    //xmltab.push(Blockly.Arduino.xmltab_["debut"]);
+    xmltab.push("String buildXML(){");
+    xmltab.push("  String XML;");
+    xmltab.push("  XML  = \"<?xml version=\'1.0\'?>\";");
+    xmltab.push("  XML += \"<inputs>\";");
+    for (var name in Blockly.Arduino.xmltab_) 
+      { 
+        if(name != "existe" )
+          xmltab.push(Blockly.Arduino.xmltab_[name]); 
+      }
+    //xmltab.push(Blockly.Arduino.xmltab_["fin"]);
+    xmltab.push("  XML += \"</inputs>\";");
+    xmltab.push("  return XML;");
+    xmltab.push("}");
+    //if (xmltab.length) { xmltab.push('\n'); }
+    if (xmltab[0] != undefined) { xmltab.push('\n'); }
     }
-  xmltab.push(Blockly.Arduino.xmltab_["fin"]);
-  //if (xmltab.length) { xmltab.push('\n'); }
-  if (xmltab[0] != undefined) { xmltab.push('\n'); }
 
   
-  javatab.push(Blockly.Arduino.javatab_["debut"]);
-  for (var name in Blockly.Arduino.javatab_) { 
-    if(name != "debut" && name != "fin")
-      javatab.push(Blockly.Arduino.javatab_[name]); 
+  if(Blockly.Arduino.javatab_['existe'] == true){
+    //javatab.push(Blockly.Arduino.javatab_["debut"]);
+    javatab.push("String buildJavascript(){");
+    javatab.push("  String javaScript = MonEsp.javaScript_start();");
+    
+    for (var name in Blockly.Arduino.javatab_) { 
+      if(name != "existe")
+        javatab.push(Blockly.Arduino.javatab_[name]); 
+    }
+    //javatab.push(Blockly.Arduino.javatab_["fin"]);
+    //if (javatab.length) { javatab.push('\n'); }
+    javatab.push("  javaScript += MonEsp.javaScript_end();");
+    javatab.push("  return javaScript;");
+    javatab.push("}");
+    if (javatab[0] != undefined) { javatab.push('\n'); }
   }
-  javatab.push(Blockly.Arduino.javatab_["fin"]);
-  //if (javatab.length) { javatab.push('\n'); }
-  if (javatab[0] != undefined) { javatab.push('\n'); }
 
+
+  
   // le tableaux des taches à inserer dans le setup apres toutes les autres insertions du setup
   tasks.push(Blockly.Arduino.tasks_["debut"]);
   for (var name in Blockly.Arduino.tasks_) { 
@@ -331,19 +342,47 @@ Blockly.Arduino.finish = function(code) {
 
   var j=1;
   while(Blockly.Arduino.tasktab_[j]){
-    tasktab.push(Blockly.Arduino.tasktab_[j]["debut"]);
+    //tasktab.push(Blockly.Arduino.tasktab_[j]["debut"]);
+    tasktab.push("void Esp32_Multitask_task_"+j+"(void *arg) {");
+    tasktab.push("  while(true) {");
     for (var name in Blockly.Arduino.tasktab_[j]){
-        if(name != "debut" && name != "fin")
-            tasktab.push(Blockly.Arduino.tasktab_[j][name]); //alert(j+'-'+Blockly.Arduino.tasktab_[j][name]+'-\n');
-        //k++;
+        //if(name != "debut" && name != "fin")
+            tasktab.push(Blockly.Arduino.tasktab_[j][name]); 
     }
-    tasktab.push(Blockly.Arduino.tasktab_[j]["fin"]);
-    //if (tasktab.length) { tasktab.push('\n'); }
+    //tasktab.push(Blockly.Arduino.tasktab_[j]["fin"]);
+    tasktab.push("  }");
+    tasktab.push("}");
     j++;
   }
-  //if (tasktab.length) { tasktab.push('\n'); }
   if (tasktab[1] != undefined) { tasktab.push('\n'); }
 
+
+  if(Blockly.Arduino.handleRoot_['existe'] == true){
+    handleRoot.push('\nvoid handleRoot(){');
+    for (var name in Blockly.Arduino.handleRoot_) {
+      if(name != "existe" )
+        handleRoot.push(Blockly.Arduino.handleRoot_[name]);
+    }
+    if (handleRoot.length) {
+      handleRoot.push('}');
+    }
+    //handleRoot.push('}');
+  }
+
+  if(Blockly.Arduino.handleXML_['existe'] == true){
+    handleXML.push('\n');
+    handleXML.push('\nvoid handleXML(){');
+    for (var name in Blockly.Arduino.handleXML_) {
+      if(name != "existe" )
+        handleXML.push(Blockly.Arduino.handleXML_[name]);
+    }
+    if (handleXML.length) {
+      handleXML.push('}');
+    }
+  // handleXML.push('}');
+  }
+
+  
 
   /*fin ajout de driss */
 
@@ -357,6 +396,8 @@ Blockly.Arduino.finish = function(code) {
     functions.push('\n');
   }
 
+  
+
   // userSetupCode added at the end of the setup function without leading spaces
   var setups = [''], userSetupCode= '';
   if (Blockly.Arduino.setups_['userSetupCode'] !== undefined) {
@@ -369,6 +410,8 @@ Blockly.Arduino.finish = function(code) {
   if (userSetupCode) {
     setups.push(userSetupCode);
   }
+
+  
 
   // Clean up temporary data 
   delete Blockly.Arduino.includes_;
@@ -389,6 +432,7 @@ Blockly.Arduino.finish = function(code) {
   delete Blockly.Arduino.idstab_;
   delete Blockly.Arduino.tasks_;
   delete Blockly.handleRoot_;
+  delete Blockly.handleXML_;
   //fin ajout driss
 
   /* modifié par Driss 
@@ -400,10 +444,12 @@ Blockly.Arduino.finish = function(code) {
                 definitions.join('\n') + 
                 variables.join('\n') +
                 separateur+ 
+                handleRoot.join('\n')+
+                handleXML.join('\n')+
+                separateur+ 
                 functions.join('\n')+
                 separateur+ 
-                handleRoot.join('\n')+
-                separateur+ 
+                
                 tasktab.join('\n')+ 
                 separateur + 
                 xmltab.join('\n') + 
