@@ -226,7 +226,8 @@ Blockly.Arduino.driss_D1R32_definir_tache = function() {
   Blockly.Arduino.tasks_['setup_task_'+num_task] ='// Tache °'+num_task+" = "+  name_task +'\n'+
     '  xTaskCreatePinnedToCore(Esp32_Multitask_task_'+num_task+',"task_'+num_task+'",'+taille_pile+',NULL,'+priorite+',&task_'+num_task+','+coeur+');\n'+
     '  delay(500);';
-   
+  
+  
   var code =  "";
   return code;
 
@@ -244,20 +245,12 @@ Blockly.Arduino.driss_D1R32_définir_les_actions_de_la_tache = function() {
   if(!Blockly.Arduino.tasktab_[num_task]){
     Blockly.Arduino.tasktab_[num_task] = Object.create(null);
   }
-
-  
-  
- // Blockly.Arduino.tasktab_[num_task]["debut"] = 'void Esp32_Multitask_'+tache+'(void *arg) {\n'+
-  //                                              '  while(true) {';
   
   Blockly.Arduino.tasktab_[num_task]["actions"] = ''+statements_task_actions+'';
-  //Blockly.Arduino.tasktab_[num_task]["fin"] = '  }\n'+
-  //                                            ' }\n';
-  
-  
-   
-  //alert(num_task+'\n'+statements_task_actions);
-  var code =  '';//statements_task_actions;
+ 
+  //console.log (statements_task_actions);
+
+  var code =  '';
   return code;
 
 };
@@ -427,6 +420,7 @@ Blockly.Arduino.driss_Creer_page_web = function() {
   Blockly.Arduino.handleRoot_['page_web'] = '  server.send ( 200, "text/html", getPage() );\n'+
                                             '  delay(10);';
   
+  Blockly.Arduino.pagetab_['existe'] = true;
   Blockly.Arduino.pagetab_['part1'] =  'String getPage(){\n'+
                                        '#define PAGE_EXIST\n'+
                                        '  String  page = "";\n'+
@@ -435,22 +429,18 @@ Blockly.Arduino.driss_Creer_page_web = function() {
                                        '  page += "  <head>";\n'+
                                        '  page += "    <meta charset=\'ISO-8859-15\'>";';
                                        
-  
-
-  
   Blockly.Arduino.pagetab_['part2'] =  '  page += "  </head>";\n'+
                                        '  page +=    MonEsp.addPhoneStyle() ;\n'+
                                        '  page += "  <body onload=\'process()\'>";';
    
   Blockly.Arduino.pagetab_['part3'] =  '  page += "    <style>";\n'+
-                                       '  page += "      .value {font-size:large; font-style:normal; color:#3388ff;font-weight:bold; }";\n'+
+                                       '  page += "      .value {font-size:x-large; font-style:normal; color:#3388ff;font-weight:bold; }";\n'+
                                        '  page += "    </style>";';  
 
   Blockly.Arduino.pagetab_['part4'] =  '  page += "  </body>";\n'+
                                        '  page += "  </html>";\n'+
                                        '  return page;\n'+
                                        ' }';
-
 
   Blockly.Arduino.styletab_['debut'] =  '  page += "    <style>";' ;
   Blockly.Arduino.styletab_['fin']   =  '  page += "    </style>";' ;
@@ -461,7 +451,7 @@ Blockly.Arduino.driss_Creer_page_web = function() {
   //alert(mybodycode.length);
   //alert(myheadcode[0]+'\n'+myheadcode[1]);
   //alert('0 - '+mybodycode[0]+'\n'+'1 - '+mybodycode[1] +'2 - '+mybodycode[2]);
-  console.log('0 - '+mybodycode[0]+'\n'+'1 - '+mybodycode[1] +'2 - '+mybodycode[2]);
+  //console.log('0 - '+mybodycode[0]+'\n'+'1 - '+mybodycode[1] +'2 - '+mybodycode[2]);
   //alert(body_code);
 
   var code = '';
@@ -485,7 +475,13 @@ Blockly.Arduino.driss_Creer_page_web = function() {
     }
     for(var k=2;k<mybodycode.length;k+=2) { 
       code += ''+mybodycode[k]+'';
+      //console.log(mybodycode[k]);
     }
+    code +=  '#ifdef PAGE_EXIST\n'+
+              '  server.handleClient();\n'+
+              '  delay(10);\n'+
+              '#endif\n'+
+              '//delay(10);\n';
   } 
 
 
@@ -920,7 +916,7 @@ Blockly.Arduino.driss_page_web = function() {
   Blockly.Arduino.handleRoot_['page_web'] = '  server.send ( 200, "text/html", getPage() );\n'+
                                             '  delay(10);';
 
-
+  Blockly.Arduino.pagetab_['existe'] = true;
   Blockly.Arduino.pagetab_['part1'] =  'String getPage(){\n'+
                                        '#define PAGE_EXIST\n'+
                                        '  String  page = "";\n'+
@@ -934,7 +930,7 @@ Blockly.Arduino.driss_page_web = function() {
                                        '  page += "  <body onload=\'process()\'>";';
    
   Blockly.Arduino.pagetab_['part3'] =  '  page += "    <style>";\n'+
-                                       '  page += "      .value {font-size:large; font-style:normal; color:#3388ff;font-weight:bold; }";\n'+
+                                       '  page += "      .value {font-size:x-large; font-style:normal; color:#3388ff;font-weight:bold; }";\n'+
                                        '  page += "    </style>";';  
 
   Blockly.Arduino.pagetab_['part4'] =  '  page += "  </body>";\n'+
@@ -1002,44 +998,20 @@ Blockly.Arduino.driss_body_text = function() {
 //------------------------------------------------------------------------------------------------------------------------------
 //driss_web_switch
 //------------------------------------------------------------------------------------------------------------------------------
-/*fonctionne pour basic
 Blockly.Arduino.driss_web_switch = function() { 
   var switch_name = this.getFieldValue('SWITCH_NAME');
-  switch_name = switch_name.replace(/ /g, "_");
+  switch_var = "$"+switch_name.replace(/ /g, "_");
+  switch_var = replaceSpec(switch_var);
   
-  Blockly.Arduino.variables_['var_switch_'+switch_name] = "int "+switch_name+" ;";
+  Blockly.Arduino.variables_['var_switch_'+switch_var] = "int "+switch_var+" ;";
 
-  Blockly.Arduino.handleRoot_['web_switch_'+switch_name] = '  MonEsp.updateStringint(&server, "'+switch_name+'", '+switch_name+');';
+  Blockly.Arduino.handleRoot_['web_switch_'+switch_var] = '  MonEsp.updateStringint(&server, "'+switch_name+'", '+switch_var+');';
                                              
-  code =  switch_name ; 
+  code =  switch_var ; 
   code +=  '~' ;
   code += 'page +=      MonEsp.javaslider();\n';
   code += 'page +=      MonEsp.slider( 0 , 1, "'+switch_name+ '""") ;\n';
   code +=  '~' ;
-
-  return [code, Blockly.Arduino.ORDER_ATOMIC];
-};
-*/
-Blockly.Arduino.driss_web_switch = function() { 
-  var switch_name = this.getFieldValue('SWITCH_NAME');
-  switch_name = switch_name.replace(/ /g, "_");
-  
-  Blockly.Arduino.variables_['var_switch_'+switch_name] = "int "+switch_name+" ;";
-
-  Blockly.Arduino.handleRoot_['web_switch_'+switch_name] = '  MonEsp.updateStringint(&server, "'+switch_name+'", '+switch_name+');';
-                                             
-  code =  switch_name + ";\ndelay(10)" ; 
-  code +=  '~' ;
-  code += 'page +=      MonEsp.javaslider();\n';
-  code += 'page +=      MonEsp.slider( 0 , 1, "'+switch_name+ '""") ;';
-  code +=  '~' ;
-
-  var zone = getEmplacement(this);
-  //alert (zone);
-  switch(zone){
-    case "TASK_ACTIONS" : 
-      
-      }  
 
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
@@ -1052,13 +1024,14 @@ Blockly.Arduino.driss_web_switch = function() {
 Blockly.Arduino.driss_web_button = function() { 
   var btn_name = this.getFieldValue('BUTTON_NAME');
   //btn_name = btn_name.substr(1, btn_name.length-2);
-  btn_name = btn_name.replace(/ /g, "_");
+  btn_var = btn_name.replace(/ /g, "_");
+  btn_var = replaceSpec(btn_var);
   
-  Blockly.Arduino.variables_['var_switch_'+btn_name] = "int "+btn_name+" ;";
+  Blockly.Arduino.variables_['var_switch_'+btn_var] = "int "+btn_var+" ;";
 
-  Blockly.Arduino.handleRoot_['web_switch_'+btn_name] = '  MonEsp.updateStringint(&server, "'+btn_name+'", '+btn_name+');';
+  Blockly.Arduino.handleRoot_['web_switch_'+btn_var] = '  MonEsp.updateStringint(&server, "'+btn_name+'", '+btn_var+');';
                                              
-  code =  btn_name ; 
+  code =  btn_var ; 
   code +=  '~' ;
   code += 'page +=      MonEsp.javaslider();\n';
   code += 'page +=      MonEsp.slider( 0 , 0, "'+btn_name+ '""") ;\n';
@@ -1078,12 +1051,14 @@ Blockly.Arduino.driss_web_potentiometre = function() {
   var maxValue = Blockly.Arduino.valueToCode(this, 'ROTARY_MAX', Blockly.Arduino.ORDER_ATOMIC);
   
   //rotary_name = switch_name.substr(1, switch_name.length-2);
-  rotary_name = rotary_name.replace(/ /g, "_");
+  rotary_var = "$"+rotary_name.replace(/ /g, "_");
+  rotary_var = replaceSpec(rotary_var);
   
-  Blockly.Arduino.variables_['var_rotary_'+rotary_name] = "int "+rotary_name+" ;";
-  Blockly.Arduino.handleRoot_['web_potentiometre_'+rotary_name] = '  MonEsp.updateStringint(&server,"'+rotary_name+'", '+rotary_name+');';
+  
+  Blockly.Arduino.variables_['var_rotary_'+rotary_var] = "int "+rotary_var+" ;";
+  Blockly.Arduino.handleRoot_['web_potentiometre_'+rotary_var] = '  MonEsp.updateStringint(&server,"'+rotary_name+'", '+rotary_var+');';
 
-  code =  rotary_name ; 
+  code =  rotary_var ; 
   code +=  '~' ;
   code += 'page +=      MonEsp.javaslider();\n';
   code += 'page +=      MonEsp.slider('+minValue+' , '+maxValue+' ,"'+rotary_name+ '""") ;\n';
@@ -1172,7 +1147,7 @@ Blockly.Arduino.driss_grove_led = function() {
   
   code ='';
   var zone = getEmplacement(this);
-  console.log ("Zone : "+zone);
+  //console.log ("Zone : "+zone);
   switch(zone){
     case "BODY" : code  ='~';
                   code +='~';
@@ -1182,6 +1157,7 @@ Blockly.Arduino.driss_grove_led = function() {
     default : //code  ='~';
                           //code +='~';
                           code = 'digitalWrite('+dropdown_pin+','+stat+');\n'  //code à insérer dans la loop Arduino
+                          code += 'delay(10);\n'
                           break;
       
       }  
@@ -1205,7 +1181,10 @@ Blockly.Arduino.driss_servo_standard = function() {
   Blockly.Arduino.variables_['var_Servo_'+dropdown_pin] = "Servo "+servo+";";
   
   Blockly.Arduino.setups_['setup_'+servo] = servo+'.attach('+dropdown_pin+');'; //code à insérer dans le setup Arduino
+  
+  
   var code = servo+'.write('+value_angle+');\n'  //code à insérer dans la loop Arduino
+  
   
   return code;
 };

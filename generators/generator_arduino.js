@@ -127,8 +127,9 @@ Blockly.Arduino.init = function(workspace) {
 
   Blockly.Arduino.tasks_ = Object.create(null);
 
-  //Blockly.Arduino.headtab_ = Object.create(null);
-  //Blockly.Arduino.bodytab_ = Object.create(null);
+  Blockly.Arduino.handleRoot_['existe']  = false;
+  Blockly.Arduino.handleXML_['existe']  = false;
+  Blockly.Arduino.pagetab_['existe']  = false;
   // fin ajout driss
 
   if (!Blockly.Arduino.variableDB_) {
@@ -321,23 +322,24 @@ Blockly.Arduino.finish = function(code) {
   }
   if (tasks[0] != undefined) { tasks.push('\n'); }
 
-  
-  pagetab.push(Blockly.Arduino.pagetab_["part1"]);
-  pagetab.push(Blockly.Arduino.pagetab_["title"]);
-  pagetab.push(Blockly.Arduino.styletab_["debut"]);
-  for (var name in Blockly.Arduino.styletab_) { 
-    if(name != "debut" && name != "fin")
-      pagetab.push(Blockly.Arduino.styletab_[name]); 
+  if(Blockly.Arduino.pagetab_['existe'] == true){
+    pagetab.push(Blockly.Arduino.pagetab_["part1"]);
+    pagetab.push(Blockly.Arduino.pagetab_["title"]);
+    pagetab.push(Blockly.Arduino.styletab_["debut"]);
+    for (var name in Blockly.Arduino.styletab_) { 
+      if(name != "debut" && name != "fin")
+        pagetab.push(Blockly.Arduino.styletab_[name]); 
+    }
+    pagetab.push(Blockly.Arduino.styletab_["fin"]);
+    pagetab.push(Blockly.Arduino.pagetab_["part2"]);
+    for (var name in Blockly.Arduino.pagetab_) { 
+      if(name != "part1" && name != "part2" && name != "part3" && name != "part4" && name != "title"  && name != "existe")
+        pagetab.push(Blockly.Arduino.pagetab_[name]); 
+    }
+    pagetab.push(Blockly.Arduino.pagetab_["part3"]);
+    pagetab.push(Blockly.Arduino.pagetab_["part4"]);
+    if (pagetab[0] != undefined) { pagetab.push('\n'); }
   }
-  pagetab.push(Blockly.Arduino.styletab_["fin"]);
-  pagetab.push(Blockly.Arduino.pagetab_["part2"]);
-  for (var name in Blockly.Arduino.pagetab_) { 
-    if(name != "part1" && name != "part2" && name != "part3" && name != "part4" && name != "title")
-      pagetab.push(Blockly.Arduino.pagetab_[name]); 
-  }
-  pagetab.push(Blockly.Arduino.pagetab_["part3"]);
-  pagetab.push(Blockly.Arduino.pagetab_["part4"]);
-  if (pagetab[0] != undefined) { pagetab.push('\n'); }
   
 
   var j=1;

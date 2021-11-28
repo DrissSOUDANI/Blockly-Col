@@ -814,7 +814,7 @@ Blockly.Blocks.driss_grove_led = {
  name:"DRISS_GROVE_LED",
  init: function() {
    this.appendDummyInput()
-       .appendField("Mettre la DEL reliée à l'entrée")
+       .appendField("Mettre la DEL reliée à la sortie")
        .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN");
    this.appendValueInput("INPUT")
        .setCheck(null)
