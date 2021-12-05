@@ -912,6 +912,8 @@ Blockly.Arduino.driss_page_web = function() {
   Blockly.Arduino.setups_['setup_page_web'] =  'server.on ( "/", handleRoot );\n'+
                                                '  server.begin();\n'+
                                                '  Serial.println ( "Le serveur HTTP est en fonctionnement" );\n';
+
+  Blockly.Arduino.definitions_['define_PAGE_EXIST'] = '#define PAGE_EXIST';
   Blockly.Arduino.handleRoot_['existe']  = true;
   Blockly.Arduino.handleRoot_['page_web'] = '  server.send ( 200, "text/html", getPage() );\n'+
                                             '  delay(10);';
