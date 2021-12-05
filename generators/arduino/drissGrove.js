@@ -4,6 +4,7 @@ Blockly.Arduino.driss_grove_button = function() {
   var dropdown_pin = this.getTitleValue('PIN');
   Blockly.Arduino.setups_['setup_button_'+dropdown_pin] = 'pinMode('+dropdown_pin+', INPUT);';
   var code = 'digitalRead('+dropdown_pin+')==1';
+  //code += ';\ndelay(20)';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 

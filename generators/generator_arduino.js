@@ -406,12 +406,25 @@ Blockly.Arduino.finish = function(code) {
     userSetupCode = '\n' + Blockly.Arduino.setups_['userSetupCode'];
     delete Blockly.Arduino.setups_['userSetupCode'];
   }
+
+  /*Modifications par Driss */
+  //for (var name in Blockly.Arduino.setups_) {
+  //  setups.push(Blockly.Arduino.setups_[name]);
+  //}
+  //if (userSetupCode) {
+  //  setups.push(userSetupCode);
+  //}
+
+  setups.push(Blockly.Arduino.setups_["setup_D1R32_config"]);
   for (var name in Blockly.Arduino.setups_) {
-    setups.push(Blockly.Arduino.setups_[name]);
+    if(name != "setup_D1R32_config" )
+      setups.push(Blockly.Arduino.setups_[name]);
   }
   if (userSetupCode) {
     setups.push(userSetupCode);
   }
+
+  /*Fins des modifs de Driss*/
 
   
 

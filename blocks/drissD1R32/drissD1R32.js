@@ -698,7 +698,7 @@ Blockly.Blocks.driss_body_text = {
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(330);
+    this.setColour(11);
  this.setTooltip("");
  this.setHelpUrl("");
   }
@@ -720,7 +720,7 @@ Blockly.Blocks.driss_web_switch = {
         //.appendField("Dessiné dans la page Web");
     this.setInputsInline(false);
     this.setOutput(true, null);
-    this.setColour(330);
+    this.setColour(28);
  this.setTooltip("");
  this.setHelpUrl("");
   }
@@ -742,7 +742,7 @@ Blockly.Blocks.driss_web_button = {
         //.appendField("Dessiné dans la page Web");
     this.setInputsInline(false);
     this.setOutput(true, null);
-    this.setColour(330);
+    this.setColour(28);
  this.setTooltip("");
  this.setHelpUrl("");
   }
@@ -771,7 +771,7 @@ Blockly.Blocks.driss_web_potentiometre = {
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField("valeur maximale du potentiomètre");
     this.setOutput(true, null);
-    this.setColour(330);
+    this.setColour(28);
  this.setTooltip("");
  this.setHelpUrl("");
   }
@@ -801,7 +801,7 @@ Blockly.Blocks.driss_web_write_val = {
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setColour(330);
+    this.setColour(28);
  this.setTooltip("");
  this.setHelpUrl("");
   }
@@ -814,21 +814,72 @@ Blockly.Blocks.driss_grove_led = {
  name:"DRISS_GROVE_LED",
  init: function() {
    this.appendDummyInput()
-       .appendField("Mettre la DEL reliée à la sortie")
+       .appendField("Mettre la DEL")
+       .appendField(new Blockly.FieldDropdown([["Rouge","RED"], ["Bleue","BLUE"], ["Verte","GREEN"], ["Blanche","WHITE"]]), "DEL_COLOR")
+       .appendField(" reliée à la sortie")
        .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN");
    this.appendValueInput("INPUT")
        .setCheck(null)
        .setAlign(Blockly.ALIGN_RIGHT)
-       .appendTitle(new Blockly.FieldImage("blocks/drissGrove/Grove_red_LED.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize))
-       .appendField("à l'état logique envoyé par");
+       .appendTitle(new Blockly.FieldImage("blocks/drissGrove/Grove_red_LED.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize), "IMG_DEL")
+       .appendField("à l'état logique de");
    this.setInputsInline(false);
    this.setPreviousStatement(true, null);
    this.setNextStatement(true, null);
    this.setColour(Blockly.Blocks.drissGrove.HUE);
 this.setTooltip("");
 this.setHelpUrl("");
- }
+ },
+ onchange: function(ev) {
+     var ledColor = this.getFieldValue('DEL_COLOR');
+     var image = "Grove_white_LED";
+     if(ledColor == "RED") image = "blocks/drissGrove/Grove_red_LED.png";
+     if(ledColor == "BLUE") image = "blocks/drissGrove/Grove_blue_LED.png";
+     if(ledColor == "GREEN") image = "blocks/drissGrove/Grove_green_LED.png";
+     if(ledColor == "WHITE") image = "blocks/drissGrove/Grove_white_LED.png";
+     this.getField("IMG_DEL").setValue(image);
+    }
 };
+
+
+//driss_grove_led
+Blockly.Blocks.driss_Web_led = { 
+    category: 'driss_grove : web',
+    helpUrl: '',
+    name:"DRISS_WEB_LED",
+    init: function() {
+      this.appendDummyInput()
+          .appendField("Dessiner une  DEL")
+          .appendField(new Blockly.FieldTextInput("LED 1"), "DEL_NAME")
+          .appendField("sur la page Web");
+      this.appendDummyInput()
+          .appendField("Couleur : ")
+          .appendField(new Blockly.FieldDropdown([["Rouge","RED"], ["Bleue","BLUE"], ["Verte","GREEN"]]), "DEL_COLOR")
+          .appendField("   -   Ecrire l'étiquette")
+          .appendField(new Blockly.FieldCheckbox("TRUE"), "SHOW_LABEL");
+      this.appendValueInput("INPUT_WEB_DEL_STAT")
+          .setCheck(null)
+          .appendTitle(new Blockly.FieldImage("blocks/drissGrove/Grove_red_LED.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize), "IMG_DEL")
+          .appendField("et la mettre à l'état logique de");
+      this.setInputsInline(false);
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(28);
+   this.setTooltip("");
+   this.setHelpUrl("");
+    },
+    onchange: function(ev) {
+        var ledColor = this.getFieldValue('DEL_COLOR');
+        var image = "Grove_white_LED";
+        if(ledColor == "RED") image = "blocks/drissGrove/Grove_red_LED.png";
+        if(ledColor == "BLUE") image = "blocks/drissGrove/Grove_blue_LED.png";
+        if(ledColor == "GREEN") image = "blocks/drissGrove/Grove_green_LED.png";
+        if(ledColor == "WHITE") image = "blocks/drissGrove/Grove_white_LED.png";
+        this.getField("IMG_DEL").setValue(image);
+       }
+  };
+
+
 
 //driss_servo_standard
 Blockly.Blocks.driss_servo_standard = {

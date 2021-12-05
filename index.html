@@ -127,7 +127,7 @@
 		
 									<li>
 										<a href="https://github.com/DrissSOUDANI/Blockly-Col" target="_blanck" title="télécharger Blockly@Col sur GitHub">
-										<span class="glyphicon glyphicon glyphicon-paperclip"></span> Blockly@Col v2 (11/05/2020)</a>
+										<span class="glyphicon glyphicon glyphicon-paperclip"></span> Blockly@Col v3 (28/11/2021)</a>
 									</li>
 									<li role="separator" class="divider"></li>
 									<li>
@@ -345,13 +345,13 @@
 			  <br />
 			  <br /><b>Documentation :</b> <a href="#" target='blank'>--</a>
 			  <br />
-			  <br />
+			  
 			  <span><b>Blockly@Col</b></span> (<a href="#" target='blank'>Github</a>)
               <span id="aboutBody" style="font-style: italic;"> </span>
               <br /> - Sebastien CANET : <a href = "https://github.com/technologiescollege/Blockly-at-rduino" target='blank'>Blockly@rduino</a>
               <br /> - Christophe GROSSE : <a href = "http://www.technozone51.fr/BlocklyDuinotest/" target='blank'>BlocklyDuinotest</a> 
               <br /> <br /><b>Merci à eux</b>
-              <br /><br />
+              <br />
               <br /> Utilise :
               <br /> - Bootstrap (<a href='http://getbootstrap.com' target='blank'>http://getbootstrap.com</a>)
               <br /> - Bootstrap Toggle (<a href='http://www.bootstraptoggle.com/' target='blank'>http://www.bootstraptoggle.com/</a>)
@@ -359,11 +359,12 @@
               <br /> - JQuerry (<a href='https://jquery.com' target='blank'>https://jquery.com)</a>
               <br /> - HeadJS (<a href='http://headjs.com/' target='blank'>http://headjs.com/)</a>
               <br /> - SmoothieCharts (<a href='http://smoothiecharts.org/' target='blank'>http://smoothiecharts.org/)</a>
-             
-			  <br />	  
+             	  
 			  <b><div align="center"><a href="#" target='blank'><font size="12"><span id="span_forms_about" style="font-style: bold;"> </span></font></a></div></b>
 			  
-			  <br /><i>version 29/01/2019 - v2 "Tim99it"</i>
+			  <strike><i>version 29/01/2018 - v1 "Boutazoultt"</i><br>
+			  <i>version 16/03/2019 - v2 "Tim99it"</i><br></strike>
+			  <i>version 28/11/2021 - v3 "Auggoug"</i>
 			  
 			  
 			  
@@ -2289,6 +2290,10 @@
 		 	 	<value name="WEB_PAGE_TEXT"><shadow type="text"><field name="TEXT">texte à écrire</field></shadow></value>
 		 	 	<value name="WEB_PAGE_STYLE"><shadow type="text"><field name="TEXT">nom du style</field></shadow></value>
 		  	</block>
+
+			<block type="driss_body_text">
+				<value name="TEXT"><shadow type="text"><field name="TEXT">Un titre</field></shadow></value>
+			</block>
 		  
 			<block type="driss_D1R32_web_write_data">
 				<value name="WEB_PAGE_DATA_LABEL"><shadow type="text"><field name="TEXT">nom de la donnée</field></shadow></value>
@@ -2302,8 +2307,24 @@
 				<value name="WEB_PAGE_JAUGE_UNITE"><shadow type="text"><field name="TEXT"></field></shadow></value>
 		  	</block>
 
-			<block type="driss_D1R32_transmettre_au_serveur_Web"></block>
+			<block type="driss_web_switch"></block>
+
+			<block type="driss_web_button"></block>
+			  
+			<block type="driss_web_potentiometre">
+				<value name="ROTARY_MIN"><shadow type="math_number">	<field name="NUM">0</field></shadow></value>
+				<value name="ROTARY_MAX"><shadow type="math_number">	<field name="NUM"></field>1024</shadow></value>
+			</block>
 			<!--
+			<block type="driss_web_write_val">
+				<value name="VAL_LABEL"><shadow type="text"><field name="TEXT">nom de la donnée</field></shadow></value>
+				<value name="VAL_UNITE"><shadow type="text"><field name="TEXT"></field></shadow></value>
+			</block>
+			-->
+			<block type="driss_Web_led"></block>
+			
+			<!--
+			<block type="driss_D1R32_transmettre_au_serveur_Web"></block>
 			<block type="driss_D1R32_InsertHTMLCodeInBody"></block>	
 			-->  
 		</category>

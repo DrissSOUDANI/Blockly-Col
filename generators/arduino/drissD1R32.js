@@ -1165,6 +1165,78 @@ Blockly.Arduino.driss_grove_led = function() {
   return code;
 };
 
+//------------------------------------------------------------------------------------------------------------------------------
+//driss_Web_led
+//------------------------------------------------------------------------------------------------------------------------------
+Blockly.Arduino.driss_Web_led = function() { 
+  var del_name = this.getFieldValue('DEL_NAME');
+  var del_color = this.getTitleValue('DEL_COLOR');
+  var stat = Blockly.Arduino.valueToCode(this, 'INPUT_WEB_DEL_STAT', Blockly.Arduino.ORDER_ATOMIC);
+  var checkbox_Show_label = this.getFieldValue('SHOW_LABEL') == 'TRUE';
+ 
+  console.log(" checkbox_Show_label : "+checkbox_Show_label);
+  
+  //del_name = del_name.substr(1, del_name.length-2);
+  del_name = del_name.replace(/ /g, "_");
+  del_name = "_"+del_name+"_";
+
+  var del_name_sa = replaceSpec(del_name);
+  
+  //var zone = getEmplacement(this);
+  
+  Blockly.Arduino.includes_['define_Duinoedu_Esp8266'] = "#include <Duinoedu_Esp8266.h>";
+
+  Blockly.Arduino.handleXML_['existe']  = true;
+  Blockly.Arduino.handleXML_['web_led'] = '  server.send(200,"text/xml",buildXML());';
+ 
+  
+  Blockly.Arduino.setups_['setup_web_led'] = "server.on ( \"/xml\", handleXML );";
+
+  Blockly.Arduino.variables_['var_server'] = "ESP8266WebServer server ( 80 );";
+  Blockly.Arduino.variables_['var_'+del_name_sa] = "String "+del_name_sa+" = \"\";";
+
+  
+  Blockly.Arduino.xmltab_['existe']  = true;
+  Blockly.Arduino.xmltab_['web_write_val_'+del_name_sa] =  '  XML += "<'+del_name_sa+'>"+'+del_name_sa+'+"</'+del_name_sa+'>";';
+ 
+  Blockly.Arduino.javatab_['existe']  = true;
+
+  del_rouge = '<button style=\\"vertical-align:middle; background-color: #C70039; border: none; color: white; border-radius: 50%; padding: 30px; cursor: pointer;\\"></button>';
+  del_verte = '<button style=\\"vertical-align:middle; background-color: #27AE60; border: none; color: white; border-radius: 50%; padding: 30px; cursor: pointer;\\"></button>';
+  del_bleue = '<button style=\\"vertical-align:middle; background-color: #2980B9; border: none; color: white; border-radius: 50%; padding: 30px; cursor: pointer;\\"></button>';
+  del_grise = '<button style=\\"vertical-align:middle; background-color: #E5E8E8; border: none; color: white; border-radius: 50%; padding: 30px; cursor: pointer;\\"></button>';
+  
+  switch (del_color){
+    case "RED" : del_style = del_rouge; break;
+    case "GREEN" : del_style = del_verte; break;
+    case "BLUE" : del_style = del_bleue; break;
+  }
+  Blockly.Arduino.javatab_['web_write_val_'+del_name_sa] =
+    '  javaScript += "if(this.responseXML.getElementsByTagName(\''+del_name_sa+'\')[0].childNodes[0].nodeValue == 1) {";\n' +
+    '  javaScript += "document.getElementById(\'v_'+del_name_sa+'\').innerHTML = \''+del_style+'\'";\n' +
+    '  javaScript += "}";\n'+
+    '  javaScript += "else {";\n' +
+    '  javaScript += "document.getElementById(\'v_'+del_name_sa+'\').innerHTML = \''+del_grise+'\'";\n' +
+    '  javaScript += "}";\n';
+  
+  
+ 
+  var code ='';
+  code +=  '~' ;
+  code +=  'page +=      buildJavascript();\n';
+  if(checkbox_Show_label){
+    code +=  'page += "   '+del_name_sa.replace(/_/g, " ") + ' <span  id=\'v_'+del_name_sa+'\'></span> ";\n';
+  }
+  else{
+    code +=  'page += "    <span  id=\'v_'+del_name_sa+'\'></span> ";\n';
+  }
+  
+  code +=  '~';
+  code +=  del_name_sa+' = String('+stat+');\n';
+  //alert(code);
+  return code; 
+};
+
 
 
 //------------------------------------------------------------------------------------------------------------------------------
