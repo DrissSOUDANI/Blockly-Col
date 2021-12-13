@@ -1276,3 +1276,41 @@ Blockly.Arduino.driss_servo_standard = function() {
   
   return code;
 };
+
+
+//driss_web_btn_download
+Blockly.Arduino.driss_web_btn_download = function() {
+  
+  var url = Blockly.Arduino.valueToCode(this, 'URL', Blockly.Arduino.ORDER_ATOMIC);
+  
+  Blockly.Arduino.includes_['define_Duinoedu_Esp8266'] = "#include <Duinoedu_Esp8266.h>";
+
+  /*
+  Blockly.Arduino.handleXML_['existe']  = true;
+  Blockly.Arduino.handleXML_['web_write_val'] = '  server.send(200,"text/xml",buildXML());';
+ 
+  
+  Blockly.Arduino.setups_['setup_web_write_val'] = "server.on ( \"/xml\", handleXML );";
+
+  Blockly.Arduino.variables_['var_server'] = "ESP8266WebServer server ( 80 );";
+  Blockly.Arduino.variables_['var_'+value_name_sa] = "String "+value_name_sa+" = \"\";";
+
+  
+  Blockly.Arduino.xmltab_['existe']  = true;
+  Blockly.Arduino.xmltab_['web_write_val_'+value_name_sa] =  '  XML += "<'+value_name_sa+'>"+'+value_name_sa+'+"</'+value_name_sa+'>";';
+  
+ 
+  Blockly.Arduino.javatab_['existe']  = true;
+  Blockly.Arduino.javatab_['web_write_val_'+value_name_sa] ='  javaScript += "document.getElementById(\'v_'+value_name_sa+'\').innerHTML = this.responseXML.getElementsByTagName(\''+value_name_sa+'\')[0].childNodes[0].nodeValue";';
+  */
+  
+
+  var code ='';
+  code +=  '~' ;
+  //code +=  'page +=      \n';
+  code +=  'page += "    <button class=\'favorite styled\'  type=\'button\'  onClick=\\'+url+'\\> Télécharger le fichier </button>";';
+  code +=  '~';
+  //code +=  value_name_sa+' = String('+value+');\n';
+  //alert(code);
+  return code; 
+};

@@ -907,3 +907,24 @@ Blockly.Blocks.driss_servo_standard = {
     this.setHelpUrl('');
   }
 };
+
+//driss_web_btn_download
+Blockly.Blocks.driss_web_btn_download = {
+    category: '',
+    helpUrl: '',
+    init: function() {
+      this.appendDummyInput()
+          .appendField("Dessiner un bouton de téléchargement ");
+      this.appendDummyInput()
+          .appendField("dans la page Web");
+      this.appendValueInput("URL")
+          .setCheck(null)
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField("Lien de téléchargement :");
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(28);
+   this.setTooltip("");
+   this.setHelpUrl("");
+    }
+  };
