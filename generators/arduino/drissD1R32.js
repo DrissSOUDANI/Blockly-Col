@@ -721,7 +721,7 @@ Blockly.Arduino.driss_D1R32_web_write_data = function() {
     
     Blockly.Arduino.javatab_['existe']  = true;
     Blockly.Arduino.javatab_['web_write_val_'+value_name_sa] =  ''+
-        '  javaScript += "document.getElementById(\'v_'+value_name_sa+'\').innerHTML = this.responseXML.getElementsByTagName(\''+value_name_sa+'\')[0].childNodes[0].nodeValue;";';
+        '  javaScript += "document.getElementById(\'v_'+value_name_sa+'\').innerHTML = this.responseXML.getElementsByTagName(\''+value_name_sa+'\')[0].childNodes[0].nodeValue;\\n";';
   }
   var code ='';
   //alert(zone);
@@ -1128,7 +1128,7 @@ Blockly.Arduino.driss_web_write_val = function() {
   //Blockly.Arduino.javatab_['debut'] = 'String buildJavascript(){\n'+
   //                                    '  String javaScript=MonEsp.javaScript_start();';
   Blockly.Arduino.javatab_['existe']  = true;
-  Blockly.Arduino.javatab_['web_write_val_'+value_name_sa] ='  javaScript += "document.getElementById(\'v_'+value_name_sa+'\').innerHTML = this.responseXML.getElementsByTagName(\''+value_name_sa+'\')[0].childNodes[0].nodeValue\n";';
+  Blockly.Arduino.javatab_['web_write_val_'+value_name_sa] ='  javaScript += "document.getElementById(\'v_'+value_name_sa+'\').innerHTML = this.responseXML.getElementsByTagName(\''+value_name_sa+'\')[0].childNodes[0].nodeValue\\n";';
   
   //Blockly.Arduino.javatab_['fin']   = '  javaScript+=MonEsp.javaScript_end();\n'+
   //                                    '  return javaScript;\n'+
