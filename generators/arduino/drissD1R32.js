@@ -322,13 +322,18 @@ Blockly.Arduino.driss_ESP_SPIFFS_Initialiser_memoire = function() {
 //--------------------------------------------------------------------------------------------------------------------
 //driss_ESP_SPIFFS_Effacer_memoire
 Blockly.Arduino.driss_ESP_SPIFFS_Effacer_fichier = function() { 
-  var fileName = Blockly.Arduino.valueToCode(this, 'FILENAME', Blockly.Arduino.ORDER_ATOMIC);
+  var file = Blockly.Arduino.valueToCode(this, 'FILENAME', Blockly.Arduino.ORDER_ATOMIC);
   
+  var fileName =  "\"/" ;
+  for(i=1; i<file.length; i++){
+    fileName = fileName+file[i];
+  }
+
   var code =  '#ifdef PAGE_EXIST\n'+
               '  server.handleClient();\n'+
               '  delay(10);\n'+
               '#endif\n'+
-              'deleteFile(SPIFFS, "'+fileName+'");';
+              'deleteFile(SPIFFS, '+fileName+');';
               
   return code;
 }
@@ -387,10 +392,17 @@ Blockly.Arduino.driss_ESP_SPIFFS_Initialiser_memoire_et_ftp = function() {
 //-------------------------------------------------------------------
 //driss_ESP_SPIFFS_creer_ajouter_au_fichier
 Blockly.Arduino.driss_ESP_SPIFFS_creer_ajouter_au_fichier = function() { 
-  var filename = Blockly.Arduino.valueToCode(this, 'FILENAME', Blockly.Arduino.ORDER_ATOMIC);
+  var file = Blockly.Arduino.valueToCode(this, 'FILENAME', Blockly.Arduino.ORDER_ATOMI);
+  
   var data = Blockly.Arduino.valueToCode(this, 'DATA', Blockly.Arduino.ORDER_ATOMIC);
   var space = this.getFieldValue('SPACE') == 'TRUE';
   var new_ligne = this.getFieldValue('NEW_LIGNE') == 'TRUE';
+
+  filename =  "\"/" ;
+  for(i=1; i<file.length; i++){
+    filename = filename+file[i];
+  }
+  
 
   Blockly.Arduino.includes_['define_Duinoedu_Utility.conv'] = "#include <Duinoedu_Utility.conv.h>";
   
