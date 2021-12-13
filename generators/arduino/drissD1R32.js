@@ -297,7 +297,9 @@ Blockly.Arduino.driss_ESP_SPIFFS_Initialiser_memoire = function() {
                                                         '    server.begin();\n'+
                                                         '    Serial.println ("HTTP server started");\n'+
                                                         '  \n'+
-                                                        '  String getPage(){\n'+
+                                                        '  }'; 
+
+  Blockly.Arduino.codeFunctions_['D1R32_spiffs_getPage'] = '  String getPage(){\n'+
                                                         '#define PAGE_EXIST \n'+
                                                         '    String  page = "<!DOCTYPE html><html><head><meta charset=\'ISO-8859-15\'>";\n'+
                                                         '    page += "<title>Blockly@Col - ac-nancy-metz.fr</title></head>";\n'+

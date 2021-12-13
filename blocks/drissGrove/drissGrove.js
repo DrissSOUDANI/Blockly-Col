@@ -186,7 +186,7 @@ Blockly.Blocks.driss_temperature_and_humidity_sensor = {
     this.appendDummyInput()
         .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_temperature_and_humidity_sensor_pro.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize/1.1, "*"), "IMG_CAPTEUR_TEMP_HUM")
         .appendField(Blockly.Msg.DRISS_GROVE_TEXT2)
-        .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownAnalogPins), "PIN");
+        .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN");
     this.setOutput(true, null);
     this.setColour(Blockly.Blocks.drissGrove.HUE);
     this.setTooltip('');
