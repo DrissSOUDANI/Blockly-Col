@@ -173,6 +173,40 @@ Blockly.Blocks['driss_grove_IR_Receiver'] = {
       }
   };
 
+//driss_temperature_sensor_v1_2
+Blockly.Blocks.driss_temperature_sensor_v1_2 = {
+  category: 'driss_grove : capteurs',
+  helpUrl: '',
+  init: function() {
+    this.appendDummyInput()
+        .appendField("la valeur de température mesurée par le capteur");
+    this.appendDummyInput()
+        
+        //.appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_temperature_sensor_V1_2.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize/1.1, "*"), "IMG_CAPTEUR_TEMP")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        
+        .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_temperature_sensor_V1_2.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize/1.1, "*"), "IMG_CAPTEUR_TEMP")
+        .appendField("relié à l'entrée ")
+        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownAnalogPins), "PIN");
+    this.appendValueInput("R0")
+        .setCheck("Number")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("R0");
+    this.appendValueInput("B_THERMISTOR")
+        .setCheck("Number")
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("B");
+    this.setOutput(true, null);
+    this.setColour(Blockly.Blocks.drissGrove.HUE);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  },
+  
+        onchange: function(ev) {
+          //Code ici
+         }
+};
+
 //Grove Temperature & humidity sensor pro mesure OK
 Blockly.Blocks.driss_temperature_and_humidity_sensor = {
   category: 'driss_grove : capteurs',

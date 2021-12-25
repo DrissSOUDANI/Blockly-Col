@@ -5,7 +5,7 @@
 goog.provide('Blockly.Blocks.drissVirtuino');
 
 goog.require('Blockly.Blocks');
-goog.require('Blockly.Types');
+goog.require('Blockly.Types'); 
 
 
 
@@ -54,6 +54,49 @@ Blockly.Blocks.driss_Virtuino_bloc_principal = {
          }
          */
 };
+
+
+Blockly.Blocks.driss_Virtuino_bloc_principal_complet = {
+  category: 'Virtuino',
+  helpUrl: '',
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Virtuino : Initialiser le module bluetooth ")
+        .appendField("RX")
+        .appendField(new Blockly.FieldTextInput("default"), "RX")
+        .appendField("TX")
+        .appendField(new Blockly.FieldTextInput("default"), "TX");
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldCheckbox("TRUE"), "DEBUG")
+        .appendField("Afficher les informations sur le port série")
+        .appendField("Vitesse")
+        .appendField(new Blockly.FieldDropdown([['9600', '9600'],['300', '300'], ['600', '600'], ['1200', '1200'],
+                ['2400', '2400'], ['4800', '4800'], 
+                ['14400', '14400'], ['19200', '19200'], ['28800', '28800'],
+                ['31250', '31250'], ['38400', '38400'], ['57600', '57600'],
+                ['115200', '115200']]), "VITESSE");
+    this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_CENTRE)
+        .appendField(new Blockly.FieldImage("blocks/drissVirtuino/virtuino.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize), "IMA");
+    this.appendDummyInput()
+        .appendField("    Capteurs et Actionneurs réliés à la carte");
+    this.appendDummyInput()
+        .appendField("    avec lesquels va interagir \"Virtuino\"");
+    this.appendStatementInput("ELEMENTS_VIRTUINO")
+        .setCheck(null);
+    this.appendDummyInput()
+        .appendField("    Comportement attendu indépendamment ");
+    this.appendDummyInput()
+        .appendField("    de l'application Virtuino");
+    this.appendStatementInput("CODE_LOUPE")
+        .setCheck(null);
+    this.setColour(35);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+
 
 /*
 //driss_Virtuino_read_capteur
@@ -161,13 +204,14 @@ Blockly.Blocks.driss_Virtuino_input = {
                                                   ["Le détecteur de présence","PIR"], 
                                                   ["Le détecteur de lumière","LIGHT_SENSOR"], 
                                                   ["Le capteur ultrason","ULTRASONS"], 
+                                                  //["Le capteur de température (analogique V1.2)","TEMPERATURE"], 
                                                   ["Le potentiomètre","ROTARY"],
                                                   ["Le recepteur IR","IRRECEIVER"],
                                                   ["Le contact tactile","TOUCH"]
                                                 ]), "SENSOR_1")
         .appendField(new Blockly.FieldImage("blocks/drissVirtuino/input.png", Blockly.Arduino.imageSize*2,  Blockly.Arduino.imageSize), "IMA")
         .appendField("sur la broche")
-        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN");
+        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownAnalogPins), "PIN");
     //this.appendDummyInput()
         //.setAlign(Blockly.ALIGN_CENTRE)
         //.appendField(new Blockly.FieldImage("blocks/drissVirtuino/input.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize), "IMA");
@@ -189,6 +233,7 @@ Blockly.Blocks.driss_Virtuino_input = {
         case "PIR" : image = "blocks/drissVirtuino/Grove_sensor_1_PIR.png"; break;
         case "LIGHT_SENSOR" : image = "blocks/drissVirtuino/Grove_sensor_1_light_sensor.png"; break;
         case "ULTRASONS" : image = "blocks/drissVirtuino/Grove_sensor_1_ultrasonic.png"; break;
+        //case "TEMPERATURE" : image = "blocks/drissVirtuino/Grove_temperature_sensor_v1_2.png"; break;
         case "ROTARY" : image = "blocks/drissVirtuino/Grove_sensor_1_rotary.png"; break;
         case "IRRECEIVER" : image = "blocks/drissVirtuino/Grove_sensor_1_Infrared_Receiver.png"; break;
         case "TOUCH" : image = "blocks/drissVirtuino/Grove_sensor_1_touch.png"; break;

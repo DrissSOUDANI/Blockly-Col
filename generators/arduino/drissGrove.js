@@ -103,6 +103,39 @@ Blockly.Arduino.driss_grove_IR_Receiver_code = function() {
 };
 
 
+//driss_temperature_sensor_v1_2
+Blockly.Arduino.driss_temperature_sensor_v1_2 = function() {
+  var dropdown_pin = this.getFieldValue('PIN');
+  var value_r0  = Blockly.Arduino.valueToCode(this, 'R0', Blockly.Arduino.ORDER_ATOMIC);
+  var value_B  = Blockly.Arduino.valueToCode(this, 'B_THERMISTOR', Blockly.Arduino.ORDER_ATOMIC);
+
+  var var_pin = 'pinTempSensor_'+dropdown_pin;
+
+  Blockly.Arduino.includes_['define_Math'] = '#include <Math.h>\n'; 
+  Blockly.Arduino.variables_['define_'+var_pin] = 'int '+var_pin+' = '+dropdown_pin+';';
+  
+  Blockly.Arduino.codeFunctions_['define_get_temperature_Sensor_V1_2'] = '\n/*lecture de la température avrec le capteur Grove Température V1.2*/ \n' + 
+                          'float get_temperature_width_v1_2_sensor() {\n'+
+                          '  int a = analogRead('+var_pin+');\n'+ 
+                          '  float R0 = '+value_r0+';\n'+
+                          '  float B = '+value_B+';\n'+
+                          '  float R = 1023.0 / a - 1.0;\n'+ 
+                          '  R = R0 * R;\n'+
+                          '  //Conversion de la tempétrature en utilisant le datasheet\n'+
+                          '  float temperature = 1.0/(log(R/R0)/B+1/298.15)-273.15;\n'+
+                          '  //Serial.println(temperature);\n'+       
+                          '  return temperature;\n'+
+                          '}\n';
+
+   
+  code = 'get_temperature_width_v1_2_sensor()' ;
+  
+ return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+
+
+
 
 //Grove Temperature & humidity sensor pro mesure OK
 Blockly.Arduino.driss_temperature_and_humidity_sensor = function() {
