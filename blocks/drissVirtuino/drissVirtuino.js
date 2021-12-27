@@ -76,8 +76,8 @@ Blockly.Blocks.driss_Virtuino_bloc_principal_complet = {
                 ['31250', '31250'], ['38400', '38400'], ['57600', '57600'],
                 ['115200', '115200']]), "VITESSE");
     this.appendDummyInput()
-                .appendField(new Blockly.FieldCheckbox("TRUE"), "MODE_MANUEL")
-                .appendField("Mode manuel (Contrôle par l'application Virtuino)");
+                .appendField(new Blockly.FieldDropdown([["Pilotage manuel par l'application Virtuino","MANU"], ["Pilotage automatique (sans Virtuino)","AUTO"]]), "MODE");
+            
     this.appendDummyInput()
         .setAlign(Blockly.ALIGN_CENTRE)
         .appendField(new Blockly.FieldImage("blocks/drissVirtuino/virtuino.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize), "IMA");

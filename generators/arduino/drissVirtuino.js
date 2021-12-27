@@ -83,7 +83,7 @@ Blockly.Arduino.driss_Virtuino_bloc_principal_complet = function() {
   var tx = this.getFieldValue('TX');
   var debug = this.getFieldValue('DEBUG') == 'TRUE';
   var vitesse = this.getFieldValue('VITESSE');
-  var mode_manuel = this.getFieldValue('MODE_MANUEL') == 'TRUE';
+  var mode = this.getFieldValue('MODE');
   var statements_elements_virtuino = Blockly.Arduino.statementToCode(this, 'ELEMENTS_VIRTUINO');
   var statements_elements_loop = Blockly.Arduino.statementToCode(this, 'CODE_LOUPE');
 
@@ -148,14 +148,14 @@ Blockly.Arduino.driss_Virtuino_bloc_principal_complet = function() {
   
 
   var code = "";
-  if(mode_manuel == true){
-    code += 'virtuinoRun();\n'+
-            'vDelay(1000);';
-  }else{
-    code = '//virtuinoRun();\n'+
-           '//vDelay(1000);\n' +
-             statements_elements_loop ;
+  switch (mode) {
+    case "MANU" : code += 'virtuinoRun();\n'+
+                          'vDelay(1000);';
+    case "AUTO" : code = '//virtuinoRun();\n'+
+                          '//vDelay(1000);\n' +
+                          statements_elements_loop ;
   }
+ 
 
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
