@@ -180,10 +180,32 @@ Blockly.Arduino.driss_Virtuino_led = function() {
 
 //driss_Virtuino_input
 Blockly.Arduino.driss_Virtuino_input = function() {
+  var sensor = this.getFieldValue('SENSOR_1');
+  //alert (sensor);
   var color = this.getFieldValue('COLOR');
   var pin = this.getFieldValue('PIN');
+
   Blockly.Arduino.setups_['setup_button_'+pin] = 'pinMode('+pin+', INPUT);';
   var code = '';
+  if(sensor == "TEMPERATURE_V12") { 
+    var var_pin = pin;
+    var value_r0 = 100000;
+    var value_B = 4275;
+    Blockly.Arduino.variables_['define_V0'] = 'float V0;';
+    Blockly.Arduino.codeFunctions_['define_get_temperature_Sensor_V1_2'] = '\n/*lecture de la température avrec le capteur Grove Température V1.2*/ \n' + 
+    'float get_temperature_width_v1_2_sensor() {\n'+
+    '  int a = analogRead('+var_pin+');\n'+ 
+    '  float R0 = '+value_r0+';\n'+
+    '  float B = '+value_B+';\n'+
+    '  float R = 1023.0 / a - 1.0;\n'+ 
+    '  R = R0 * R;\n'+
+    '  //Conversion de la tempétrature en utilisant le datasheet\n'+
+    '  float temperature = 1.0/(log(R/R0)/B+1/298.15)-273.15;\n'+
+    '  //Serial.println(temperature);\n'+       
+    '  return temperature;\n'+
+    '}\n';
+    code = "V0 = get_temperature_width_v1_2_sensor();\n "
+  }
   return code;
   //return [code, Blockly.Arduino.ORDER_ATOMIC];
 };

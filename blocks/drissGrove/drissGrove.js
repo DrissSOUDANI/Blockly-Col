@@ -185,7 +185,7 @@ Blockly.Blocks.driss_temperature_sensor_v1_2 = {
         //.appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_temperature_sensor_V1_2.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize/1.1, "*"), "IMG_CAPTEUR_TEMP")
         .setAlign(Blockly.ALIGN_RIGHT)
         
-        .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_temperature_sensor_V1_2.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize/1.1, "*"), "IMG_CAPTEUR_TEMP")
+        .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_temperature_sensor_v1_2.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize/1.1, "*"), "IMG_CAPTEUR_TEMP")
         .appendField("relié à l'entrée ")
         .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownAnalogPins), "PIN");
     this.appendValueInput("R0")

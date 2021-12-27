@@ -113,6 +113,9 @@ Blockly.Arduino.driss_temperature_sensor_v1_2 = function() {
 
   Blockly.Arduino.includes_['define_Math'] = '#include <Math.h>\n'; 
   Blockly.Arduino.variables_['define_'+var_pin] = 'int '+var_pin+' = '+dropdown_pin+';';
+  //Blockly.Arduino.variables_['define_V0'] = 'float V0;';
+
+  
   
   Blockly.Arduino.codeFunctions_['define_get_temperature_Sensor_V1_2'] = '\n/*lecture de la température avrec le capteur Grove Température V1.2*/ \n' + 
                           'float get_temperature_width_v1_2_sensor() {\n'+

@@ -204,17 +204,17 @@ Blockly.Blocks.driss_Virtuino_input = {
                                                   ["Le détecteur de présence","PIR"], 
                                                   ["Le détecteur de lumière","LIGHT_SENSOR"], 
                                                   ["Le capteur ultrason","ULTRASONS"], 
-                                                  //["Le capteur de température (analogique V1.2)","TEMPERATURE"], 
+                                                  ["Le capteur de température","TEMPERATURE_V12"], 
                                                   ["Le potentiomètre","ROTARY"],
                                                   ["Le recepteur IR","IRRECEIVER"],
                                                   ["Le contact tactile","TOUCH"]
                                                 ]), "SENSOR_1")
-        .appendField(new Blockly.FieldImage("blocks/drissVirtuino/input.png", Blockly.Arduino.imageSize*2,  Blockly.Arduino.imageSize), "IMA")
+        //.appendField(new Blockly.FieldImage("blocks/drissVirtuino/input.png", Blockly.Arduino.imageSize*2,  Blockly.Arduino.imageSize), "IMA")
         .appendField("sur la broche")
         .appendField(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownAnalogPins), "PIN");
-    //this.appendDummyInput()
-        //.setAlign(Blockly.ALIGN_CENTRE)
-        //.appendField(new Blockly.FieldImage("blocks/drissVirtuino/input.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize), "IMA");
+    this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_CENTRE)
+        .appendField(new Blockly.FieldImage("blocks/drissVirtuino/input.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize), "IMA");
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -233,7 +233,7 @@ Blockly.Blocks.driss_Virtuino_input = {
         case "PIR" : image = "blocks/drissVirtuino/Grove_sensor_1_PIR.png"; break;
         case "LIGHT_SENSOR" : image = "blocks/drissVirtuino/Grove_sensor_1_light_sensor.png"; break;
         case "ULTRASONS" : image = "blocks/drissVirtuino/Grove_sensor_1_ultrasonic.png"; break;
-        //case "TEMPERATURE" : image = "blocks/drissVirtuino/Grove_temperature_sensor_v1_2.png"; break;
+        case "TEMPERATURE_V12" : image = "blocks/drissVirtuino/Grove_temperature_sensor_v1_2.png"; break;
         case "ROTARY" : image = "blocks/drissVirtuino/Grove_sensor_1_rotary.png"; break;
         case "IRRECEIVER" : image = "blocks/drissVirtuino/Grove_sensor_1_Infrared_Receiver.png"; break;
         case "TOUCH" : image = "blocks/drissVirtuino/Grove_sensor_1_touch.png"; break;
