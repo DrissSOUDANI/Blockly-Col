@@ -146,14 +146,17 @@ Blockly.Arduino.driss_Virtuino_bloc_principal_complet = function() {
   '  espSerial.setTimeout(50);\n'+
   '  virtuino.begin(onReceived,onRequested,256);\n';   
   
-
+//alert (mode);
   var code = "";
   switch (mode) {
     case "MANU" : code += 'virtuinoRun();\n'+
-                          'vDelay(1000);';
-    case "AUTO" : code = '//virtuinoRun();\n'+
+                          'vDelay(1000);\n'+
+                           statements_elements_virtuino;
+                  break;
+    case "AUTO" : code += '//virtuinoRun();\n'+
                           '//vDelay(1000);\n' +
                           statements_elements_loop ;
+                  break;
   }
  
 
@@ -213,7 +216,8 @@ Blockly.Arduino.driss_Virtuino_input = function() {
     '  //Serial.println(temperature);\n'+       
     '  return temperature;\n'+
     '}\n';
-    code = "V0 = get_temperature_width_v1_2_sensor();\n "
+    code = "V0 = get_temperature_width_v1_2_sensor();\n ";
+    code += "V[0] = get_temperature_width_v1_2_sensor();\n "
   }
   return code;
   //return [code, Blockly.Arduino.ORDER_ATOMIC];
