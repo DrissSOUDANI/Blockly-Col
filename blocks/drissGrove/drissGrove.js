@@ -507,23 +507,25 @@ Blockly.Blocks.driss_grove_led = {
 };
 */
 
+
+
 //Grove red LED OK
 Blockly.Blocks.driss_grove_red_led = {
-   category: 'driss_grove : actionneurs',
-  helpUrl: '',
-  init: function() {
-    this.setColour(Blockly.Blocks.drissGrove.HUE);
-    this.appendDummyInput("")
-        .appendTitle(new Blockly.FieldDropdown([[Blockly.Msg.DRISS_GROVE_TEXT33, "HIGH"], [Blockly.Msg.DRISS_GROVE_TEXT34, "LOW"]]), "STAT")
-        .appendTitle(Blockly.Msg.DRISS_GROVE_TEXT32)
-        .appendTitle(Blockly.Msg.DRISS_GROVE_TEXT35)
-        .appendTitle(new Blockly.FieldImage("blocks/drissGrove/Grove_red_LED.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize))
-        .appendTitle(Blockly.Msg.DRISS_GROVE_TEXT9)
-        .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setTooltip(Blockly.Msg.DRISS_GROVE_SORTIE);
-  }
+  category: 'driss_grove : actionneurs',
+ helpUrl: '',
+ init: function() {
+   this.setColour(Blockly.Blocks.drissGrove.HUE);
+   this.appendDummyInput("")
+       .appendTitle(new Blockly.FieldDropdown([[Blockly.Msg.DRISS_GROVE_TEXT33, "HIGH"], [Blockly.Msg.DRISS_GROVE_TEXT34, "LOW"]]), "STAT")
+       .appendTitle(Blockly.Msg.DRISS_GROVE_TEXT32)
+       .appendTitle(Blockly.Msg.DRISS_GROVE_TEXT35)
+       .appendTitle(new Blockly.FieldImage("blocks/drissGrove/Grove_red_LED.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize))
+       .appendTitle(Blockly.Msg.DRISS_GROVE_TEXT9)
+       .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN");
+   this.setPreviousStatement(true, null);
+   this.setNextStatement(true, null);
+   this.setTooltip(Blockly.Msg.DRISS_GROVE_SORTIE);
+ }
 };
 
 
@@ -647,6 +649,25 @@ Blockly.Blocks.driss_grove_mini_ventilateur = {
     this.setTooltip(Blockly.Msg.DRISS_GROVE_SORTIE);
   }
 };
+
+//driss_grove_relais
+Blockly.Blocks.driss_grove_relais = {
+  category: 'driss_grove : actionneurs',
+ helpUrl: '',
+ init: function() {
+  this.setColour(Blockly.Blocks.drissGrove.HUE);
+  this.appendDummyInput("")
+      .appendTitle(new Blockly.FieldDropdown([["Fermer", "HIGH"], ["Ouvrir", "LOW"]]), "STAT")
+      .appendTitle("le relais")
+      .appendTitle(new Blockly.FieldImage("blocks/drissGrove/Grove _relais.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize))
+      .appendTitle("relié à la sortie")
+      .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN");
+  this.setPreviousStatement(true, null);
+  this.setNextStatement(true, null);
+  this.setTooltip(Blockly.Msg.DRISS_GROVE_SORTIE);
+}
+};
+
 
 
 //Grove driss_grove_piezo_buzzer ok

@@ -148,7 +148,7 @@ Blockly.Arduino.driss_temperature_and_humidity_sensor = function() {
 
   var var_dht = 'dht_'+dropdown_pin;
 
-  Blockly.Arduino.includes_['define_DHT'] = '#include <DHT.h>\n'; 
+  Blockly.Arduino.includes_['define_DHT'] = '#include <DHT.h>\n';  
   
   switch(dropdown_ref){
     case "DHT22" : //Blockly.Arduino.definitions_['define_DHTTYPE'] = '#define DHTTYPE DHT22 ; // DHT 22  (AM2302)';
@@ -554,6 +554,15 @@ Blockly.Arduino.driss_grove_mini_ventilateur = function() {
   var dropdown_pin = this.getTitleValue('PIN');
   var dropdown_stat = this.getTitleValue('STAT');
   Blockly.Arduino.setups_['setup_mini_ventilateur'+dropdown_pin] = 'pinMode('+dropdown_pin+', OUTPUT);'; //code à insérer dans le setup Arduino
+  var code = 'digitalWrite('+dropdown_pin+','+dropdown_stat+');\n'  //code à insérer dans la loop Arduino
+  return code;
+};
+
+//driss_grove_relais
+Blockly.Arduino.driss_grove_relais = function() {
+  var dropdown_pin = this.getTitleValue('PIN');
+  var dropdown_stat = this.getTitleValue('STAT');
+  Blockly.Arduino.setups_['setup_relais_'+dropdown_pin] = 'pinMode('+dropdown_pin+', OUTPUT);'; //code à insérer dans le setup Arduino
   var code = 'digitalWrite('+dropdown_pin+','+dropdown_stat+');\n'  //code à insérer dans la loop Arduino
   return code;
 };
