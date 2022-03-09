@@ -136,8 +136,8 @@
 									</li>
 									
 									<li>
-										<a href="./librairies-Arduino/Arduino.1.8.5_for_Blockly@Col.zip" target="_blanck" title="télécharger Arduino 1.8.5 avec les librairies à utiliser avec Blockly@Col - inclut les cartes LinkItOne et D1R32 ">
-										<span class="glyphicon glyphicon glyphicon-link"></span>Arduino.1.8.5 (standard+LinkItOne+D1R32) (13/22/2021)</a>
+										<a href="./librairies-Arduino/arduino-1.8.5_for_Blockly@Col_V2022.zip" target="_blanck" title="télécharger Arduino 1.8.5 avec les librairies à utiliser avec Blockly@Col - inclut les cartes LinkItOne et D1R32 ">
+										<span class="glyphicon glyphicon glyphicon-link"></span>Arduino.1.8.5 (standard+LinkItOne+D1R32+190 librairies) (29/12/2021)</a>
 									</li>
 
 								</ul>
@@ -1642,7 +1642,7 @@
             <block type="driss_ContactMagnetique_DetecteOuverture_v2"></block>
 
         </category>
-		-->
+	-->
     </category>
      <sep></sep>
     
@@ -2360,15 +2360,26 @@
 			<block type="driss_ESP_SPIFFS_Effacer_fichier">
 				<value name="FILENAME">	<shadow type="text"><field name="TEXT">nom du fichier</field></shadow></value>
 			</block>
+			<!--
 			<block type="driss_ESP_SPIFFS_Initialiser_memoire_et_ftp">
 				<value name="USERNAME">	<shadow type="text"><field name="TEXT">utilisateur</field></shadow></value>
 				<value name="PASSWORD">	<shadow type="text"><field name="TEXT">mot de passe</field></shadow></value>
 			</block>
+		-->
 			<block type="driss_ESP_SPIFFS_creer_ajouter_au_fichier">
 				<value name="FILENAME">	<shadow type="text"><field name="TEXT">nom du fichier</field></shadow></value>
 				<value name="DATA">	<shadow type="text"><field name="TEXT">donnée à ajouter</field></shadow></value>
 			</block>
-	
+			<!--
+			<block type="driss_ESP_SPIFFS_ajouter_lien_telechargement_sur_page_Web">
+				<value name="FILENAME">	<shadow type="text"><field name="TEXT">nom du fichier</field></shadow></value>
+				<value name="DATA">	<shadow type="text"><field name="TEXT">donnée à ajouter</field></shadow></value>
+			</block>
+			-->
+			<block type="driss_ESP_SPIFFS_valider_les_ecritures"></block>
+
+			<block type="driss_ESP_SPIFFS_show_informations"></block>
+			
 		</category>
 
     </category>
@@ -2376,19 +2387,19 @@
 
 	<!-- CAT_DRISS_VIRTUINO **********************************************************************************************************************-->
     <category name="CAT_DRISS_VIRTUINO" colour="#8181F7">
-		<block type="driss_Virtuino_bloc_principal"></block>
-		<block type="driss_Virtuino_bloc_principal_complet"></block>
-		<block type="driss_Virtuino_bloc_principal_complet2">
+		<!--<block type="driss_Virtuino_bloc_principal"></block>
+		<block type="driss_Virtuino_bloc_principal_complet2"></block>-->
+		<block type="driss_Virtuino_bloc_principal_complet">
 			<value name="VIRTUINO_BLUETOOTH">	
 				<shadow type="driss_virtuino_bluetooth">
-				
+					<value name="RX">	<shadow type="math_number"><field name="RX">1</field></shadow></value>
 				</shadow>
 			</value>
 		</block>
 
 
 		
-		<!--<block type="driss_virtuino_bluetooth"></block>-->
+		<block type="driss_virtuino_bluetooth"></block>
 
 		<!-- <block type="driss_Virtuino_read_capteur"></block> -->
 		<block type="driss_Virtuino_led"></block>

@@ -112,7 +112,7 @@ Blockly.Blocks.driss_grove_light_sensor = {
         .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownAnalogPins), "PIN");
     this.appendDummyInput()
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("(valeur numérique comprise entre 0 et 1024) ");
+        .appendField("(valeur numérique comprise entre 0 et 4095) ");
     this.setInputsInline(false);
     this.setOutput(true, null);
     this.setColour(Blockly.Blocks.drissGrove.HUE);

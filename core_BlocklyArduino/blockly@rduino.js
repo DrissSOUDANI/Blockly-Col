@@ -200,10 +200,11 @@ BlocklyDuino.saveXmlFile = function () {
 		newel.appendChild(document.createTextNode(toolboxids));
 		xml.insertBefore(newel, xml.childNodes[0]);
 	}
-	
+	//alert(5);
 	var data = Blockly.Xml.domToPrettyText(xml);
 	var datenow = Date.now();
 	var uri = 'data:text/xml;charset=utf-8,' + encodeURIComponent(data);
+	
 	$(this).attr({
 	            'download': "blockly@col_"+datenow+".xml",
 				'href': uri,
@@ -412,7 +413,7 @@ BlocklyDuino.bindFunctions = function() {
 /**
  * checks all checkboxes in modal "configModal"
  */
-BlocklyDuino.checkAll = function () {
+BlocklyDuino.checkAll = function () { 
     if(this.checked) {
         // Iterate each checkbox
         $('#modal-body-config input:checkbox[id^=checkbox_]').each(function() {

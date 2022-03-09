@@ -8,7 +8,7 @@ goog.require('Blockly.Blocks');
 goog.require('Blockly.Types'); 
 
 
-
+/*
 Blockly.Blocks.driss_Virtuino_bloc_principal = {
   category: 'Virtuino',
   helpUrl: '',
@@ -45,18 +45,11 @@ Blockly.Blocks.driss_Virtuino_bloc_principal = {
     this.setColour(35);
  this.setTooltip("");
  this.setHelpUrl("");
-  }/*,
-
-        onchange: function(ev) {
-         this.getField("VITESSE").setValue("9600");
-         this.getField("RX").setValue("8");
-         this.getField("TX").setValue("9");
-         }
-         */
+  }
 };
 
 
-Blockly.Blocks.driss_Virtuino_bloc_principal_complet = {
+Blockly.Blocks.driss_Virtuino_bloc_principal_complet2 = {
   category: 'Virtuino',
   helpUrl: '',
   init: function() {
@@ -98,10 +91,10 @@ Blockly.Blocks.driss_Virtuino_bloc_principal_complet = {
  this.setHelpUrl("");
   }
 };
+*/
 
 
-
-Blockly.Blocks.driss_Virtuino_bloc_principal_complet2 = {
+Blockly.Blocks.driss_Virtuino_bloc_principal_complet = {
   category: 'Virtuino',
   helpUrl: '',
   init: function() {
@@ -110,21 +103,24 @@ Blockly.Blocks.driss_Virtuino_bloc_principal_complet2 = {
         .appendField("VIRTUINO");
     this.appendDummyInput()
         .setAlign(Blockly.ALIGN_CENTRE)
-        .appendField(new Blockly.FieldImage("blocks/drissVirtuino/virtuino6.png", Blockly.Arduino.imageSize*6,  Blockly.Arduino.imageSize*1.5), "IMA");
+        .appendField(new Blockly.FieldImage("blocks/drissVirtuino/virtuino6.png", Blockly.Arduino.imageSize*7,  Blockly.Arduino.imageSize*1.5), "IMA");
     this.appendDummyInput()
-        .appendField("1 - Initialiser le module Bluetooth de la maquette");
+        .appendField("1 - Initialiser le module Bluetooth de la maquette")
+        .appendField("et déclarer les variables");
     this.appendStatementInput("VIRTUINO_BLUETOOTH")
         .setCheck(null);
     this.appendDummyInput()
-        .appendField("2 - Lister les Capteurs et Actionneurs de la ");
-    this.appendDummyInput()
-        .appendField("   maquette avec lesquels va intéragir Virtuino");
+        .appendField("2 - Lister les Capteurs / Actionneurs de la")
+        .appendField("maquette avec lesquels va intéragir Virtuino");
+    //this.appendDummyInput()
+        //.appendField("   maquette avec lesquels va intéragir Virtuino");
     this.appendStatementInput("ELEMENTS_VIRTUINO")
         .setCheck(null);
     this.appendDummyInput()
-        .appendField("3 - Décrire éventuellement le comportement");
-    this.appendDummyInput()
-        .appendField("   autonome de la maquette");
+        .appendField("3 - Décrire le comportement autonome")
+        .appendField("de la maquette (optionnel)");
+    //this.appendDummyInput()
+        //.appendField("   de la maquette (optionnel)");
     this.appendStatementInput("CODE_LOUPE")
         .setCheck(null);
     this.setColour(35);
@@ -236,7 +232,8 @@ Blockly.Blocks.driss_Virtuino_actuator = {
         .appendField(" ")
         .appendField(new Blockly.FieldDropdown([    ["L'actionneur","ANY_ACTUATOR"], 
                                                     ["Le mini ventilateur","MINIVENTILATEUR"], 
-                                                    ["Le relais","RELAY"]
+                                                    ["Le relais","RELAY"],
+                                                    ["Le servomoteur","SERVO"]
                                               ]),
                                                 "ACTUATOR")
         .appendTitle(new Blockly.FieldImage("blocks/drissVirtuino/output.png", Blockly.Arduino.imageSize*2,  Blockly.Arduino.imageSize), "IMA")
@@ -258,7 +255,8 @@ Blockly.Blocks.driss_Virtuino_actuator = {
       switch(actuator) {
         case "ANY_ACTUATOR"  : image = "blocks/drissVirtuino/output.png"; break;
         case "MINIVENTILATEUR"    : image = "blocks/drissVirtuino/Grove_mini_ventilateur.png"; break;
-        case "RELAY"    : image = "blocks/drissVirtuino/Grove _relais.png"; break;
+        case "RELAY"    : image = "blocks/drissVirtuino/Grove_relais.png"; break;
+        case "SERVO"    : image = "blocks/drissVirtuino/Grove_servo.png"; break;
         
       }
       

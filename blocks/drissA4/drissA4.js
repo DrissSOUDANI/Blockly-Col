@@ -475,7 +475,7 @@ Blockly.Blocks['driss_OFF'] = {
     this.setOutput(true, null);
     this.setColour(0);
  this.setTooltip("");
- this.setHelpUrl("");
+ this.setHelpUrl(""); 
   }
 };
 

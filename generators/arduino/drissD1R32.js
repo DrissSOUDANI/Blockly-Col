@@ -288,16 +288,16 @@ Blockly.Arduino.driss_ESP_SPIFFS_Initialiser_memoire = function() {
    Blockly.Arduino.setups_['setup_D1R32_init_spiffs'] = '#ifdef ESP32 \n'+
                                                         '  if (SPIFFS.begin(true)) {\n'+
                                                         '    listDir(SPIFFS, "/", 0,server);\n'+
-                                                        '#elif defined ESP8266\n'+
+                                                        '  #elif defined ESP8266\n'+
                                                         '  if (SPIFFS.begin()) {\n'+
                                                         '    listESP8266(server);\n'+
-                                                        '#endif\n'+
+                                                        '  #endif\n'+
                                                         '    Serial.println("SPIFFS opened!");\n'+
                                                         '  }\n'+
-                                                        '    server.begin();\n'+
-                                                        '    Serial.println ("HTTP server started");\n'+
-                                                        '  \n'+
-                                                        '  }'; 
+                                                        '  server.begin();\n'+
+                                                        '  Serial.println ("HTTP server started");\n'+
+                                                        '';
+                                                        //'  }'; 
 
   Blockly.Arduino.codeFunctions_['D1R32_spiffs_getPage'] = '  String getPage(){\n'+
                                                         '#define PAGE_EXIST \n'+
@@ -329,11 +329,11 @@ Blockly.Arduino.driss_ESP_SPIFFS_Effacer_fichier = function() {
     fileName = fileName+file[i];
   }
 
-  var code =  '#ifdef PAGE_EXIST\n'+
-              '  server.handleClient();\n'+
-              '  delay(10);\n'+
-              '#endif\n'+
-              'deleteFile(SPIFFS, '+fileName+');';
+  var code =  //'#ifdef PAGE_EXIST\n'+
+              //'  server.handleClient();\n'+
+              //'  delay(10);\n'+
+              //'#endif\n'+
+              'deleteFile(SPIFFS, '+fileName+');\n';
               
   return code;
 }
@@ -402,11 +402,10 @@ Blockly.Arduino.driss_ESP_SPIFFS_creer_ajouter_au_fichier = function() {
   for(i=1; i<file.length; i++){
     filename = filename+file[i];
   }
-  
 
   Blockly.Arduino.includes_['define_Duinoedu_Utility.conv'] = "#include <Duinoedu_Utility.conv.h>";
   
-  var code =  'appendFile(SPIFFS, '+filename+', PCHAR2('+data+'));\n';
+  var code =  'appendFile(SPIFFS, '+filename+', String('+data+').c_str());\n';
   if(space)  code += 'appendFile(SPIFFS, '+filename+', " ");\n';
   if(new_ligne)  code += 'appendFile(SPIFFS, '+filename+', "\\n");\n';
               
@@ -414,6 +413,99 @@ Blockly.Arduino.driss_ESP_SPIFFS_creer_ajouter_au_fichier = function() {
 }
 
 
+//-------------------------------------------------------------------
+//driss_ESP_SPIFFS_ajouter_lien_telechargement_sur_page_Web
+Blockly.Arduino.driss_ESP_SPIFFS_ajouter_lien_telechargement_sur_page_Web = function() { 
+  var file = Blockly.Arduino.valueToCode(this, 'FILENAME', Blockly.Arduino.ORDER_ATOMI);
+  
+  link=  "" ;
+  filename =  "\"/" ;
+  
+  for(i=1; i<file.length; i++){
+    filename = filename+file[i];
+  }
+  link = filename.substr(1);
+  link = link.substr(0,link.length-1);
+  //alert(filename+'       '+link);
+
+  Blockly.Arduino.includes_['define_Duinoedu_Utility.conv'] = "#include <Duinoedu_Utility.conv.h>";
+  
+  Blockly.Arduino.codeFunctions_['D1R32_spiffs_getPage'] = '  String getPage(){\n'+
+                                                        '#define PAGE_EXIST \n'+
+                                                        '    String  page = "<!DOCTYPE html><html><head><meta charset=\'ISO-8859-15\'>";\n'+
+                                                        '    page += "<title>Blockly@Col - ac-nancy-metz.fr</title></head>";\n'+
+                                                        '    page += MonEsp.addPhoneStyle();\n'+
+                                                        '    page += "<BODY onload=\'process()\'>";\n'+
+                                                        '    page += "<a href=\''+link+'\'> '+link.substr(1)+'</a>";\n'+
+                                                        '    page += "</body>";\n'+
+                                                        '    page += "</html>";\n'+
+                                                        '    return page;\n'+
+                                                        '  }';
+  
+  code="";           
+  return code;
+}
+
+
+
+//-------------------------------------------------------------------
+//driss_ESP_SPIFFS_valider_les_ecritures
+//Ce bloc est necessaire pour que le code soit dans la boucle repeter indifinement si elle existe dans le programme
+Blockly.Arduino.driss_ESP_SPIFFS_valider_les_ecritures = function() { 
+  var code =  '#ifdef PAGE_EXIST\n'+
+              '  server.handleClient();\n'+
+              '  delay(10);\n'+
+              '#endif\n';      
+  return code;
+};
+
+
+//-------------------------------------------------------------------
+//driss_ESP_SPIFFS_show_informations
+Blockly.Arduino.driss_ESP_SPIFFS_show_informations = function() { 
+  
+  Blockly.Arduino.codeFunctions_['D1R32_spiffs_printDirectory'] = '  void printDirectory(File dir, int numTabs=2) {\n'+
+                                                        '  while (true) { \n'+
+                                                        '    File entry =  dir.openNextFile();\n'+
+                                                        '    if (! entry) { // no more files\n'+
+                                                        '      break;;\n'+
+                                                        '    }\n'+
+                                                        '    for (uint8_t i = 0; i < numTabs; i++) {\n'+
+                                                        '      Serial.print("\t");\n'+
+                                                        '    }\n'+
+                                                        '    Serial.print(entry.name());\n'+
+                                                        '    if (entry.isDirectory()) {\n'+
+                                                        '      Serial.println("/");\n'+
+                                                        '      printDirectory(entry, numTabs + 1);\n'+
+                                                        '    } else {\n'+
+                                                        '      // files have sizes, directories do not\n'+
+                                                        '      Serial.print("\t\t");\n'+
+                                                        '      Serial.println(entry.size(), DEC);\n'+
+                                                        '    }\n'+
+                                                        '    entry.close();\n'+
+                                                        '    Serial.println("-----------------------");\n'+
+                                                        '  }\n'+
+                                                        '}';
+  
+  Blockly.Arduino.setups_['setup_D1R32_spiffs_show_informations'] = 'unsigned int totalBytes = SPIFFS.totalBytes();\n'+
+                                                        '  unsigned int usedBytes = SPIFFS.usedBytes();\n'+
+                                                        '  Serial.println("Informations systeme");\n'+
+                                                        '  Serial.println("-----------------------");\n'+
+                                                        '  Serial.print("Espace Total : ");\n'+
+                                                        '  Serial.print(totalBytes);\n'+
+                                                        '  Serial.println("byte");\n'+
+                                                        '  Serial.print("Espace utilise : ");\n'+
+                                                        '  Serial.print(usedBytes);\n'+
+                                                        '  Serial.println();\n'+
+                                                        '  Serial.println("-----------------------");\n'+
+                                                        '  // Lister le répertoire\n'+
+                                                        '  File dir = SPIFFS.open("/");\n'+
+                                                        '  printDirectory(dir);';
+                                                        //'  }'; 
+  
+  var code =  '';      
+  return code;
+};
 
 
 
@@ -769,6 +861,7 @@ Blockly.Arduino.driss_D1R32_afficher_jauge_dans_page_web = function() {
   Blockly.Arduino.includes_['define_Duinoedu_Esp8266'] = "#include <Duinoedu_Esp8266.h>";
 
   Blockly.Arduino.variables_['var_server'] = "ESP8266WebServer server ( 80 );";
+  Blockly.Arduino.variables_['var_'+value_name_sa] = "String "+value_name_sa+"=\"\";";
 
   var zone = getEmplacement(this);
   //alert(zone);
@@ -794,7 +887,7 @@ Blockly.Arduino.driss_D1R32_afficher_jauge_dans_page_web = function() {
     case "CADRE" : code +=  '~' ;
                    code +=  'page +=        buildJavascript();\n';
                    code +=  'page +=        MonEsp.gauge('+min+','+max+',"'+value_name_sa+'");';
-                   code +=  '~' ;
+                   code +=  '~'+value_name_sa+' = String('+value+');\n'
                    break;
       
       }  

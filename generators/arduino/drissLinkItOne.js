@@ -36,10 +36,14 @@ Blockly.Arduino.driss_linkItOne_GSM_initialisation = function() {
   Blockly.Arduino.includes_['define_LTask'] = '#include <LTask.h>'; 
   Blockly.Arduino.includes_['define_LGSM'] = '#include <LGSM.h>'; 
 
+  Blockly.Arduino.variables_['define_linkitOne_num'] = 'String  linkitOne_num;';
+  Blockly.Arduino.variables_['define_linkitOne_sms'] = 'String  linkitOne_sms;';
+
   Blockly.Arduino.codeFunctions_['define_getNumSMS'] = '\nString getNumSMS() {\n'+
    ' char num[20] ;\n'+       
    ' LSMS.remoteNumber(num, 20);\n'+
    ' String numero(num);\n'+
+   ' linkitOne_num = numero;\n'+
    ' return  numero;\n'+
    '}';  
 
@@ -52,6 +56,7 @@ Blockly.Arduino.driss_linkItOne_GSM_initialisation = function() {
    '  msg[len++] = (char)c;\n'+
    '  }\n'+
    ' String message(msg);\n'+
+   ' linkitOne_sms = message;\n'+
    ' return message;\n'+
    '}';    
 

@@ -1,6 +1,7 @@
 
 
 //driss_Virtuino_bloc_principal 
+/*
 Blockly.Arduino.driss_Virtuino_bloc_principal = function() {
   var rx = this.getFieldValue('RX');
   var tx = this.getFieldValue('TX');
@@ -79,8 +80,8 @@ Blockly.Arduino.driss_Virtuino_bloc_principal = function() {
 //------------------------------------------------------------------------------
 
 
-//driss_Virtuino_bloc_principal_complet 
-Blockly.Arduino.driss_Virtuino_bloc_principal_complet = function() {
+//driss_Virtuino_bloc_principal_complet2 
+Blockly.Arduino.driss_Virtuino_bloc_principal_complet2 = function() {
   var rx = this.getFieldValue('RX');
   var tx = this.getFieldValue('TX');
   var debug = this.getFieldValue('DEBUG') == 'TRUE';
@@ -152,18 +153,7 @@ Blockly.Arduino.driss_Virtuino_bloc_principal_complet = function() {
   
 //alert (mode);
   var code = "";
-  /*
-  switch (mode) {
-    case "MANU" : code += 'virtuinoRun();\n'+
-                          'vDelay(1000);\n'+
-                           statements_elements_virtuino;
-                  break;
-    case "AUTO" : code += '//virtuinoRun();\n'+
-                          '//vDelay(1000);\n' +
-                          statements_elements_loop ;
-                  break;
-  }
- */
+  
   code += 'virtuinoRun();\n'+
           'vDelay(1000);\n'+
           statements_elements_virtuino +
@@ -171,12 +161,12 @@ Blockly.Arduino.driss_Virtuino_bloc_principal_complet = function() {
 
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
-
+*/
 
 //--------------------------------------------------------------------------------------------
 
-//driss_Virtuino_bloc_principal_complet2 
-Blockly.Arduino.driss_Virtuino_bloc_principal_complet2 = function() {
+//driss_Virtuino_bloc_principal_complet 
+Blockly.Arduino.driss_Virtuino_bloc_principal_complet = function() {
   var statements_bluetooth = Blockly.Arduino.statementToCode(this, 'VIRTUINO_BLUETOOTH');
   var statements_elements_virtuino = Blockly.Arduino.statementToCode(this, 'ELEMENTS_VIRTUINO');
   var statements_elements_loop = Blockly.Arduino.statementToCode(this, 'CODE_LOUPE');
@@ -429,8 +419,16 @@ Blockly.Arduino.driss_Virtuino_led = function() {
 //driss_Virtuino_actuator
 Blockly.Arduino.driss_Virtuino_actuator = function() {
   var actuator = this.getFieldValue('ACTUATOR');
-  var pin = this.getFieldValue('PIN');
-  Blockly.Arduino.setups_['setup_actuator'+pin] = 'pinMode('+pin+', OUTPUT);';
+  var dropdown_pin = this.getFieldValue('PIN');
+  
+  
+  switch (actuator){
+    case "SERVO" :  var servo = 'servomoteur_'+dropdown_pin;
+                    Blockly.Arduino.setups_['setup_'+servo] = servo+'.attach('+dropdown_pin+');';
+                    break;
+    default : Blockly.Arduino.setups_['setup_actuator'+dropdown_pin] = 'pinMode('+dropdown_pin+', OUTPUT);';
+  }
+
   var code = '';
   return code;
   //return [code, Blockly.Arduino.ORDER_ATOMIC];

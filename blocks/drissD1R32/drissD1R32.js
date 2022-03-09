@@ -18,9 +18,9 @@ Blockly.Blocks.driss_D1R32_ESP32_config_simple = {
         .appendField("Configurer la carte D1R32 en ")
         .appendField(new Blockly.FieldDropdown([["Station Wifi","STATION"], ["Point  d'accès Wifi","ACCESSPOINT"]]), "TYPE");
     this.appendDummyInput()   
-        .appendField("Elle sera reliée au réseau Wifi ci-dessous et aura", "MSG1");
-    this.appendDummyInput()
-        .appendField("l'adresse IP 192.168.1.41", "MSG2"); 
+        .appendField("Elle sera reliée au réseau Wifi ci-dessous", "MSG1");
+   //this.appendDummyInput()
+        //.appendField("l'adresse IP 192.168.1.41", "MSG2"); 
     this.appendValueInput("SSID")  
         .setCheck("String")
         .setAlign(Blockly.ALIGN_RIGHT)
@@ -41,8 +41,8 @@ Blockly.Blocks.driss_D1R32_ESP32_config_simple = {
       onchange: function(ev) {
         var type_conn = this.getFieldValue('TYPE');
         switch(type_conn){
-          case "STATION" :  this.getField("MSG1").setValue("Elle SERA RELIEE au réseau Wifi ci-dessous et aura");
-                            this.getField("MSG2").setValue("l'adresse IP 192.168.1.41");
+          case "STATION" :  this.getField("MSG1").setValue("Elle SERA RELIEE au réseau Wifi ci-dessous");
+                            //this.getField("MSG2").setValue("l'adresse IP 192.168.1.41");
                             break;
           case "ACCESSPOINT" :  this.getField("MSG1").setValue("Elle DIFFUSERA le réseau wifi indiqué");
                             this.getField("MSG2").setValue("et aura l'adresse IP : 192.168.4.1");
@@ -139,7 +139,7 @@ init: function() {
         .setAlign(Blockly.ALIGN_CENTRE)
         .appendField(new Blockly.FieldImage("blocks/drissD1R32/processeur.png", Blockly.Arduino.imageSize*2,  Blockly.Arduino.imageSize));
     this.appendDummyInput()
-        .appendField("Déclaration et initialisations communes ");
+        .appendField("Déclarations et initialisations communes ");
     this.appendStatementInput("INITIALISATIONS")
         .setCheck(null);
     this.appendDummyInput()
@@ -240,10 +240,10 @@ Blockly.Blocks.driss_ESP_SPIFFS_Initialiser_memoire = {
   category: 'diss_D1R32',
   helpUrl: '',
   init: function() {
+    //this.appendDummyInput()
+    //    .appendField("SPIFFS");
     this.appendDummyInput()
-        .appendField("SPIFFS");
-    this.appendDummyInput()
-        .appendField(" Initialiser la mémoire Spiffs");
+        .appendField("SPIFFS : Initialiser la mémoire SPIFFS");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(36);
@@ -258,12 +258,12 @@ Blockly.Blocks.driss_ESP_SPIFFS_Effacer_fichier = {
   category: 'diss_D1R32',
   helpUrl: '',
   init: function() {
-    this.appendDummyInput()
-        .appendField("SPIFFS");
+   //this.appendDummyInput()
+    //    .appendField("SPIFFS");
     this.appendValueInput("FILENAME")
         .setCheck(null)
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("  Effacer le fichier de la mémoire Spiffs         ")
+        .appendField("SPIFFS : Effacer ce fichier de la mémoire    ")
         .appendField("Nom du fichier");
     
     this.setPreviousStatement(true, null);
@@ -310,12 +310,12 @@ Blockly.Blocks.driss_ESP_SPIFFS_creer_ajouter_au_fichier = {
   category: 'diss_D1R32',
   helpUrl: '',
   init: function() {
-    this.appendDummyInput()
-        .appendField("SPIFFS");
+    //this.appendDummyInput()
+    //    .appendField("SPIFFS");
     this.appendValueInput("FILENAME")
         .setCheck(null)
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("Ajouter la donnée au fichier                      ")
+        .appendField("SPIFFS : Ajouter la donnée au fichier             ")
         .appendField("Nom du fichier");
     this.appendValueInput("DATA")
         .setCheck(null)
@@ -340,11 +340,63 @@ Blockly.Blocks.driss_ESP_SPIFFS_creer_ajouter_au_fichier = {
 
 
 
+//---------------------------------------
+//driss_ESP_SPIFFS_ajouter_lien_telechargement_sur_page_Web
+Blockly.Blocks.driss_ESP_SPIFFS_ajouter_lien_telechargement_sur_page_Web = {
+    category: 'diss_D1R32',
+    helpUrl: '',
+    init: function() {
+        this.appendDummyInput()
+            .appendField("SPIFFS : ")
+            .appendField("Ajouter sur la page Web          ");
+        this.appendValueInput("FILENAME")
+            .setCheck("String")
+            .setAlign(Blockly.ALIGN_RIGHT)
+            .appendField("Un lien pour télécharger le fichier");
+        this.setInputsInline(false);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour(11);
+     this.setTooltip("");
+     this.setHelpUrl("");
+      }
+    };
 
 
 
+//-------------------------------------------------------------------
+//driss_ESP_SPIFFS_valider_les_ecritures
+//Ce bloc est necessaire pour que le code soit dans la boucle repeter indifinement si elle existe dans le programme
+Blockly.Blocks.driss_ESP_SPIFFS_valider_les_ecritures = {
+    init: function() {
+          this.appendDummyInput()
+              .appendField("SPIFFS : ")
+              .appendField("Valider les écritures");
+          this.setInputsInline(false);
+          this.setPreviousStatement(true, null);
+          this.setNextStatement(true, null);
+          this.setColour(11);
+       this.setTooltip("");
+       this.setHelpUrl("");
+        }
+    };
+    
 
-
+//-------------------------------------------------------------------
+//driss_ESP_SPIFFS_show_informations
+Blockly.Blocks.driss_ESP_SPIFFS_show_informations = {
+    init: function() {
+          this.appendDummyInput()
+            .appendField("SPIFFS : Afficher les informations de la mémore")
+            .appendField("dans la console");
+          this.setInputsInline(false);
+          this.setPreviousStatement(true, null);
+          this.setNextStatement(true, null);
+          this.setColour(36);
+       this.setTooltip("");
+       this.setHelpUrl("");
+        }
+    };
 
 
 

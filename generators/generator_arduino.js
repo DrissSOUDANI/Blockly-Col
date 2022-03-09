@@ -347,6 +347,7 @@ Blockly.Arduino.finish = function(code) {
     //tasktab.push(Blockly.Arduino.tasktab_[j]["debut"]);
     tasktab.push("void Esp32_Multitask_task_"+j+"(void *arg) {");
     tasktab.push("  while(true) {");
+    tasktab.push("    delay(10);");
     for (var name in Blockly.Arduino.tasktab_[j]){
         //if(name != "debut" && name != "fin")
             tasktab.push(Blockly.Arduino.tasktab_[j][name]); 
