@@ -993,11 +993,11 @@ Blockly.Arduino.driss_grove_bluetooth_v30_bt_init = function() {
    ' byte index_baudrate=0;\n'+ 
    ' while ((baudrate_trouve == false) && (index_baudrate<7 )) {\n'+ 
    '  bt.begin(baudrate[index_baudrate]);\n'+ 
-   '  Serial.println("Teste Baudrate = "+String(baudrate[index_baudrate]));\n'+ 
+   '  Serial.println("Test de communication à la vitesse "+String(baudrate[index_baudrate]));\n'+ 
    '  bt.print("AT");\n'+ 
    '  if (reponse_bt()) {\n'+ 
    '    baudrate_trouve=true;\n'+ 
-   '    Serial.println("Baudrate trouve = "+String(baudrate[index_baudrate]));\n'+ 
+   '    Serial.println("Test réussi à la vitesse "+String(baudrate[index_baudrate]));\n'+ 
    '    //on parametre le module bluetooth en 9600 bauds\n'+ 
    '    bt.print("AT+DEFAULT");\n'+ 
    '    delay(1000);\n'+ 
@@ -1009,7 +1009,7 @@ Blockly.Arduino.driss_grove_bluetooth_v30_bt_init = function() {
    '    delay(1000);\n'+
    '    bt.print("AT+ROLESM");\n'+
    '    delay(1000);\n'+
-   '    Serial.println("Module Bluetooth programmé en 9600bds");\n'+
+   '    Serial.println("Module Bluetooth programmé pour communiquer à la vitesse à 9600bds");\n'+
    '  }\n'+
    '  else {\n'+
    '    index_baudrate+=1;\n'+
@@ -1055,12 +1055,13 @@ Blockly.Arduino.driss_grove_bluetooth_v30_bt_init = function() {
   //dans setup    
   Blockly.Arduino.setups_['setup_bt'] = ''+
   'Serial.begin(9600);\n'+
-  'bt.begin(9600);\n'+
-  'setupBlueToothConnection();\n';   
+  '  bt.begin(9600);\n'+
+  '  setupBlueToothConnection();\n';   
   
 
   var code = '';
-  return [code, Blockly.Arduino.ORDER_ATOMIC];
+  //return [code, Blockly.Arduino.ORDER_ATOMIC];
+  return code;
 };
 
 Blockly.Arduino.driss_grove_bluetooth_v30_bt_available = function() {
