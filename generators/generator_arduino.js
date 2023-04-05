@@ -449,6 +449,7 @@ Blockly.Arduino.finish = function(code) {
   delete Blockly.Arduino.tasks_;
   delete Blockly.handleRoot_;
   delete Blockly.handleXML_;
+  delete Blockly.variables_;
   //fin ajout driss
 
   /* modifié par Driss 

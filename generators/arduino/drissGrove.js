@@ -346,7 +346,7 @@ Blockly.Arduino.driss_PIR_motion_sensor = function() {
     
 //Grove Ultrasonic Ranger OK
 Blockly.Arduino.driss_grove_ultrasonic_ranger = function() {
-  var dropdown_pin = this.getTitleValue('PIN');
+  var dropdown_pin = this.getTitleValue('PIN'); 
   var dropdown_unite = this.getFieldValue('UNITE');
   //dans include définition    
   Blockly.Arduino.includes_['define_Ultrasonic'] = '#include "Ultrasonic.h"\n'; 
@@ -967,7 +967,7 @@ Blockly.Arduino.driss_grove_bluetooth_v30_bt_init = function() {
   "//Leonardo et Micro : utiliser pour RX : 8, 9, 10, 11, 14 (MISO), 15 (SCK), 16 (MOSI)";
 
  
-  Blockly.Arduino.variables_['define_var_bt'] = "SoftwareSerial bt("+dropdown_RX_pin+","+dropdown_TX_pin+"); // RX, TX\n"; 
+  Blockly.Arduino.variables_['define_var_bt'] = "SoftwareSerial bt("+dropdown_TX_pin+","+dropdown_RX_pin+"); // TX, RX\n"; 
   Blockly.Arduino.variables_['define_var_time_out'] = "boolean time_out;";
   Blockly.Arduino.variables_['define_var_stringOne'] = 'String stringOne = "";';
   Blockly.Arduino.variables_['define_var_baudrate'] = 'unsigned long baudrate[] = {9600,19200,38400,57600,115200,230400,460800,};';

@@ -333,6 +333,7 @@ Blockly.Arduino.driss_Virtuino_input_numerique = function() {
       case "HUMIDITY_DHT11" :  var var_dht = 'dht_'+dropdown_pin;
                               Blockly.Arduino.includes_['define_DHT'] = '#include <DHT.h>\n';
                               Blockly.Arduino.variables_['define_'+var_dht] = 'DHT '+var_dht+'('+dropdown_pin+',DHT11);';
+                             Blockly.Arduino.variables
                               Blockly.Arduino.setups_['setup_get_temperature_and_humidity_sensor_'+dropdown_pin] = var_dht+'.begin();';
                               Blockly.Arduino.codeFunctions_['define_get_humidity'] = '\n/*lecture de l"humidité*/ \n' + 
                                   'float get_humidity(DHT dht) {\n'+
@@ -343,9 +344,9 @@ Blockly.Arduino.driss_Virtuino_input_numerique = function() {
                                   code += "V["+virtuel_pin+"] = get_humidity("+var_dht+");\ndelay(10);\n" ;
                           break;
 
-      case "ULTRASONS" :  var var_ultrasonic = 'ultrasonic_'+dropdown_pin;
+      case "ULTRASONS" :  var var_ultrasonic = 'ultrasonic_'+dropdown_pin; 
                           Blockly.Arduino.includes_['define_Ultrasonic'] = '#include <Ultrasonic.h>\n';
-                          Blockly.Arduino.variables_['define_'+var_ultrasonic] = 'Ultrasonic  '+var_ultrasonic+'('+dropdown_pin+');';
+                          Blockly.Arduino.variables_['var_'+var_ultrasonic] = 'Ultrasonic '+var_ultrasonic+'('+dropdown_pin+');';
                           
       
                           code += "V["+virtuel_pin+"] = "+var_ultrasonic+".MeasureInCentimeters();\n" ;
