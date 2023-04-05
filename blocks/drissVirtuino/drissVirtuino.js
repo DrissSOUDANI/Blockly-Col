@@ -302,8 +302,7 @@ Blockly.Blocks.driss_Virtuino_input_logique = {
         case "MICROSWITCH"   : image = "blocks/drissVirtuino/Grove_sensor_1_MicroSwitch.png"; break;
         case "PIR" : image = "blocks/drissVirtuino/Grove_sensor_1_PIR.png"; break;
         //case "LIGHT_SENSOR" : image = "blocks/drissVirtuino/Grove_sensor_1_light_sensor.png"; break;
-        //case "ULTRASONS" : image = "blocks/drissVirtuino/Grove_sensor_1_ultrasonic.png"; break;
-        
+       
         //case "TEMPERATURE_DHT11" : image = "blocks/drissVirtuino/Grove_temperature_and_humidity_sensor.png"; break;
         //case "HUMIDITY_DHT11" : image = "blocks/drissVirtuino/Grove_temperature_and_humidity_sensor.png"; break;
         //case "TEMPERATURE_DHT22" : image = "blocks/drissVirtuino/Grove_temperature_and_humidity_sensor_pro.png"; break;
@@ -330,8 +329,8 @@ Blockly.Blocks.driss_Virtuino_input_numerique = {
                                                  // ["Le fin de course","MICROSWITCH"], 
                                                  // ["Le détecteur de présence","PIR"], 
                                                   ["Le capteur de température (DHT11)","TEMPERATURE_DHT11"],
-                                                  ["Le capteur d'humidité (DHT11)","HUMIDITY_DHT11"]
-                                             
+                                                  ["Le capteur d'humidité (DHT11)","HUMIDITY_DHT11"],
+                                                  ["Le capteur à ultrasons","ULTRASONS"]
                                                   //["Le capteur de température (DHT11)","TEMPERATURE_DHT22"],
                                                   //["Le recepteur IR","IRRECEIVER"],
                                                  // ["Le contact tactile","TOUCH"]
@@ -363,6 +362,9 @@ Blockly.Blocks.driss_Virtuino_input_numerique = {
         case "SWITCH"  : image = "blocks/drissVirtuino/Grove_sensor_1_switch.png"; break;
         case "MICROSWITCH"   : image = "blocks/drissVirtuino/Grove_sensor_1_MicroSwitch.png"; break;
         case "PIR" : image = "blocks/drissVirtuino/Grove_sensor_1_PIR.png"; break;
+        case "ULTRASONS" : image = "blocks/drissVirtuino/Grove_sensor_1_ultrasonic.png"; 
+                          texte = "Mettre la mesure en cm dans V"  ;  
+                          break;
 
         case "TEMPERATURE_DHT11" : image = "blocks/drissVirtuino/Grove_temperature_and_humidity_sensor.png"; 
                                    texte = "Mettre la mesure en degrès dans V"  ;        

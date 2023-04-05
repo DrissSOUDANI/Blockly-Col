@@ -342,6 +342,14 @@ Blockly.Arduino.driss_Virtuino_input_numerique = function() {
                                   '}\n';
                                   code += "V["+virtuel_pin+"] = get_humidity("+var_dht+");\ndelay(10);\n" ;
                           break;
+
+      case "ULTRASONS" :  var var_ultrasonic = 'ultrasonic_'+dropdown_pin;
+                          Blockly.Arduino.includes_['define_Ultrasonic'] = '#include <Ultrasonic.h>\n';
+                          Blockly.Arduino.variables_['define_'+var_ultrasonic] = 'Ultrasonic  '+var_ultrasonic+'('+dropdown_pin+');';
+                          
+      
+                          code += "V["+virtuel_pin+"] = "+var_ultrasonic+".MeasureInCentimeters();\n" ;
+                      break;
   
 
   }
