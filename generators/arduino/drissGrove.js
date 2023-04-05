@@ -967,7 +967,7 @@ Blockly.Arduino.driss_grove_bluetooth_v30_bt_init = function() {
   "//Leonardo et Micro : utiliser pour RX : 8, 9, 10, 11, 14 (MISO), 15 (SCK), 16 (MOSI)";
 
  
-  Blockly.Arduino.variables_['define_var_bt'] = "SoftwareSerial bt("+dropdown_RX_pin+","+dropdown_TX_pin+"); // TX(8), RX(9)\n"; 
+  Blockly.Arduino.variables_['define_var_bt'] = "SoftwareSerial bt("+dropdown_TX_pin+","+dropdown_RX_pin+"); // TX(8), RX(9)\n"; 
   Blockly.Arduino.variables_['define_var_time_out'] = "boolean time_out;";
   Blockly.Arduino.variables_['define_var_stringOne'] = 'String stringOne = "";';
   Blockly.Arduino.variables_['define_var_baudrate'] = 'unsigned long baudrate[] = {9600,19200,38400,57600,115200,230400,460800,};';
