@@ -138,11 +138,11 @@ Blockly.Blocks.driss_virtuino_bluetooth = {
         //.appendField("Initialiser le module Bluetooth de la maquette");
     this.appendDummyInput()
         .setAlign(Blockly.ALIGN_CENTRE)
-        .appendField("RX : ")
-        .appendField(new Blockly.FieldTextInput("default"), "RX")
-        .appendField(" - ")
         .appendField("TX : ")
         .appendField(new Blockly.FieldTextInput("default"), "TX")
+        .appendField(" - ")
+        .appendField("RX : ")
+        .appendField(new Blockly.FieldTextInput("default"), "RX")
         .appendField(" - ")
     /*
     this.appendDummyInput()
