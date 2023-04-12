@@ -40,10 +40,19 @@ Blockly.Arduino.driss_grove_microswitch = function() {
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
+
 //Grove Light Sensor OK
 Blockly.Arduino.driss_grove_light_sensor = function() {
   var dropdown_pin = this.getTitleValue('PIN');
   var code = 'analogRead('+dropdown_pin+')';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+//Grove driss_grove_Infrared_reflective_sensor OK
+Blockly.Arduino.driss_grove_Infrared_reflective_sensor = function() {
+  var dropdown_pin = this.getTitleValue('PIN');
+  Blockly.Arduino.setups_['setup_Infrared_reflective_'+dropdown_pin] = 'pinMode('+dropdown_pin+', INPUT);';
+  var code = 'digitalRead('+dropdown_pin+')';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 

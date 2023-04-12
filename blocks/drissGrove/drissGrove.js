@@ -121,6 +121,30 @@ Blockly.Blocks.driss_grove_light_sensor = {
   }
 };
 
+//Grove driss_grove_Infrared_reflective_sensor OK
+Blockly.Blocks.driss_grove_Infrared_reflective_sensor = {
+  category: 'driss_grove : capteurs',
+  helpUrl: '',
+  init: function() {
+    this.appendDummyInput()
+        .appendField("La valeur retournée par le recepteur");
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_sensor_reflected_infrared_Receiver.png", Blockly.Arduino.imageSize,  Blockly.Arduino.imageSize, "*"))
+        .appendField("reflective infrarouge relié à l'entrée ")
+        .appendTitle(new Blockly.FieldDropdown(Blockly.Arduino.getDropDownDigitalPins), "PIN");
+    this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField("(valeur numérique comprise entre ...) ");
+    this.setInputsInline(false);
+    this.setOutput(true, null);
+    this.setColour(Blockly.Blocks.drissGrove.HUE);
+    this.setTooltip('');
+    this.setHelpUrl('');
+  }
+};
+
+
+
 //Grove driss_grove_IR_Receiver ok
 Blockly.Blocks['driss_grove_IR_Receiver'] = {
         init: function() {
