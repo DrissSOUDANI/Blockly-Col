@@ -250,7 +250,7 @@ Blockly.Arduino.driss_virtuino_bluetooth = function() {
   Blockly.Arduino.variables_['define_virtuino_bluetooth_Commentaire_01'] = "//arduino RX pin=2  arduino TX pin=3";
   Blockly.Arduino.variables_['define_virtuino_bluetooth_Commentaire_02'] = "//connect the arduino RX pin to esp8266 module TX pin";
   Blockly.Arduino.variables_['define_virtuino_bluetooth_Commentaire_03'] = "//connect the arduino TX pin to esp8266 module RX pin";
-  Blockly.Arduino.variables_['define_var_espSerial'] = "SoftwareSerial espSerial("+rx+","+tx+"); // SoftwareSerial mySerial (rxPin, txPin);\n"; 
+  Blockly.Arduino.variables_['define_var_espSerial'] = "SoftwareSerial espSerial("+rx+","+tx+");  // SoftwareSerial mySerial (rxPin, txPin);\n"; 
   
   Blockly.Arduino.variables_['define_var_Debug'] = "boolean debug = true;";
 
