@@ -16,11 +16,14 @@ Blockly.Blocks.driss_D1R32_ESP32_config_simple = {
   init: function() {
     this.appendDummyInput()
         .appendField("Configurer la carte D1R32 en ")
-        .appendField(new Blockly.FieldDropdown([["Station Wifi","STATION"], ["Point  d'accès Wifi","ACCESSPOINT"]]), "TYPE");
-    this.appendDummyInput()   
+        //.appendField(new Blockly.FieldDropdown([["Station Wifi","STATION"], ["Point  d'accès Wifi","ACCESSPOINT"]]), "TYPE");
+        .appendField(new Blockly.FieldDropdown([["Point  d'accès Wifi","ACCESSPOINT"]]), "TYPE");
+        this.appendDummyInput()   
         .appendField("Elle sera reliée au réseau Wifi ci-dessous", "MSG1");
-   //this.appendDummyInput()
-        //.appendField("l'adresse IP 192.168.1.41", "MSG2"); 
+        
+        
+   this.appendDummyInput()
+        .appendField("l'adresse IP 192.168.1.41", "MSG2"); 
     this.appendValueInput("SSID")  
         .setCheck("String")
         .setAlign(Blockly.ALIGN_RIGHT)
@@ -49,6 +52,7 @@ Blockly.Blocks.driss_D1R32_ESP32_config_simple = {
                             break;
         }
        }
+       
 };
 
 
@@ -59,7 +63,7 @@ Blockly.Blocks.driss_D1R32_ESP32_config_complet = {
   init: function() {
     this.appendDummyInput()
         .appendField("Configurer la carte D1R32 en")
-        .appendField(new Blockly.FieldDropdown([["Station Wifi","STATION_IP"], ["Point  d'accès Wifi","ACCESSPOINT_IP"]]), "TYPE");
+        .appendField(new Blockly.FieldDropdown([["Station Wifi","STATION_IP"]]), "TYPE");
     this.appendDummyInput()   
         .appendField("Elle sera reliée au réseau Wifi indiqué ", "MSG1");
     this.appendDummyInput()
