@@ -301,7 +301,7 @@ Blockly.Arduino.driss_ESP_SPIFFS_Initialiser_memoire = function() {
 
   Blockly.Arduino.codeFunctions_['D1R32_spiffs_getPage'] = '  String getPage(){\n'+
                                                         '#define PAGE_EXIST \n'+
-                                                        '    String  page = "<!DOCTYPE html><html><head><meta charset=\'ISO-8859-15\'>";\n'+
+                                                        '    String  page = "<!DOCTYPE html><html><head><meta charset=\'utf-8\'>";\n'+
                                                         '    page += "<title>Blockly@Col - ac-nancy-metz.fr</title></head>";\n'+
                                                         '    page += MonEsp.addPhoneStyle();\n'+
                                                         '    page += "<BODY onload=\'process()\'>";\n'+
@@ -370,7 +370,7 @@ Blockly.Arduino.driss_ESP_SPIFFS_Initialiser_memoire_et_ftp = function() {
                                                         '  \n'+
                                                         '  String getPage(){\n'+
                                                         '#define PAGE_EXIST \n'+
-                                                        '    String  page = "<!DOCTYPE html><html><head><meta charset=\'ISO-8859-15\'>";\n'+
+                                                        '    String  page = "<!DOCTYPE html><html><head><meta charset=\'utf-8\'>";\n'+
                                                         '    page += "<title>Blockly@Col - ac-nancy-metz.fr</title></head>";\n'+
                                                         '    page += MonEsp.addPhoneStyle();\n'+
                                                         '    page += "<BODY onload=\'process()\'>";\n'+
@@ -432,7 +432,7 @@ Blockly.Arduino.driss_ESP_SPIFFS_ajouter_lien_telechargement_sur_page_Web = func
   
   Blockly.Arduino.codeFunctions_['D1R32_spiffs_getPage'] = '  String getPage(){\n'+
                                                         '#define PAGE_EXIST \n'+
-                                                        '    String  page = "<!DOCTYPE html><html><head><meta charset=\'ISO-8859-15\'>";\n'+
+                                                        '    String  page = "<!DOCTYPE html><html><head><meta charset=\'utf-8\'>";\n'+
                                                         '    page += "<title>Blockly@Col - ac-nancy-metz.fr</title></head>";\n'+
                                                         '    page += MonEsp.addPhoneStyle();\n'+
                                                         '    page += "<BODY onload=\'process()\'>";\n'+
@@ -533,7 +533,7 @@ Blockly.Arduino.driss_Creer_page_web = function() {
                                        '  page += "<!DOCTYPE html>";\n'+
                                        '  page += "<html>";\n'+
                                        '  page += "  <head>";\n'+
-                                       '  page += "    <meta charset=\'ISO-8859-15\'>";';
+                                       '  page += "    <meta charset=\'utf-8\'>";';
                                        
   Blockly.Arduino.pagetab_['part2'] =  '  page += "  </head>";\n'+
                                        '  page +=    MonEsp.addPhoneStyle() ;\n'+
@@ -1032,7 +1032,7 @@ Blockly.Arduino.driss_page_web = function() {
                                        '  page += "<!DOCTYPE html>";\n'+
                                        '  page += "<html>";\n'+
                                        '  page += "  <head>";\n'+
-                                       '  page += "    <meta charset=\'ISO-8859-15\'>";';
+                                       '  page += "    <meta charset=\'utf-8\'>";';
 
   Blockly.Arduino.pagetab_['part2'] =  '  page += "  </head>";\n'+
                                        '  page +=    MonEsp.addPhoneStyle() ;\n'+
