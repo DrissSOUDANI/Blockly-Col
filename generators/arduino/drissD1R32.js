@@ -783,6 +783,12 @@ Blockly.Arduino.driss_D1R32_web_write_data = function() {
 
   value_name = value_name.substr(1, value_name.length-2);
   value_name = value_name.replace(/ /g, "_");
+  value_name = value_name.replace(/=/g, "");
+  value_name = value_name.replace(/\+/g, "");
+  value_name = value_name.replace(/-/g, "");
+  value_name = value_name.replace(/\*/g, "");
+  value_name = value_name.replace(/\\/g, "");
+  value_name = value_name.replace(/\//g, "");
   value_name = "_"+value_name+"_";
 
   unite = unite.replace(/ /g, "");
