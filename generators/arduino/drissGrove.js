@@ -1156,6 +1156,56 @@ Blockly.Arduino.driss_grove_rfid_init = function() {
 };
 */
 
+//RFID -------------------------------------------------------------------------
+
+Blockly.Arduino.driss_grove_rfid_declaration = function() {
+  var Rx_pin = this.getTitleValue('PIN_RX');
+  var Tx_pin = Number(Rx_pin) + 1;
+
+  Blockly.Arduino.variables_['var_dsMyRFID'] = "RFID125 dsMyRFID "; 
+
+  //dans include définition    
+  Blockly.Arduino.includes_['define_SoftwareSerial'] = "#include <SoftwareSerial.h>"; 
+  Blockly.Arduino.includes_['define_RFID125'] = "#include <RFID125.h>"; 
+
+  //dans setup    
+  Blockly.Arduino.setups_['setup_dsMyRFID'] = 'dsMyRFID.brancher('+Rx_pin+', '+Tx_pin+');'; 
+  
+  var code = '';
+  return code;;
+};
+
+Blockly.Arduino.driss_grove_rfid_code_available = function() {
+  //var Rx_pin = this.getTitleValue('PIN_RX');
+  //var Tx_pin = Number(Rx_pin) + 1;
+
+  //var rfid = 'rfid_'+Rx_pin+"_"+Tx_pin;
+
+  //dans setup    
+  //Blockly.Arduino.setups_['setup_'+rfid] = rfid+'.brancher('+Rx_pin+', '+Tx_pin+');'; 
+  
+  //dans include définition    
+  //Blockly.Arduino.includes_['define_SoftwareSerial'] = "#include <SoftwareSerial.h>"; 
+  //Blockly.Arduino.includes_['define_RFID125'] = "#include <RFID125.h>"; 
+
+  //Blockly.Arduino.variables_['var_'+rfid] = "RFID125 "+rfid+";"; 
+  
+  
+  var code = 'dsMyRFID.unCodeEstPresent()';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.driss_grove_rfid_lire_code = function() {
+
+
+  Blockly.Arduino.variables_['var_dsMyRFID'] = "RFID125 dsMyRFID;"; 
+  
+  
+  var code ='dsMyRFID.lireCode()';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+
 
 //Grove RFID driss_grove_rfid_write_code
 Blockly.Arduino.driss_grove_rfid_write_code = function() {
@@ -1169,10 +1219,10 @@ Blockly.Arduino.driss_grove_rfid_write_code = function() {
   Blockly.Arduino.includes_['define_SoftwareSerial'] = "#include <SoftwareSerial.h>"; 
   Blockly.Arduino.includes_['define_RFID125'] = "#include <RFID125.h>"; 
 
-  Blockly.Arduino.variables_['var_'+rfid] = "RFID125 "+rfid+";\n"; 
+  Blockly.Arduino.variables_['var_'+rfid] = "RFID125 "+rfid+";"; 
 
   //dans setup    
-  Blockly.Arduino.setups_['setup_'+rfid] = rfid+'.brancher('+Rx_pin+', '+Tx_pin+');\n'; 
+  Blockly.Arduino.setups_['setup_'+rfid] = rfid+'.brancher('+Rx_pin+', '+Tx_pin+');'; 
 
   var code = rfid+'.ecrireCode("'+code+'");\n';
   return code;
@@ -1721,10 +1771,10 @@ Blockly.Arduino.driss_grove_4_digit_display_digitsOnOff = function() {
   if (checkbox_digit_1_g) {digit_1b += "1"; id1+=64;} else digit_1b += "0";
   if (checkbox_digit_1_f) {digit_1b += "1"; id1+=32;} else digit_1b += "0";
   if (checkbox_digit_1_e) {digit_1b += "1"; id1+=16;} else digit_1b += "0";
-  if (checkbox_digit_1_d) {digit_1b += "1"; id1+=08;} else digit_1b += "0";
-  if (checkbox_digit_1_c) {digit_1b += "1"; id1+=04;} else digit_1b += "0";
-  if (checkbox_digit_1_b) {digit_1b += "1"; id1+=02;} else digit_1b += "0";
-  if (checkbox_digit_1_a) {digit_1b += "1"; id1+=01;} else digit_1b += "0";
+  if (checkbox_digit_1_d) {digit_1b += "1"; id1+=8;} else digit_1b += "0";
+  if (checkbox_digit_1_c) {digit_1b += "1"; id1+=4;} else digit_1b += "0";
+  if (checkbox_digit_1_b) {digit_1b += "1"; id1+=2;} else digit_1b += "0";
+  if (checkbox_digit_1_a) {digit_1b += "1"; id1+=1;} else digit_1b += "0";
   
   var id2=0;
   var digit_2b = "0b0";

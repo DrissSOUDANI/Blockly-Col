@@ -1,0 +1,89 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <toolboxcategories>CAT_LOGIC,CAT_LOOPS,CAT_MATH,CAT_TEXT,CAT_DRISS_CONSOLE,CAT_VARIABLES_DS,CAT_DRISS_GROVE</toolboxcategories>
+  <toolbox>undefined</toolbox>
+  <block type="driss_console_init_serial" id="+2MI$dv}LlAga49;q)QH" inline="false" x="110" y="-10">
+    <field name="VITESSE">9600</field>
+    <next>
+      <block type="variables_declare_ds" id="5im]I7xX?E_z]cIMa.:K" inline="false">
+        <field name="VAR">pouls</field>
+        <field name="TYPE">NUMBER</field>
+        <next>
+          <block type="driss_grove_finger_clip_heart_begin" id="Lz4d0`:_WDeUQ=^ME/,6" inline="false">
+            <value name="ADRESSE_I2C">
+              <shadow type="math_number" id="uhra}F9M7rniYXSsa2su">
+                <field name="NUM">80</field>
+              </shadow>
+            </value>
+            <next>
+              <block type="controls_whileUntil" id="=#zu|NV-kkq9jkfv~_Jl" inline="false">
+                <field name="MODE">WHILE</field>
+                <value name="BOOL">
+                  <block type="driss_grove_finger_clip_heart_pouls_dispo" id="MoxrZyi*Ee_:P24E,k6h" inline="false"></block>
+                </value>
+                <statement name="DO">
+                  <block type="variables_set_ds" id="?PrEV[3q-6g(J1/~Hmw0" inline="false">
+                    <field name="VAR">pouls</field>
+                    <value name="VALUE">
+                      <block type="driss_grove_finger_clip_heart_rate" id="09Cltd5b%1(q,yg3[EN!" inline="false"></block>
+                    </value>
+                    <next>
+                      <block type="driss_console_write" id="O_0Q}T@RoSoP@z]OJU.4" inline="false">
+                        <field name="RL">AVEC</field>
+                        <value name="TEXT">
+                          <block type="variables_get_ds" id="u#PlTn_%jSS!x+HE[1w]" inline="false">
+                            <field name="VAR">pouls</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="controls_if" id="@y2uY}5bn@8J3]IQ+ik6" inline="false">
+                            <mutation else="1"></mutation>
+                            <value name="IF0">
+                              <block type="logic_compare" id="9eQN,k~RB*?#NbENW]FA">
+                                <field name="OP">GT</field>
+                                <value name="A">
+                                  <block type="variables_get_ds" id="V7}l!0H^9RHi,LONL4{o" inline="false">
+                                    <field name="VAR">pouls</field>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="math_number" id="@[/8FDnTF5;fM#)32m1+" inline="false">
+                                    <field name="NUM">70</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <statement name="DO0">
+                              <block type="driss_grove_red_led" id="-Zy~nNFA)%(|lj8|rk;S" inline="false">
+                                <field name="STAT">HIGH</field>
+                                <field name="PIN">2</field>
+                              </block>
+                            </statement>
+                            <statement name="ELSE">
+                              <block type="driss_grove_red_led" id="f}d=6}N%1@WEr_Z$k[[-" inline="false">
+                                <field name="STAT">LOW</field>
+                                <field name="PIN">2</field>
+                              </block>
+                            </statement>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <next>
+                  <block type="controls_base_delay" id="?{qiYVy8%C[pH8pE=F9#" inline="false">
+                    <value name="DELAY_TIME">
+                      <shadow type="math_number" id="nA5bxRmz5(|0LXCNSs9j">
+                        <field name="NUM">500</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

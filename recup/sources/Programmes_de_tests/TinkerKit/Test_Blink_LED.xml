@@ -1,0 +1,34 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="controls_repeat_infinite" id="13" x="117" y="83">
+    <statement name="DO">
+      <block type="driss_tinkerKit_red_led" id="20">
+        <field name="STAT">HIGH</field>
+        <field name="PIN">O0</field>
+        <next>
+          <block type="base_delay" id="40" inline="true">
+            <value name="DELAY_TIME">
+              <block type="math_number" id="41">
+                <field name="NUM">1000</field>
+              </block>
+            </value>
+            <next>
+              <block type="driss_tinkerKit_red_led" id="21">
+                <field name="STAT">LOW</field>
+                <field name="PIN">O0</field>
+                <next>
+                  <block type="base_delay" id="42" inline="true">
+                    <value name="DELAY_TIME">
+                      <block type="math_number" id="43">
+                        <field name="NUM">1000</field>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

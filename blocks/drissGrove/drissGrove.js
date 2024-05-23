@@ -1216,6 +1216,69 @@ Blockly.Blocks['driss_grove_rfid_init'] = {
 */
 
 
+
+//RFID -------------------------------------------------------------------------------------------------
+Blockly.Blocks['driss_grove_rfid_declaration'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Initialiser le lecteur RFID");
+    this.appendDummyInput()
+        .appendField("relié à la broche")
+        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.dropdownDigitalRFID), "PIN_RX")
+        .appendField("(Rx) et 3 (Tx)", "PIN_TX");
+    this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_CENTRE)
+        .appendField(new Blockly.FieldImage("blocks/drissGrove/Grove_rfid_125.png", Blockly.Arduino.imageSize*2,  Blockly.Arduino.imageSize*2, "*"));
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(36);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  },
+  onchange: function(ev) {
+     var pin_Rx = this.getFieldValue('PIN_RX');
+     var pin_Tx = Number(pin_Rx) + 1;
+     this.getField("PIN_TX").setValue("(Rx) et  "+pin_Tx+" (Tx)", "PIN_TX");
+     }
+};
+
+Blockly.Blocks['driss_grove_rfid_code_available'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Un badge (un code) RFID est présent");
+    this.appendDummyInput()
+        .appendField("devant le lecteur RFID ");
+        //.appendField("lecteur RFID relié à la broche")
+        //.appendField(new Blockly.FieldDropdown(Blockly.Arduino.dropdownDigitalRFID), "PIN_RX")
+        //.appendField("(Rx) et 3 (Tx)", "PIN_TX");
+    this.setOutput(true, null);
+    this.setColour(230);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  },
+  onchange: function(ev) {
+     //var pin_Rx = this.getFieldValue('PIN_RX');
+     //var pin_Tx = Number(pin_Rx) + 1;
+     //this.getField("PIN_TX").setValue("(Rx) et  "+pin_Tx+" (Tx)", "PIN_TX");
+     }
+};
+
+
+Blockly.Blocks['driss_grove_rfid_lire_code'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Code lu par le lecteur RFID sur le badge");
+    this.setOutput(true, null);
+    this.setColour(230);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+
+
+
+
 //Grove RFID driss_grove_rfid_write_code
 Blockly.Blocks['driss_grove_rfid_write_code'] = {
     init: function() {

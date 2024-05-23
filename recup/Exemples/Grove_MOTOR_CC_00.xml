@@ -1,0 +1,59 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <toolboxcategories>CAT_LOGIC,CAT_LOOPS,CAT_MATH,CAT_ARRAY,CAT_TEXT,CAT_DRISS_CONSOLE,CAT_VARIABLES_DS,CAT_ARDUINO,CAT_TECHNOZONE,CAT_DRISS_A4,CAT_DRISS_GROVE,CAT_DRISS_LINKIT_ONE</toolboxcategories>
+  <toolbox>undefined</toolbox>
+  <block type="driss_grove_DC_motor_turn" id="%Xqd0{b8[U(cCt:3S|F1" x="270" y="90">
+    <field name="SENS">SENS_HORAIRE</field>
+    <field name="MOTEUR">MOTOR2</field>
+    <field name="ADRESSE">0x0F</field>
+    <value name="VITESSE">
+      <block type="math_number" id="r63L6=/`Lg}3!@XMKY*z">
+        <field name="NUM">50</field>
+      </block>
+    </value>
+    <next>
+      <block type="controls_base_delay" id="eAx.6V4:nFew3t$CV{c#">
+        <value name="DELAY_TIME">
+          <shadow type="math_number" id="TMR1yXmhlX(BvuiuL4}P">
+            <field name="NUM">3000</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="driss_grove_DC_motor_turn" id=".2]2;9v[n5@$ij15jIK)">
+            <field name="SENS">SENS_ANTI_HORAIRE</field>
+            <field name="MOTEUR">MOTOR2</field>
+            <field name="ADRESSE">0x0F</field>
+            <value name="VITESSE">
+              <block type="math_number" id="2EpraQ]LSbhmPGv#tc:-">
+                <field name="NUM">50</field>
+              </block>
+            </value>
+            <next>
+              <block type="controls_base_delay" id="G:FF!wEjq5DXt%t7L=`#">
+                <value name="DELAY_TIME">
+                  <shadow type="math_number" id="r0S^Ea.w:TST.K{K]@X0">
+                    <field name="NUM">3000</field>
+                  </shadow>
+                </value>
+                <next>
+                  <block type="driss_grove_DC_motor_stop" id=",d-xZ|1GS;2],td?JEq6">
+                    <field name="MOTEUR">MOTOR2</field>
+                    <field name="ADRESSE">0x0F</field>
+                    <next>
+                      <block type="controls_base_delay" id="u$ysl%7xuaG4/fzc[rbK">
+                        <value name="DELAY_TIME">
+                          <shadow type="math_number" id="W{PTzHK7RQ^e9Dj+QLr*">
+                            <field name="NUM">3000</field>
+                          </shadow>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

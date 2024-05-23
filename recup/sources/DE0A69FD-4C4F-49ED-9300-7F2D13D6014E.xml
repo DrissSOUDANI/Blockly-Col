@@ -1,0 +1,485 @@
+<xml xmlns="http://www.w3.org/1999/xhtml"><block id="$a[1_AQ8.TdP?lbXtkWu" type="factory_base" movable="false" deletable="false" x="0" y="0">
+    <mutation connections="NONE"></mutation>
+    <field name="NAME">grove_bluetooth_v30</field>
+    <field name="INLINE">EXT</field>
+    <field name="CONNECTIONS">NONE</field>
+    <statement name="INPUTS">
+      <block id="VW|ThXgHCT,|iO+W!LQV" type="input_dummy">
+        <field name="ALIGN">LEFT</field>
+        <statement name="FIELDS">
+          <block id="cH(5hL(MHpIL{,qHeGCX" type="field_static">
+            <field name="TEXT">Initialiser le module Bluetooth</field>
+          </block>
+        </statement>
+        <next>
+          <block id="zqaW^uPZ07`wb.L;r;FY" type="input_dummy">
+            <field name="ALIGN">LEFT</field>
+            <statement name="FIELDS">
+              <block id="!|q@#Ja=o}cz9+DbDr~B" type="field_image">
+                <field name="SRC">blocks/drissGrove/Grove_Serial_Bluetoothv30.png</field>
+                <field name="WIDTH">70</field>
+                <field name="HEIGHT">60</field>
+                <field name="ALT">*</field>
+              </block>
+            </statement>
+            <next>
+              <block id="YW7@!e0q~Y7JwY9ijXd9" type="input_dummy">
+                <field name="ALIGN">LEFT</field>
+                <statement name="FIELDS">
+                  <block id="f**}XGUO25mm:-Vao4Dy" type="field_static">
+                    <field name="TEXT">Nom du module Bluetooth</field>
+                    <next>
+                      <block id="mV!;yIX@?r7,BTqj4`S]" type="field_input">
+                        <field name="TEXT">Grove_BT_01</field>
+                        <field name="FIELDNAME">BT_NAME</field>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <next>
+                  <block id="|5TiTW2hwb!D8sNrLK%}" type="input_dummy">
+                    <field name="ALIGN">LEFT</field>
+                    <statement name="FIELDS">
+                      <block id="DLa{b0Dv#qm)s2hwhYeg" type="field_static">
+                        <field name="TEXT">Code PIN du module Bluetooth</field>
+                        <next>
+                          <block id="kr2p[!;cn?zLL{y7~cee" type="field_input">
+                            <field name="TEXT">0000</field>
+                            <field name="FIELDNAME">BT_PINCODE</field>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                    <next>
+                      <block id="(pzI3dHoKZkxmK|hC}i:" type="input_value">
+                        <field name="INPUTNAME">PIN_RX</field>
+                        <field name="ALIGN">RIGHT</field>
+                        <statement name="FIELDS">
+                          <block id="R9lW_r%Vu`J6@d!N}^@Z" type="field_static">
+                            <field name="TEXT">Rx</field>
+                          </block>
+                        </statement>
+                        <value name="TYPE">
+                          <shadow id="x#R6b#!,x![V;.G5ubrR" type="type_null"></shadow>
+                          <block id="g2U{l4alu}e|7oa;ZR,k" type="type_number"></block>
+                        </value>
+                        <next>
+                          <block id="Z{;Rp9K.aeMd!q5=Vy`j" type="input_value">
+                            <field name="INPUTNAME">PIN_TX</field>
+                            <field name="ALIGN">RIGHT</field>
+                            <statement name="FIELDS">
+                              <block id="HZ}K-^](yCjY(lTc)CV4" type="field_static">
+                                <field name="TEXT">Tx</field>
+                              </block>
+                            </statement>
+                            <value name="TYPE">
+                              <shadow id="x#R6b#!,x![V;.G5ubrR" type="type_null"></shadow>
+                              <block id="BoKaeVnzU-[%sjctyC:T" type="type_number"></block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block id="jK:43N$i?d:}dK4KEMtG" type="text" movable="false" deletable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block id="HDj3PK5s~g{dnI)6-l}[" type="text" movable="false" deletable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="COLOUR">
+      <block id="B6A!%O(h6TC.[zk,Vw0{" type="colour_hue">
+        <mutation colour="#5b67a5"></mutation>
+        <field name="HUE">230</field>
+      </block>
+    </value>
+  </block><block id="$a[1_AQ8.TdP?lbXtkWu" type="factory_base" movable="false" deletable="false" x="0" y="0">
+    <mutation connections="BOTH"></mutation>
+    <field name="NAME">grove_bluetooth_v30_Send_message</field>
+    <field name="INLINE">EXT</field>
+    <field name="CONNECTIONS">BOTH</field>
+    <statement name="INPUTS">
+      <block id="VW|ThXgHCT,|iO+W!LQV" type="input_dummy">
+        <field name="ALIGN">LEFT</field>
+        <statement name="FIELDS">
+          <block id="cH(5hL(MHpIL{,qHeGCX" type="field_static">
+            <field name="TEXT">Envoyer le message  suivant</field>
+          </block>
+        </statement>
+        <next>
+          <block id="3GTIYFZ(q4Z%9K9(~l3m" type="input_dummy">
+            <field name="ALIGN">LEFT</field>
+            <statement name="FIELDS">
+              <block id="pA,tX+UY+CEP1S1k8eYv" type="field_static">
+                <field name="TEXT">par la liaison Bluetooth</field>
+              </block>
+            </statement>
+            <next>
+              <block id="P4!2.#e`w.Ep)rm4%Jdl" type="input_value">
+                <field name="INPUTNAME">BT_MESSAGE_TO_SEND</field>
+                <field name="ALIGN">RIGHT</field>
+                <statement name="FIELDS">
+                  <block id="bgkuMIJ9mg!wt0O48md]" type="field_static">
+                    <field name="TEXT">Message</field>
+                  </block>
+                </statement>
+                <value name="TYPE">
+                  <shadow id="l]74^RxJfm,746gOk:#{" type="type_null"></shadow>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block id="jK:43N$i?d:}dK4KEMtG" type="text" movable="false" deletable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block id="HDj3PK5s~g{dnI)6-l}[" type="text" movable="false" deletable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="TOPTYPE">
+      <shadow id="|#zTTcaY5=%[~eota5p(" type="type_null"></shadow>
+    </value>
+    <value name="BOTTOMTYPE">
+      <shadow id="EHn0;D`==y:5coL8isWT" type="type_null"></shadow>
+    </value>
+    <value name="COLOUR">
+      <block id="B6A!%O(h6TC.[zk,Vw0{" type="colour_hue">
+        <mutation colour="#5b67a5"></mutation>
+        <field name="HUE">230</field>
+      </block>
+    </value>
+  </block><block id="$a[1_AQ8.TdP?lbXtkWu" type="factory_base" movable="false" deletable="false" x="0" y="0">
+    <mutation connections="BOTH"></mutation>
+    <field name="NAME">grove_OLED_96x96_init</field>
+    <field name="INLINE">EXT</field>
+    <field name="CONNECTIONS">BOTH</field>
+    <statement name="INPUTS">
+      <block id="VW|ThXgHCT,|iO+W!LQV" type="input_dummy">
+        <field name="ALIGN">LEFT</field>
+        <statement name="FIELDS">
+          <block id="cH(5hL(MHpIL{,qHeGCX" type="field_static">
+            <field name="TEXT">Initialiser l'écran OLED 96x96</field>
+          </block>
+        </statement>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block id="jK:43N$i?d:}dK4KEMtG" type="text" movable="false" deletable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block id="HDj3PK5s~g{dnI)6-l}[" type="text" movable="false" deletable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="TOPTYPE">
+      <shadow id="|#zTTcaY5=%[~eota5p(" type="type_null"></shadow>
+    </value>
+    <value name="BOTTOMTYPE">
+      <shadow id="EHn0;D`==y:5coL8isWT" type="type_null"></shadow>
+    </value>
+    <value name="COLOUR">
+      <block id="B6A!%O(h6TC.[zk,Vw0{" type="colour_hue">
+        <mutation colour="#a5875b"></mutation>
+        <field name="HUE">36</field>
+      </block>
+    </value>
+  </block><block id="$a[1_AQ8.TdP?lbXtkWu" type="factory_base" movable="false" deletable="false" x="0" y="0">
+    <mutation connections="BOTH"></mutation>
+    <field name="NAME">grove_oled_96x96_show_text</field>
+    <field name="INLINE">EXT</field>
+    <field name="CONNECTIONS">BOTH</field>
+    <statement name="INPUTS">
+      <block id="VW|ThXgHCT,|iO+W!LQV" type="input_dummy">
+        <field name="ALIGN">LEFT</field>
+        <statement name="FIELDS">
+          <block id="cH(5hL(MHpIL{,qHeGCX" type="field_static">
+            <field name="TEXT">Afficher le texte sur l'écran OLED 96x96</field>
+          </block>
+        </statement>
+        <next>
+          <block id="dW|@;yb$3iZPzquJV#r(" type="input_value">
+            <field name="INPUTNAME">OLED_96x96_TEXTE</field>
+            <field name="ALIGN">RIGHT</field>
+            <statement name="FIELDS">
+              <block id="*2Xzd|;G,4I{srN|,,tf" type="field_static">
+                <field name="TEXT">Texte</field>
+              </block>
+            </statement>
+            <value name="TYPE">
+              <shadow id="iJ~@5G;o*:CuY}MUW!T]" type="type_null"></shadow>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block id="jK:43N$i?d:}dK4KEMtG" type="text" movable="false" deletable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block id="HDj3PK5s~g{dnI)6-l}[" type="text" movable="false" deletable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="TOPTYPE">
+      <shadow id="|#zTTcaY5=%[~eota5p(" type="type_null"></shadow>
+    </value>
+    <value name="BOTTOMTYPE">
+      <shadow id="EHn0;D`==y:5coL8isWT" type="type_null"></shadow>
+    </value>
+    <value name="COLOUR">
+      <block id="B6A!%O(h6TC.[zk,Vw0{" type="colour_hue">
+        <mutation colour="#5b67a5"></mutation>
+        <field name="HUE">230</field>
+      </block>
+    </value>
+  </block><block id="$a[1_AQ8.TdP?lbXtkWu" type="factory_base" movable="false" deletable="false" x="0" y="0">
+    <mutation connections="BOTH"></mutation>
+    <field name="NAME">grove_oled_96x96_show_text_at_xy</field>
+    <field name="INLINE">EXT</field>
+    <field name="CONNECTIONS">BOTH</field>
+    <statement name="INPUTS">
+      <block id="VW|ThXgHCT,|iO+W!LQV" type="input_dummy">
+        <field name="ALIGN">LEFT</field>
+        <statement name="FIELDS">
+          <block id="cH(5hL(MHpIL{,qHeGCX" type="field_static">
+            <field name="TEXT">Afficher le texte sur l'écran OLED 96x96</field>
+          </block>
+        </statement>
+        <next>
+          <block id="dW|@;yb$3iZPzquJV#r(" type="input_value">
+            <field name="INPUTNAME">OLED_96x96_TEXTE</field>
+            <field name="ALIGN">RIGHT</field>
+            <statement name="FIELDS">
+              <block id="*2Xzd|;G,4I{srN|,,tf" type="field_static">
+                <field name="TEXT">Texte</field>
+              </block>
+            </statement>
+            <value name="TYPE">
+              <shadow id="iJ~@5G;o*:CuY}MUW!T]" type="type_null"></shadow>
+              <block id="x4}x+h6l.G[?BHpV.-at" type="type_string"></block>
+            </value>
+            <next>
+              <block id="Y5[y%1mA2kxo-$~Lb:Wu" type="input_dummy">
+                <field name="ALIGN">LEFT</field>
+                <statement name="FIELDS">
+                  <block id="F~?KQr_,fccc+OLWXFkz" type="field_image">
+                    <field name="SRC">blocks/drissGrove/Grove_OLED_Display_96x96.png</field>
+                    <field name="WIDTH">70</field>
+                    <field name="HEIGHT">60</field>
+                    <field name="ALT">*</field>
+                  </block>
+                </statement>
+                <next>
+                  <block id=")t3`~b(^0kXO58E(AcfV" type="input_value">
+                    <field name="INPUTNAME">OLED_96x96_LIG</field>
+                    <field name="ALIGN">RIGHT</field>
+                    <statement name="FIELDS">
+                      <block id="Fq-$CoxQ)$Et%sdljKgH" type="field_static">
+                        <field name="TEXT">Commencer l'écrirure à la position :</field>
+                        <next>
+                          <block id="#y,V|r!|Hzc)K|MBste9" type="field_static">
+                            <field name="TEXT">Ligne</field>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                    <value name="TYPE">
+                      <shadow id=":Uu@VD3[`ZKs.]G:NRDk" type="type_null"></shadow>
+                      <block id="N?)czZ76IRRje+$,L4hA" type="type_number"></block>
+                    </value>
+                    <next>
+                      <block id="ao|:og[a=?OwW)$NJp8n" type="input_value">
+                        <field name="INPUTNAME">OLED_96x96_COL</field>
+                        <field name="ALIGN">RIGHT</field>
+                        <statement name="FIELDS">
+                          <block id="N!k2V12yx#xgW^q1i1?t" type="field_static">
+                            <field name="TEXT">Colonne</field>
+                          </block>
+                        </statement>
+                        <value name="TYPE">
+                          <shadow id="ecg5B!n7OYGTVXRAv;i%" type="type_null"></shadow>
+                          <block id="r;{B6a1{p.O%hbtoCeIC" type="type_number"></block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block id="jK:43N$i?d:}dK4KEMtG" type="text" movable="false" deletable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block id="HDj3PK5s~g{dnI)6-l}[" type="text" movable="false" deletable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="TOPTYPE">
+      <shadow id="|#zTTcaY5=%[~eota5p(" type="type_null"></shadow>
+    </value>
+    <value name="BOTTOMTYPE">
+      <shadow id="EHn0;D`==y:5coL8isWT" type="type_null"></shadow>
+    </value>
+    <value name="COLOUR">
+      <block id="B6A!%O(h6TC.[zk,Vw0{" type="colour_hue">
+        <mutation colour="#5b67a5"></mutation>
+        <field name="HUE">230</field>
+      </block>
+    </value>
+  </block><block id="$a[1_AQ8.TdP?lbXtkWu" type="factory_base" movable="false" deletable="false" x="0" y="0">
+    <mutation connections="BOTH"></mutation>
+    <field name="NAME">grove_oled_96x96_goto_xy</field>
+    <field name="INLINE">EXT</field>
+    <field name="CONNECTIONS">BOTH</field>
+    <statement name="INPUTS">
+      <block id="VW|ThXgHCT,|iO+W!LQV" type="input_dummy">
+        <field name="ALIGN">LEFT</field>
+        <statement name="FIELDS">
+          <block id="cH(5hL(MHpIL{,qHeGCX" type="field_static">
+            <field name="TEXT">Déplacer le curseur sur l'écran</field>
+          </block>
+        </statement>
+        <next>
+          <block id="!m7YC5$$6%lF:%u@%R2J" type="input_dummy">
+            <field name="ALIGN">LEFT</field>
+            <statement name="FIELDS">
+              <block id="ByXU6f(1R;Kr=pmmuUy:" type="field_static">
+                <field name="TEXT">OLED 96x96 à la position</field>
+              </block>
+            </statement>
+            <next>
+              <block id="dW|@;yb$3iZPzquJV#r(" type="input_value">
+                <field name="INPUTNAME">OLED_96x96_LIG</field>
+                <field name="ALIGN">RIGHT</field>
+                <statement name="FIELDS">
+                  <block id="*2Xzd|;G,4I{srN|,,tf" type="field_static">
+                    <field name="TEXT">Ligne</field>
+                  </block>
+                </statement>
+                <value name="TYPE">
+                  <shadow id="iJ~@5G;o*:CuY}MUW!T]" type="type_null"></shadow>
+                  <block id=",HqfZzxp$en2gbCHmSVP" type="type_number"></block>
+                </value>
+                <next>
+                  <block id="iY^{DRI?|xpwGq,A=.`Z" type="input_value">
+                    <field name="INPUTNAME">OLED_96x96_COL</field>
+                    <field name="ALIGN">RIGHT</field>
+                    <statement name="FIELDS">
+                      <block id="^K)^(Q+]1Eh(iM85e7$d" type="field_static">
+                        <field name="TEXT">Colonne</field>
+                      </block>
+                    </statement>
+                    <value name="TYPE">
+                      <shadow id="E:zyw8;C`PZt4{mk8Z?l" type="type_null"></shadow>
+                      <block id="Bo1xK3*s~tUdJp4COWE$" type="type_number"></block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block id="jK:43N$i?d:}dK4KEMtG" type="text" movable="false" deletable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block id="HDj3PK5s~g{dnI)6-l}[" type="text" movable="false" deletable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="TOPTYPE">
+      <shadow id="|#zTTcaY5=%[~eota5p(" type="type_null"></shadow>
+    </value>
+    <value name="BOTTOMTYPE">
+      <shadow id="EHn0;D`==y:5coL8isWT" type="type_null"></shadow>
+    </value>
+    <value name="COLOUR">
+      <block id="B6A!%O(h6TC.[zk,Vw0{" type="colour_hue">
+        <mutation colour="#5b67a5"></mutation>
+        <field name="HUE">230</field>
+      </block>
+    </value>
+  </block><block id="$a[1_AQ8.TdP?lbXtkWu" type="factory_base" movable="false" deletable="false" x="0" y="0">
+    <mutation connections="BOTH"></mutation>
+    <field name="NAME">grove_oled_96x96_show_number</field>
+    <field name="INLINE">EXT</field>
+    <field name="CONNECTIONS">BOTH</field>
+    <statement name="INPUTS">
+      <block id="VW|ThXgHCT,|iO+W!LQV" type="input_dummy">
+        <field name="ALIGN">LEFT</field>
+        <statement name="FIELDS">
+          <block id="cH(5hL(MHpIL{,qHeGCX" type="field_static">
+            <field name="TEXT">Afficher le nombre sur l'écran OLED 96x96</field>
+          </block>
+        </statement>
+        <next>
+          <block id="dW|@;yb$3iZPzquJV#r(" type="input_value">
+            <field name="INPUTNAME">OLED_96x96_NUMBER</field>
+            <field name="ALIGN">RIGHT</field>
+            <statement name="FIELDS">
+              <block id="*2Xzd|;G,4I{srN|,,tf" type="field_static">
+                <field name="TEXT">Nombre</field>
+              </block>
+            </statement>
+            <value name="TYPE">
+              <shadow id="iJ~@5G;o*:CuY}MUW!T]" type="type_null"></shadow>
+              <block id="F]yqx9[6pO76V8.bSQB?" type="type_number"></block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block id="jK:43N$i?d:}dK4KEMtG" type="text" movable="false" deletable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block id="HDj3PK5s~g{dnI)6-l}[" type="text" movable="false" deletable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="TOPTYPE">
+      <shadow id="|#zTTcaY5=%[~eota5p(" type="type_null"></shadow>
+    </value>
+    <value name="BOTTOMTYPE">
+      <shadow id="EHn0;D`==y:5coL8isWT" type="type_null"></shadow>
+    </value>
+    <value name="COLOUR">
+      <block id="B6A!%O(h6TC.[zk,Vw0{" type="colour_hue">
+        <mutation colour="#5b67a5"></mutation>
+        <field name="HUE">230</field>
+      </block>
+    </value>
+  </block></xml>
