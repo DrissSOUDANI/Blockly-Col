@@ -1465,7 +1465,7 @@ Blockly.Blocks['driss_grove_RF_433MHz_receive_number'] = {
       this.setOutput(true, null);
       this.setColour(Blockly.Blocks.drissGrove.HUE);
    this.setTooltip("");
-   this.setHelpUrl("");
+   this.setHelpUrl(""); 
     }
   };
 
