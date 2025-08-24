@@ -512,14 +512,17 @@ BlocklyDuino.buildToolbox = function() {
 
 	// set the toolbox from local storage
 	if (loadIds === undefined || loadIds === "") {
+		//alert("1 - "+loadIds)
 		loadIds = window.localStorage.toolboxids;
 	}
 
 	// set the default toolbox if none
 	if (loadIds === undefined || loadIds === "") {
 		if ($('#defaultCategories').length) {
+			//alert("2 - "+loadIds)
 			loadIds = $('#defaultCategories').html();
 		} else {
+			//alert("3 - "+loadIds)
 			loadIds = '';
 		}
 	}
@@ -527,8 +530,13 @@ BlocklyDuino.buildToolbox = function() {
 	window.localStorage.toolboxids = loadIds;
 
 	var xmlValue = '<xml id="toolbox">\n';	
+	
 	var xmlids = loadIds.split(",");
+	//alert(xmlids[0]);
+	//xmlids = xmlids[0].trim();
+	//alert(xmlids);
 	for (var i = 0; i < xmlids.length; i++) {
+		//alert("#"+xmlids[i])
 		if ($('#'+xmlids[i]).length) {
 			xmlValue += $('#'+xmlids[i])[0].outerHTML+'\n';
 			

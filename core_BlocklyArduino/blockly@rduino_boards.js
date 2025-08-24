@@ -297,8 +297,8 @@ var profile = {
 	    serial : 9600,
 	},
 	
-	R1D32_Grove: {
-	    description: "R1D32 + Shield Grove",
+	D1R32_Grove: {
+	    description: "D1R32 + Shield Grove",
 	    digital: ["D0", "D1",  "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9", "D10", "D11", "D12", "D13"],
 		dropdownDigital: [["D0", "D0"], ["D1", "D1"], ["D2", "D2"], ["D3", "D3"], ["D4", "D4"], ["D5", "D5"], ["D6", "D6"], ["D7", "D7"], ["D8", "D8"], ["D9", "D9"], ["D10", "D10"], ["D11", "D11"], ["D12", "D12"], ["D13", "D13"]],
 		
@@ -321,12 +321,12 @@ var profile = {
 	},
 	arduino_uno_shield_Grove: {
 	    description: "Arduino Uno + Shield Grove",
-	    digital: ["D0", "D1",  "D2", "D3", "D4", "D5", "D6", "D7", "D8", "D9", "D10", "D11", "D12", "D13"],
-		dropdownDigital: [["D0", "D0"], ["D1", "D1"], ["D2", "D2"], ["D3", "D3"], ["D4", "D4"], ["D5", "D5"], ["D6", "D6"], ["D7", "D7"], ["D8", "D8"], ["D9", "D9"], ["D10", "D10"], ["D11", "D11"], ["D12", "D12"], ["D13", "D13"]],
+	    digital: ["D2", "D3", "D4", "D5", "D6", "D7", "D8"],
+		dropdownDigital: [["D2", "2"], ["D3", "3"], ["D4", "4"], ["D5", "5"], ["D6", "6"], ["D7", "7"], ["D8", "8"]],
 		
 		
 		analog : ["A0", "A1", "A2", "A3"],
-		dropdownAnalog: [["D2", "D2"], ["D3", "D3"], ["D4", "D4"], ["D5", "D5"], ["D6", "D6"], ["D7", "D7"], ["A0", "A0"], ["A1", "A1"], ["A2", "A2"], ["A3", "A3"]],
+		dropdownAnalog: [["A0", "A0"], ["A1", "A1"], ["A2", "A2"], ["A3", "A3"]],
 		
 		I2C: ["D3", "D4"],
 		SPI: [["D10 (SS)", "D10"], ["D11 (MOSI)", "D11"], ["D12 (MISO)", "D12"], ["D13 (SCK)", "D13"]],

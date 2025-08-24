@@ -1912,6 +1912,7 @@ Blockly.Msg.CAT_DRISS_GROVE_BLUETOOTH =" - Bluetooth";
 Blockly.Msg.CAT_DRISS_GROVE_RFID =" - RFID";
 Blockly.Msg.CAT_DRISS_GROVE_NFC =" - NFC";
 Blockly.Msg.CAT_DRISS_GROVE_GPS =" GPS";
+
 Blockly.Msg.CAT_DRISS_GROVE_RTC="- Horloge temps réel (RTC)";
 Blockly.Msg.CAT_DRISS_GROVE_BIOMETRIE="- Biométrie";
 
@@ -1989,9 +1990,6 @@ Blockly.Msg.CAT_DRISS_VIRTUINO = "Virtuino";
 Blockly.Msg.CAT_DRISS_ADAFRUIT = "Adafruit";
 
 Blockly.Msg.CAT_DRISS_HUSKYLENS = "HuskyLens";
-Blockly.Msg.CAT_DRISS_HUSKYLENS_FACE_RECOGNITION = "- Reconnaissance faciale";
-Blockly.Msg.CAT_DRISS_HUSKYLENS_OBJECT_TRACKING = "- Suivi d'objets";
-Blockly.Msg.CAT_DRISS_HUSKYLENS_SD_CARD = "- Carte micro SD";
 
 
 

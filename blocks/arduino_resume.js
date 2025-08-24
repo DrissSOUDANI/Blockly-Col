@@ -182,6 +182,13 @@ head.load(
         console.log("Done loading driss Adafruit Blocks");
     });
 
+head.load(
+        "blocks/drissHuskyLens/drissHuskyLens.js",
+        function() {
+            // Call a function when done
+            console.log("Done loading driss HuskyLens Blocks");
+        });
+
 
 head.load(
 "blocks/blocks_typing.js",

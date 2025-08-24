@@ -1371,8 +1371,242 @@ Blockly.Arduino.driss_grove_RF_433MHz_send_number = function() {
 
 
 
-//NFC Tag
-//Grove RFID driss_grove_nfc_init
+//NFC 
+Blockly.Arduino.driss_grove_nfc_init_shield = function() {
+  
+  var dropdown_pin = this.getFieldValue('PIN');
+
+  //dans include définition    
+  Blockly.Arduino.includes_['define_NfcAdapter'] = '#include <NfcAdapter.h>'; 
+  Blockly.Arduino.includes_['define_PN532'] = '#include <PN532/PN532/PN532.h>"'; 
+
+  //Utilisation de SPI
+  Blockly.Arduino.includes_['define_SPI'] = '#include <SPI.h>'; 
+  Blockly.Arduino.includes_['define_PN532_SPI'] = '#include <PN532/PN532_SPI/PN532_SPI.h>';  
+  Blockly.Arduino.variables_['var_pn532spi'] = "PN532_SPI pn532spi(SPI, 10);";
+  Blockly.Arduino.variables_['var_nfc'] = "NfcAdapter nfc = NfcAdapter(pn532spi);";
+
+  //Utilisation de I2C
+  //Blockly.Arduino.includes_['define_Wire'] = '#include <Wire.h>'; 
+  //Blockly.Arduino.includes_['define_PN532_I2C'] = '#include <PN532/PN532_I2C/PN532_I2C.h>';  
+  //Blockly.Arduino.variables_['var_pn532_i2c'] = "PN532_I2C pn532_i2c(Wire);";
+  //Blockly.Arduino.variables_['var_nfc'] = "NfcAdapter nfc = NfcAdapter(pn532_i2c);";
+
+  //Blockly.Arduino.variables_['var___tag__'] = "NfcTag __tag__ ;";
+
+  Blockly.Arduino.codeFunctions_['define_getTagType'] = '//Envoi le type de Tag\n'+
+  'String getTagType(NfcTag __tagNFC__) {\n'+
+  '  if(nfc.tagPresent()){\n'+
+  '    String tagType = __tagNFC__.getTagType();\n'+
+  '    #ifdef NDEF_USE_SERIAL\n'+
+  '      Serial.print("Type = ");Serial.println(tagType);\n'+
+  '    #endif\n'+
+  '    return(tagType);\n'+
+  '  }\n'+
+  '  return("                ");\n' +
+  '}\n';
+
+  Blockly.Arduino.codeFunctions_['define_getTagUID'] = '//Envoi le UID du Tag\n'+
+  'String getTagUID(NfcTag __tagNFC__) {\n'+
+  '  if(nfc.tagPresent()){\n'+
+  '    String uid = __tagNFC__.getUidString();\n'+
+  '    #ifdef NDEF_USE_SERIAL\n'+
+  '      Serial.print("UID = ");Serial.println(uid);\n'+
+  '    #endif\n'+
+  '    return(uid);\n'+
+  '  }\n'+
+  '  return("                ");\n' +
+  '}\n';
+
+
+  Blockly.Arduino.codeFunctions_['define_getNbreMessagesInTag'] = '//Envoi le nombre de Messages contenu dans le Tag\n'+
+  'int getNbreMessagesInTag(NfcTag __tagNFC__) {\n'+
+  '  if(nfc.tagPresent()){\n'+
+  '    if(__tagNFC__.hasNdefMessage()){\n'+
+  '      NdefMessage message = __tagNFC__.getNdefMessage();\n'+
+  '      int nbreMessages = message.getRecordCount();\n'+
+  '      #ifdef NDEF_USE_SERIAL\n'+
+  '        Serial.print("Le Tag contient ");\n'+
+  '        Serial.print(nbreMessages);\n'+
+  '        Serial.print(" message(s)");\n'+
+  '      #endif\n'+ 
+  '      return(nbreMessages);\n'+
+  '    }\n'+
+  '    else {\n'+
+  '      #ifdef NDEF_USE_SERIAL\n'+
+  '        Serial.println("Le Tag ne contient aucun message");\n'+
+  '      #endif\n'+ 
+  '      return(0);\n' +
+  '    }\n'+
+  '  }\n'+
+  '  #ifdef NDEF_USE_SERIAL\n'+
+  '    Serial.println("Tag absent !!");\n'+
+  '  #endif\n'+ 
+  '  return(-1);\n' +
+  '}\n';
+
+
+
+
+
+
+  //dans setup    
+  Blockly.Arduino.setups_['setup_NFC_init'] = ''+
+  '//Serial.begin(9600);\n'+
+  '  #ifdef NDEF_USE_SERIAL\n'+
+  '  Serial.println("Activation de la communication NFC");\n'+
+  '  #endif\n'+
+  '  \n'+
+  '  nfc.begin();\n'+
+  '  \n'+
+  '  #ifdef NDEF_USE_SERIAL\n'+
+  '    Serial.println("Communication NFC...Activée");\n'+
+  '  #endif\n'; 
+  
+  var code = 'NfcTag __tagNFC__;\n';
+  return code;
+}
+
+Blockly.Arduino.driss_grove_nfc_periferique_present = function() {
+  
+  var code = "nfc.tagPresent()";
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+}
+
+Blockly.Arduino.driss_grove_nfc_read_tag_and_set_vars = function() {
+  var tag_type = Blockly.Arduino.variableDB_.getName(this.getFieldValue('TAG_TYPE'), Blockly.Variables.NAME_TYPE);
+  var tag_uid = Blockly.Arduino.variableDB_.getName(this.getFieldValue('TAG_UID'), Blockly.Variables.NAME_TYPE);
+  var tag_nbreMessages = Blockly.Arduino.variableDB_.getName(this.getFieldValue('TAG_NBRE_MESSAGE'), Blockly.Variables.NAME_TYPE);
+  
+  var code = "";
+  code += "__tagNFC__ = nfc.read();\n";
+  code += tag_type + " = getTagType(__tagNFC__);\n";
+  code += tag_uid + " = getTagUID(__tagNFC__);\n";
+  code += tag_nbreMessages + " = getNbreMessagesInTag(__tagNFC__);\n";
+ 
+  return code;
+}
+
+
+
+Blockly.Arduino.driss_grove_nfc_read_tag = function() {
+  
+  var code = "__tagNFC__ = nfc.read();\n";
+  return code;
+}
+
+
+Blockly.Arduino.driss_grove_nfc_get_tag_type = function() {
+  //dans setup    
+
+  var code = "getTagType(__tagNFC__)";
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+}
+
+Blockly.Arduino.driss_grove_nfc_get_tag_uid = function() {
+  //dans setup    
+
+  var code = "getTagUID( __tagNFC__)";
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+}
+
+Blockly.Arduino.driss_grove_nfc_tag_message_present = function() {
+  
+  var code = " __tagNFC__.hasNdefMessage()";
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+}
+
+Blockly.Arduino.driss_grove_nfc_tag_get_nbre_message = function() {
+ 
+  var code = "getNbreMessagesInTag( __tagNFC__)";
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+}
+
+Blockly.Arduino.driss_grove_nfc_format_tag = function() {
+  Blockly.Arduino.codeFunctions_['define_formatTag'] = '//Formatter Le Tag\n'+
+  'bool formatTag() {\n'+
+  '  if(nfc.tagPresent()){\n'+
+  '    bool success = nfc.format();\n'+
+  '      #ifdef NDEF_USE_SERIAL\n'+
+  '        if (success) {\n'+
+  '          Serial.println("Le Tag est formaté en NDEF");\n'+
+  '        } else {\n'+
+  '          Serial.println("!! Echec lors du formattage du Tag");\n'+
+  '        }\n'+
+  '      #endif\n'+ 
+  '      return(success);\n'+
+  '  }\n'+
+  '}\n';
+  
+  var code = "formatTag();\n";
+  return code;
+}
+
+Blockly.Arduino.driss_grove_nfc_erase_tag = function() {
+  Blockly.Arduino.codeFunctions_['define_eraseTag'] = '//Effacer les messages du Tag\n'+
+  'bool eraseTag() {\n'+
+  '  if(nfc.tagPresent()){\n'+
+  '    bool success = nfc.erase();\n'+
+  '      #ifdef NDEF_USE_SERIAL\n'+
+  '        if (success) {\n'+
+  '          Serial.println("Le Tag ne contient plus de message");\n'+
+  '        } else {\n'+
+  '          Serial.println("!! Echec lors de l\'effacement des messages du Tag");\n'+
+  '        }\n'+
+  '      #endif\n'+ 
+  '      return(success);\n'+
+  '  }\n'+
+  '}\n';
+  
+  var code = "eraseTag();\n";
+  return code;
+}
+
+Blockly.Arduino.driss_grove_nfc_factory_state_tag = function() {
+  
+  Blockly.Arduino.codeFunctions_['define_cleanTag'] = '//Initialise le Tag avec les paramètres d\'usine\n'+
+  'bool cleanTag() {\n'+
+  '  if(nfc.tagPresent()){\n'+
+  '    bool success = nfc.clean();\n'+
+  '      #ifdef NDEF_USE_SERIAL\n'+
+  '        if (success) {\n'+
+  '          Serial.println("Tag restauré avec les paramètres d\'usine");\n'+
+  '        } else {\n'+
+  '          Serial.println("!! Echec lors de l\'initialisation du Tag");\n'+
+  '        }\n'+
+  '      #endif\n'+ 
+  '      return(success);\n'+
+  '  }\n'+
+  '}\n';
+  
+  var code = "cleanTag();\n";
+  return code;
+}
+
+Blockly.Arduino.driss_grove_nfc_write_message_in_tag = function() {
+  var nfc_message = Blockly.Arduino.valueToCode(this, 'NFC_MESSAGE', Blockly.Arduino.ORDER_ATOMIC);
+  
+  Blockly.Arduino.codeFunctions_['define_writeMessageInTag'] = '//Ecrire un message dans le Tag\n'+
+  'bool writeMessageInTag(String message) {\n'+
+  '  if(nfc.tagPresent()){\n'+
+  '    NdefMessage msg = NdefMessage();\n'+
+  '    msg.addUriRecord(message);\n'+
+  '    bool success = nfc.write(msg);\n'+
+  '      #ifdef NDEF_USE_SERIAL\n'+
+  '        if (success) {\n'+
+  '          Serial.println("Le message a été ajouté au Tag");\n'+
+  '        } else {\n'+
+  '          Serial.println("!! Echec lors de l\'écriture dans le Tag !!");\n'+
+  '        }\n'+
+  '      #endif\n'+ 
+  '      return(success);\n'+
+  '  }\n'+
+  '}\n';
+  
+  var code = "writeMessageInTag("+nfc_message+");\n";
+  return code;
+}
+
 
 
 //-Afficheur Grove - LCD ----------------------------------------------------------------------------------------------------------------------------------------
@@ -1840,6 +2074,8 @@ Blockly.Arduino.driss_grove_4_digit_display_setBrightness = function() {
 
 
 
+
+
 //Grove : driss_grove_finger_clip_heart_begin
 Blockly.Arduino.driss_grove_finger_clip_heart_begin = function() {
   var adresse_I2C = Blockly.Arduino.valueToCode(this, 'ADRESSE_I2C',Blockly.Arduino.ORDER_UNARY_POSTFIX);
@@ -2049,4 +2285,237 @@ Blockly.Arduino.driss_grove_RTC_Lire_donnee = function() {
 
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
+
+
+
+
+
+
+//---- GPS GROVE -------------------------------------------------------------------------------------------------------------
+
+//Grove  GPS initialisation OK
+Blockly.Arduino.driss_grove_gps_initialisation = function() {
+  Blockly.Arduino.includes_['define_LinItOne_GPS'] = '#include <LGPS.h>'; 
+  Blockly.Arduino.includes_['define_LinItOne_LGPRS'] = '#include <LGPRS.h>'; 
+
+  Blockly.Arduino.codeFunctions_['define_setPauseGPS'] = '\n/*Pause pour que traiter les infos GPS */ \n' +
+  'void setPauseGPS() {\n'+
+  ' delay(3000);\n'+ 
+  '}\n';
+  Blockly.Arduino.setups_['setup_GPS'] = 'LGPS.powerOn(GPS_GLONASS);\n'+ 
+  '  //Serial.println("Activation du recepteur GPS ...OK.");\n';
+  
+  
+  var code = 'setPauseGPS();\n';
+  return code;
+};
+
+//Grove  GPS Lire les données OK
+Blockly.Arduino.driss_grove_gps_lireDonnees = function() {
+
+  Blockly.Arduino.variables_['define_gpsSentenceInfoStruct'] = '\n// Cette structure est nécessaire pour stocker les données qui arrivent des satellites\n'+
+                                                                'gpsSentenceInfoStruct info;\n';
+  Blockly.Arduino.variables_['define_latitude'] = 'double latitude = 0.00;';
+  Blockly.Arduino.variables_['define_longitude'] = 'double longitude = 0.00;';
+  Blockly.Arduino.variables_['define_lat_format'] = 'String lat_format = "0.00000";'; 
+  Blockly.Arduino.variables_['define_lon_format'] = 'String lon_format = "0.00000";'; 
+  Blockly.Arduino.variables_['define_altitude'] = 'float altitude = 0.00;'; 
+  Blockly.Arduino.variables_['define_alt_format'] = 'String alt_format = "0.00000";'; 
+  Blockly.Arduino.variables_['define_dop'] = 'float dop = 100.00; //dilution of precision'; 
+  Blockly.Arduino.variables_['define_geoid'] = 'float geoid = 0.00;'; 
+  Blockly.Arduino.variables_['define_k_speed'] = 'float k_speed = 0.00;  //speed in knots ';
+  Blockly.Arduino.variables_['define_m_speed'] = 'float m_speed = 0.00; //speed in m/s';  
+  Blockly.Arduino.variables_['define_m_speed_format'] = 'String m_speed_format = "0";'; 
+  Blockly.Arduino.variables_['define_track_angle'] = 'float track_angle = 0.00;'; 
+  Blockly.Arduino.variables_['define_fix'] = 'int fix = 0;'; 
+  Blockly.Arduino.variables_['define_time'] = 'String time_format = "00:00:00";'; 
+  Blockly.Arduino.variables_['define_date'] = 'String date_format = "00:00:00";'; 
+  Blockly.Arduino.variables_['define_sat_num'] = 'int sat_num = 0; //number of visible satellites'; 
+  
+
+  Blockly.Arduino.codeFunctions_['define_convert_degrees'] = '\n/*Obtenir les degrés à partir de (d)ddmm.mmmm to (d)dd.mmmmmm*/ \n' + 
+   'float convert_degrees(String str, boolean dir) {\n'+
+   ' double mm, dd;\n'+       
+   ' int point = str.indexOf(".");\n'+
+   ' dd = str.substring(0, (point - 2)).toFloat();\n'+
+   ' mm = str.substring(point - 2).toFloat() / 60.00;\n'+
+   ' return (dir ? -1 : 1) * (dd + mm);\n'+
+   '}\n';  
+
+  Blockly.Arduino.codeFunctions_['define_doubleToStr'] = '\n/*Convertir un double en string */ \n' +
+  'String doubleToStr(double val) {\n'+
+   ' int buf = (int) (val *1000000);\n'+ 
+   ' String str_Val = "";\n'+  
+   ' String s = String(buf);\n'+ 
+   ' if (abs(val) < 10) {\n'+ 
+   '  str_Val = s.substring(0, 1);\n'+ 
+   '  str_Val += ".";\n'+ 
+   '  str_Val += s.substring(1);\n'+      
+   ' }else if (abs(val) < 100) {\n'+
+   '  str_Val = s.substring(0, 2);\n'+
+   '  str_Val += ".";\n'+
+   '  str_Val += s.substring(2);\n'+
+   ' } else {\n'+
+   '  str_Val = s.substring(0, 3);\n'+
+   '  str_Val += ".";\n'+
+   '  str_Val += s.substring(3);\n'+
+   ' }\n'+
+   ' return str_Val;\n'+
+   '}\n';    
+  
+  Blockly.Arduino.codeFunctions_['define_getSatellitesDatas'] = '\n/*obtient les informations des satellites */ \n' +
+   'void getSatellitesDatas(gpsSentenceInfoStruct* info) {\n'+
+   ' LGPS.getData(info);\n'+ 
+   ' if (info->GPGGA[0] == \'$\') {\n'+
+   '  String str = (char*)(info->GPGGA);\n'+  
+   '  str = str.substring(str.indexOf(",") + 1);\n'+ 
+   '  time_format = str.substring(0, 2) + ":" + str.substring(2, 4) + ":" + str.substring(4, 6);\n'+ 
+   '  str = str.substring(str.indexOf(",") + 1);\n'+ 
+   '  latitude = convert_degrees(str.substring(0, str.indexOf(",")), str.charAt(str.indexOf(",") + 1) == \'S\');\n'+ 
+   '  lat_format = doubleToStr( latitude);\n'+ 
+   '  str = str.substring(str.indexOf(",") + 3);\n'+ 
+   '  longitude = convert_degrees(str.substring(0, str.indexOf(",")), str.charAt(str.indexOf(",") + 1) == \'W\');\n'+      
+   '  lon_format = doubleToStr( longitude);\n'+ 
+   '  str = str.substring(str.indexOf(",") + 3);\n'+ 
+   '  fix = str.charAt(0) - 48;\n'+ 
+   '  str = str.substring(2);\n'+ 
+   '  sat_num = str.substring(0, 2).toInt();\n'+ 
+   '  str = str.substring(3);\n'+ 
+   '  dop = str.substring(0, str.indexOf(",")).toFloat();\n'+ 
+   '  str = str.substring(str.indexOf(",") + 1);\n'+ 
+   '  altitude = str.substring(0, str.indexOf(",")).toFloat();\n'+ 
+   '  alt_format = doubleToStr( altitude);\n'+ 
+   '  alt_format = alt_format + str.substring(str.indexOf(",") + 1,1);\n'+
+   '  str = str.substring(str.indexOf(",") + 3);\n'+ 
+   '  geoid = str.substring(0, str.indexOf(",")).toFloat();\n'+ 
+   ' \n'+ 
+   '  if (info->GPRMC[0] == \'$\') {\n'+ 
+   '    str = (char*)(info->GPRMC);\n'+ 
+   '    int comma = 0;\n'+ 
+   '    for (int i = 0; i < 60; ++i) {\n'+ 
+   '      if (info->GPRMC[i] == \',\') {\n'+ 
+   '       comma++;\n'+ 
+   '       if (comma == 7) {\n'+ 
+   '        comma = i + 1;\n'+ 
+   '        break;\n'+ 
+   '       }\n'+ 
+   '      }\n'+ 
+   '    }\n'+ 
+   '    str = str.substring(comma);\n'+ 
+   '    k_speed = str.substring(0, str.indexOf(",")).toFloat();\n'+ 
+   '    m_speed = k_speed * 0.514;\n'+ 
+   '    m_speed_format = doubleToStr( m_speed);\n'+ 
+   '    str = str.substring(str.indexOf(",") + 1);\n'+ 
+   '    track_angle = str.substring(0, str.indexOf(",")).toFloat();\n'+ 
+   '    str = str.substring(str.indexOf(",") + 1);\n'+ 
+   '    date_format = str.substring(0, 2) + "-" + str.substring(2, 4) + "-" + "20" + str.substring(4, 6);\n'+ 
+   '    \n'+ 
+   '    //return sat_num;\n'+ 
+   '   }\n'+ 
+   '  }\n'+ 
+   ' else {\n'+ 
+   '  //Serial.println("No GGA data");\n'+ 
+   ' }\n'+ 
+   ' //return 0;\n'+ 
+   
+   '}';   
+
+  var code = 'getSatellitesDatas(&info);\n';
+  return code ;
+};
+
+//grove_gps : Nombre de satellites
+Blockly.Arduino.driss_grove_gps_NbreSatellites = function() {
+  Blockly.Arduino.codeFunctions_['define_GPSgetSatellitesNbre'] = '\n/*Renvoyer le nombre de satellites captés */ \n' +
+  'int GPSgetSatellitesNbre() {\n'+
+  ' return sat_num;\n'+ 
+  '}\n';
+  var code = 'GPSgetSatellitesNbre()';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+
+//grove_gps  GPS : Date
+Blockly.Arduino.driss_grove_gps_getDate = function() {
+  Blockly.Arduino.codeFunctions_['define_GPSgetDate'] = '\n/*Renvoyer la date */ \n' +
+  'String GPSgetDate() {\n'+
+  ' return date_format;\n'+ 
+  '}\n';
+  var code = 'GPSgetDate()';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+
+//grove_gps  GPS : Time
+Blockly.Arduino.driss_grove_gps_getTime = function() {
+  Blockly.Arduino.codeFunctions_['define_GPSgetTime'] = '\n/*Renvoyer l"heure */ \n' +
+  'String GPSgetTime() {\n'+
+  ' return time_format;\n'+ 
+  '}\n';
+  var code = 'GPSgetTime()';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+//grove_gps  GPS : Lattitude
+Blockly.Arduino.driss_grove_gps_getLatitude = function() {
+  Blockly.Arduino.codeFunctions_['define_GPSgetLatitude'] = '\n/*Renvoyer la latitude */ \n' +
+  'String GPSgetLatitude() {\n'+
+  ' return lat_format;\n'+ 
+  '}\n';
+  var code = 'GPSgetLatitude()';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+//grove_gps  GPS : Longitude
+Blockly.Arduino.driss_grove_gps_getLongitude = function() {
+  Blockly.Arduino.codeFunctions_['define_GPSgetLattitude'] = '\n/*Renvoyer la longitude */ \n' +
+  'String GPSgetLongitude() {\n'+
+  ' return lon_format;\n'+ 
+  '}\n';
+  var code = 'GPSgetLongitude()';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+//grove_gps : Altitude
+Blockly.Arduino.driss_grove_gps_getAltitude = function() {
+  Blockly.Arduino.codeFunctions_['define_GPSgetLattitude'] = '\n/*Renvoyer l"altitude */ \n' +
+  'String GPSgetAltitude() {\n'+
+  ' return alt_format;\n'+ 
+  '}\n';
+  var code = 'GPSgetAltitude()';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+//grove_gps  GPS : Vitesse
+Blockly.Arduino.driss_grove_gps_getVitesse = function() {
+  Blockly.Arduino.codeFunctions_['define_GPSgetVitesse'] = '\n/*Renvoyer la vitesse */ \n' +
+  'String GPSgetVitesse() {\n'+
+  ' return m_speed_format;\n'+ 
+  '}\n';
+  var code = 'GPSgetVitesse()';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+
+//grove_gps  GPS : Vitesse
+Blockly.Arduino.driss_grove_gps_get_GGA_GPRMC_Trame = function() {
+  Blockly.Arduino.codeFunctions_['define_GPSget_GGA_GPRMC_Trame'] = '\n/*Renvoyer la trame : date, heure, latitude, longitude, altitude, vitesse, nbre de satellites */ \n' +
+  'String GPSget_GGA_GPRMC_Trame() {\n'+
+  ' String Trame_GGA_GPRMC= "" ;\n'+
+  ' Trame_GGA_GPRMC = Trame_GGA_GPRMC + date_format + "," ; \n'+
+  ' Trame_GGA_GPRMC = Trame_GGA_GPRMC + time_format + "," ; \n'+
+  ' Trame_GGA_GPRMC = Trame_GGA_GPRMC + lat_format  + "," ; \n'+
+  ' Trame_GGA_GPRMC = Trame_GGA_GPRMC + lon_format  + "," ; \n'+
+  ' Trame_GGA_GPRMC = Trame_GGA_GPRMC + alt_format  + "," ; \n'+
+  ' Trame_GGA_GPRMC = Trame_GGA_GPRMC + m_speed_format + ","   ; \n'+
+  ' Trame_GGA_GPRMC = Trame_GGA_GPRMC + sat_num ; \n'+
+
+  ' return Trame_GGA_GPRMC;\n'+ 
+  '}\n';
+
+  var code = 'GPSget_GGA_GPRMC_Trame()';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+//----  -------------------------------------------------------------------------------------------------------------
 

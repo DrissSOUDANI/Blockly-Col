@@ -163,4 +163,11 @@ function() {
     console.log("Done loading Driss Adafruit Generators");
 });
 
+head.load(
+    "generators/arduino/drissHuskyLens.js",
+    function() {
+        // Call a function when done
+        console.log("Done loading Driss HuskyLens Generators");
+    });
+
 /* Fin des ajouts de Driss */
