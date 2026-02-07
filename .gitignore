@@ -1,0 +1,7 @@
+# Dossiers non versionnés
+_sources/
+_dist/
+_venv/
+
+# Mfichiers Python
+*.py
