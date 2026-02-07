@@ -1,0 +1,135 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+    <!-- Brand, toggle pour l'affichage en version mobile -->
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        
+        <a class="navbar-brand  hidden-xs hidden-sm" href="#">
+            <img src="media/image_navBar.png" class="img-responsive">
+        </a>
+        
+    </div>
+
+    <!-- Liens de navigation, formulaires et autres -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+            <li>
+                <div id="menuPanelBlockly" class="margin-top-5">
+                    <ul id="ul_nav" role="tablist">
+                        <li role="presentation" id="tab_blocks" class="active">
+                             <button href="#content_blocks" class="text-left btn btn-primary " aria-controls="content_blocks" role="tab" data-toggle="tab" id="btn_Programme">
+                                 <span class="glyphicon glyphicon-home"></span>
+                                 <span id="a_blocks"> </span>
+                             </button>
+                        </li>
+                        <li role="presentation" id="tab_arduino" >
+                             <button href="#content_arduino" class="text-left btn btn-danger" aria-controls="content_arduino" role="tab" data-toggle="tab" id="btn_Code_Arduino">
+                                 <span class="glyphicon glyphicon-check"></span>
+                                <span id="a_arduino"></span>
+                             </button>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon glyphicon-download-alt"></span> Télécharger <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+
+                    <li>
+                        <a href="https://github.com/DrissSOUDANI/Blockly-Col" target="_blanck" title="télécharger Blockly@Col sur GitHub">
+                        <span class="glyphicon glyphicon glyphicon-paperclip"></span> Blockly@Col v3 (13/12/2021)</a>
+                    </li>
+                    <li role="separator" class="divider"></li>
+                    <li>
+                        <a href="./librairies-Arduino/libraries-08-03-2020.zip" target="_blanck" title="télécharger Les librairies Arduino à utiliser avec Blockly@Col">
+                        <span class="glyphicon glyphicon glyphicon-link"></span>Librairies pour Arduino.1.8.5 (13/12/2021)</a>
+                    </li>
+                    
+                    <li>
+                        <a href="./librairies-Arduino/arduino-1.8.5_for_Blockly@Col_V2022.zip" target="_blanck" title="télécharger Arduino 1.8.5 avec les librairies à utiliser avec Blockly@Col - inclut les cartes LinkItOne et D1R32 ">
+                        <span class="glyphicon glyphicon glyphicon-link"></span>Arduino.1.8.5 (standard+LinkItOne+D1R32+190 librairies) (29/12/2021)</a>
+                    </li>
+
+                </ul>
+            </li>
+            <!--
+            <li><a href="https://github.com/DrissSOUDANI/Blockly-Col" target="_blanck" title="télécharger Blockly@Col sur GitHub">
+                    <span class="glyphicon glyphicon glyphicon-download-alt"></span> 
+                    Télécharger
+            </a></li>
+        -->
+            
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-folder-open"></span> <span id="span_fichier"></span> <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+
+                    <li >
+                        <!--a href="#" title="Lien actif">Lien actif <span class="sr-only">(current)</span></a-->
+                        <a id="btn_saveXML"  href="#" role='button'>
+                              <span class="glyphicon glyphicon-floppy-save"></span><span id="span_saveXML"> </span>
+                         </a>
+                    </li>
+                    <li role="separator" class="divider"></li>
+                    <li>
+                        <a id="btn_fakeload"  href="#" role='button'>
+                            <span class="glyphicon glyphicon-open"></span><span id="span_fakeload"> </span>
+                        </a>
+                        <input type="file" id="load" style="display: none;" />
+                    </li>
+                </ul>
+            </li>
+            
+
+            
+            <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog "></span> <span id="span_configurer"></span> <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="#" id="btn_config"  data-toggle="modal" data-target="#configModal">
+                            </span><span class="glyphicon glyphicon-wrench"> </span><span id="span_config"> 	
+                        </a>
+                    </li>
+                    <!--
+                    <li role="separator" class="divider"></li>
+                    <li class="dropdown-header">Carte</li>
+
+                    <li>
+                        <select class="form-control" id="pinout" >
+                            <option value="arduino_uno">Arduino Uno</option>
+                            <option value="arduino_mega">Arduino Mega</option>
+                            <option value="arduino_nano">Arduino Nano</option>
+                            <option value="arduino_barbot">Arduino Barbot</option>
+                            <option value="R1D32_Grove">R1D32 + Shield Grove</option>
+                        </select>
+                        
+                    </li>
+                    -->
+                    
+                </ul>
+            </li>
+        
+        
+        <!--
+            <li>
+                <button id="btn_exemples" href="#" class="btn btn-default" data-toggle="modal" data-target="#exemplesModal">
+                <span class="glyphicon glyphicon-hand-right"> </span><span id="span_exemples" class="hidden-md hidden-sm hidden-xs"> </span></button>
+            </li>
+        -->
+        
+            <li>
+                <button id="btn_about" href="#" class="btn btn-default" data-toggle="modal" data-target="#aboutModal">
+                <span class="glyphicon glyphicon-user"> </span><span id="span_about" class="hidden-md hidden-sm hidden-xs"> </span></button>
+            </li>
+        
+        </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
